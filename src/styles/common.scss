@@ -1,3 +1,16 @@
+#root {
+  max-width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#homeBackground {
+  width: 344px;
+  height: 100%;
+  background-color: white;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,6 +42,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: pink;
 }
 
 h1 {
