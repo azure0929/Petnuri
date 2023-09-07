@@ -1,15 +1,23 @@
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import "./styles/common.scss";
+import Place from "./pages/Place";
+import Challenge from "./pages/Challenge";
+import PetTalk from "./pages/PetTalk";
+import MyPage from "./pages/MyPage";
 
-function App() {
+import "./styles/common.scss";
+import "./styles/globalstyle.scss";
+
+const App = () => {
   return (
-    <div className="home-container">
-      <div className="home-background">임시 배경</div>
-      <div className="home-content">
-        <Home />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/place" element={<Place />} />
+      <Route path="/challenge" element={<Challenge />} />
+      <Route path="/pettalk" element={<PetTalk />} />
+      <Route path="/mypage" element={<MyPage />} />
+    </Routes>
   );
-}
+};
 
 export default App;
