@@ -1,15 +1,10 @@
 import MainTab from "../components/MainTab";
-import "../styles/common.scss";
+import Background from "../components/Background";
 
 const PetTalk = () => {
   return (
     <>
-      <div className="container">
-        <div className="background">임시 배경</div>
-        <div className="content">
-          <div>임시 PetTalk 페이지</div>
-        </div>
-      </div>
+      <Background>임시 PetTalk</Background>
       <MainTab />
     </>
   );
