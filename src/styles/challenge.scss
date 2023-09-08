@@ -1,0 +1,272 @@
+@import '../styles/globalstyle.scss';
+
+.head {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid #F1F1F5; 
+	display: flex;
+  align-items: center;
+	justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.name {
+  width: 100%;
+  height: 26px; 
+  padding: 0px 24px;
+  position: absolute;
+	top: 80px;
+	display: flex;
+	align-items: center;
+  font-size: 14px;
+	font-weight: 600;
+	.img {
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background-color: #B8BAC1;
+		margin-right: 5px;
+	}
+}
+
+.credit {
+	width: 100%;
+	height: 34px;
+	padding: 0px 24px;
+	position: absolute; 
+	top: 122px;
+	display: flex; 
+  font-size: 24px;
+  font-weight: 600;
+
+	img {
+		width: 24px;
+		height: 24px;
+		margin-left: 3px;
+	}
+}
+
+.shop{
+	width: 100%;
+	height: 52px;  
+	padding: 0px 24px;
+	position: absolute;  
+	top: 172px;
+
+	.container {
+		width: 327px;
+		height: 52px;
+		background-color:#F2F4F6;
+    border-radius: 12px;
+    justify-content: space-between;
+		align-items: center;
+
+		.button {
+		height: 100%;
+		border: none;
+		border-radius: 12px;
+		font-size: 14px;
+		align-items: center;
+		background-color:#F2F4F6;
+		// &:hover { 
+		//   color:#D9DBDE ;
+		// }
+		// &:active { 
+		//   color:#B8BAC1 ;
+		// }
+	  }
+		.left-button, .right-button {
+			flex-grow: 1; 
+			display: flex; 
+			justify-content: center; 
+	 }
+  }
+}
+
+.event {
+  width: 100%;
+  height: 260px;
+  position: absolute;
+  top: 256px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+	.head {
+		width: 375px;
+		height: 26px;
+		padding: 1px 24px;
+		display: flex; 
+		justify-content: space-between; 
+		margin-bottom: 16px;
+ 
+		span {
+			font-size: 18px;
+			font-weight: 600;
+		}
+ }
+ 
+	.body {
+		width: 100%;
+		height: 200px;
+		display:flex;
+		flex-direction: row;
+		gap:16px;
+		padding-left: 24px;
+		padding-bottom: 30px;
+		overflow-y: hidden;
+
+		&::-webkit-scrollbar {
+			height: 10px;
+		}
+		&::-webkit-scrollbar-track {
+			background-color: #F2F4F6;
+			border-radius: 10px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #B8BAC1;
+			border-radius: 10px;
+			&:hover {
+				background-color: #D9DBDE;
+			}
+		}
+ 
+		.section{
+			width:140px;
+			height:188px;
+ 
+			.img{
+				width:140px;
+				height:140px;
+				border-radius:12px;
+				border: 1px solid red;
+				margin-bottom: 8px;
+			}
+		 
+			.text{
+				width:140px;
+				height:40px;
+				padding:0Px,0Px,2Px,0Px;
+
+				.title {
+					height: 20px;
+					font-size: 14px;
+					font-weight: 600;
+				}
+				.subtitle {
+					height: 20px;
+					font-size: 12px;
+					color: $sub_font_color;
+				}
+			}
+	 }
+ }	
+}
+	
+.daily_head{
+	width: 100%;  
+	height: 24px;    
+	padding: 0px 24px;  
+	position: absolute;    
+	top: 516px;
+	display:flex;    
+	align-items: center;
+	justify-content:space-between;
+
+	.left-item { 
+	  display:flex; 
+	  align-items:center;
+
+	  img { 
+	    margin-right:10px; 
+	  }
+
+	  .head {
+	    font-size:18px;
+	    font-weight:600;
+	  }
+	}
+
+	.sort {
+		font-size: 12px;
+		color: $sub_font_color;
+	}
+}
+	
+.daily_body{
+	width: 100%;   
+	height: 176px;   
+	padding: 0 24px 0 24px;
+	position: absolute;
+	top: 556px;
+
+	.challenge {
+		width: 100%;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 15px;
+		&:not(:last-child){
+			margin-bottom: 15px;
+		}
+
+		.img {
+			width: 48px;
+			height: 48px;
+			border-radius: 9px;
+			background-color: #B8BAC1;
+		}
+
+		.main {
+			margin-right: 30%;
+
+			.title {
+				height: 20px;
+				font-size: 14px;
+				font-weight: 600;
+			}
+			.time {
+				height: 18px;
+				font-size: 12px;
+				color: #FFBA08;
+			}
+		}
+
+		.participate {
+			font-size: 12px;
+			color: $sub_font_color
+		}
+	}
+}
+	
+.bonus{
+	width: 100%;
+	height: 93px; 
+	padding: 0 24px;
+	position: absolute;     
+	top: 744px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.title {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 15px;
+		align-self: flex-start;
+	}
+	.btn {
+		width: 327px;
+		height: 51px;
+		border: none;
+		border-radius: 12px;
+		background-color: #B8BAC1;
+		font-size: 15px;
+		font-weight: 300;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
