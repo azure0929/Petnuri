@@ -1,6 +1,6 @@
-import MainTab from "../components/MainTab";
-import Background from "../components/Background";
-import '../styles/challenge.scss'
+import MainTab from "@/components/MainTab";
+import Background from "@/components/Background";
+import '@/styles/challenge.scss'
 import { useRef } from "react";
 import fireImage from '../../public/fire.png'
 import creditImage from '../../public/credit.png'
