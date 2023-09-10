@@ -2,13 +2,17 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import '@/styles/challenge.scss'
 import { useRef } from "react";
-import fireImage from '../../public/fire.png'
-import creditImage from '../../public/credit.png'
+import fireImage from '/fire.png'
+import creditImage from '/credit.png'
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { FiRotateCcw } from 'react-icons/fi'
+import ChallengeBS from "@/components/BottomSheet/ChallengeBS";
+import { useSetRecoilState } from 'recoil'
+import { bottomSheetState } from "@/store";
 
 const Challenge = () => {
   const scrollRef = useRef(null);
+  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     if (!scrollRef.current) return;
@@ -18,7 +22,7 @@ const Challenge = () => {
     const current = scrollRef.current as HTMLDivElement;
     current.scrollLeft += e.deltaY;
   };
-  
+
   return (
     <>
       <Background>
@@ -57,20 +61,6 @@ const Challenge = () => {
                 <div className="subtitle">카드 디자인 서브 타이틀</div>
               </div>
             </div>
-            <div className="section">
-              <div className="img"></div>
-              <div className="text">
-                <div className="title">랜선대회 챌린지</div>
-                <div className="subtitle">카드 디자인 서브 타이틀</div>
-              </div>
-            </div>
-            <div className="section">
-              <div className="img"></div>
-              <div className="text">
-                <div className="title">랜선대회 챌린지</div>
-                <div className="subtitle">카드 디자인 서브 타이틀</div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -90,29 +80,15 @@ const Challenge = () => {
             </div>
             <div className="participate">참여하기 <IoIosArrowForward/></div>
           </div>
-          <div className="challenge">
-            <div className="img"></div>
-            <div className="main">
-              <div className="title">대규모 챌린지</div> 
-              <div className="time"><FiRotateCcw/> 6시간 후 </div>
-            </div>
-            <div className="participate">참여하기 <IoIosArrowForward/></div>
-          </div>
-          <div className="challenge">
-            <div className="img"></div>
-            <div className="main">
-              <div className="title">대규모 챌린지</div> 
-              <div className="time"><FiRotateCcw/> 6시간 후 </div>
-            </div>
-            <div className="participate">참여하기 <IoIosArrowForward/></div>
-          </div>
         </div>
         <div className="bonus">
           <div className="title">추가 보너스 받기</div>
-          <button className="btn">보너스 받기 버튼</button>
+          <button className="button" onClick={() => setBottomIsOpen(true)}>보너스 받기 버튼</button>
         </div>
+        <ChallengeBS/>
+        <MainTab />
       </Background>
-      <MainTab />
+      
     </>
   );
 };
