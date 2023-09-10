@@ -1,6 +1,6 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
-import '@/styles/challenge.scss'
+import styles from '@/styles/challenge.module.scss'
 import { useRef } from "react";
 import fireImage from '/fire.png'
 import creditImage from '/credit.png'
@@ -26,69 +26,68 @@ const Challenge = () => {
   return (
     <>
       <Background>
-        <div className="head">
+        <div className={styles.head}>
           <span>챌린지</span>
         </div>
-        <div className="name">
-          <div className="img"></div>
-          <div className="title">꿍이집사 펫고수</div>
+        <div className={styles.name}>
+          <div className={styles.img}></div>
+          <div className={styles.title}>꿍이집사 펫고수</div>
         </div>
-        <div className="credit">
+        <div className={styles.credit}>
          1220 크레딧 
          <img src={creditImage} alt="credit" />
         </div>
 
-        <div className="shop">
-          <div className="container">
-            <button className="button left-button">포인트샵 가기</button>
+        <div className={styles.shop}>
+          <div className={styles.container}>
+            <button className={styles.button}>포인트샵 가기</button>
             <span>|</span>
-            <button className="button right-button">구매내역 보기</button>
+            <button className={styles.button}>구매내역 보기</button>
           </div>
         </div>
 
-        <div className="event">
-          <div className="head">
+        <div className={styles.event}>
+          <div className={styles.head}>
             <span>이벤트 챌린지</span>
           </div>
           <div 
-          className="body" 
+          className={styles.body} 
           ref={scrollRef}
           onWheel={handleWheel}>
-            <div className="section">
-              <div className="img"></div>
-              <div className="text">
-                <div className="title">랜선대회 챌린지</div>
-                <div className="subtitle">카드 디자인 서브 타이틀</div>
+            <div className={styles.section}>
+              <div className={styles.img}></div>
+              <div className={styles.text}>
+                <div className={styles.title}>랜선대회 챌린지</div>
+                <div className={styles.subtitle}>카드 디자인 서브 타이틀</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="daily_head">
-          <div className="left-item">
+        <div className={styles.daily_head}>
+          <div className={styles.left_item}>
             <img src={fireImage} alt="fire" />
-            <span className="head">데일리 챌린지</span>
+            <span className={styles.head}>데일리 챌린지</span>
           </div>
-          <div className="sort">최신순 <IoIosArrowDown/></div>
+          <div className={styles.sort}>최신순 <IoIosArrowDown/></div>
         </div>
-        <div className="daily_body">
-          <div className="challenge">
-            <div className="img"></div>
-            <div className="main">
-              <div className="title">대규모 챌린지</div> 
-              <div className="time"><FiRotateCcw/> 6시간 후 </div>
+        <div className={styles.daily_body}>
+          <div className={styles.challenge}>
+            <div className={styles.img}></div>
+            <div className={styles.main}>
+              <div className={styles.title}>대규모 챌린지</div> 
+              <div className={styles.time}><FiRotateCcw/> 6시간 후 </div>
             </div>
-            <div className="participate">참여하기 <IoIosArrowForward/></div>
+            <div className={styles.participate}>참여하기 <IoIosArrowForward/></div>
           </div>
         </div>
-        <div className="bonus">
-          <div className="title">추가 보너스 받기</div>
-          <button className="button" onClick={() => setBottomIsOpen(true)}>보너스 받기 버튼</button>
+        <div className={styles.bonus}>
+          <div className={styles.title}>추가 보너스 받기</div>
+          <button className={styles.button} onClick={() => setBottomIsOpen(true)}>보너스 받기 버튼</button>
         </div>
         <ChallengeHBS/>
         <MainTab />
       </Background>
-      
     </>
   );
 };
