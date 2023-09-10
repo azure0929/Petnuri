@@ -1,0 +1,94 @@
+@mixin title-font() {
+  font-size: 18px;
+  font-weight: 600;
+}
+@mixin sub-font() {
+  font-size: 12px;
+  color: #767676;
+}
+
+.head {
+  height: 100px;
+  border-bottom: 1px solid #EBEBEB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include title-font();
+}
+
+.attend, .quiz, .invite {
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .text_box{
+    height: 42px;
+    text-align: left;
+
+    .title {
+      @include title-font();
+      margin-left: 4px;
+    }
+    .sub{
+      @include sub-font();
+      padding-top: 1px;
+      line-height: 18px;
+    }
+  }
+}
+
+.btn_1 {
+  width: 96px;
+  height: 42px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quetion {
+  height: 70px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 10px;
+}
+
+.code {
+  height: 44px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  .text {
+    color: #646464;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .btn_2 {
+    width: 104px;
+    height: 22px;
+    background-color: #A0A0A0;
+    border: none;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.toast {
+  height: 48px;
+  position: relative;
+  bottom: 100px;
+}

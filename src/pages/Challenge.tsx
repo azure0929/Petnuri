@@ -6,7 +6,7 @@ import fireImage from '/fire.png'
 import creditImage from '/credit.png'
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { FiRotateCcw } from 'react-icons/fi'
-import ChallengeBS from "@/components/BottomSheet/ChallengeBS";
+import ChallengeHBS from "@/components/BottomSheet/ChallengeHBS";
 import { useSetRecoilState } from 'recoil'
 import { bottomSheetState } from "@/store";
 
@@ -85,7 +85,7 @@ const Challenge = () => {
           <div className="title">추가 보너스 받기</div>
           <button className="button" onClick={() => setBottomIsOpen(true)}>보너스 받기 버튼</button>
         </div>
-        <ChallengeBS/>
+        <ChallengeHBS/>
         <MainTab />
       </Background>
       
