@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Place from "./pages/Place";
 import Challenge from "./pages/challenge";
 import PointShop from "@/pages/challenge/PointShop";
-import PetTalk from "./pages/PetTalk";
+import PetTalk from "@/pages/petTalk";
 import MyPage from "./pages/MyPage";
 
 import "./styles/common.scss";
