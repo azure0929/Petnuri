@@ -1,4 +1,4 @@
-@import '../styles/globalstyle.scss';
+@import '@/styles/globalstyle.scss';
 
 .head {
   width: 100%;
@@ -7,14 +7,13 @@
 	display: flex;
   align-items: center;
 	justify-content: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .name {
   width: 100%;
   height: 26px; 
-  padding: 0px 24px;
   position: absolute;
 	top: 80px;
 	display: flex;
@@ -43,7 +42,6 @@
 .credit {
 	width: 100%;
 	height: 34px;
-	padding: 0px 24px;
 	position: absolute; 
 	top: 122px;
 	display: flex; 
@@ -60,7 +58,6 @@
 .shop{
 	width: 100%;
 	height: 52px;  
-	padding: 0px 24px;
 	position: absolute;  
 	top: 172px;
 
@@ -90,11 +87,15 @@
 		//   color:#B8BAC1 ;
 		// }
 	  }
+		.button_right {
+			@extend .button;
+			color: #999999;
+		}
   }
 }
 
 .event {
-  width: 100%;
+  width: 327px;
   height: 260px;
   position: absolute;
   top: 256px;
@@ -103,9 +104,8 @@
   align-items: center;
 
 	.head {
-		width: 375px;
+		width: 327px;
 		height: 26px;
-		padding: 1px 24px;
 		display: flex; 
 		justify-content: space-between; 
 		margin-bottom: 16px;
@@ -122,8 +122,6 @@
 		display:flex;
 		flex-direction: row;
 		gap:16px;
-		padding-left: 24px;
-		padding-bottom: 30px;
 		overflow-y: hidden;
 
 		&::-webkit-scrollbar {
@@ -174,9 +172,8 @@
 }
 	
 .daily_head{
-	width: 100%;  
-	height: 24px;    
-	padding: 0px 24px;  
+	width: 327px;  
+	height: 24px;     
 	position: absolute;    
 	top: 516px;
 	display:flex;    
@@ -204,14 +201,13 @@
 }
 	
 .daily_body{
-	width: 100%;   
+	width: 327px;   
 	height: 176px;   
-	padding: 0 24px 0 24px;
 	position: absolute;
 	top: 556px;
 
 	.challenge {
-		width: 100%;
+		width: 327px;
 		height: 48px;
 		display: flex;
 		align-items: center;
@@ -275,9 +271,8 @@
 }
 	
 .bonus{
-	width: 100%;
+	width: 327px;
 	height: 93px; 
-	padding: 0 24px;
 	position: absolute;     
 	top: 744px;
 	display: flex;

@@ -9,6 +9,7 @@ import { FiRotateCcw } from 'react-icons/fi'
 import ChallengeHBS from "@/components/BottomSheet/ChallengeHBS";
 import { useSetRecoilState } from 'recoil'
 import { bottomSheetState } from "@/store";
+import { createToast } from "@/utils/ToastUtils";
 
 const Challenge = () => {
   const scrollRef = useRef(null);
@@ -54,6 +55,8 @@ const Challenge = () => {
     current.scrollLeft += e.deltaY;
   };
 
+  const wrong = () => createToast('error', '추후 오픈 예정입니다');
+
   return (
     <>
       <Background>
@@ -74,7 +77,7 @@ const Challenge = () => {
           <div className={styles.container}>
             <Link to="/pointshop" className={styles.button}>포인트샵 가기</Link>
             <span>|</span>
-            <button className={styles.button}>포인트 사용 내역</button>
+            <button className={styles.button_right} onClick={wrong}>포인트 사용 내역</button>
           </div>
         </div>
 
