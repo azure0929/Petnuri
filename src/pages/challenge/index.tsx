@@ -4,7 +4,6 @@ import styles from '@/styles/challenge.module.scss'
 import { useRef } from "react";
 import fireImage from '/fire.png'
 import creditImage from '/credit.png'
-import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { FiRotateCcw } from 'react-icons/fi'
 import ChallengeHBS from "@/components/BottomSheet/ChallengeHBS";
 import { useSetRecoilState } from 'recoil'
@@ -32,6 +31,7 @@ const Challenge = () => {
         <div className={styles.name}>
           <div className={styles.img}></div>
           <div className={styles.title}>꿍이집사 펫고수</div>
+          <div className={styles.date}> 23.03.06</div>
         </div>
         <div className={styles.credit}>
          1220 크레딧 
@@ -69,7 +69,7 @@ const Challenge = () => {
             <img src={fireImage} alt="fire" />
             <span className={styles.head}>데일리 챌린지</span>
           </div>
-          <div className={styles.sort}>최신순 <IoIosArrowDown/></div>
+          <div className={styles.sort}>24시간마다 초기화</div>
         </div>
         <div className={styles.daily_body}>
           <div className={styles.challenge}>
@@ -78,12 +78,17 @@ const Challenge = () => {
               <div className={styles.title}>대규모 챌린지</div> 
               <div className={styles.time}><FiRotateCcw/> 6시간 후 </div>
             </div>
-            <div className={styles.participate}>참여하기 <IoIosArrowForward/></div>
+            <button className={styles.participate_on}>참여하기</button>
+            <button className={styles.participate_off}>참여완료</button>
           </div>
         </div>
         <div className={styles.bonus}>
           <div className={styles.title}>추가 보너스 받기</div>
-          <button className={styles.button} onClick={() => setBottomIsOpen(true)}>보너스 받기 버튼</button>
+          <button 
+            className={styles.button} 
+            onClick={() => setBottomIsOpen(true)}>
+            보너스 받기 
+          </button>
         </div>
         <ChallengeHBS/>
         <MainTab />

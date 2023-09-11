@@ -19,14 +19,24 @@
 	top: 80px;
 	display: flex;
 	align-items: center;
-  font-size: 14px;
-	font-weight: 600;
+
 	.img {
 		width: 26px;
 		height: 26px;
 		border-radius: 50%;
 		background-color: #B8BAC1;
 		margin-right: 5px;
+	}
+
+	.title {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.date {
+		font-size: 12px;
+		color: #707070;
+		margin-left: 8px;
 	}
 }
 
@@ -227,15 +237,38 @@
 				font-weight: 600;
 			}
 			.time {
+				width: 74px;
 				height: 18px;
 				font-size: 12px;
+				background: #FFBA081A;
 				color: #FFBA08;
 			}
 		}
 
-		.participate {
+		.participate_on {
+			width: 66px;
+			height: 30px;
 			font-size: 12px;
-			color: $sub_font_color
+			border: none;
+			border-radius: 8px;
+			background: #3F54D11A;
+			color: #3F54D1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.participate_off {
+			width: 66px;
+			height: 30px;
+			font-size: 12px;
+			border: none;
+			border-radius: 8px;
+			background: #D6D6D6;
+			color: #707070;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 }
@@ -261,9 +294,10 @@
 		height: 51px;
 		border: none;
 		border-radius: 12px;
-		background-color: #B8BAC1;
-		font-size: 15px;
-		font-weight: 300;
+		background: #3F54D1;
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: 600;
 		justify-content: center;
 		align-items: center;
 	}
