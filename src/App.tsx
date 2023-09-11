@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Place from "./pages/Place";
-import Challenge from "./pages/Challenge";
+import Challenge from "./pages/challenge";
 import PetTalk from "./pages/PetTalk";
 import MyPage from "./pages/MyPage";
 

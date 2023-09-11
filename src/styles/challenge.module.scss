@@ -59,6 +59,7 @@
 		height: 52px;
 		background-color:#F2F4F6;
     border-radius: 12px;
+		display:flex;
     justify-content: space-between;
 		align-items: center;
 
@@ -70,8 +71,8 @@
 		align-items: center;
 		background-color:#F2F4F6;
 		flex-grow: 1; 
-			display: flex; 
-			justify-content: center; 
+		display: flex; 
+		justify-content: center; 
 		// &:hover { 
 		//   color:#D9DBDE ;
 		// }

@@ -15,7 +15,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ children }) => {
         {isOpen && (
           <>
             <div className={styles.background} onClick={() => setIsOpen(false)}></div>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${isOpen ? styles.active : ''}`}>
               {children}
             </div>
           </>
