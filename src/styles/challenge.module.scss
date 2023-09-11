@@ -59,6 +59,7 @@
 		height: 52px;
 		background-color:#F2F4F6;
     border-radius: 12px;
+		display:flex;
     justify-content: space-between;
 		align-items: center;
 
@@ -69,6 +70,9 @@
 		font-size: 14px;
 		align-items: center;
 		background-color:#F2F4F6;
+		flex-grow: 1; 
+		display: flex; 
+		justify-content: center; 
 		// &:hover { 
 		//   color:#D9DBDE ;
 		// }
@@ -76,11 +80,6 @@
 		//   color:#B8BAC1 ;
 		// }
 	  }
-		.left-button, .right-button {
-			flex-grow: 1; 
-			display: flex; 
-			justify-content: center; 
-	 }
   }
 }
 
@@ -174,7 +173,7 @@
 	align-items: center;
 	justify-content:space-between;
 
-	.left-item { 
+	.left_item { 
 	  display:flex; 
 	  align-items:center;
 
@@ -257,7 +256,7 @@
 		margin-bottom: 15px;
 		align-self: flex-start;
 	}
-	.btn {
+	.button {
 		width: 327px;
 		height: 51px;
 		border: none;
