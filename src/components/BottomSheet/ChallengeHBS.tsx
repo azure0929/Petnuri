@@ -5,32 +5,23 @@ import toast from "react-hot-toast";
 
 const ChallengeHBS = () => {
 
-  const complete = () => toast.success('포인트 지급이 완료되었습니다', {
-    className: styles.toast,
-    style: {
-      background: '#B0B0B0',
-      color: '#424242',
-    },
-    position: "bottom-center",
-  });
+  const createToast = (type:'success'|'error', message:string) => {
+    const toastFunc = type === 'success' ? toast.success : toast.error;
+    return toastFunc(message, {
+      style: {
+        background: '#B0B0B0',
+        color: '#424242',
+        height: '48px',
+        position: 'relative',
+        bottom: '100px',
+      },
+      position: "bottom-center",
+    });
+  };
 
-  const wrong = () => toast.success('오답입니다. 내일 다시 참여가 가능합니다', {
-    className: styles.toast,
-    style: {
-      background: '#B0B0B0',
-      color: '#424242',
-    },
-    position: "bottom-center",
-  });
-
-  const copy = () => toast.success('복사되었습니다', {
-    className: styles.toast,
-    style: {
-      background: '#B0B0B0',
-      color: '#424242',
-    },
-    position: "bottom-center",
-  });
+  const complete = () => createToast('success', '포인트 지급이 완료되었습니다');
+  const wrong = () => createToast('error', '오답입니다. 내일 다시 참여가 가능합니다');
+  const copy = () => createToast('success', '복사되었습니다');
 
   return (
     <>
@@ -55,7 +46,7 @@ const ChallengeHBS = () => {
               <br />집사 퀴즈 풀고 50포인트 받아가세요 !
             </div>
           </div>
-          <button className={styles.btn_1}>지급완료</button>
+          <button className={styles.btn_1} onClick={wrong}>지급완료</button>
         </div>
 
         <div className={styles.quetion}></div>
