@@ -32,6 +32,9 @@ const EditInfo = () => {
           회원 탈퇴
           <AiOutlineRight />
         </div>
+        <div className={styles.editbtnarea}>
+          <button>수정 완료</button>
+        </div>
       </div>
     </Background>
   );
