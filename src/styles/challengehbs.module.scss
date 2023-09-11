@@ -1,3 +1,5 @@
+@import '@/styles/common.scss';
+
 @mixin title-font() {
   font-size: 18px;
   font-weight: 600;
@@ -9,7 +11,7 @@
 
 .head {
   height: 100px;
-  border-bottom: 1px solid #EBEBEB;
+  border-bottom: 1px solid $gray_0200_EBEBEB;
   display: flex;
   align-items: center;
   justify-content: center;
