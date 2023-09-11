@@ -1,7 +1,7 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from '@/styles/challenge.module.scss'
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import fireImage from '/fire.png'
 import creditImage from '/credit.png'
 import { FiRotateCcw } from 'react-icons/fi'
@@ -12,6 +12,28 @@ import { bottomSheetState } from "@/store";
 const Challenge = () => {
   const scrollRef = useRef(null);
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const [hour,setHour] = useState(0);
+  const [participated, setParticipated] = useState(false);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const now = new Date();
+      const nextDay = new Date(now);
+      nextDay.setDate(now.getDate() + 1);
+      nextDay.setHours(0, 0, 0, 0); 
+
+      let diffInMs = nextDay.getTime() - now.getTime();
+      let diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+
+      setHour(diffInHours);
+
+      if (diffInHours === 24) {
+        setParticipated(false);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId); 
+}, []);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     if (!scrollRef.current) return;
@@ -76,10 +98,23 @@ const Challenge = () => {
             <div className={styles.img}></div>
             <div className={styles.main}>
               <div className={styles.title}>대규모 챌린지</div> 
-              <div className={styles.time}><FiRotateCcw/> 6시간 후 </div>
+              <div className={styles.time}><FiRotateCcw/> {hour}시간 후 </div>
             </div>
-            <button className={styles.participate_on}>참여하기</button>
-            <button className={styles.participate_off}>참여완료</button>
+            {/* f5시 참여완료를 참여하기로 바뀌지 않게 하려면 백엔드 필요  */}
+            {participated ? (
+              <button 
+                className={styles.participate_off}
+                onClick={() => setParticipated(false)} 
+                disabled
+                >
+                참여완료</button>
+              ) : (
+              <button 
+                className={styles.participate_on}
+                onClick={() => setParticipated(true)} 
+                >
+                참여하기</button>
+              )}
           </div>
         </div>
         <div className={styles.bonus}>
