@@ -2,14 +2,20 @@
   width: 375px;
   height: 60%;
   background-color: white;
-  border-radius :30px;
-  border-bottom-left-radius :0px; 
-  border-bottom-right-radius :0px;
+  border-radius: 30px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   position: fixed;
-  bottom: 0;
+  bottom: -100%;
   z-index: 9;
   padding: 0 24px;
+  transition: transform 0.3s ease-out;
 }
+
+.container.visible {
+  transform: translateY(-170%);
+}
+
 .background {
   position: fixed;
   width: 100%;
@@ -19,4 +25,10 @@
   top: 0;
   left: 0;
   z-index: 8;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.background.visible {
+  opacity: 1;
 }
