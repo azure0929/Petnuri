@@ -29,3 +29,10 @@
   background-color: #171717;
   z-index: -1;
 }
+.select_wrap {
+  display: flex;
+  margin-top: 24px;
+  .select_pet {
+    margin-left: 13px;
+  }
+}
