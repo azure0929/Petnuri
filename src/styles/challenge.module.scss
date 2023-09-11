@@ -1,4 +1,4 @@
-@import '../styles/globalstyle.scss';
+@import '@/styles/globalstyle.scss';
 
 .head {
   width: 100%;
@@ -7,20 +7,18 @@
 	display: flex;
   align-items: center;
 	justify-content: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .name {
   width: 100%;
   height: 26px; 
-  padding: 0px 24px;
   position: absolute;
 	top: 80px;
 	display: flex;
 	align-items: center;
-  font-size: 14px;
-	font-weight: 600;
+
 	.img {
 		width: 26px;
 		height: 26px;
@@ -28,12 +26,22 @@
 		background-color: #B8BAC1;
 		margin-right: 5px;
 	}
+
+	.title {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.date {
+		font-size: 12px;
+		color: #707070;
+		margin-left: 8px;
+	}
 }
 
 .credit {
 	width: 100%;
 	height: 34px;
-	padding: 0px 24px;
 	position: absolute; 
 	top: 122px;
 	display: flex; 
@@ -50,7 +58,6 @@
 .shop{
 	width: 100%;
 	height: 52px;  
-	padding: 0px 24px;
 	position: absolute;  
 	top: 172px;
 
@@ -80,11 +87,15 @@
 		//   color:#B8BAC1 ;
 		// }
 	  }
+		.button_right {
+			@extend .button;
+			color: #999999;
+		}
   }
 }
 
 .event {
-  width: 100%;
+  width: 327px;
   height: 260px;
   position: absolute;
   top: 256px;
@@ -93,9 +104,8 @@
   align-items: center;
 
 	.head {
-		width: 375px;
+		width: 327px;
 		height: 26px;
-		padding: 1px 24px;
 		display: flex; 
 		justify-content: space-between; 
 		margin-bottom: 16px;
@@ -112,8 +122,6 @@
 		display:flex;
 		flex-direction: row;
 		gap:16px;
-		padding-left: 24px;
-		padding-bottom: 30px;
 		overflow-y: hidden;
 
 		&::-webkit-scrollbar {
@@ -164,9 +172,8 @@
 }
 	
 .daily_head{
-	width: 100%;  
-	height: 24px;    
-	padding: 0px 24px;  
+	width: 327px;  
+	height: 24px;     
 	position: absolute;    
 	top: 516px;
 	display:flex;    
@@ -194,14 +201,13 @@
 }
 	
 .daily_body{
-	width: 100%;   
+	width: 327px;   
 	height: 176px;   
-	padding: 0 24px 0 24px;
 	position: absolute;
 	top: 556px;
 
 	.challenge {
-		width: 100%;
+		width: 327px;
 		height: 48px;
 		display: flex;
 		align-items: center;
@@ -227,23 +233,46 @@
 				font-weight: 600;
 			}
 			.time {
+				width: 74px;
 				height: 18px;
 				font-size: 12px;
+				background: #FFBA081A;
 				color: #FFBA08;
 			}
 		}
 
-		.participate {
+		.participate_on {
+			width: 66px;
+			height: 30px;
 			font-size: 12px;
-			color: $sub_font_color
+			border: none;
+			border-radius: 8px;
+			background: #3F54D11A;
+			color: #3F54D1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.participate_off {
+			width: 66px;
+			height: 30px;
+			font-size: 12px;
+			border: none;
+			border-radius: 8px;
+			background: #D6D6D6;
+			color: #707070;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			pointer-events: none;
 		}
 	}
 }
 	
 .bonus{
-	width: 100%;
+	width: 327px;
 	height: 93px; 
-	padding: 0 24px;
 	position: absolute;     
 	top: 744px;
 	display: flex;
@@ -261,9 +290,10 @@
 		height: 51px;
 		border: none;
 		border-radius: 12px;
-		background-color: #B8BAC1;
-		font-size: 15px;
-		font-weight: 300;
+		background: #3F54D1;
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: 600;
 		justify-content: center;
 		align-items: center;
 	}
