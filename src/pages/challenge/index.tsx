@@ -11,12 +11,14 @@ import { bottomSheetState } from "@/store";
 
 const Challenge = () => {
   const scrollRef = useRef(null);
+  const intervalId = useRef(0);
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const [hour,setHour] = useState(0);
   const [participated, setParticipated] = useState(false);
 
+
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const calculateTime = () => {
       const now = new Date();
       const nextDay = new Date(now);
       nextDay.setDate(now.getDate() + 1);
@@ -30,9 +32,16 @@ const Challenge = () => {
       if (diffInHours === 24) {
         setParticipated(false);
       }
+    };
+    setTimeout(() => {
+      calculateTime();
+      
+      intervalId.current = setInterval(calculateTime, 60000);
     }, 1000);
 
-    return () => clearInterval(intervalId); 
+    return () => {
+      if(intervalId.current) clearInterval(intervalId.current); 
+    };
 }, []);
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
