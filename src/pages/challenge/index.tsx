@@ -2,6 +2,7 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from '@/styles/challenge.module.scss'
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import fireImage from '/fire.png'
 import creditImage from '/credit.png'
 import { FiRotateCcw } from 'react-icons/fi'
@@ -71,9 +72,9 @@ const Challenge = () => {
 
         <div className={styles.shop}>
           <div className={styles.container}>
-            <button className={styles.button}>포인트샵 가기</button>
+            <Link to="/pointshop" className={styles.button}>포인트샵 가기</Link>
             <span>|</span>
-            <button className={styles.button}>구매내역 보기</button>
+            <button className={styles.button}>포인트 사용 내역</button>
           </div>
         </div>
 
