@@ -4,6 +4,7 @@ import styles from '@/styles/mypage.module.scss';
 import { IoIosAdd } from 'react-icons/io';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const MyPage = () => {
   return (
@@ -25,7 +26,9 @@ const MyPage = () => {
             <p className={styles.email}>Yu-jin@kakao.com</p>
           </div>
           <div className={styles.setting}>
-            <IoSettingsSharp />
+            <Link to="/mypage/editinfo">
+              <IoSettingsSharp />
+            </Link>
           </div>
         </div>
         <div className={styles.space}></div>

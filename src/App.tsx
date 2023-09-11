@@ -7,6 +7,7 @@ import PetTalk from '@/pages/petTalk';
 import Concern from '@/pages/petTalk/concern';
 import FreeTalk from '@/pages/petTalk/freetalk';
 import MyPage from './pages/mypage/MyPage';
+import EditInfo from './pages/mypage/EditInfo';
 
 import './styles/common.scss';
 import './styles/globalstyle.scss';
@@ -49,6 +50,10 @@ const App = () => {
       <Route
         path="/mypage"
         element={<MyPage />}
+      />
+      <Route
+        path="/mypage/editinfo"
+        element={<EditInfo />}
       />
     </Routes>
   );
