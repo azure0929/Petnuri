@@ -1,9 +1,21 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const onChallenge = () => {
+    navigate(`challenge`)
+  }
+
+  const onPettalk = () => {
+    navigate(`PetTalk`)
+  }
+
   return (
     <>
       <Background>
@@ -30,7 +42,7 @@ const Home = () => {
           <div className={styles.recommend}>
             <div className={styles.title}>
               <h3>추천 챌린지</h3>
-              <div role="button">더보기</div>
+              <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list}>
               <li>
@@ -59,7 +71,7 @@ const Home = () => {
           <div className={styles.hot}>
             <div className={styles.title}>
               <h3>펫톡 인기글</h3>
-              <div role="button">더보기</div>
+              <div role="button" onClick={onPettalk}>더보기</div>
             </div>
             <ul className={styles.list}>
               <li>
