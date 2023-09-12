@@ -3,8 +3,9 @@
 .main-tab {
   width: 375px;
   height: 65px;
-  background-color: $gray_0200_EBEBEB;
+  background-color: #fff;
   display: flex;
+  border-top: 1px solid $gray_0200_EBEBEB;
 
   position: fixed;
   right: 300px;
