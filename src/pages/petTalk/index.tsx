@@ -2,11 +2,25 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { activeTabState } from "../../store/petTalkState";
+import { useEffect } from "react";
 
 import { Select, Space } from "antd";
 
 const PetTalk = () => {
   const location = useLocation();
+  const [activeTab, setActiveTab] = useRecoilState(activeTabState);
+
+  useEffect(() => {
+    if (location.pathname === "/petTalk") {
+      setActiveTab("전체");
+    } else if (location.pathname === "/concern") {
+      setActiveTab("고민상담");
+    } else if (location.pathname === "/freetalk") {
+      setActiveTab("자유수다");
+    }
+  }, [location.pathname, setActiveTab]);
   return (
     <>
       <Background>
@@ -14,7 +28,7 @@ const PetTalk = () => {
           <Link
             to="/petTalk"
             className={`${styles.head_item} ${
-              location.pathname === "/petTalk" ? styles.active : ""
+              activeTab === "전체" ? styles.active : ""
             }`}
           >
             전체
@@ -22,7 +36,7 @@ const PetTalk = () => {
           <Link
             to="/concern"
             className={`${styles.head_item} ${
-              location.pathname === "/concern" ? styles.active : ""
+              activeTab === "고민상담" ? styles.active : ""
             }`}
           >
             고민상담
@@ -30,7 +44,7 @@ const PetTalk = () => {
           <Link
             to="/freetalk"
             className={`${styles.head_item} ${
-              location.pathname === "/freetalk" ? styles.active : ""
+              activeTab === "자유수다" ? styles.active : ""
             }`}
           >
             자유수다
