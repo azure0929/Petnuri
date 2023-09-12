@@ -14,10 +14,9 @@
 .name {
   width: 100%;
   height: 26px;
-  position: absolute;
-  top: 80px;
   display: flex;
   align-items: center;
+  margin-top: 20px;
   padding: 0 24px;
 
   .img {
@@ -43,11 +42,10 @@
 .credit {
   width: 100%;
   height: 34px;
-  position: absolute;
-  top: 122px;
   display: flex;
   font-size: 24px;
   font-weight: 600;
+  margin-top: 15px;
   padding: 0 24px;
 
   img {
@@ -60,8 +58,7 @@
 .shop {
   width: 100%;
   height: 52px;
-  position: absolute;
-  top: 172px;
+  margin-top: 15px;
   padding: 0 24px;
 
   .container {
@@ -100,11 +97,10 @@
 .event {
   width: 327px;
   height: 260px;
-  position: absolute;
-  top: 256px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 25px;
   padding: 0 24px;
 
   .head {
@@ -179,8 +175,6 @@
 .daily_head {
   width: 375px;
   height: 24px;
-  position: absolute;
-  top: 516px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -209,9 +203,8 @@
 
 .daily_body {
   width: 327px;
-  height: 176px;
-  position: absolute;
-  top: 556px;
+  height: 152px;
+  margin-top: 15px;
   padding: 0 24px;
 
   .challenge {
@@ -281,10 +274,9 @@
 .bonus {
   width: 327px;
   height: 93px;
-  position: absolute;
-  top: 744px;
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
   padding: 0 24px;
 
   .title {
