@@ -1,10 +1,9 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
+import credit from '@/asset/credit.svg'
 import { useRef, useState, useEffect } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-import creditImage from "/credit.png";
 import { FiRotateCcw } from "react-icons/fi";
 import { BsFire } from "react-icons/bs";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
@@ -71,7 +70,7 @@ const Challenge = () => {
         </div>
         <div className={styles.credit}>
           1220 크레딧
-          <img src={creditImage} alt="credit" />
+          <img src={credit} alt="credit" />
         </div>
 
         <div className={styles.shop}>
