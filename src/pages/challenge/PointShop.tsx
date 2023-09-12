@@ -29,7 +29,10 @@ const PointShop = () => {
           <img src={creditImage} alt="credit" />
         </div>
 
-        <div className={styles.ad}></div>
+        <div className={styles.ad}>
+          <div className={styles.banner}>프로모션 배너</div>
+          <div className={styles.banner_sub}>프로모션 배너 서브텍스트</div>
+        </div>
 
         <div className={styles.p_title}>큰 타이틀</div>
 

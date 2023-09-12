@@ -1,6 +1,6 @@
 import BottomSheet from "./BottomSheet";
-import fireImage from '/fire.png'
 import styles from '@/styles/challengehbs.module.scss'
+import { BsFire } from 'react-icons/bs'
 import { createToast } from "@/utils/ToastUtils";
 
 const ChallengeHBS = () => {
@@ -16,7 +16,7 @@ const ChallengeHBS = () => {
 
         <div className={styles.attend}>
           <div className={styles.text_box}>
-            <img src={fireImage} alt="fire" />
+            <BsFire size='18px'color='#EC6330'/>
             <span className={styles.title}>출석체크</span>
             <div className={styles.sub}>출석석체크하고 30 포인트 받아가세요 !</div>
           </div>
@@ -25,7 +25,7 @@ const ChallengeHBS = () => {
 
         <div className={styles.quiz}>
           <div className={styles.text_box}>
-            <img src={fireImage} alt="fire" />
+            <BsFire size='18px'color='#EC6330'/>
             <span className={styles.title}>집사퀴즈</span>
             <div className={styles.sub}>
               집사에겐 필수 상식 ! 
@@ -39,7 +39,7 @@ const ChallengeHBS = () => {
 
         <div className={styles.invite}>
           <div className={styles.text_box}>
-            <img src={fireImage} alt="fire" />
+            <BsFire size='18px'color='#EC6330'/>
             <span className={styles.title}>친구초대</span>
             <div className={styles.sub}>
               추천 코드를 통해 친구가 회원가입을 할 경우 
