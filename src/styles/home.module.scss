@@ -1,0 +1,204 @@
+@import '@/styles/globalstyle.scss';
+
+.head {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid #F1F1F5; 
+	display: flex;
+  align-items: center;
+	justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.contents {
+
+  // 프로필
+  .profile {
+    padding: 0 24px;
+    margin-top: 16px;
+    .tabmenu {
+      display: flex;
+      font-size: 14px;
+      > div {
+        border: 1px solid #d6d6d6;
+        border-radius: 24px;
+        width: 94px;
+        height: 32px;
+        padding: 6px 8px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        gap: 8px;
+        color: #5c5c5c;
+        cursor: pointer;
+        .icon {
+          width: 18px;
+          height: 18px;
+          background-color: #d6d6d6;
+          border-radius: 50%;
+        }
+      }
+    }
+    .detail {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+        background-color: #d6d6d6;
+      }
+      .name {
+        h3 {
+          margin-top: 12px;
+          font-size: 18px;
+          font-weight: 600;
+          letter-spacing: -.1px;
+        }
+        div {
+          border: none;
+          border-radius: 24px;
+          margin-top: 16px;
+          padding: 10px 24px;
+          height: 40px;
+          color: #3f54d1;
+          font-size: 14px;
+          letter-spacing: -.1px;
+          line-height: 1.4;
+          background-color: rgba(63, 84, 209, .1);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // 추천 챌린지
+  .recommend {
+    margin-top: 36px;
+    color: #171717;
+    overflow: hidden;
+    .title {
+      width: calc(100% - 48px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h3 {
+        font-weight: 600;
+      }
+      div {
+        font-size: 12px;
+        color: #5c5c5c;
+        cursor: pointer;
+      }
+    }
+    .list {
+      margin-top: 16px;
+      padding-left: 24px;
+      display: flex;
+      gap: 16px;
+      text-align-last: left;
+      li {
+        width: 140px;
+        .photo {
+          width: 140px;
+          height: 140px;
+          background-color: #d6d6d6;
+          border-radius: 12px;
+          cursor: pointer;
+        }
+        .desc {
+          margin-top: 8px;
+          span {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: -.1px;
+          }
+          p {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #707070;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+
+  .hot {
+    margin-top: 36px;
+    color: #171717;
+    .title {
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h3 {
+        font-weight: 600;
+      }
+      div {
+        font-size: 12px;
+        color: #5c5c5c;
+        cursor: pointer;
+      }
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      li {
+        border-bottom: 1px solid #ebebeb;
+        padding: 14px 0;
+        .content {
+          display: flex;
+          align-items: center;
+          padding: 0 24px;
+          .photo {
+            width: 48px;
+            height: 48px;
+            background-color: #d6d6d6;
+            border-radius: 8px;
+          }
+          .detail {
+            margin-left: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 232px;
+            .info {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space:nowrap;
+              span {
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: -.1px;
+              }
+            }
+            .user {
+              font-size: 12px;
+              color: #707070;
+              letter-spacing: -.1px;
+              display: flex;
+              gap: 4px;
+              margin-top: 4px;
+            }
+          }
+          .icon {
+            color: #707070;
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+            margin-left: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
