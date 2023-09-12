@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Place from './pages/Place';
 import Challenge from './pages/challenge';
 import PointShop from '@/pages/challenge/PointShop';
@@ -8,6 +8,8 @@ import Concern from '@/pages/petTalk/concern';
 import FreeTalk from '@/pages/petTalk/freetalk';
 import MyPage from './pages/mypage/MyPage';
 import EditInfo from './pages/mypage/EditInfo';
+
+import Admin from '@/pages/admin'
 
 import './styles/common.scss';
 import './styles/globalstyle.scss';
@@ -54,6 +56,11 @@ const App = () => {
       <Route
         path="/mypage/editinfo"
         element={<EditInfo />}
+      />
+
+      <Route
+        path="/admin"
+        element={<Admin />}
       />
     </Routes>
   );
