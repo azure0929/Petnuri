@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
-import Place from "./pages/Place";
 import Challenge from "./pages/challenge";
 import PointShop from "@/pages/challenge/PointShop";
 import EvnetChallenge1 from "@/pages/challenge/EventChallenge1";
@@ -23,7 +22,6 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/place" element={<Place />} />
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/eventchallenge1" element={<EvnetChallenge1 />} />
       <Route path="/pointshop" element={<PointShop />} />
