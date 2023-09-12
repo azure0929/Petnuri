@@ -2,10 +2,10 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
 import credit from '@/asset/credit.svg'
+import fire from '@/asset/fire.svg'
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiRotateCcw } from "react-icons/fi";
-import { BsFire } from "react-icons/bs";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
@@ -109,7 +109,7 @@ const Challenge = () => {
 
         <div className={styles.daily_head}>
           <div className={styles.left_item}>
-            <BsFire size="18px" color="#EC6330" />
+            <img src={fire} alt="fire" />
             <span className={styles.head}>데일리 챌린지</span>
           </div>
           <div className={styles.sort}>24시간마다 초기화</div>
