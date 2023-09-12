@@ -38,11 +38,11 @@ const Challenge = () => {
     setTimeout(() => {
       calculateTime();
       
-      intervalId.current = setInterval(calculateTime, 60000);
+      intervalId.current = window.setInterval(calculateTime, 60000);
     }, 1000);
 
     return () => {
-      if(intervalId.current) clearInterval(intervalId.current); 
+      if(intervalId.current) window.clearInterval(intervalId.current); 
     };
 }, []);
 
