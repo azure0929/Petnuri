@@ -1,0 +1,121 @@
+.head {
+  span {
+    font-size: 20px;
+  }
+}
+
+.bannerImg {
+  width: 375px;
+  height: 600px;
+  left: 0;
+  margin-left: -24px;
+  border: 1px solid black;
+  border-radius: 24px;
+}
+
+.title {
+  display: block;
+  margin-top: 30px;
+  padding: 16px 24px;
+  .mainTitle {
+    display: block;
+    text-align: start;
+    font-weight: 600;
+    height: 24px;
+    size: 18px;
+  }
+  .subTitle {
+    display: block;
+    text-align: start;
+    width: 327px;
+    height: 20px;
+    size: 14px;
+    color: #707070;
+  }
+}
+
+.contents {
+  display: block;
+  width: 375px;
+  .how {
+    display: flex;
+    padding: 16px 24px;
+    .howTitle {
+      display: block;
+      width: 120px;
+      height: 20px;
+      text-align: start;
+    }
+    .howInfo {
+      display: block;
+      width: 208px;
+      height: 20px;
+      text-align: start;
+    }
+  }
+
+  .period {
+    display: flex;
+    padding: 16px 24px;
+    .periodTitle {
+      display: block;
+      width: 120px;
+      height: 20px;
+      text-align: start;
+    }
+    .periodInfo {
+      display: block;
+      width: 208px;
+      height: 20px;
+      text-align: start;
+    }
+  }
+
+  .point {
+    display: flex;
+    padding: 16px 24px;
+    .pointTitle {
+      display: block;
+      width: 120px;
+      height: 20px;
+      text-align: start;
+    }
+    .pointInfo {
+      display: block;
+      width: 208px;
+      height: 20px;
+      text-align: start;
+    }
+  }
+}
+
+.participants {
+  .title {
+    display: block;
+    width: 375px;
+    height: 24px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: start;
+    padding: 0px 24px;
+  }
+  .info {
+    .img {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      background-color: yellowgreen;
+    }
+    .name {
+      display: block;
+      width: 120px;
+      height: 20px;
+      font-weight: 600;
+      span {
+        font-weight: 600;
+        width: 49px;
+        height: 20px;
+      }
+    }
+  }
+}
