@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Place from "./pages/Place";
 import Challenge from "./pages/challenge";
 import PointShop from "@/pages/challenge/PointShop";
+import EvnetChallenge1 from "@/pages/challenge/EventChallenge1";
 import PetTalk from "@/pages/petTalk";
 import Concern from "@/pages/petTalk/concern";
 import FreeTalk from "@/pages/petTalk/freetalk";
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/place" element={<Place />} />
       <Route path="/challenge" element={<Challenge />} />
+      <Route path="/eventchallenge1" element={<EvnetChallenge1 />} />
       <Route path="/pointshop" element={<PointShop />} />
       <Route path="/pettalk" element={<PetTalk />} />
       <Route path="/pettalk" element={<PetTalk />} />
