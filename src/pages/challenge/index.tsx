@@ -2,6 +2,7 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
 import { useRef, useState, useEffect } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import creditImage from "/credit.png";
 import { FiRotateCcw } from "react-icons/fi";

@@ -1,0 +1,19 @@
+{
+  "title": "천하제일 집사대회",
+  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+  "images": [
+    "url",
+    "url"
+  ],
+  "kit_start_date":"2023-09-01",
+  "kit_end_date":"2023-09-01",
+  "reward_start_date":"2023-09-01",
+  "reward_end_date":"2023-09-01",
+  "rewardList":[
+    {
+      "itemId":1,
+      "name":"집사안심세트A"
+    }
+  ],
+  "process": "unprocessed" 
+}
