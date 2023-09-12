@@ -1,18 +1,15 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
-import DailyGet from "./DailyGet";
-import DailyPost from "./DailyPost";
+import CheonhaGet from "./CheonhaGet";
 
-const Daily = () => {
+const Cheonha = () => {
   return (
     <>
       <Background>  
-        <DailyPost />
-        <br />
-        <DailyGet />
+        <CheonhaGet />
       </Background>
       <MainTab />
     </>
   );
 };
-export default Daily;
+export default Cheonha;

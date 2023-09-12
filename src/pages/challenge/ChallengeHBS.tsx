@@ -1,4 +1,4 @@
-import BottomSheet from "./BottomSheet";
+import BottomSheet from "@/components/BottomSheet/BottomSheet";
 import styles from '@/styles/challengehbs.module.scss'
 import { BsFire } from 'react-icons/bs'
 import { createToast } from "@/utils/ToastUtils";

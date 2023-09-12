@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import creditImage from '/credit.png'
 import { FiRotateCcw } from 'react-icons/fi'
 import { BsFire } from 'react-icons/bs'
-import ChallengeHBS from "@/components/BottomSheet/ChallengeHBS";
+import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
 import { useSetRecoilState } from 'recoil'
 import { bottomSheetState } from "@/store";
 import { createToast } from "@/utils/ToastUtils";
