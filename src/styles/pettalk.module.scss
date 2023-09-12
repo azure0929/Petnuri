@@ -1,4 +1,8 @@
-@import "@/styles/globalstyle.scss";
+@import "@/styles/common.scss";
+
+.content_wrapper {
+  margin: 0 24px;
+}
 
 .headTab {
   width: 100%;
@@ -26,13 +30,19 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #171717;
+  background-color: $gray_0900_171717;
   z-index: -1;
 }
 .select_wrap {
   display: flex;
-  margin-top: 24px;
-  .select_pet {
-    margin-left: 13px;
-  }
+  margin: 10px 0 5px 0;
+}
+.banner {
+  width: 327px;
+  height: 176px;
+  background-color: $gray_0300_D6D6D6;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

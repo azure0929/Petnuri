@@ -50,20 +50,25 @@ const PetTalk = () => {
             자유수다
           </Link>
         </div>
+        <div className={styles.content_wrapper}>
+          <div className={styles.select_wrap}>
+            <Space wrap>
+              <Select
+                size="large"
+                defaultValue="강아지"
+                bordered={false}
+                options={[
+                  { value: "강아지", label: "강아지" },
+                  { value: "고양이", label: "고양이" },
+                ]}
+              />
+            </Space>
+          </div>
 
-        <div className={styles.select_wrap}>
-          <Space wrap className={styles.select_pet}>
-            <Select
-              defaultValue="강아지"
-              bordered={false}
-              options={[
-                { value: "강아지", label: "강아지" },
-                { value: "고양이", label: "고양이" },
-              ]}
-            />
-          </Space>
+          <div className={styles.banner}>프로모션 배너</div>
         </div>
       </Background>
+
       <MainTab />
     </>
   );
