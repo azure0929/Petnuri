@@ -46,3 +46,79 @@
   justify-content: center;
   align-items: center;
 }
+.talk_item {
+  text-align: left;
+  .user_info {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    img {
+      width: 26px;
+      height: 26px;
+      background-color: pink; //수정예정
+      border-radius: 100%;
+    }
+    .user_name {
+      color: $gray_0700_5C5C5C;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .today_date {
+      color: $gray_0600_707070;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+  .title {
+    color: $gray_0900_171717;
+    margin: 8px 0;
+    margin-left: 30px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .content_text {
+    color: $gray_0900_171717;
+    margin-left: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    width: 293px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: unset;
+    -webkit-line-clamp: 2;
+    line-height: 20px;
+  }
+  .plus_button {
+    color: $gray_0600_707070;
+    font-size: 12px;
+    font-weight: 400;
+    background: inherit;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+    cursor: pointer;
+    margin-left: 30px;
+  }
+  .content_img {
+    background-color: $gray_0300_D6D6D6;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 30px;
+
+    img {
+      width: 293px;
+      height: 194px;
+    }
+  }
+  .response_wrapper {
+    display: flex;
+    gap: 8px;
+    margin-left: 30px;
+  }
+}

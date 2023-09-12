@@ -65,7 +65,49 @@ const PetTalk = () => {
             </Space>
           </div>
 
-          <div className={styles.banner}>프로모션 배너</div>
+          <div className={styles.banner}>
+            프로모션 배너
+            <img src="" alt="프로모션 배너" />
+          </div>
+
+          <div className={styles.select_wrap}>
+            <Space wrap>
+              <Select
+                size="middle"
+                defaultValue="인기순"
+                bordered={false}
+                style={{ margin: 0 }}
+                options={[
+                  { value: "인기순", label: "인기순" },
+                  { value: "최신순", label: "최신순" },
+                ]}
+              />
+            </Space>
+          </div>
+
+          <div className={styles.talk_item}>
+            <div className={styles.user_info}>
+              <img src="" alt="profile-img" />
+              <span className={styles.user_name}>닉네임</span>
+              <span className={styles.today_date}>・ 오늘 날짜 넣기</span>
+            </div>
+            <div className={styles.title}>제목 텍스트 입니다.</div>
+            <div className={styles.content_text}>
+              꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가
+              아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요
+              어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+            </div>
+            <button className={styles.plus_button}>더보기</button>
+            <div className={styles.content_img}>
+              예시 이미지
+              <img src="" alt="예시이미지" />
+            </div>
+            <div className={styles.response_wrapper}>
+              <div>좋아요</div>
+              <div>댓글</div>
+              <div>조회수</div>
+            </div>
+          </div>
         </div>
       </Background>
 
