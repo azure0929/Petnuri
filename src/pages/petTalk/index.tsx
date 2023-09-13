@@ -5,6 +5,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
 import { useEffect } from "react";
+import heart from "../../assets/heart_18px.svg";
+import talk from "../../assets/talk_18px.svg";
+import view from "../../assets/view_18px.svg";
 
 import { Select, Space } from "antd";
 
@@ -66,7 +69,6 @@ const PetTalk = () => {
           </div>
 
           <div className={styles.banner}>
-            프로모션 배너
             <img src="" alt="프로모션 배너" />
           </div>
 
@@ -85,6 +87,7 @@ const PetTalk = () => {
             </Space>
           </div>
 
+          {/* item 클릭하면 상세페이지 연결 추가하기 */}
           <div className={styles.talk_item}>
             <div className={styles.user_info}>
               <img src="" alt="profile-img" />
@@ -98,14 +101,23 @@ const PetTalk = () => {
               어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
             </div>
             <button className={styles.plus_button}>더보기</button>
+            {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
             <div className={styles.content_img}>
-              예시 이미지
               <img src="" alt="예시이미지" />
             </div>
             <div className={styles.response_wrapper}>
-              <div>좋아요</div>
-              <div>댓글</div>
-              <div>조회수</div>
+              <div className={styles.icon_area}>
+                <img src={heart} alt="" />
+                <span>100</span>
+              </div>
+              <div className={styles.icon_area}>
+                <img src={talk} alt="" />
+                <span>100</span>
+              </div>
+              <div className={styles.icon_area}>
+                <img src={view} alt="" />
+                <span>100</span>
+              </div>
             </div>
           </div>
         </div>
