@@ -1,4 +1,12 @@
-interface challenge {
+interface challengeHead {
+  head: string;
+}
+
+interface challengeBanner {
+  bannerImg: string;
+}
+
+interface challengeContents {
   mainTitle: string;
   subTitle: string;
   howTitle: string;
@@ -7,6 +15,9 @@ interface challenge {
   periodInfo: string;
   pointTitle: string;
   pointInfo: string;
+}
+
+interface challengeJoin {
   participantsTitle: string;
   participantsImg: string;
   participantsName: string;

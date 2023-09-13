@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Challenge from "./pages/challenge";
+import Contest from "./pages/challenge/Contest";
 import PointShop from "@/pages/challenge/PointShop";
 import EvnetChallenge1 from "@/pages/challenge/EventChallenge1";
 import PetTalk from "@/pages/petTalk";
@@ -17,13 +18,19 @@ import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
 import "./styles/globalstyle.scss";
+import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/challenge" element={<Challenge />} />
+<<<<<<< HEAD
+      <Route path="/contest" element={<Contest />} />
+      <Route path="/dailychallenge1" element={<DailyChallenge1 />} />
+=======
       <Route path="/eventchallenge1" element={<EvnetChallenge1 />} />
+>>>>>>> 60fd7f846e599e6a180a1d46e32dd56b7f1e8585
       <Route path="/pointshop" element={<PointShop />} />
       <Route path="/pettalk" element={<PetTalk />} />
       <Route path="/pettalk" element={<PetTalk />} />
