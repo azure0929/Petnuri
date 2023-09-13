@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Place from './pages/Place';
 import Challenge from './pages/challenge';
 import PointShop from '@/pages/challenge/PointShop';
@@ -11,6 +11,7 @@ import EditInfo from './pages/mypage/EditInfo';
 
 import './styles/common.scss';
 import './styles/globalstyle.scss';
+import ConcernWrite from './pages/petTalk/ConcernWrite';
 
 const App = () => {
   return (
@@ -46,6 +47,10 @@ const App = () => {
       <Route
         path="/freetalk"
         element={<FreeTalk />}
+      />
+      <Route
+        path="/pettalk/concernwrite"
+        element={<ConcernWrite />}
       />
       <Route
         path="/mypage"
