@@ -1,8 +1,8 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
-import credit from '@/asset/credit.svg'
-import fire from '@/asset/fire.svg'
+import credit from "@/asset/credit.svg";
+import fire from "@/asset/fire.svg";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiRotateCcw } from "react-icons/fi";
@@ -113,9 +113,14 @@ const Challenge = () => {
         </div>
         <div className={styles.daily_body}>
           <div className={styles.challenge}>
-            <div className={styles.img}></div>
+            <div
+              className={styles.img}
+              onClick={() => navigate("/dailychallenge1")}
+            ></div>
             <div className={styles.main}>
-              <div className={styles.title}>대규모 챌린지</div>
+              <Link to="/dailychallenge1" className={styles.title}>
+                대규모 챌린지
+              </Link>
               <div className={styles.time}>
                 <FiRotateCcw /> {hour}시간 후{" "}
               </div>

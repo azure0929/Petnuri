@@ -9,8 +9,8 @@ const ChallengeContents: React.FC<contentsProps> = ({ contents }) => {
     <>
       <div>
         <div className={styles.title}>
-          <span className={styles.mainTitle}>{contents.mainTitle}</span>
-          <span className={styles.subTitle}>{contents.subTitle}</span>
+          <div className={styles.mainTitle}>{contents.mainTitle}</div>
+          <div className={styles.subTitle}>{contents.subTitle}</div>
         </div>
         <div className={styles.contents}>
           <div className={styles.how}>
