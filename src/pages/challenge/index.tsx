@@ -1,9 +1,9 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
-import credit from '@/assets/credit.svg'
-import fire from '@/assets/fire.svg'
-import vector from '@/assets/vector.svg'
+import credit from "@/assets/credit.svg";
+import fire from "@/assets/fire.svg";
+import vector from "@/assets/vector.svg";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
