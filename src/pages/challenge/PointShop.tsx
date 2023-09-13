@@ -9,11 +9,13 @@ import product3 from '@/assets/product3.svg'
 import product4 from '@/assets/product4.svg'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link } from "react-router-dom";
+import Header from '@/components/Head'
 
 const PointShop = () => {
   return (
     <>
       <Background>
+        <Header>
         <div className={styles.head}>
           <Link 
             to="/challenge">
@@ -22,6 +24,7 @@ const PointShop = () => {
           <span>포인트샵</span>
           <div className={styles.eorl}></div>
         </div>
+        </Header>
 
         <div className={styles.name}>
           <div className={styles.img}></div>

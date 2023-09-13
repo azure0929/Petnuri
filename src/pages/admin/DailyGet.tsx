@@ -23,7 +23,7 @@ const DailyGet = () => {
       try {
         const response = await fetch('/Daily.json');
         const data = await response.json();
-        setChallenges([data]);
+        setChallenges(data);
       } catch (error) {
         console.error('Error:', error);
       }

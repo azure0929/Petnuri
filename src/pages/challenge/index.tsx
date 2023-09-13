@@ -7,6 +7,7 @@ import vector from '@/assets/vector.svg'
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
+import Header from '@/components/Head'
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
@@ -50,9 +51,11 @@ const Challenge = () => {
   return (
     <>
       <Background>
-        <div className={styles.mainHead}>
-          <span>챌린지</span>
-        </div>
+        <Header>
+          <div className={styles.mainHead}>
+            <span>챌린지</span>
+          </div>
+        </Header>
         <div className={styles.name}>
           <div className={styles.img}></div>
           <div className={styles.nickname}>닉네임</div>
