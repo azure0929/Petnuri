@@ -1,6 +1,6 @@
 import BottomSheet from "@/components/BottomSheet";
 import styles from '@/styles/challengehbs.module.scss'
-import fire from '@/asset/fire.svg'
+import fire from '@/assets/fire.svg'
 import { createToast } from "@/utils/ToastUtils";
 
 const ChallengeHBS = () => {

@@ -1,12 +1,12 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from '@/styles/pointshop.module.scss'
-import credit from '@/asset/credit.svg'
-import dog from '@/asset/dog.svg'
-import product1 from '@/asset/product1.svg'
-import product2 from '@/asset/product2.svg'
-import product3 from '@/asset/product3.svg'
-import product4 from '@/asset/product4.svg'
+import credit from '@/assets/credit.svg'
+import dog from '@/assets/dog.svg'
+import product1 from '@/assets/product1.svg'
+import product2 from '@/assets/product2.svg'
+import product3 from '@/assets/product3.svg'
+import product4 from '@/assets/product4.svg'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const PointShop = () => {
         <div className={styles.head}>
           <Link 
             to="/challenge">
-            <IoIosArrowBack size="32"/>
+            <IoIosArrowBack size="24" className={styles.io}/>
           </Link>
           <span>포인트샵</span>
           <div className={styles.eorl}></div>

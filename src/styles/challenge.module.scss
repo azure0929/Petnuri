@@ -27,9 +27,23 @@
     margin-right: 5px;
   }
 
-  .title {
+  .nickname {
     font-size: 14px;
     font-weight: 600;
+    color: $gray_0700_5C5C5C;
+  }
+
+  .petname{
+    width: 58px;
+    height: 18px;
+    background-color: $brand_blue_100_3F54D11A;
+    border-radius: 4px;
+    color: $brand_blue_200_3F54D1;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 4px;
   }
 
   .date {
@@ -58,7 +72,7 @@
 .shop {
   width: 100%;
   height: 52px;
-  margin-top: 15px;
+  margin-top: 5px;
   padding: 0 24px;
 
   .container {
@@ -108,7 +122,7 @@
     height: 26px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     padding: 0 24px;
 
     span {
@@ -123,39 +137,26 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
-    overflow-y: hidden;
-
-    &::-webkit-scrollbar {
-      height: 10px;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #f2f4f6;
-      border-radius: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #b8bac1;
-      border-radius: 10px;
-      &:hover {
-        background-color: #d9dbde;
-      }
-    }
 
     .section {
-      width: 140px;
+      width: 156px;
       height: 188px;
 
       .img {
-        width: 140px;
-        height: 140px;
+        width: 156px;
+        height: 156px;
         border-radius: 12px;
         border: 1px solid red;
         margin-bottom: 8px;
       }
 
       .text {
-        width: 140px;
+        width: 156px;
         height: 40px;
         padding: 0px, 0px, 2px, 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
 
         .title {
           height: 20px;
@@ -166,6 +167,7 @@
           height: 20px;
           font-size: 12px;
           color: $gray_0600_707070;
+          margin-top: 4px;
         }
       }
     }
@@ -239,6 +241,25 @@
         font-size: 12px;
         background: #ffba081a;
         color: #ffba08;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .vectorWrapper {
+          position: relative;
+          display: inline-block; 
+        }
+        
+        .square {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 3px;
+          height:3px;
+          transform: translate(-120%, -50%);
+          background-color:#ffba08; 
+          border-radius: 1px;
+        }
       }
     }
 
@@ -276,7 +297,7 @@
   height: 93px;
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
+  margin-top: 45px;
   padding: 0 24px;
 
   .title {
