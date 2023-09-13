@@ -28,7 +28,7 @@ const PointShop = () => {
 
         <div className={styles.name}>
           <div className={styles.img}></div>
-          <div className={styles.title}>닉네임</div>
+          <div className={styles.nickname}>닉네임</div>
           <div className={styles.date}> 23.03.06</div>
         </div>
 
