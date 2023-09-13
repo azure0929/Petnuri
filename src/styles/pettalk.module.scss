@@ -120,5 +120,21 @@
     display: flex;
     gap: 8px;
     margin-left: 30px;
+    .icon_area {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 18px;
+        height: 18px;
+        margin-right: 2px;
+      }
+      span {
+        margin-top: 1px;
+        color: $gray_0500_999999;
+        font-size: 12px;
+        align-items: center;
+      }
+    }
   }
 }

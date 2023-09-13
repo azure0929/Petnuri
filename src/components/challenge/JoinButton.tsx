@@ -1,4 +1,4 @@
-import styles from "@/styles/JoinButton.module.scss";
+import styles from "@/styles/joinButton.module.scss";
 
 const JoinButton = () => {
   return (

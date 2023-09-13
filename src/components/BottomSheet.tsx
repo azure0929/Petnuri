@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import styles from '@/styles/bottomsheet.module.scss'
 import { useRecoilState } from 'recoil'
-import { bottomSheetState } from "@/store";
+import { bottomSheetState } from "@/store/challengeState";
 
 interface BottomSheetProps {
   children: ReactNode;
