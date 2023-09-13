@@ -1,18 +1,17 @@
-@import '@/styles/globalstyle.scss';
+@import "@/styles/globalstyle.scss";
 
 .head {
   width: 100%;
   height: 56px;
-  border-bottom: 1px solid #F1F1F5; 
-	display: flex;
+  border-bottom: 1px solid #f1f1f5;
+  display: flex;
   align-items: center;
-	justify-content: center;
+  justify-content: center;
   font-size: 22px;
   font-weight: 600;
 }
 
 .contents {
-
   // 프로필
   .profile {
     padding: 0 24px;
@@ -56,7 +55,7 @@
           margin-top: 12px;
           font-size: 18px;
           font-weight: 600;
-          letter-spacing: -.1px;
+          letter-spacing: -0.1px;
         }
         div {
           border: none;
@@ -66,9 +65,9 @@
           height: 40px;
           color: #3f54d1;
           font-size: 14px;
-          letter-spacing: -.1px;
+          letter-spacing: -0.1px;
           line-height: 1.4;
-          background-color: rgba(63, 84, 209, .1);
+          background-color: rgba(63, 84, 209, 0.1);
           cursor: pointer;
         }
       }
@@ -116,7 +115,7 @@
             display: block;
             font-size: 14px;
             font-weight: 600;
-            letter-spacing: -.1px;
+            letter-spacing: -0.1px;
           }
           p {
             margin-top: 4px;
@@ -173,17 +172,17 @@
             .info {
               overflow: hidden;
               text-overflow: ellipsis;
-              white-space:nowrap;
+              white-space: nowrap;
               span {
                 font-size: 14px;
                 font-weight: 600;
-                letter-spacing: -.1px;
+                letter-spacing: -0.1px;
               }
             }
             .user {
               font-size: 12px;
               color: #707070;
-              letter-spacing: -.1px;
+              letter-spacing: -0.1px;
               display: flex;
               gap: 4px;
               margin-top: 4px;
@@ -201,4 +200,3 @@
     }
   }
 }
-
