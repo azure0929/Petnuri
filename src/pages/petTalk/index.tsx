@@ -9,8 +9,6 @@ import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
 
-import { Select, Space } from "antd";
-
 const PetTalk = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -24,6 +22,7 @@ const PetTalk = () => {
       setActiveTab("자유수다");
     }
   }, [location.pathname, setActiveTab]);
+
   return (
     <>
       <Background>
@@ -55,17 +54,10 @@ const PetTalk = () => {
         </div>
         <div className={styles.content_wrapper}>
           <div className={styles.select_wrap}>
-            <Space wrap>
-              <Select
-                size="large"
-                defaultValue="강아지"
-                bordered={false}
-                options={[
-                  { value: "강아지", label: "강아지" },
-                  { value: "고양이", label: "고양이" },
-                ]}
-              />
-            </Space>
+            <select className={styles.select_pet} name="강아지">
+              <option value="강아지">강아지</option>
+              <option value="고양이">고양이</option>
+            </select>
           </div>
 
           <div className={styles.banner}>
@@ -73,18 +65,10 @@ const PetTalk = () => {
           </div>
 
           <div className={styles.select_wrap}>
-            <Space wrap>
-              <Select
-                size="middle"
-                defaultValue="인기순"
-                bordered={false}
-                style={{ margin: 0 }}
-                options={[
-                  { value: "인기순", label: "인기순" },
-                  { value: "최신순", label: "최신순" },
-                ]}
-              />
-            </Space>
+            <select className={styles.select_sort} name="인기순">
+              <option value="인기순">인기순</option>
+              <option value="최신순">최신순</option>
+            </select>
           </div>
 
           {/* item 클릭하면 상세페이지 연결 추가하기 */}
@@ -92,7 +76,7 @@ const PetTalk = () => {
             <div className={styles.user_info}>
               <img src="" alt="profile-img" />
               <span className={styles.user_name}>닉네임</span>
-              <span className={styles.today_date}>・ 오늘 날짜 넣기</span>
+              <span className={styles.today_date}>・ 게시된 날짜 넣기</span>
             </div>
             <div className={styles.title}>제목 텍스트 입니다.</div>
             <div className={styles.content_text}>
