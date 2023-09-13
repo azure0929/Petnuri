@@ -7,8 +7,8 @@ interface headProps {
 const ChallengeHead: React.FC<headProps> = ({ head }) => {
   return (
     <>
-      <div className={styles.head}>
-        <span>{head.head}</span>
+      <div className={styles.header}>
+        <div>{head.head}</div>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
+import SaveBS from "./SaveBS";
 
 const Contest = () => {
   const head: challengeHead = {
@@ -40,8 +41,9 @@ const Contest = () => {
         <ChallengeContents contents={contents} />
         <ChallengeJoin join={join} />
         <JoinButton />
+        <SaveBS />
+        <MainTab />
       </Background>
-      <MainTab />
     </>
   );
 };

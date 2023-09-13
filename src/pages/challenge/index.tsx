@@ -1,9 +1,9 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
-import credit from '@/assets/credit.svg'
-import fire from '@/assets/fire.svg'
-import vector from '@/assets/vector.svg'
+import credit from "@/assets/credit.svg";
+import fire from "@/assets/fire.svg";
+import vector from "@/assets/vector.svg";
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
@@ -104,12 +104,21 @@ const Challenge = () => {
         </div>
         <div className={styles.daily_body}>
           <div className={styles.challenge}>
-            <div className={styles.img}></div>
+            <div
+              className={styles.img}
+              onClick={() => navigate("/dailychallenge1")}
+            ></div>
             <div className={styles.main}>
-              <div className={styles.title}>대규모 챌린지</div>
+              <Link to="/dailychallenge1" className={styles.title}>
+                대규모 챌린지
+              </Link>
               <div className={styles.time}>
                 <div className={styles.vectorWrapper}>
-                  <img src={vector} alt="vector" style={{marginRight:'6px'}}/> 
+                  <img
+                    src={vector}
+                    alt="vector"
+                    style={{ marginRight: "6px" }}
+                  />
                   <div className={styles.square}></div>
                 </div>
                 {hour}시간 후{" "}
