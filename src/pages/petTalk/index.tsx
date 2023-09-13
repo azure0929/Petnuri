@@ -44,7 +44,7 @@ const PetTalk = () => {
                 <Link
                   to="/petTalk"
                   className={`${styles.head_item} ${
-                    activeTab === "전체" ? styles.active : ""
+                    activeTab === "전체" ? styles.tab_active : ""
                   }`}
                 >
                   전체
@@ -52,7 +52,7 @@ const PetTalk = () => {
                 <Link
                   to="/concern"
                   className={`${styles.head_item} ${
-                    activeTab === "고민상담" ? styles.active : ""
+                    activeTab === "고민상담" ? styles.tab_active : ""
                   }`}
                 >
                   고민상담
@@ -60,7 +60,7 @@ const PetTalk = () => {
                 <Link
                   to="/freetalk"
                   className={`${styles.head_item} ${
-                    activeTab === "자유수다" ? styles.active : ""
+                    activeTab === "자유수다" ? styles.tab_active : ""
                   }`}
                 >
                   자유수다

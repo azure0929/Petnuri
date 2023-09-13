@@ -16,20 +16,21 @@
   box-sizing: border-box;
   position: relative;
 }
-// .active {
-//   position: relative;
-//   border-bottom: 2px solid #171717;
-//   z-index: 1;
-// }
-// .active::before {
-//   content: "";
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-//   width: 100%;
-//   background-color: $gray_0900_171717;
-//   z-index: -1;
-// }
+.tab_active {
+  position: relative;
+  border-bottom: 2px solid $gray_0900_171717;
+  z-index: 1;
+}
+.tab_active::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: $gray_0900_171717;
+  z-index: -1;
+}
+
 .content_wrapper {
   padding: 80px 0 65px 0;
   .select_wrap {
@@ -185,16 +186,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #3f54d1;
+    background-color: $brand_blue_200_3F54D1;
     border-radius: 100%;
     box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
     cursor: pointer;
     position: fixed;
     right: 320px;
     bottom: 75px;
+    transition: transform 0.3s ease;
+    img {
+      transition: transform 0.3s ease;
+    }
   }
   .active {
     img {
+      transition: transform 0.3s ease;
       transform: rotate(45deg);
     }
     z-index: 50;
@@ -232,11 +238,14 @@
   position: fixed;
   top: 0;
   right: 300px;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  visibility: hidden;
   z-index: 25;
 }
 
 .modal_backdrop.active {
-  display: block; /* active일 때 보이도록 설정 */
+  opacity: 1; /* active일 때 불투명한 상태 */
+  visibility: visible; /* active일 때 화면에 보이도록 설정 */
 }
