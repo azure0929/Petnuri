@@ -4,6 +4,7 @@ import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
+import Head from "@/components/Head";
 import { useEffect } from "react";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
@@ -26,32 +27,37 @@ const PetTalk = () => {
   return (
     <>
       <Background>
-        <div className={styles.headTab}>
-          <Link
-            to="/petTalk"
-            className={`${styles.head_item} ${
-              activeTab === "전체" ? styles.active : ""
-            }`}
-          >
-            전체
-          </Link>
-          <Link
-            to="/concern"
-            className={`${styles.head_item} ${
-              activeTab === "고민상담" ? styles.active : ""
-            }`}
-          >
-            고민상담
-          </Link>
-          <Link
-            to="/freetalk"
-            className={`${styles.head_item} ${
-              activeTab === "자유수다" ? styles.active : ""
-            }`}
-          >
-            자유수다
-          </Link>
-        </div>
+        <Head>
+          <div className={styles.headTab}>
+            <div className={styles.head_menu}>
+              <Link
+                to="/petTalk"
+                className={`${styles.head_item} ${
+                  activeTab === "전체" ? styles.active : ""
+                }`}
+              >
+                전체
+              </Link>
+              <Link
+                to="/concern"
+                className={`${styles.head_item} ${
+                  activeTab === "고민상담" ? styles.active : ""
+                }`}
+              >
+                고민상담
+              </Link>
+              <Link
+                to="/freetalk"
+                className={`${styles.head_item} ${
+                  activeTab === "자유수다" ? styles.active : ""
+                }`}
+              >
+                자유수다
+              </Link>
+            </div>
+          </div>
+        </Head>
+
         <div className={styles.content_wrapper}>
           <div className={styles.select_wrap}>
             <select className={styles.select_pet} name="강아지">
