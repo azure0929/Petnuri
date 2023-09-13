@@ -1,0 +1,11 @@
+@import '@/styles/common.scss';
+
+.container {
+  width: 375px;
+  height: 56px;
+  border: 1px solid $gray_0200_EBEBEB;
+  background-color: #FFFFFF03;
+  backdrop-filter: blur(12px);
+  display: flex;
+  position: fixed;
+}
