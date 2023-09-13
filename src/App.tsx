@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Place from "./pages/Place";
 import Challenge from "./pages/challenge";
+import Contest from "./pages/challenge/Contest";
 import PointShop from "@/pages/challenge/PointShop";
 import PetTalk from "@/pages/petTalk";
 import Concern from "@/pages/petTalk/concern";
@@ -17,6 +18,7 @@ import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
 import "./styles/globalstyle.scss";
+import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/place" element={<Place />} />
       <Route path="/challenge" element={<Challenge />} />
+      <Route path="/contest" element={<Contest />} />
+      <Route path="/dailychallenge1" element={<DailyChallenge1 />} />
       <Route path="/pointshop" element={<PointShop />} />
       <Route path="/pettalk" element={<PetTalk />} />
       <Route path="/pettalk" element={<PetTalk />} />

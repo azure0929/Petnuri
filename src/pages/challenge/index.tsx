@@ -92,14 +92,11 @@ const Challenge = () => {
           </div>
           <div className={styles.body} ref={scrollRef} onWheel={handleWheel}>
             <div className={styles.section}>
-              <div
-                className={styles.img}
-                onClick={() => navigate("/eventchallenge1")}
-              >
+              <div className={styles.img} onClick={() => navigate("/contest")}>
                 asd
               </div>
               <div className={styles.text}>
-                <Link to="/eventchallenge1" className={styles.title}>
+                <Link to="/contest" className={styles.title}>
                   랜선대회 챌린지
                 </Link>
                 <div className={styles.subtitle}>카드 디자인 서브 타이틀</div>
