@@ -146,9 +146,13 @@ body {
   background-color: pink; //수정예정
 }
 button {
-  display: flex;
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
   cursor: pointer;
-  outline: none;
 }
 input {
   display: flex;
@@ -156,4 +160,3 @@ input {
 }
 
 $sub_font_color: #707070;
-

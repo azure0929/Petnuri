@@ -8,11 +8,13 @@ import Contest from "./pages/challenge/Contest";
 import ECYanado from "@/pages/challenge/ECYanado";
 import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
 import PointShop from "@/pages/challenge/PointShop";
-
 // 펫톡
 import PetTalk from "@/pages/petTalk";
-import Concern from "@/pages/petTalk/concern";
-import FreeTalk from "@/pages/petTalk/freetalk";
+import Concern from "./pages/petTalk/Concern";
+import FreeTalk from "@/pages/petTalk/Freetalk";
+import ConcernWrite from "./pages/petTalk/ConcernWrite";
+import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
+
 // 마이페이지
 import MyPage from "./pages/mypage/MyPage";
 import EditInfo from "./pages/mypage/EditInfo";
@@ -37,12 +39,13 @@ const App = () => {
       <Route path="/contest" element={<Contest />} />
       <Route path="/ecyanado" element={<ECYanado />} />
       <Route path="/dailychallenge1" element={<DailyChallenge1 />} />
-      <Route path="/contest" element={<Contest />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
       <Route path="/pettalk" element={<PetTalk />} />
       <Route path="/concern" element={<Concern />} />
       <Route path="/freetalk" element={<FreeTalk />} />
+      <Route path="/pettalk/concernwrite" element={<ConcernWrite />} />
+      <Route path="/pettalk/freetalkwrite" element={<FreetalkWrite />} />
       {/* 마이페이지 */}
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/mypage/editinfo" element={<EditInfo />} />

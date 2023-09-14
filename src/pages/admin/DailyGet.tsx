@@ -1,20 +1,5 @@
 import { useEffect, useState } from 'react';
 
-interface Review {
-  reviewUserId: number;
-  reviewUserNickname: string;
-  reviewImgUrl: string;
-}
-
-interface ChallengeData {
-  challengeId: number;
-  challengeName: string;
-  challengeReview: string;
-  userId: number;
-  review: Review[];
-  status: boolean;
-}
-
 const DailyGet = () => {
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
 
@@ -23,7 +8,7 @@ const DailyGet = () => {
       try {
         const response = await fetch('/Daily.json');
         const data = await response.json();
-        setChallenges([data]);
+        setChallenges(data);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -38,6 +23,11 @@ const DailyGet = () => {
          <div key={challengeData.challengeId}>
            <h1>챌린지 이름 : {challengeData.challengeName}</h1>
            <p>챌린지 설명 : {challengeData.challengeReview}</p>
+           <p>섬네일 : 
+            <img 
+            src={challengeData.thumbnail} 
+            alt="섬네일"
+            style={{ maxWidth: '100px', maxHeight: '100px' }}  /></p>
 
            {challengeData.review.map((review, index) => (
              <div key={index}>
