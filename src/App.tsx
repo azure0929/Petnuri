@@ -7,7 +7,10 @@ import PetRegist from "./pages/onboarding/PetRegist";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
+import ECYanado from "@/pages/challenge/ECYanado";
 import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
+import DailyChallenge2 from "./pages/challenge/DailyChallenge2";
+import DailyChallenge3 from "./pages/challenge/DailyChallenge3";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
 import PetTalk from "@/pages/petTalk";
@@ -40,7 +43,10 @@ const App = () => {
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
+      <Route path="/ecyanado" element={<ECYanado />} />
       <Route path="/dailychallenge1" element={<DailyChallenge1 />} />
+      <Route path="/dailychallenge2" element={<DailyChallenge2 />} />
+      <Route path="/dailychallenge3" element={<DailyChallenge3 />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
       <Route path="/pettalk" element={<PetTalk />} />

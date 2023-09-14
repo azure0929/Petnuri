@@ -5,7 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import SaveBS from "./SaveBS";
+import DeliveryBS from "./DeliveryBS";
 
 const Contest = () => {
   const head: challengeHead = {
@@ -13,7 +13,7 @@ const Contest = () => {
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: "https://www.naver.com",
   };
 
   const contents: challengeContents = {
@@ -41,7 +41,7 @@ const Contest = () => {
         <ChallengeContents contents={contents} />
         <ChallengeJoin join={join} />
         <JoinButton />
-        <SaveBS />
+        <DeliveryBS />
         <MainTab />
       </Background>
     </>
