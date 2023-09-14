@@ -46,3 +46,75 @@ $red_accent_F42A3B: #f42a3b;
 $base_black_000000: #000000;
 $base_white_ffffff: #ffffff;
 $black_191919: #191919;
+
+$body_regular_12px: (
+  font-size: 12px,
+  font-style: normal,
+  font-weight: 400,
+  line-height: 18px, 
+  letter-spacing: -0.1px
+);
+
+$body_regular_12px_letter_-05px: (
+  font-size: 12px,
+  font-style: normal,
+  font-weight: 400,
+  line-height: 18px, 
+  letter-spacing: -0.5px
+);
+
+$body_regular_14px_letter_-05px: (
+  font-size: 14px,
+  font-style: normal,
+  font-weight: 400,
+  line-height: 20px, 
+  letter-spacing: -0.5px
+);
+
+$body_regular_14px: (
+  font-size: 14px,
+  font-style: normal,
+  font-weight: 400,
+  line-height: 20px, 
+  letter-spacing: -0.1px
+);
+
+$title-bold-12px: (
+  font-size: 14px,
+  font-style: normal,
+  font-weight: 600,
+  line-height: 18px, 
+  letter-spacing: -0.1px
+);
+
+$title-bold-14px: (
+  font-size: 14px,
+  font-style: normal,
+  font-weight: 600,
+  line-height: 20px, 
+  letter-spacing: -0.1px
+);
+
+$title-bold-16px: (
+  font-size: 16px,
+  font-style: normal,
+  font-weight: 600,
+  line-height: 22px, 
+  letter-spacing: -0.1px
+);
+
+$title-bold-18px: (
+  font-size: 18px,
+  font-style: normal,
+  font-weight: 600,
+  line-height: 24px, 
+  letter-spacing: -0.1px
+);
+
+$title-bold-24px: (
+  font-size: 24px,
+  font-style: normal,
+  font-weight: 600,
+  line-height: 34px, 
+  letter-spacing: -0.1px
+);

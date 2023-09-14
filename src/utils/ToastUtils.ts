@@ -9,6 +9,8 @@ export const createToast = (type:'success'|'error', message:string) => {
       height: '48px',
       position: 'relative',
       bottom: '100px',
+      fontSize: '16px',
+      fontWeight: '600',
     },
     position: "bottom-center",
   });
@@ -22,6 +24,8 @@ export const simpleToast = (message:string) => {
       height: '48px',
       position: 'relative',
       bottom: '100px',
+      fontSize: '16px',
+      fontWeight: '600',
     },
     position: "bottom-center",
   });
