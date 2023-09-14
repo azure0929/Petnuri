@@ -2,13 +2,8 @@
 
 .contain {
   width: 345px;
-  height: 100%;
-  position: fixed;
-  z-index: 1;
   .header {
-    width: 345px;
     height: 56px;
-    background-color: $base_white_ffffff;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: -0.1px;
@@ -27,16 +22,12 @@
       cursor: pointer;
     }
   }
-  .tab_menu {
-    border-bottom: 1px solid $gray_0200_EBEBEB;
-    top: 38px;
-    height: 38px;
-  }
-  .tab {
-    width: 345px;
 
+  .tab {
+    height: 45px;
     display: flex;
     justify-content: space-around;
+    cursor: pointer;
 
     .active {
       width: 30%;
