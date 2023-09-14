@@ -9,8 +9,8 @@ import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
 import PetTalk from "@/pages/petTalk";
-import Concern from "@/pages/petTalk/concern";
-import FreeTalk from "@/pages/petTalk/freetalk";
+import Concern from "./pages/petTalk/Concern";
+import FreeTalk from "@/pages/petTalk/Freetalk";
 import ConcernWrite from "./pages/petTalk/ConcernWrite";
 import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
 
