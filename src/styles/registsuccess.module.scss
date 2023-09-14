@@ -1,0 +1,18 @@
+@import '@/styles/common.scss';
+
+.head {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  .prev {
+    position: absolute;
+    left: 24px;
+    cursor: pointer;
+  }
+}
