@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "@/pages/home";
 import Login from "@/pages/Login";
 import OnBoarding from "./pages/onboarding";
+import PetRegist from "./pages/onboarding/PetRegist";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
@@ -38,6 +39,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/onboarding" element={<OnBoarding />} />
+      <Route path="/petregist" element={<PetRegist />} />
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
