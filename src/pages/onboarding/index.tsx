@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Background from "@/components/Background";
 import styles from '@/styles/onboarding.module.scss';
 
@@ -9,6 +10,16 @@ const OnBoarding = () => {
   const [showName, setShowName] = useState(false);
   const [nickname, setNickname] = useState('');
   const [nicknameError, setNicknameError] = useState('');
+  
+  const navigate = useNavigate();
+
+  const onMain = () => {
+    navigate(`/`)
+  }
+
+  const onPetRegist = () => {
+    navigate(`/petregist`)
+  }
 
   const handlePetSelection = (pet: PetType) => {
     if (selectedPet === pet) {
@@ -38,7 +49,7 @@ const OnBoarding = () => {
   const isNextButtonEnabled = selectedPet !== null && !nicknameError && nickname !== '';
 
   return (
-    <div>
+    <>
       <Background>
         <div className={styles.head}>
           <p>펫 정보 등록</p>
@@ -85,7 +96,7 @@ const OnBoarding = () => {
               <p>{nicknameError}</p>
             )}
           </div>
-          <div role="button" className={styles.skip}>
+          <div role="button" className={styles.skip} onClick={onMain}>
             <p>지금은 건너뛰기</p>
           </div>
         </div>
@@ -97,13 +108,14 @@ const OnBoarding = () => {
               color: isNextButtonEnabled ? '#F5F5F5' : '#999999',
               borderColor: nicknameError ? '#F42A3B' : undefined
             }}
+            onClick={onPetRegist}
           >
             다음
           </div>
         </div>
       </Background>
-    </div>
-  )
-}
+    </>
+  );
+};
 
 export default OnBoarding;
