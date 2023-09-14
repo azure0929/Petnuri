@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Background from '@/components/Background';
-import arrow_left_mid from "@/assets/arrow_left_mid.svg";
+import { useNavigate } from 'react-router-dom';
+import Background from "@/components/Background";
 import styles from "@/styles/petregist.module.scss";
+import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 
 type MaleType = "남" | "여";
 
@@ -58,13 +59,23 @@ const PetRegist = () => {
     }
   }
 
+  const navigate = useNavigate();
+
+  const onRegistSuccess = () => {
+    navigate(`/registsuccess`);
+  }
+
+  const onOnBoarding = () => {
+    navigate(`/onboarding`);
+  }
+
   const isNextButtonEnabled = selectedMale !== null && !ageError && age !== '';
 
   return (
     <>
       <Background>
         <div className={styles.head}>
-          <div role="button" className={styles.prev}>
+          <div role="button" className={styles.prev} onClick={onOnBoarding}>
             <img src={arrow_left_mid} alt="prev" />
           </div>
           <p>펫 정보 등록</p>
@@ -128,6 +139,7 @@ const PetRegist = () => {
               color: isNextButtonEnabled ? '#F5F5F5' : '#999999',
               borderColor: ageError ? '#F42A3B' : undefined
             }}
+            onClick={onRegistSuccess}
           >
             다음
           </div>
