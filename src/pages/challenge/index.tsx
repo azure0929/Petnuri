@@ -27,21 +27,17 @@ const Challenge = () => {
       nextDay.setDate(now.getDate() + 1);
       nextDay.setHours(0, 0, 0, 0);
 
-      let diffInMs = nextDay.getTime() - now.getTime();
-      let diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-
+      const diffInMs = nextDay.getTime() - now.getTime();
+      const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
       setHour(diffInHours);
-
       if (diffInHours === 24) {
         setParticipated({});
       }
     };
     setTimeout(() => {
       calculateTime();
-
       intervalId.current = window.setInterval(calculateTime, 60000);
     }, 1000);
-
     return () => {
       if (intervalId.current) window.clearInterval(intervalId.current);
     };
@@ -57,7 +53,6 @@ const Challenge = () => {
         console.error('Error:', error);
       }
     };
-
     fetchData();
    }, []);
 

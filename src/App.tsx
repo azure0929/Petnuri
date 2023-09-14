@@ -14,12 +14,14 @@ import DailyChallenge2 from "./pages/challenge/DailyChallenge2";
 import DailyChallenge3 from "./pages/challenge/DailyChallenge3";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
-import PetTalk from "@/pages/petTalk";
-import Concern from "./pages/petTalk/Concern";
-import FreeTalk from "@/pages/petTalk/Freetalk";
+import PetTalk from '@/pages/petTalk';
+import Concern from '@/pages/petTalk/concern';
+import FreeTalk from '@/pages/petTalk/freetalk';
 import ConcernWrite from "./pages/petTalk/ConcernWrite";
 import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
-
+//펫 프로필
+import PetProfileAdd from '@/pages/petprofile';
+import Modify from '@/pages/petprofile/Modify';
 // 마이페이지
 import MyPage from "./pages/mypage/MyPage";
 import EditInfo from "./pages/mypage/EditInfo";
@@ -56,6 +58,9 @@ const App = () => {
       <Route path="/freetalk" element={<FreeTalk />} />
       <Route path="/pettalk/concernwrite" element={<ConcernWrite />} />
       <Route path="/pettalk/freetalkwrite" element={<FreetalkWrite />} />
+      {/* 펫 프로필 */}
+      <Route path="/petprofileadd" element={<PetProfileAdd />}/>
+      <Route path="/petprofilemodify" element={<Modify />}/>
       {/* 마이페이지 */}
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/mypage/editinfo" element={<EditInfo />} />
