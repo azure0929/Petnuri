@@ -15,12 +15,14 @@ const ConcernWrite = () => {
   return (
     <Background>
       <div className={styles.contain}>
-        <div className={styles.header}>
-          <AiOutlineLeft className={styles.icon} onClick={onClickBack} />
-          고민상담
-        </div>
+        <Head
+          style={{ height: "100px", display: "flex", flexDirection: "column" }}
+        >
+          <div className={styles.header}>
+            <AiOutlineLeft className={styles.icon} onClick={onClickBack} />
+            고민상담
+          </div>
 
-        <Head style={{ height: "38px" }}>
           <div className={styles.tab}>
             {active ? (
               <>
