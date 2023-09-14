@@ -10,8 +10,12 @@ import product4 from '@/assets/product4.svg'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link } from "react-router-dom";
 import Header from '@/components/Head'
+import { simpleToast } from "@/utils/ToastUtils";
 
 const PointShop = () => {
+
+  const wrong = () => simpleToast('추후 오픈 예정입니다');
+
   return (
     <>
       <Background>
@@ -45,7 +49,7 @@ const PointShop = () => {
 
         <div className={styles.p_title}>큰 타이틀</div>
 
-        <div className={styles.product}>
+        <label className={styles.product} onClick={wrong}>
           <div className={styles.info}>
             <div className={styles.box}>
               <img src={product1} alt="product1" />
@@ -97,7 +101,7 @@ const PointShop = () => {
               <div className={styles.sub}>누구나 탐내는 진공 사료통</div>
             </div>
           </div>
-        </div>
+        </label>
       </Background>
       <MainTab />
     </>

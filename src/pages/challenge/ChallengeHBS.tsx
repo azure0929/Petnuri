@@ -1,13 +1,13 @@
 import BottomSheet from "@/components/BottomSheet";
 import styles from '@/styles/challengehbs.module.scss'
 import fire from '@/assets/fire.svg'
-import { createToast } from "@/utils/ToastUtils";
+import { createToast, simpleToast } from "@/utils/ToastUtils";
 
 const ChallengeHBS = () => {
 
   const complete = () => createToast('success', '포인트 지급이 완료되었습니다');
-  const wrong = () => createToast('error', '오답입니다. 내일 다시 참여가 가능합니다');
-  const copy = () => createToast('success', '복사되었습니다');
+  const wrong = () => createToast('error', '내일 다시 참여가 가능합니다');
+  const copy = () => simpleToast('클립보드에 복사되었습니다');
 
   return (
     <>
