@@ -39,7 +39,7 @@
       align-items: center;
       display: flex;
       justify-content: center;
-      cursor: pointer;
+
       .photo {
         width: 78px;
         height: 78px;
@@ -68,6 +68,7 @@
         bottom: 0;
         right: 0;
         font-weight: bold;
+        cursor: pointer;
       }
     }
     .nickarea {
