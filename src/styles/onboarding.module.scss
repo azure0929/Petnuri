@@ -1,0 +1,19 @@
+@import "@/styles/common.scss";
+
+.head {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid $gray_0200_EBEBEB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  color: $gray_0900_171717;
+}
