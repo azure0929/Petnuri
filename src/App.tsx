@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-// 홈, 로그인
-import Home from "./pages/home";
+// 홈, 로그인, 온보딩
+import Home from "@/pages/home";
 import Login from "@/pages/Login";
+import OnBoarding from "./pages/onboarding";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
@@ -33,9 +34,10 @@ import "./styles/globalstyle.scss";
 const App = () => {
   return (
     <Routes>
-      {/* home, login */}
+      {/* home, login, 온보딩 */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/onboarding" element={<OnBoarding />} />
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
