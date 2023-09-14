@@ -5,20 +5,20 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import DeliveryBS from "./DeliveryBS";
+import SaveBS from "./SaveBS";
 
-const Contest = () => {
+const ECYanado = () => {
   const head: challengeHead = {
     head: "천하제일 집사대회",
   };
 
   const banner: challengeBanner = {
-    bannerImg: "https://www.naver.com",
+    bannerImg: "배너 이미지",
   };
 
   const contents: challengeContents = {
-    mainTitle: "천하제일 집사대회",
-    subTitle: "천하제일 집사대회",
+    mainTitle: "야 너도? 야 나도!",
+    subTitle: "야 너도? 야 나도!",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
@@ -41,11 +41,11 @@ const Contest = () => {
         <ChallengeContents contents={contents} />
         <ChallengeJoin join={join} />
         <JoinButton />
-        <DeliveryBS />
+        <SaveBS />
         <MainTab />
       </Background>
     </>
   );
 };
 
-export default Contest;
+export default ECYanado;

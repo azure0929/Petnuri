@@ -5,6 +5,7 @@ import Login from "@/pages/Login";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
+import ECYanado from "@/pages/challenge/ECYanado";
 import DailyChallenge1 from "./pages/challenge/DailyChallenge1";
 import PointShop from "@/pages/challenge/PointShop";
 
@@ -34,6 +35,7 @@ const App = () => {
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
+      <Route path="/ecyanado" element={<ECYanado />} />
       <Route path="/dailychallenge1" element={<DailyChallenge1 />} />
       <Route path="/contest" element={<Contest />} />
       <Route path="/pointshop" element={<PointShop />} />
