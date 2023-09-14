@@ -3,6 +3,7 @@ import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 import styles from '@/styles/registsuccess.module.scss';
 
 const RegistSuccess = () => {
+
   return (
     <>
       <Background>
