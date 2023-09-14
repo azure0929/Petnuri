@@ -5,11 +5,10 @@
   width: 327px;
   height: 100%;
   padding-top: 120px;
-  margin: 0 24px;
 
   .selectarea {
     width: 100%;
-    margin-bottom: 24px;
+    margin: 0 24px;
     .category {
       width: 327px;
       border-radius: 12px;
@@ -29,9 +28,8 @@
   .photoarea {
     width: 100%;
     font-size: 16px;
-    line-height: 22px;
-    letter-spacing: -0.1px;
     font-weight: bold;
+    margin: 24px;
     .photo {
       text-align: left;
       margin-bottom: 8px;
@@ -55,7 +53,7 @@
 
   .titlearea {
     width: 100%;
-    margin: 24px 0;
+    margin: 0 24px;
     .title {
       text-align: left;
       font-size: 16px;
@@ -83,6 +81,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    margin: 24px;
     padding-bottom: 40px;
     .text {
       text-align: left;
@@ -116,6 +115,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid $gray_0200_EBEBEB;
+
     button {
       width: 327px;
       height: 54px;
@@ -124,13 +125,12 @@
       background-color: rgba(63, 84, 209, 0.1);
       font-size: 16px;
       line-height: 22px;
-      letter-spacing: -0.1px;
       color: $brand_blue_200_3F54D1;
       font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 18px 0 32px 0;
+      margin: 18px 24px 32px 24px;
     }
   }
 }
