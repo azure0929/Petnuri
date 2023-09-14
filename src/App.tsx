@@ -4,6 +4,7 @@ import Home from "@/pages/home";
 import Login from "@/pages/Login";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
+import RegistSuccess from "./pages/onboarding/RegistSuccess";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
@@ -40,6 +41,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/onboarding" element={<OnBoarding />} />
       <Route path="/petregist" element={<PetRegist />} />
+      <Route path="/registsuccess" element={<RegistSuccess />} />
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
