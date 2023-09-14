@@ -223,14 +223,18 @@ const PetTalk = () => {
             </button>
             {isMenuOpen && (
               <div className={styles.menu}>
-                <button className={styles.item}>
-                  <img src={concern_icon} alt="" />
-                  <span>고민상담</span>
-                </button>
-                <button className={styles.item}>
-                  <img src={freetalk_icon} alt="" />
-                  <span>자유수다</span>
-                </button>
+                <Link to="/pettalk/concernwrite">
+                  <button className={styles.item}>
+                    <img src={concern_icon} alt="" />
+                    <span>고민상담</span>
+                  </button>
+                </Link>
+                <Link to="/pettalk/freetalkwrite">
+                  <button className={styles.item}>
+                    <img src={freetalk_icon} alt="" />
+                    <span>자유수다</span>
+                  </button>
+                </Link>
               </div>
             )}
           </div>
