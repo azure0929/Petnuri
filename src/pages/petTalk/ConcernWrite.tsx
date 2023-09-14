@@ -1,9 +1,10 @@
-import Background from '@/components/Background';
-import PettalkWrite from '@/components/PettalkWrite';
-import styles from '@/styles/concernwrite.module.scss';
-import { useState } from 'react';
-import { AiOutlineLeft } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import Background from "@/components/Background";
+import PettalkWrite from "@/components/PettalkWrite";
+import styles from "@/styles/concernwrite.module.scss";
+import { useState } from "react";
+import { AiOutlineLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import Head from "../../components/Head";
 
 const ConcernWrite = () => {
   const navigate = useNavigate();
@@ -15,45 +16,39 @@ const ConcernWrite = () => {
     <Background>
       <div className={styles.contain}>
         <div className={styles.header}>
-          <AiOutlineLeft
-            className={styles.icon}
-            onClick={onClickBack}
-          />
+          <AiOutlineLeft className={styles.icon} onClick={onClickBack} />
           고민상담
         </div>
-        <div className={styles.tab}>
-          {active ? (
-            <>
-              <div
-                className={styles.active}
-                onClick={() => setActive(true)}
-              >
-                강아지
-              </div>
-              <div
-                className={styles.unactive}
-                onClick={() => setActive(false)}
-              >
-                고양이
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                className={styles.unactive}
-                onClick={() => setActive(true)}
-              >
-                강아지
-              </div>
-              <div
-                className={styles.active}
-                onClick={() => setActive(false)}
-              >
-                고양이
-              </div>
-            </>
-          )}
-        </div>
+
+        <Head style={{ height: "38px" }}>
+          <div className={styles.tab}>
+            {active ? (
+              <>
+                <div className={styles.active} onClick={() => setActive(true)}>
+                  강아지
+                </div>
+                <div
+                  className={styles.unactive}
+                  onClick={() => setActive(false)}
+                >
+                  고양이
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className={styles.unactive}
+                  onClick={() => setActive(true)}
+                >
+                  강아지
+                </div>
+                <div className={styles.active} onClick={() => setActive(false)}>
+                  고양이
+                </div>
+              </>
+            )}
+          </div>
+        </Head>
         <PettalkWrite />
       </div>
     </Background>

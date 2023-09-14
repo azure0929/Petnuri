@@ -5,9 +5,15 @@ interface bannerProps {
 }
 
 const ChallengeBanner: React.FC<bannerProps> = ({ banner }) => {
+  const handleDivClick = () => {
+    window.open(banner.bannerImg, "_blank");
+  };
+
   return (
     <>
-      <div className={styles.bannerImg}>{banner.bannerImg}</div>
+      <div className={styles.bannerImg} onClick={handleDivClick}>
+        asd
+      </div>
     </>
   );
 };

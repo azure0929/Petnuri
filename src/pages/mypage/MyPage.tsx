@@ -1,7 +1,6 @@
 import MainTab from '../../components/MainTab';
 import Background from '../../components/Background';
 import styles from '@/styles/mypage.module.scss';
-import { IoIosAdd } from 'react-icons/io';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -15,11 +14,7 @@ const MyPage = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <div className={styles.photo}>
-              <div className={styles.plusbtn}>
-                <IoIosAdd />
-              </div>
-            </div>
+            <div className={styles.photo}></div>
           </div>
           <div className={styles.nickarea}>
             <p className={styles.nickname}>여덟글자까지가능</p>

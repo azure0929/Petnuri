@@ -7,9 +7,9 @@ import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
 
-const DailyChallenge1 = () => {
+const DailyChallenge2 = () => {
   const head: challengeHead = {
-    head: "간식 바치기",
+    head: "산책 시키기",
   };
 
   const banner: challengeBanner = {
@@ -17,8 +17,8 @@ const DailyChallenge1 = () => {
   };
 
   const contents: challengeContents = {
-    mainTitle: "간식 바치기",
-    subTitle: "간식 바치기",
+    mainTitle: "산책 시키기",
+    subTitle: "산책 시키기",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
@@ -48,4 +48,4 @@ const DailyChallenge1 = () => {
   );
 };
 
-export default DailyChallenge1;
+export default DailyChallenge2;
