@@ -11,6 +11,9 @@ import PointShop from '@/pages/challenge/PointShop';
 import PetTalk from '@/pages/petTalk';
 import Concern from '@/pages/petTalk/concern';
 import FreeTalk from '@/pages/petTalk/freetalk';
+//펫 프로필
+import PetProfileAdd from '@/pages/petprofile';
+import Modify from '@/pages/petprofile/Modify';
 // 마이페이지
 import MyPage from './pages/mypage/MyPage';
 import EditInfo from './pages/mypage/EditInfo';
@@ -70,6 +73,15 @@ const App = () => {
       <Route
         path="/pettalk/concernwrite"
         element={<ConcernWrite />}
+      />
+      {/* 펫 프로필 */}
+      <Route
+        path="/petprofileadd"
+        element={<PetProfileAdd />}
+      />
+      <Route
+        path="/petprofilemodify"
+        element={<Modify />}
       />
       {/* 마이페이지 */}
       <Route
