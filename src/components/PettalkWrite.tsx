@@ -1,13 +1,18 @@
-import styles from '@/styles/write.module.scss';
-import { AiOutlinePlus } from 'react-icons/ai';
+import styles from "@/styles/write.module.scss";
+import { AiOutlinePlus } from "react-icons/ai";
 
-const PettalkWrite = () => {
+interface PettalkWriteProps {
+  isFreeTalkWrite: boolean; // isFreeTalkWrite prop의 타입을 boolean으로 지정합니다
+}
+
+const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
   return (
     <div className={styles.all}>
       <div className={styles.selectarea}>
         <select
           name="category"
           className={styles.category}
+          disabled={isFreeTalkWrite}
         >
           <option>카테고리를 선택하세요</option>
         </select>
@@ -24,7 +29,7 @@ const PettalkWrite = () => {
             type="file"
             name="file"
             id="file"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             multiple
           />
         </div>
