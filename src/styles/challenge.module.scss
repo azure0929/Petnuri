@@ -7,8 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
+  @include title_bold_18px;
+
 }
 
 .name {
@@ -28,8 +28,7 @@
   }
 
   .nickname {
-    font-size: 14px;
-    font-weight: 600;
+    @include title_bold_14px;
     color: $gray_0700_5C5C5C;
   }
 
@@ -39,15 +38,15 @@
     background-color: $brand_blue_100_3F54D11A;
     border-radius: 4px;
     color: $brand_blue_200_3F54D1;
-    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 4px;
+    @include body_regular_12px;
   }
 
   .date {
-    font-size: 12px;
+    @include body_regular_12px;
     color: $gray_0600_707070;
     margin-left: 8px;
   }
@@ -57,15 +56,15 @@
   width: 100%;
   height: 34px;
   display: flex;
-  font-size: 24px;
-  font-weight: 600;
   margin-top: 10px;
   padding: 0 24px;
+  @include title_bold_24px;
 
   img {
     width: 24px;
     height: 24px;
     margin-left: 3px;
+    margin-top: 5px;
   }
 }
 
@@ -88,19 +87,13 @@
       height: 100%;
       border: none;
       border-radius: 12px;
-      font-size: 14px;
       align-items: center;
       background-color: $gray_0100_F5F5F5;
       flex-grow: 1;
       display: flex;
       justify-content: center;
       cursor: pointer;
-      // &:hover {
-      //   color:#D9DBDE ;
-      // }
-      // &:active {
-      //   color:#B8BAC1 ;
-      // }
+      @include body_regular_14px
     }
     .button_right {
       @extend .button;
@@ -127,8 +120,7 @@
     padding: 0 24px;
 
     span {
-      font-size: 18px;
-      font-weight: 600;
+      @include title_bold_18px
     }
   }
 
@@ -162,12 +154,11 @@
 
         .title {
           height: 20px;
-          font-size: 14px;
-          font-weight: 600;
+          @include title_bold_14px
         }
         .subtitle {
           height: 20px;
-          font-size: 12px;
+          @include body_regular_12px;
           color: $gray_0600_707070;
           margin-top: 4px;
         }
@@ -193,14 +184,13 @@
     }
 
     .head {
-      font-size: 18px;
-      font-weight: 600;
+      @include title_bold_18px;
       margin-left: 4px;
     }
   }
 
   .sort {
-    font-size: 12px;
+    @include body_regular_12px;
     color: $gray_0600_707070;
   }
 }
@@ -239,18 +229,17 @@
   
         .title {
           height: 20px;
-          font-size: 14px;
-          font-weight: 600;
+          @include title_bold_14px
         }
         .time {
           width: 74px;
           height: 18px;
-          font-size: 12px;
           background: #ffba081a;
           color: #ffba08;
           display: flex;
           justify-content: center;
           align-items: center;
+          @include body_regular_12px;
   
           .vectorWrapper {
             position: relative;
@@ -273,7 +262,6 @@
       .participate_on {
         width: 66px;
         height: 30px;
-        font-size: 12px;
         border: none;
         border-radius: 8px;
         background: $brand_blue_100_3F54D11A;
@@ -281,12 +269,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @include body_regular_12px;
       }
   
       .participate_off {
         width: 66px;
         height: 30px;
-        font-size: 12px;
         border: none;
         border-radius: 8px;
         background: $gray_0300_D6D6D6;
@@ -295,6 +283,7 @@
         justify-content: center;
         align-items: center;
         pointer-events: none;
+        @include body_regular_12px
       }
     }
   }
@@ -309,10 +298,9 @@
   padding: 0 24px;
 
   .title {
-    font-size: 18px;
-    font-weight: 600;
     margin-bottom: 15px;
     align-self: flex-start;
+    @include title_bold_18px;
   }
   .button {
     width: 327px;
@@ -321,9 +309,8 @@
     border-radius: 12px;
     background: $brand_blue_200_3F54D1;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
     justify-content: center;
     align-items: center;
+    @include title_bold_16px;
   }
 }
