@@ -26,9 +26,9 @@ const PetTalk = () => {
   useEffect(() => {
     if (location.pathname === "/petTalk") {
       setActiveTab("전체");
-    } else if (location.pathname === "/concern") {
+    } else if (location.pathname === "/petTalk/concern") {
       setActiveTab("고민상담");
-    } else if (location.pathname === "/freetalk") {
+    } else if (location.pathname === "/petTalk/freetalk") {
       setActiveTab("자유수다");
     }
   }, [location.pathname, setActiveTab]);
@@ -49,7 +49,7 @@ const PetTalk = () => {
                   전체
                 </Link>
                 <Link
-                  to="/concern"
+                  to="/petTalk/concern"
                   className={`${styles.head_item} ${
                     activeTab === "고민상담" ? styles.tab_active : ""
                   }`}
@@ -57,7 +57,7 @@ const PetTalk = () => {
                   고민상담
                 </Link>
                 <Link
-                  to="/freetalk"
+                  to="/petTalk/freetalk"
                   className={`${styles.head_item} ${
                     activeTab === "자유수다" ? styles.tab_active : ""
                   }`}
@@ -222,13 +222,13 @@ const PetTalk = () => {
             </button>
             {isMenuOpen && (
               <div className={styles.menu}>
-                <Link to="/pettalk/concernwrite">
+                <Link to="/petTalk/concernwrite">
                   <button className={styles.item}>
                     <img src={concern_icon} alt="" />
                     <span>고민상담</span>
                   </button>
                 </Link>
-                <Link to="/pettalk/freetalkwrite">
+                <Link to="/petTalk/freetalkwrite">
                   <button className={styles.item}>
                     <img src={freetalk_icon} alt="" />
                     <span>자유수다</span>
