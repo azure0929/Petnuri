@@ -5,7 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import DeliveryBS from "./DeliveryBS";
+import DeliveryBS from "./deliverybs/DeliveryBS";
 
 const Contest = () => {
   const head: challengeHead = {

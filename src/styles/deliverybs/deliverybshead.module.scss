@@ -2,13 +2,11 @@
 
 .headContanier {
   display: flex;
-  width: 375px;
   height: 56px;
   border-bottom: 1px solid $gray_0200_EBEBEB;
   background-color: #ffffff03;
   backdrop-filter: blur(12px);
-  position: fixed;
-  padding: 0 40px;
+  //   position: fixed;
   align-items: center;
   justify-content: center;
   .header {
@@ -19,7 +17,7 @@
     position: relative;
   }
   .arrowImg {
-    left: 30px;
+    left: 0;
     position: absolute;
     img {
       cursor: pointer;
