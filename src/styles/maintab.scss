@@ -3,7 +3,8 @@
 .main-tab {
   width: 375px;
   height: 65px;
-  background-color: #fff;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
   display: flex;
   border-top: 1px solid $gray_0200_EBEBEB;
   position: fixed;
