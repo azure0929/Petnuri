@@ -71,11 +71,13 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ children, height = 60 }) => {
               className={`${styles.container} ${isVisible ? styles.visible : ''}`} 
               style={{ height: `${sheetHeight}vh` }}
             >
-              <div 
-                className={styles.handler} 
-                onMouseDown={handleDragStart}
-                onTouchStart={handleDragStart}
-              ></div>
+              <div className={styles.handlerWrapper}>
+                <div 
+                  className={styles.handler} 
+                  onMouseDown={handleDragStart}
+                  onTouchStart={handleDragStart}
+                ></div>
+              </div>
               {children}
             </div>
           </div>
