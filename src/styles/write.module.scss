@@ -9,16 +9,22 @@
   .selectarea {
     width: 100%;
     margin: 0 24px;
+    padding-bottom: 24px;
     .category {
       width: 327px;
       border-radius: 12px;
       border: 1px solid $gray_0200_EBEBEB;
-      background-color: $gray_0100_F5F5F5;
       padding: 16px;
       font-size: 14px;
       line-height: 20px;
-      letter-spacing: -0.1px;
       outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: url("../assets/arrow_bottom_lg.svg") no-repeat;
+      background-color: $gray_0100_F5F5F5;
+      background-position: right 20px center;
+      padding-right: 50px;
       option {
         color: $gray_0900_171717;
       }
@@ -29,7 +35,7 @@
     width: 100%;
     font-size: 16px;
     font-weight: bold;
-    margin: 24px;
+    margin: 0 24px 24px 24px;
     .photo {
       text-align: left;
       margin-bottom: 8px;
