@@ -20,7 +20,6 @@ const PetTalk = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleFloating = () => {
-    console.log("플로팅 버튼!");
     setIsMenuOpen(!isMenuOpen);
   };
 

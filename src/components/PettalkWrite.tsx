@@ -8,15 +8,17 @@ interface PettalkWriteProps {
 const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
   return (
     <div className={styles.all}>
-      <div className={styles.selectarea}>
-        <select
-          name="category"
-          className={styles.category}
-          disabled={isFreeTalkWrite}
-        >
-          <option>카테고리를 선택하세요</option>
-        </select>
-      </div>
+      {!isFreeTalkWrite ? (
+        <div className={styles.selectarea}>
+          <select
+            name="category"
+            className={styles.category}
+            disabled={isFreeTalkWrite}
+          >
+            <option>카테고리를 선택하세요</option>
+          </select>
+        </div>
+      ) : null}
       <div className={styles.photoarea}>
         <div className={styles.photo}>사진 등록하기</div>
         <div>
