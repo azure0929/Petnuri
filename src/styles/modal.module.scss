@@ -1,12 +1,6 @@
-.modalWrapper {
+.wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 166px;
-  width: 100%;
-  height: 100%; 
 }
 
 .container {
@@ -15,6 +9,7 @@
   background-color: white;
   border-radius: 8px;
   z-index: 9;
+  transform: translateY(-45%);
 }
 
 .background {
