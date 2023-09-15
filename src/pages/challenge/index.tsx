@@ -147,7 +147,7 @@ const Challenge = () => {
                         ({...prevParticipation,[challengeData.challengeId]: false}))}
                     disabled
                   >
-                    참여완료
+                    지급완료
                   </button>
                 ) : (
                   <button
@@ -175,8 +175,8 @@ const Challenge = () => {
             보너스 받기
           </button>
         </div>
-        <ChallengeHBS />
         <MainTab />
+        <ChallengeHBS />
       </Background>
     </>
   );
