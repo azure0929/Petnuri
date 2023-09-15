@@ -69,6 +69,14 @@ const Concern = () => {
           </Head>
 
           <div className={styles.content_wrapper}>
+            <div className={styles.category_wrapper}>
+              <button>질병/질환</button>
+              <button>미용/패션</button>
+              <button>교육/훈련</button>
+              <button>양육/관리</button>
+              <button>반려용품</button>
+            </div>
+
             <div className={styles.select_wrap}>
               <select className={styles.select_pet} name="강아지">
                 <option value="강아지">강아지</option>
