@@ -23,13 +23,17 @@ const Modal: React.FC<BottomSheetProps> = ({ children, height='204' }) => {
   return (
     <>
       {isOpen && (
-          <div className={styles.modalWrapper}>
-              <div className={`${styles.background} ${isVisible ? styles.visible : ''}`} onClick={() => setIsOpen(false)}></div>
-              <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}
-              style={{height:`${height}px`}}>
-                  {children}
-              </div>
+      <>
+        <div className={styles.box}>
+          <div className={`${styles.background} ${isVisible ? styles.visible : ''}`} onClick={() => setIsOpen(false)}></div>
+          <div className={styles.wrapper}>
+            <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}
+            style={{height:`${height}px`}}>
+                {children}
+            </div>
           </div>
+        </div>
+      </>
       )}
     </>
   );

@@ -1,0 +1,35 @@
+@import '@/styles/common.scss';
+
+.head {
+  height: 75px;
+  @include title_bold_18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sliderWrapper {
+  height: 400px;
+  .img {
+    width: 100%;
+    height: 367px;
+  }
+}
+
+.okWrapper {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .ok {
+    width: 279px;
+    background-color: $brand_blue_200_3F54D1;
+    border-radius: 50px;
+    color: #fff;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include title_bold_14px;
+  }
+}
