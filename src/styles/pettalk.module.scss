@@ -36,6 +36,7 @@
   .select_wrap {
     display: flex;
     margin: 0 24px;
+    padding-top: 24px;
     .select_pet,
     .select_sort {
       color: $gray_0900_171717;
@@ -248,4 +249,18 @@
 .modal_backdrop.active {
   opacity: 1; /* active일 때 불투명한 상태 */
   visibility: visible; /* active일 때 화면에 보이도록 설정 */
+}
+
+.category_wrapper {
+  display: flex;
+  margin: 0 24px;
+
+  overflow: auto;
+  white-space: nowrap;
+  button {
+    border: 1px solid $gray_0300_D6D6D6;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-right: 8px;
+  }
 }

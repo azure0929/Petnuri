@@ -53,11 +53,11 @@ const App = () => {
       <Route path="/dailychallenge3" element={<DailyChallenge3 />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
-      <Route path="/pettalk" element={<PetTalk />} />
-      <Route path="/concern" element={<Concern />} />
-      <Route path="/freetalk" element={<FreeTalk />} />
-      <Route path="/pettalk/concernwrite" element={<ConcernWrite />} />
-      <Route path="/pettalk/freetalkwrite" element={<FreetalkWrite />} />
+      <Route path="/petTalk" element={<PetTalk />} />
+      <Route path="/petTalk/concern" element={<Concern />} />
+      <Route path="/petTalk/freetalk" element={<FreeTalk />} />
+      <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />
+      <Route path="/petTalk/freetalkwrite" element={<FreetalkWrite />} />
       {/* 펫 프로필 */}
       <Route path="/petprofileadd" element={<PetProfileAdd />} />
       <Route path="/petprofilemodify" element={<Modify />} />
