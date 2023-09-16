@@ -20,6 +20,14 @@ const Home = () => {
     navigate(`PetTalk`)
   }
 
+  const onPetProfileAdd = () => {
+    navigate(`petprofileadd`)
+  }
+
+  const onPetProfileModify = () => {
+    navigate(`petprofilemodify`)
+  }
+
   return (
     <>
       <Background>
@@ -30,7 +38,7 @@ const Home = () => {
           <div className={styles.profile}>
             <div className={styles.tabmenu}>
               {/* <div></div> */}
-              <div role="button" className={styles.add}>
+              <div role="button" className={styles.add} onClick={onPetProfileAdd}>
                 <div className={styles.icon}></div>
                 <span>추가하기</span>
               </div>
@@ -39,7 +47,7 @@ const Home = () => {
               <div className={styles.photo}></div>
               <div className={styles.name}>
                 <h3>익명의 집사</h3>
-                <div role="button">수정하기</div>
+                <div role="button" onClick={onPetProfileModify}>수정하기</div>
               </div>
             </div>
           </div>
