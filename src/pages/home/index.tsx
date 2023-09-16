@@ -3,8 +3,12 @@ import Background from "@/components/Background";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
+import KitModal from "@/components/modal/KitModal";
+import { useSetRecoilState } from "recoil";
+import { bottomSheetState } from "@/store/challengeState";
 
 const Home = () => {
+  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
   const navigate = useNavigate();
 
@@ -140,7 +144,15 @@ const Home = () => {
               </li>
             </ul>
           </div>
+          
+          <div className={styles.kit}>
+            <div className={styles.title}> 검진 키트 결과 보기 </div>
+            <div className={styles.image} onClick={() => setBottomIsOpen(true)}>
+              커밍순
+            </div>
+          </div>   
         </div>
+        <KitModal/> 
       </Background>
       <MainTab />
     </>

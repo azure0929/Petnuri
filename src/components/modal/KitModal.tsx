@@ -32,7 +32,7 @@ const KitModal = () => {
 
 return (
   <>
-    <Modal height={562}>
+    <Modal height={562} transformY={-130}>
       <p className={styles.head}>펫 누리 비대면 검진키트</p>
       <div className={styles.sliderWrapper}>
         <Slider {...settings}>
