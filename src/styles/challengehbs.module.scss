@@ -1,8 +1,8 @@
 @import '@/styles/common.scss';
 
 .head {
-  height: 64px;
-  padding: 32px 24px 8px 24px;
+  height: 44px;
+  padding: 28px 24px 16px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,54 +40,74 @@
 }
 
 .quetion {
-  height: 101px;
+  height: 56px;
   background-color: #D9D9D9;
   border: none;
   border-radius: 10px;
 }
 
+.answer {
+  height: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  .selected {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    @include body_regular_14px;
+  }
+}
+
+.check {
+  height: 50px;
+  background-color: $brand_blue_100_3F54D11A;
+  border-radius: 12px;
+  color: $brand_blue_200_3F54D1;
+  margin: 16px 0;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include title_bold_14px;
+}
+
 .invite {
-  @include body(92px);
+  @include body(90px);
 }
 
 .btn_1 {
-  width: 96px;
-  height: 42px;
-  background-color: #D9D9D9;
+  width: 78px;
+  height: 30px;
+  background-color: $brand_blue_200_3F54D1;
   border: none;
-  border-radius: 50px;
-  font-size: 14px;
+  border-radius: 8px;
+  color: #FFFFFF;
+  padding: 6px 8px 6px 7px;
   display: flex;
   align-items: center;
   justify-content: center;
+  @include body_regular_12px;
 }
 
 .code {
   height: 44px;
   background-color: $gray_0100_F5F5F5;
-  border: none;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 9px 16px;
 
   .text {
-    color: #646464;
-    font-size: 14px;
-    font-weight: 500;
+    color: #333;
+    @include title_bold_14px;
   }
 
   .btn_2 {
-    width: 104px;
-    height: 22px;
-    background-color: #A0A0A0;
-    border: none;
-    border-radius: 50px;
-    color: #FFFFFF;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
+    height: 20px;
+    color: $gray_0600_707070;
+    @include body_regular_14px;
   }
 }
