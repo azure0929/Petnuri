@@ -1,5 +1,6 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
+import { useRef, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
@@ -9,6 +10,8 @@ import { bottomSheetState } from "@/store/challengeState";
 
 const Home = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const scrollRef = useRef<HTMLUListElement>(null);
+  let startTouchX = 0;
 
   const navigate = useNavigate();
 
@@ -20,6 +23,51 @@ const Home = () => {
     navigate(`PetTalk`)
   }
 
+  const onPetProfileAdd = () => {
+    navigate(`petprofileadd`)
+  }
+
+  const onPetProfileModify = () => {
+    navigate(`petprofilemodify`)
+  }
+
+  useEffect(() => {
+    const handleWheel = (e:any) => {
+      if (e.deltaY === 0 || !scrollRef.current) return;
+      e.preventDefault();
+      if (scrollRef.current) {
+        scrollRef.current.scrollLeft += e.deltaY;
+      }
+    };
+    const handleTouchStart = (e:any) => {
+      if (!scrollRef.current) return;
+      startTouchX = e.touches[0].clientX; 
+    };
+    const handleTouchMove = (e:any) => {
+      if (!scrollRef.current) return;
+      e.preventDefault();
+      const xDiff = startTouchX - e.touches[0].clientX;
+      if (scrollRef.current){ 
+        scrollRef.current.scrollLeft += xDiff;
+        startTouchX = e.touches[0].clientX;
+     }
+    };
+    const element = scrollRef.current;
+    if (element) {
+        element.addEventListener('wheel', handleWheel, { passive: false });
+        element.addEventListener('touchstart', handleTouchStart);
+        element.addEventListener('touchmove', handleTouchMove);
+
+        return () => {
+            if (element){
+                element.removeEventListener('wheel', handleWheel);
+                element.removeEventListener('touchstart', handleTouchStart);
+                element.removeEventListener('touchmove', handleTouchMove);
+            }
+        };
+     }
+   }, []);
+
   return (
     <>
       <Background>
@@ -30,7 +78,7 @@ const Home = () => {
           <div className={styles.profile}>
             <div className={styles.tabmenu}>
               {/* <div></div> */}
-              <div role="button" className={styles.add}>
+              <div role="button" className={styles.add} onClick={onPetProfileAdd}>
                 <div className={styles.icon}></div>
                 <span>추가하기</span>
               </div>
@@ -39,7 +87,7 @@ const Home = () => {
               <div className={styles.photo}></div>
               <div className={styles.name}>
                 <h3>익명의 집사</h3>
-                <div role="button">수정하기</div>
+                <div role="button" onClick={onPetProfileModify}>수정하기</div>
               </div>
             </div>
           </div>
@@ -48,7 +96,7 @@ const Home = () => {
               <h3>추천 챌린지</h3>
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
-            <ul className={styles.list}>
+            <ul className={styles.list} ref={scrollRef} >
               <li>
                 <div className={styles.photo}></div>
                 <div className={styles.desc}>
