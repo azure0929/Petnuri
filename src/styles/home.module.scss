@@ -12,6 +12,7 @@
 }
 
 .contents {
+  position: relative;
   // 프로필
   .profile {
     padding: 0 24px;
@@ -197,6 +198,39 @@
           }
         }
       }
+    }
+  }
+  .kit {
+    margin-top: 33px;
+    margin-bottom: 91px;
+    padding: 0 24px;
+    .title {
+      width: 375px;
+      height: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 24px; 
+      letter-spacing: -0.1px;
+      color: #333333;
+    }
+    .image {
+      width: 326px;
+      height: 176px;
+      background-color: #D6D6D6;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 150%;
+      letter-spacing: -0.5px;
+      color: #000;
+      cursor: pointer;
     }
   }
 }
