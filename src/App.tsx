@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Modal from "react-modal";
 // 홈, 로그인, 온보딩
 import Home from "@/pages/home";
-import Login from "@/pages/Login";
+import Login from "@/pages/login";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
 import RegistSuccess from "./pages/onboarding/RegistSuccess";
@@ -56,11 +56,11 @@ const App = () => {
       <Route path="/dailychallenge3" element={<DailyChallenge3 />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
-      <Route path="/pettalk" element={<PetTalk />} />
-      <Route path="/concern" element={<Concern />} />
-      <Route path="/freetalk" element={<FreeTalk />} />
-      <Route path="/pettalk/concernwrite" element={<ConcernWrite />} />
-      <Route path="/pettalk/freetalkwrite" element={<FreetalkWrite />} />
+      <Route path="/petTalk" element={<PetTalk />} />
+      <Route path="/petTalk/concern" element={<Concern />} />
+      <Route path="/petTalk/freetalk" element={<FreeTalk />} />
+      <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />
+      <Route path="/petTalk/freetalkwrite" element={<FreetalkWrite />} />
       {/* 펫 프로필 */}
       <Route path="/petprofileadd" element={<PetProfileAdd />} />
       <Route path="/petprofilemodify" element={<Modify />} />

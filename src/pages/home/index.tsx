@@ -3,8 +3,14 @@ import Background from "@/components/Background";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
+import KitModal from "@/components/modal/KitModal";
+import { useSetRecoilState } from "recoil";
+import { bottomSheetState } from "@/store/challengeState";
+import { useScrollUl } from "@/utils/Scroll";
 
 const Home = () => {
+  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const scrollRef = useScrollUl()
 
   const navigate = useNavigate();
 
@@ -14,6 +20,14 @@ const Home = () => {
 
   const onPettalk = () => {
     navigate(`PetTalk`)
+  }
+
+  const onPetProfileAdd = () => {
+    navigate(`petprofileadd`)
+  }
+
+  const onPetProfileModify = () => {
+    navigate(`petprofilemodify`)
   }
 
   return (
@@ -26,7 +40,7 @@ const Home = () => {
           <div className={styles.profile}>
             <div className={styles.tabmenu}>
               {/* <div></div> */}
-              <div role="button" className={styles.add}>
+              <div role="button" className={styles.add} onClick={onPetProfileAdd}>
                 <div className={styles.icon}></div>
                 <span>추가하기</span>
               </div>
@@ -35,7 +49,7 @@ const Home = () => {
               <div className={styles.photo}></div>
               <div className={styles.name}>
                 <h3>익명의 집사</h3>
-                <div role="button">수정하기</div>
+                <div role="button" onClick={onPetProfileModify}>수정하기</div>
               </div>
             </div>
           </div>
@@ -44,7 +58,7 @@ const Home = () => {
               <h3>추천 챌린지</h3>
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
-            <ul className={styles.list}>
+            <ul className={styles.list} ref={scrollRef} >
               <li>
                 <div className={styles.photo}></div>
                 <div className={styles.desc}>
@@ -140,7 +154,15 @@ const Home = () => {
               </li>
             </ul>
           </div>
+          
+          <div className={styles.kit}>
+            <div className={styles.title}> 검진 키트 결과 보기 </div>
+            <div className={styles.image} onClick={() => setBottomIsOpen(true)}>
+              커밍순
+            </div>
+          </div>   
         </div>
+        <KitModal/> 
       </Background>
       <MainTab />
     </>

@@ -6,9 +6,10 @@ import { bottomSheetState } from "@/store/challengeState";
 interface BottomSheetProps {
   children: ReactNode;
   height?: number; 
+  transformY?: number;
 }
 
-const Modal: React.FC<BottomSheetProps> = ({ children, height='204' }) => {
+const Modal: React.FC<BottomSheetProps> = ({ children, height='204', transformY=0 }) => {
   const [isOpen, setIsOpen] = useRecoilState(bottomSheetState);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -23,13 +24,15 @@ const Modal: React.FC<BottomSheetProps> = ({ children, height='204' }) => {
   return (
     <>
       {isOpen && (
-          <div className={styles.modalWrapper}>
-              <div className={`${styles.background} ${isVisible ? styles.visible : ''}`} onClick={() => setIsOpen(false)}></div>
-              <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}
-              style={{height:`${height}px`}}>
-                  {children}
-              </div>
+      <>
+        <div className={`${styles.background} ${isVisible ? styles.visible : ''}`} onClick={() => setIsOpen(false)}></div>
+        <div className={styles.wrapper}>
+          <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}
+          style={{height:`${height}px`, transform: `translateY(${transformY}%)` }}>
+              {children}
           </div>
+        </div>
+      </>
       )}
     </>
   );

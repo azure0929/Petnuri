@@ -15,7 +15,7 @@ const YanadoGet = () => {
       try {
         const response = await fetch('/Yanado.json');
         const data = await response.json();
-        setRewardData(data);
+        setRewardData(data.data[0]);
       } catch (error) {
         console.error('YanadoGet Error:', error);
       }

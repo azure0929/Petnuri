@@ -8,28 +8,44 @@ import JoinButton from "@/components/challenge/JoinButton";
 import DeliveryBS from "./deliverybs/DeliveryBS";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
+import styles from "@/styles/challengejoin.module.scss";
+import { useScrollDiv } from "@/utils/Scroll";
 
-interface ContestT {
-  title: string;
-  thumbnail: string;
-  kit_start_date: string;
-  kit_end_date: string;
+interface contestData {
   process: string;
 }
 
 const Contest = () => {
-  const [contestData, setContestData] = useState<ContestT | null>(null);
+  const scrollRef = useScrollDiv();
+  const [joinList, setJoinList] = useState<joinList[]>([]);
+  const [contestData, setContestData] = useState<contestData | null>(null);
+
   useEffect(() => {
     const contestApi = async () => {
       try {
         const response = await fetch("/Cheonha.json");
         const data = await response.json();
-        setContestData(data);
+        setContestData(data.data[0]);
       } catch (error) {
         console.error("contestApi Error : " + error);
       }
     };
+
     contestApi();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/Chamyo.json");
+        const data = await response.json();
+        setJoinList(data.joinList);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const head: challengeHead = {
@@ -51,12 +67,6 @@ const Contest = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-  const join: challengeJoin = {
-    participantsTitle: "다른 집사들도 참여중이에요!",
-    participantsImg: "이미지",
-    participantsName: "아이디",
-  };
-
   let renderButton;
   if (contestData !== null && contestData.process === "unprocessed") {
     renderButton = <JoinButton />;
@@ -74,7 +84,20 @@ const Contest = () => {
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin join={join} />
+        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+        <div className={styles.participants} ref={scrollRef}>
+          {joinList !== null
+            ? joinList.map((joinItem, index) => (
+                <ChallengeJoin
+                  key={index}
+                  join={{
+                    participantsImg: joinItem.images,
+                    participantsName: joinItem.nickName,
+                  }}
+                />
+              ))
+            : null}
+        </div>
         {renderButton}
         <DeliveryBS />
         <MainTab />

@@ -1,19 +1,23 @@
 {
-  "title": "야너도? 야나도!",
-  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-  "images": [
-    "url",
-    "url"
-  ],
-  "rewardStartDate":"2023-09-01",
-  "rewardEndDate":"2023-09-13",
-  "rewardList":[
+  "data":[
     {
-      "eventId":1,
-      "itemId":1,
-      "name":"14일중 원하는 날에 반려일기 10회작성"
+      "title": "야너도? 야나도!",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "images": [
+        "url",
+        "url"
+      ],
+      "rewardStartDate":"2023-09-01",
+      "rewardEndDate":"2023-09-13",
+      "rewardList":[
+        {
+          "eventId":1,
+          "itemId":1,
+          "name":"14일중 원하는 날에 반려일기 10회작성"
+        }
+      ],
+      "process": "unprocessed"
+    
     }
-  ],
-  "process": "unprocessed"
-
+  ]
 }
