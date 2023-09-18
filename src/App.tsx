@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 // 홈, 로그인, 온보딩
 import Home from "@/pages/home";
-import Login from "@/pages/Login";
+import Login from "@/pages/login";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
 import RegistSuccess from "./pages/onboarding/RegistSuccess";
