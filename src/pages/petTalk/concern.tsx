@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
 import Head from "@/components/Head";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { useScrollDiv } from "@/utils/Scroll";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
@@ -18,7 +19,10 @@ const Concern = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const categoryRef = useRef<HTMLDivElement>(null);
+
+  const scrollRef = useScrollDiv();
+
+  const [activeCategory, setActiveCategory] = useState(0);
 
   const handleFloating = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -33,18 +37,6 @@ const Concern = () => {
       setActiveTab("자유수다");
     }
   }, [location.pathname, setActiveTab]);
-
-  const handleScroll = (direction: "left" | "right") => {
-    const container = categoryRef.current;
-    if (container) {
-      const scrollAmount = 200; // 조절 가능한 스크롤 양
-      if (direction === "left") {
-        container.scrollLeft -= scrollAmount;
-      } else {
-        container.scrollLeft += scrollAmount;
-      }
-    }
-  };
 
   return (
     <>
@@ -83,15 +75,38 @@ const Concern = () => {
 
           <div className={styles.content_wrapper}>
             <div className={styles.category_container}>
-              <div className={styles.category_wrapper} ref={categoryRef}>
-                <button>질병/질환</button>
-                <button>미용/패션</button>
-                <button>교육/훈련</button>
-                <button>양육/관리</button>
-                <button>반려용품</button>
+              <div className={styles.category_wrapper} ref={scrollRef}>
+                <button
+                  className={activeCategory === 0 ? styles.active_button : ""}
+                  onClick={() => setActiveCategory(0)}
+                >
+                  질병/질환
+                </button>
+                <button
+                  className={activeCategory === 1 ? styles.active_button : ""}
+                  onClick={() => setActiveCategory(1)}
+                >
+                  미용/패션
+                </button>
+                <button
+                  className={activeCategory === 2 ? styles.active_button : ""}
+                  onClick={() => setActiveCategory(2)}
+                >
+                  교육/훈련
+                </button>
+                <button
+                  className={activeCategory === 3 ? styles.active_button : ""}
+                  onClick={() => setActiveCategory(3)}
+                >
+                  양육/관리
+                </button>
+                <button
+                  className={activeCategory === 4 ? styles.active_button : ""}
+                  onClick={() => setActiveCategory(4)}
+                >
+                  반려용품
+                </button>
               </div>
-              <button onClick={() => handleScroll("left")}>&lt;</button>
-              <button onClick={() => handleScroll("right")}>&gt;</button>
             </div>
 
             <div className={styles.select_wrap}>
