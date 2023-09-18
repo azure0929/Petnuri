@@ -1,6 +1,6 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
-import styles from "@/styles/pettalk.module.scss";
+import styles from "@/styles/pettalkdetail.module.scss";
 import { useNavigate } from "react-router-dom";
 
 import Head from "@/components/Head";
@@ -47,7 +47,6 @@ const PetTaliDetail = () => {
                   어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요
                   어뜩하죠ㅠㅠ
                 </div>
-                <button className={styles.plus_button}>더보기</button>
               </div>
 
               {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}

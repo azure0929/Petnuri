@@ -56,7 +56,7 @@ const App = () => {
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
       <Route path="/petTalk" element={<PetTalk />} />
-      <Route path="/petTalk/{petTalkId}" element={<PetTaliDetail />} />
+      <Route path="/petTalk/:petTaliId" element={<PetTaliDetail />} />
       <Route path="/petTalk/concern" element={<Concern />} />
       <Route path="/petTalk/freetalk" element={<FreeTalk />} />
       <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />
