@@ -23,7 +23,7 @@ const NayegiGet = () => {
       try {
         const response = await fetch('/Nayegi.json');
         const data = await response.json();
-        setRewardData(data);
+        setRewardData(data.data[0]);
       } catch (error) {
         console.error('NayegiGet Error:', error);
       }

@@ -1,20 +1,24 @@
 {
-  "title": "나 여기 가봤네",
-  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-  "images": [
-    "url",
-    "url"
-  ],
-  "kitStartDate":"2023-09-01",
-  "kitEndDate":"2023-09-01",
-  "rewardStartDate":"2023-09-01",
-  "rewardEndDate":"2023-09-01",
-  "rewardList":[
+  "data": [
     {
-      "itemId":1,
-      "name":"동물병원A"
+      "title": "나 여기 가봤네",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "images": [
+        "url",
+        "url"
+      ],
+      "kitStartDate":"2023-09-01",
+      "kitEndDate":"2023-09-01",
+      "rewardStartDate":"2023-09-01",
+      "rewardEndDate":"2023-09-01",
+      "rewardList":[
+        {
+          "itemId":1,
+          "name":"동물병원A"
+        }
+      ],
+      "process": "unprocessed"
+    
     }
-  ],
-  "process": "unprocessed"
-
+  ]
 }

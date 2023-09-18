@@ -1,35 +1,36 @@
-.participants {
-  margin-top: 40px;
+@import '@/styles/common.scss';
 
-  .title {
-    display: block;
-    width: 375px;
-    height: 24px;
-    font-weight: 600;
-    font-size: 18px;
-    text-align: start;
-    padding: 0px 24px;
+.title {
+  display: block;
+  width: 375px;
+  height: 24px;
+  text-align: start;
+  padding: 0px 24px;
+  margin-top: 40px;
+  @include title_bold_18px;
+}
+.participants {
+  display: flex;
+  padding: 0 24px;
+  gap: 16px;
+  overflow-x:auto;
+  &::-webkit-scrollbar {
+    display: none;
   }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   .info {
     .img {
       width: 120px;
       height: 120px;
       border-radius: 12px;
-      background-color: yellowgreen;
-      margin-left: 24px;
       margin-top: 10px;
     }
     .name {
-      display: block;
       width: 120px;
       height: 20px;
-      font-weight: 600;
       margin-top: 10px;
-      span {
-        font-weight: 600;
-        width: 49px;
-        height: 20px;
-      }
+      @include title_bold_14px;
     }
   }
 }

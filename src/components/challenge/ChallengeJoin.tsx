@@ -5,15 +5,16 @@ interface joinProps {
 }
 
 const ChallengeJoin: React.FC<joinProps> = ({ join }) => {
+
   return (
     <>
-      <div className={styles.participants}>
-        <span className={styles.title}>{join.participantsTitle}</span>
-        <div className={styles.info}>
-          <div className={styles.img}>{join.participantsImg}</div>
-          <div className={styles.name}>
-            <span>{join.participantsName}</span>
-          </div>
+      <div className={styles.info}>
+        <img 
+          src={join.participantsImg} 
+          alt="Review" 
+          className={styles.img}/>
+        <div className={styles.name}>
+          <span>{join.participantsName}</span>
         </div>
       </div>
     </>

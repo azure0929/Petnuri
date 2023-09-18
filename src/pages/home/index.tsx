@@ -1,17 +1,16 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
-import { useRef, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
+import { useScrollUl } from "@/utils/Scroll";
 
 const Home = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
-  const scrollRef = useRef<HTMLUListElement>(null);
-  let startTouchX = 0;
+  const scrollRef = useScrollUl()
 
   const navigate = useNavigate();
 
@@ -30,43 +29,6 @@ const Home = () => {
   const onPetProfileModify = () => {
     navigate(`petprofilemodify`)
   }
-
-  useEffect(() => {
-    const handleWheel = (e:any) => {
-      if (e.deltaY === 0 || !scrollRef.current) return;
-      e.preventDefault();
-      if (scrollRef.current) {
-        scrollRef.current.scrollLeft += e.deltaY;
-      }
-    };
-    const handleTouchStart = (e:any) => {
-      if (!scrollRef.current) return;
-      startTouchX = e.touches[0].clientX; 
-    };
-    const handleTouchMove = (e:any) => {
-      if (!scrollRef.current) return;
-      e.preventDefault();
-      const xDiff = startTouchX - e.touches[0].clientX;
-      if (scrollRef.current){ 
-        scrollRef.current.scrollLeft += xDiff;
-        startTouchX = e.touches[0].clientX;
-     }
-    };
-    const element = scrollRef.current;
-    if (element) {
-        element.addEventListener('wheel', handleWheel, { passive: false });
-        element.addEventListener('touchstart', handleTouchStart);
-        element.addEventListener('touchmove', handleTouchMove);
-
-        return () => {
-            if (element){
-                element.removeEventListener('wheel', handleWheel);
-                element.removeEventListener('touchstart', handleTouchStart);
-                element.removeEventListener('touchmove', handleTouchMove);
-            }
-        };
-     }
-   }, []);
 
   return (
     <>
