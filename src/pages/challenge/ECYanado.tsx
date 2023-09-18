@@ -6,8 +6,28 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
+import styles from "@/styles/challengejoin.module.scss";
+import { useState, useEffect} from 'react';
+import { useScroll } from "@/utils/Scroll";
 
 const ECYanado = () => {
+  const scrollRef= useScroll();
+  const [joinList, setJoinList] = useState<joinList[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/Chamyo.json');
+        const data = await response.json();
+        setJoinList(data.joinList);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+   }, []);
+
   const head: challengeHead = {
     head: "천하제일 집사대회",
   };
@@ -27,19 +47,24 @@ const ECYanado = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-  const join: challengeJoin = {
-    participantsTitle: "다른 집사들도 참여중이에요!",
-    participantsImg: "이미지",
-    participantsName: "아이디",
-  };
-
   return (
     <>
       <Background>
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin join={join} />
+        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+        <div className={styles.participants} ref={scrollRef}>
+          {joinList.map((joinItem, index) =>
+              <ChallengeJoin 
+                key={index}
+                join={{
+                  participantsImg: joinItem.images,
+                  participantsName: joinItem.nickName
+                }} 
+              />
+          )}
+        </div>
         <JoinButton />
         <SaveBS />
         <MainTab />
