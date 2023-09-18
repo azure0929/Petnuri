@@ -23,7 +23,7 @@ const CheonhaGet = () => {
       try {
         const response = await fetch('/Cheonha.json');
         const data = await response.json();
-        setRewardData(data);
+        setRewardData(data.data[0]);
       } catch (error) {
         console.error('CheonhaGet Error:', error);
       }
