@@ -47,3 +47,25 @@ interface ChallengeData {
   review: Review[];
   status: boolean;
 }
+
+//펫톡
+
+interface PetTalkMainPage {
+  petTalkId : number;
+  thumbnail : string;
+  title : string;
+  content : string;
+  createdAt : string;
+  viewCount : number;
+  likeCount : number;
+  replyCount : number;
+  isLiked : true;
+  writer : writer;
+}
+
+interface writer {
+  writerId : number;
+  profileImageUrl : string;
+  nickname : string;
+  rank : string;
+}

@@ -7,10 +7,26 @@ import KitModal from "@/components/modal/KitModal";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
+import { useState,useEffect } from 'react'
 
 const Home = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const scrollRef = useScrollUl()
+  const [petTalkList, setPetTalkList] = useState<PetTalkMainPage[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/PettalkMain.json');
+        const data = await response.json();
+        setPetTalkList(data.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+   }, []);
 
   const navigate = useNavigate();
 
@@ -88,71 +104,30 @@ const Home = () => {
               <div role="button" onClick={onPettalk}>더보기</div>
             </div>
             <ul className={styles.list}>
-              <li>
-                <div className={styles.content}>
-                  <div className={styles.photo}></div>
-                  <div className={styles.detail}>
-                    <div className={styles.info}>
-                      <span>커뮤니티 텍스트 제목입니다. 커뮤니티 텍스트</span>
+              {petTalkList.slice(0, 4).map((item) => {
+                const date = new Date(item.createdAt);
+                const hours = ("0" + date.getHours()).slice(-2);
+                const minutes = ("0" + date.getMinutes()).slice(-2);
+
+                return (
+                  <li key={item.petTalkId.toString()}>
+                    <div className={styles.content}>
+                      <img src={item.thumbnail} className={styles.photo} alt="thumbnail" />
+                      <div className={styles.detail}>
+                        <div className={styles.info}>
+                          <span>{item.title}</span>
+                        </div>
+                        <div className={styles.user}>
+                          <span>{item.writer.nickname}</span>
+                          <span>&#183;</span>
+                          <p>{`${hours}:${minutes}`}</p> 
+                        </div>
+                      </div>
+                      <div className={styles.icon}><IoIosArrowForward /></div>
                     </div>
-                    <div className={styles.user}>
-                      <span>닉네임</span>
-                      <span>&#183;</span>
-                      <p><span>8</span>시간전</p>
-                    </div>
-                  </div>
-                  <div className={styles.icon}><IoIosArrowForward /></div>
-                </div>
-              </li>
-              <li>
-                <div className={styles.content}>
-                  <div className={styles.photo}></div>
-                  <div className={styles.detail}>
-                    <div className={styles.info}>
-                      <span>커뮤니티 텍스트 제목입니다. 커뮤니티 텍스트</span>
-                    </div>
-                    <div className={styles.user}>
-                      <span>닉네임</span>
-                      <span>&#183;</span>
-                      <p><span>8</span>시간전</p>
-                    </div>
-                  </div>
-                  <div className={styles.icon}><IoIosArrowForward /></div>
-                </div>
-              </li>
-              <li>
-                <div className={styles.content}>
-                  <div className={styles.photo}></div>
-                  <div className={styles.detail}>
-                    <div className={styles.info}>
-                      <span>커뮤니티 텍스트 제목입니다. 커뮤니티 텍스트</span>
-                    </div>
-                    <div className={styles.user}>
-                      <span>닉네임</span>
-                      <span>&#183;</span>
-                      <p><span>8</span>시간전</p>
-                    </div>
-                  </div>
-                  <div className={styles.icon}><IoIosArrowForward /></div>
-                </div>
-              </li>
-              <li>
-                <div className={styles.content}>
-                  <div className={styles.photo}></div>
-                  <div className={styles.detail}>
-                    <div className={styles.info}>
-                      <span>커뮤니티 텍스트 제목입니다. 커뮤니티 텍스트</span>
-                    </div>
-                    <div className={styles.user}>
-                      <span>닉네임</span>
-                      <span>&#183;</span>
-                      <p><span>8</span>시간전</p>
-                    </div>
-                  </div>
-                  <div className={styles.icon}><IoIosArrowForward /></div>
-                </div>
-              </li>
-            </ul>
+                  </li>)
+              })}
+            </ul> 
           </div>
           
           <div className={styles.kit}>
