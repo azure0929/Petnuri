@@ -8,10 +8,10 @@ import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect} from 'react';
-import { useScroll } from "@/utils/Scroll";
+import { useScrollDiv } from "@/utils/Scroll";
 
 const ECYanado = () => {
-  const scrollRef= useScroll();
+  const scrollRef= useScrollDiv();
   const [joinList, setJoinList] = useState<joinList[]>([]);
 
   useEffect(() => {

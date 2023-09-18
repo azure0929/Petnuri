@@ -8,10 +8,10 @@ import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect} from 'react';
-import { useScroll } from "@/utils/Scroll";
+import { useScrollDiv } from "@/utils/Scroll";
 
 const DailyChallenge3 = () => {
-  const scrollRef= useScroll();
+  const scrollRef= useScrollDiv();
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
 
   useEffect(() => {

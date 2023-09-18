@@ -8,10 +8,10 @@ import JoinButton from "@/components/challenge/JoinButton";
 import DeliveryBS from "./DeliveryBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect} from 'react';
-import { useScroll } from "@/utils/Scroll";
+import { useScrollDiv } from "@/utils/Scroll";
 
 const Contest = () => {
-  const scrollRef= useScroll();
+  const scrollRef= useScrollDiv();
   const [joinList, setJoinList] = useState<joinList[]>([]);
 
   useEffect(() => {
