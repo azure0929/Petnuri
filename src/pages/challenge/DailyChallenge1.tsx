@@ -6,8 +6,24 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
+import { useState, useEffect} from 'react';
 
 const DailyChallenge1 = () => {
+  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/Daily.json');
+        const data = await response.json();
+        setChallenges(data.data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+   }, []);
+
   const head: challengeHead = {
     head: "간식 바치기",
   };
@@ -27,11 +43,7 @@ const DailyChallenge1 = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-  const join: challengeJoin = {
-    participantsTitle: "다른 집사들도 참여중이에요!",
-    participantsImg: "이미지",
-    participantsName: "아이디",
-  };
+
 
   return (
     <>
@@ -39,7 +51,9 @@ const DailyChallenge1 = () => {
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin join={join} />
+        {challenges.length > 0 && (
+         <ChallengeJoin join={challenges[0].review} />
+       )}
         <JoinButton />
         <SaveBS />
         <MainTab />

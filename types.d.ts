@@ -17,17 +17,16 @@ interface challengeContents {
   pointInfo: string;
 }
 
-interface challengeJoin {
-  participantsTitle: string;
-  participantsImg: string;
-  participantsName: string;
-}
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {
   reviewUserId: number;
   reviewUserNickname: string;
   reviewImgUrl: string;
 }
+
+type ChallengeJoinProps = {
+  join: Review[];
+};
 
 interface ChallengeData {
   challengeId: number;
