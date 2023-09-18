@@ -25,6 +25,7 @@ interface challengeJoin {
 interface joinList {
   images: string;
   nickName: string;
+  // process: string;
 }
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용

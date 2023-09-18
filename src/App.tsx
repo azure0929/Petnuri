@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Modal from "react-modal";
 // 홈, 로그인, 온보딩
 import Home from "@/pages/home";
 import Login from "@/pages/login";
@@ -36,6 +37,8 @@ import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
 import "./styles/globalstyle.scss";
+
+Modal.setAppElement("#root");
 
 const App = () => {
   return (

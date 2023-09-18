@@ -5,28 +5,48 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import DeliveryBS from "./DeliveryBS";
+import DeliveryBS from "./deliverybs/DeliveryBS";
+import { useEffect, useState } from "react";
+import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challengejoin.module.scss";
-import { useState, useEffect} from 'react';
 import { useScrollDiv } from "@/utils/Scroll";
 
+interface contestData {
+  process: string;
+}
+
 const Contest = () => {
-  const scrollRef= useScrollDiv();
+  const scrollRef = useScrollDiv();
   const [joinList, setJoinList] = useState<joinList[]>([]);
+  const [contestData, setContestData] = useState<contestData | null>(null);
+
+  useEffect(() => {
+    const contestApi = async () => {
+      try {
+        const response = await fetch("/Cheonha.json");
+        const data = await response.json();
+        setContestData(data.data[0]);
+      } catch (error) {
+        console.error("contestApi Error : " + error);
+      }
+    };
+
+    contestApi();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/Chamyo.json');
+        const response = await fetch("/Chamyo.json");
         const data = await response.json();
         setJoinList(data.joinList);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
     fetchData();
-   }, []);
+  }, []);
 
   const head: challengeHead = {
     head: "천하제일 집사대회",
@@ -47,6 +67,17 @@ const Contest = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
+  let renderButton;
+  if (contestData !== null && contestData.process === "unprocessed") {
+    renderButton = <JoinButton />;
+  } else if (contestData !== null && contestData.process === "processed") {
+    renderButton = <JoinComplete />;
+  } else if (contestData !== null && contestData.process === "unjoin") {
+    renderButton = <div>인증하기</div>;
+  } else if (contestData !== null && contestData.process === "join") {
+    renderButton = <div>인증완료</div>;
+  }
+
   return (
     <>
       <Background>
@@ -55,17 +86,19 @@ const Contest = () => {
         <ChallengeContents contents={contents} />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
-          {joinList.map((joinItem, index) =>
-              <ChallengeJoin 
-                key={index}
-                join={{
-                  participantsImg: joinItem.images,
-                  participantsName: joinItem.nickName
-                }} 
-              />
-          )}
+          {joinList !== null
+            ? joinList.map((joinItem, index) => (
+                <ChallengeJoin
+                  key={index}
+                  join={{
+                    participantsImg: joinItem.images,
+                    participantsName: joinItem.nickName,
+                  }}
+                />
+              ))
+            : null}
         </div>
-        <JoinButton />
+        {renderButton}
         <DeliveryBS />
         <MainTab />
       </Background>

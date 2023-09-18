@@ -1,0 +1,25 @@
+.selectContainer {
+  margin-top: 10px;
+  .selectRewardTitle {
+    width: 200px;
+    height: 22px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    text-align: start;
+    margin: 10px 0;
+  }
+  .selectReward {
+    width: 327px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px;
+    border-color: #ebebeb;
+    padding: 16px;
+    gap: 10px;
+    color: #333333;
+    background-color: #ebebeb;
+    font-size: 14px;
+  }
+}
