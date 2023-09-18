@@ -27,7 +27,14 @@ const Login = () => {
       }
     }
   };
-  
+
+  // 1 : 1 채팅 상담하기 클릭 시 이동
+  const chatLink = "http://pf.kakao.com/_RfxnuG/chat";
+
+  const handleChatClick = () => {
+    window.location.href = chatLink;
+  };
+
   return (
     <>
       <Background>
@@ -41,6 +48,7 @@ const Login = () => {
               </p>
               <span>동료 집사분들과 함께 해볼까요?</span>
             </div>
+            {/** isAuthenticated 값에 따라 버튼 렌더링 여부 결정 */}
             {!isAuthenticated && (
               <div
                 role="button"
@@ -51,7 +59,7 @@ const Login = () => {
                 <span>카카오로 간편 로그인</span>
               </div>
             )}
-            <div className={styles.chat}>
+            <div className={styles.chat} onClick={handleChatClick}>
               <span>로그인이 안되시나요?</span> |
               <span>1 : 1 채팅 상담하기</span>
             </div>
