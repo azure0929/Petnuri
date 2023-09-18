@@ -30,7 +30,7 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
       width: "500px",
       height: "400px",
       padding: "0",
-      //   overflow: "hidden",
+      overflow: "hidden",
     },
   };
 

@@ -23,9 +23,8 @@ const DeliveryBSReward: React.FC = () => {
           <option value="카테고리를 선택해주세요">
             카테고리를 선택해주세요
           </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="댕댕이 세트">댕댕이 세트</option>
+          <option value="냥냥이 세트">냥냥이 세트</option>
         </select>
       </div>
     </>

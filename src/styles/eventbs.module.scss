@@ -10,8 +10,8 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  margin: 40px auto;
-  height: 24px;
+  //   margin: 40px auto;
+  height: 68px;
   .bsTitle {
     display: block;
     width: 140px; // 133px로 하면 한줄로 안됨
@@ -34,11 +34,11 @@
 }
 
 .addImg {
-  width: 124px;
-  height: 124px;
+  width: 120px;
+  height: 120px;
   border-radius: 20px;
   border: 1px solid black;
-  margin: 43px auto;
+  margin: auto;
   line-height: 24px;
   background-color: #d9d9d9;
   position: relative;
@@ -52,8 +52,8 @@
     transform: translate(-50%, -50%);
   }
   .saveImg {
-    width: 124px;
-    height: 124px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     position: absolute;
     top: 50%;
@@ -64,32 +64,34 @@
 
 .addText {
   width: 319px;
-  height: 57px;
-  margin-top: 32px;
-  border-radius: 10px;
+  height: 52px;
+  margin-top: 24px;
+  border-radius: 12px;
   padding: 10px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .autoSave {
+  display: block;
   width: 319px;
   height: 18px;
   font-size: 12px;
   font-weight: 600;
   color: #c2c2c2;
   text-align: start;
-  margin-top: 50px;
+  margin: 24px 16px 4px;
 }
 
 .button {
   width: 327px;
   height: 48px;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #3f54d1;
   justify-content: center;
   align-items: center;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-
-  margin: 20px auto;
+  margin-bottom: 24px;
 }

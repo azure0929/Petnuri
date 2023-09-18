@@ -6,8 +6,32 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import DeliveryBS from "./deliverybs/DeliveryBS";
+import { useEffect, useState } from "react";
+import JoinComplete from "@/components/challenge/JoinComplete";
+
+interface ContestT {
+  title: string;
+  thumbnail: string;
+  kit_start_date: string;
+  kit_end_date: string;
+  process: string;
+}
 
 const Contest = () => {
+  const [contestData, setContestData] = useState<ContestT | null>(null);
+  useEffect(() => {
+    const contestApi = async () => {
+      try {
+        const response = await fetch("/Cheonha.json");
+        const data = await response.json();
+        setContestData(data);
+      } catch (error) {
+        console.error("contestApi Error : " + error);
+      }
+    };
+    contestApi();
+  }, []);
+
   const head: challengeHead = {
     head: "천하제일 집사대회",
   };
@@ -33,6 +57,17 @@ const Contest = () => {
     participantsName: "아이디",
   };
 
+  let renderButton;
+  if (contestData !== null && contestData.process === "unprocessed") {
+    renderButton = <JoinButton />;
+  } else if (contestData !== null && contestData.process === "processed") {
+    renderButton = <JoinComplete />;
+  } else if (contestData !== null && contestData.process === "unjoin") {
+    renderButton = <div>인증하기</div>;
+  } else if (contestData !== null && contestData.process === "join") {
+    renderButton = <div>인증완료</div>;
+  }
+
   return (
     <>
       <Background>
@@ -40,7 +75,7 @@ const Contest = () => {
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
         <ChallengeJoin join={join} />
-        <JoinButton />
+        {renderButton}
         <DeliveryBS />
         <MainTab />
       </Background>

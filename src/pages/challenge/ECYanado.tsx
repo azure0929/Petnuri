@@ -5,11 +5,11 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import SaveBS from "./SaveBS";
+import EventSaveBS from "@/pages/challenge/EventSaveBS";
 
 const ECYanado = () => {
   const head: challengeHead = {
-    head: "천하제일 집사대회",
+    head: "야 너도? 야 나도!",
   };
 
   const banner: challengeBanner = {
@@ -41,7 +41,7 @@ const ECYanado = () => {
         <ChallengeContents contents={contents} />
         <ChallengeJoin join={join} />
         <JoinButton />
-        <SaveBS />
+        <EventSaveBS />
         <MainTab />
       </Background>
     </>

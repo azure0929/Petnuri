@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/deliverybs/deliverybsagree.module.scss";
+import rightArrow from "@/assets/arrow_right_small.svg";
+import Modal from "react-modal";
+import AgreeModal from "./AgreeModal";
 
 const DeliveryBSAgree = () => {
   // 약관 동의
@@ -69,6 +72,27 @@ const DeliveryBSAgree = () => {
       setAllCheck(false);
     }
   }, [agreedCheck, ruleCheck, exchangeCheck, marketingCheck]);
+
+  useEffect(() => {
+    // allCheck 상태가 변경될 때, 모든 하위 체크박스의 checked 속성을 allCheck 값으로 설정
+    if (allCheck === true) {
+      setAgreeCheck(true);
+      setRuleCheck(true);
+      setExchangeCheck(true);
+      setMarketingCheck(true);
+    }
+  }, [allCheck]);
+  // 모달
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       {/* 약관 동의 */}
@@ -95,9 +119,12 @@ const DeliveryBSAgree = () => {
               className="check"
             />
             <label htmlFor="check1" className={styles.agreementLabel}>
-              <span>이용약관</span>
+              <div className={styles.agreeTitle}>이용약관</div>
               <span className={styles.red}>*</span>
             </label>
+            <div onClick={openModal} className={styles.arrowImg}>
+              <img src={rightArrow} className={styles.rightArrow} />
+            </div>
           </div>
           <div className={styles.form_agreement_item}>
             <input
@@ -108,9 +135,12 @@ const DeliveryBSAgree = () => {
               className="check"
             />
             <label htmlFor="check2" className={styles.agreementLabel}>
-              <span>참가규칙</span>
+              <div className={styles.agreeTitle}>참가규칙</div>
               <span className={styles.red}>*</span>
             </label>
+            <div onClick={openModal}>
+              <img src={rightArrow} className={styles.rightArrow} />
+            </div>
           </div>
           <div className={styles.form_agreement_item}>
             <input
@@ -121,9 +151,12 @@ const DeliveryBSAgree = () => {
               className="check"
             />
             <label htmlFor="check3" className={styles.agreementLabel}>
-              <span>교환 및 반품 정책</span>
+              <div className={styles.agreeTitle}>교환 및 반품 정책</div>
               <span className={styles.red}>*</span>
             </label>
+            <div onClick={openModal}>
+              <img src={rightArrow} className={styles.rightArrow} />
+            </div>
           </div>
           <div className={styles.form_agreement_item}>
             <input
@@ -134,11 +167,21 @@ const DeliveryBSAgree = () => {
               className="check"
             />
             <label htmlFor="check4" className={styles.agreementLabel}>
-              <span>개인정보 제 3자 정보 제공 활용 동의</span>
+              <div className={styles.agreeTitle}>
+                개인정보 제 3자 정보 제공 활용 동의
+              </div>
             </label>
+            <div onClick={openModal}>
+              <img src={rightArrow} className={styles.rightArrow} />
+            </div>
           </div>
         </div>
       </div>
+      <AgreeModal
+        isOpen={modalOpen}
+        closeModal={closeModal}
+        setAllCheck={setAllCheck}
+      />
     </>
   );
 };

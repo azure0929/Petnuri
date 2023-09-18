@@ -38,18 +38,34 @@
   }
   .form_agreement_item {
     display: flex;
-    width: 272px;
+    width: 327px;
     height: 36px;
     justify-content: start;
     align-items: center;
+    position: relative;
     .agreementLabel {
+      width: 309px;
       color: #707070;
       font-size: 14px;
       margin-left: 10px;
+      text-align: center;
+      display: flex;
+      .agreeTitle {
+        justify-content: start;
+        align-items: center;
+        margin-left: 28px;
+      }
+      .red {
+        margin-left: -28px;
+        color: #eb4b62;
+      }
     }
-    .red {
-      margin-left: -28px;
-      color: #eb4b62;
+    .rightArrow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateY(50%);
+      cursor: pointer;
     }
   }
 }

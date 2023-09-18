@@ -7,6 +7,7 @@ import DeliveryBSAddress from "./DeliveryBSAddress";
 import DeliveryBSmessage from "./DeliveryBSmessage";
 import DeliveryBSAgree from "./DeliveryBSAgree";
 import DeliveryBSBtn from "./DeliveryBSBtn";
+import DeliveryBSReward from "./DeliveryBSReward";
 
 const DeliveryBS = () => {
   // 수령인 이름
@@ -54,6 +55,7 @@ const DeliveryBS = () => {
       <DeliveryBSContact onContactComplete={handleContactComplete} />
       <DeliveryBSAddress onAddressComplete={handleAddressComplete} />
       <DeliveryBSmessage onMessageComplete={handleMessageComplete} />
+      <DeliveryBSReward />
       <DeliveryBSAgree />
       <DeliveryBSBtn data={data} />
     </BottomSheet>

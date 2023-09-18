@@ -1,13 +1,15 @@
-import BottomSheet from "@/components/BottomSheet";
-import styles from "@/styles/savebs.module.scss";
+import BottomSheet from "@/pages/challenge/EventBSLayout";
+import styles from "@/styles/eventbs.module.scss";
 import addIcon from "@/assets/icon-plus-circle-mono.svg";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
 
-const SaveBS = () => {
+const DailySaveBS = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+
+  // 이미지 업로드
   const [newUserImg, setNewUserImg] = useState<string>();
 
   const closeBS = () => {
@@ -36,35 +38,29 @@ const SaveBS = () => {
   return (
     <>
       <BottomSheet>
-        <div className={styles.bsContainer}>
-          <div>
-            <div className={styles.bsHead}>
-              <span className={styles.bsTitle}>인증사진 올리기</span>
-              <img
-                className={styles.closeIcon}
-                src={closeIcon}
-                onClick={closeBS}
-              />
-            </div>
-            <div className={styles.addImg} onClick={handleUploadClick}>
-              <input
-                className="userImg"
-                type="file"
-                onChange={uploadImage}
-                style={{ display: "none" }}
-                ref={fileInputRef}
-              />
-              {newUserImg ? (
-                <img src={newUserImg} className={styles.saveImg} />
-              ) : (
-                <img src={addIcon} className={styles.addIcon} />
-              )}
-            </div>
+        <div className={styles.bsHead}>
+          <span className={styles.bsTitle}>인증사진 올리기</span>
+          <img className={styles.closeIcon} src={closeIcon} onClick={closeBS} />
+        </div>
+        <div className={styles.container}>
+          <div className={styles.addImg} onClick={handleUploadClick}>
             <input
-              className={styles.addText}
-              placeholder="게시글을 입력해주세요"
+              className="userImg"
+              type="file"
+              onChange={uploadImage}
+              style={{ display: "none" }}
+              ref={fileInputRef}
             />
+            {newUserImg ? (
+              <img src={newUserImg} className={styles.saveImg} />
+            ) : (
+              <img src={addIcon} className={styles.addIcon} />
+            )}
           </div>
+          <input
+            className={styles.addText}
+            placeholder="게시글을 입력해주세요"
+          />
           <span className={styles.autoSave}>
             펫톡-챌린지 탭에 자동 등록 됩니다.
           </span>
@@ -76,4 +72,4 @@ const SaveBS = () => {
     </>
   );
 };
-export default SaveBS;
+export default DailySaveBS;
