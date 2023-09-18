@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Modal from "react-modal";
 // 홈, 로그인, 온보딩
 import Home from "@/pages/home";
 import Login from "@/pages/login";
@@ -15,10 +16,12 @@ import DailyChallenge3 from "./pages/challenge/DailyChallenge3";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
 import PetTalk from "@/pages/petTalk";
+import PetTaliDetail from "./pages/petTalk/Detail";
 import Concern from "@/pages/petTalk/Concern";
 import FreeTalk from "@/pages/petTalk/Freetalk";
 import ConcernWrite from "./pages/petTalk/ConcernWrite";
 import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
+
 //펫 프로필
 import PetProfileAdd from "@/pages/petprofile";
 import Modify from "@/pages/petprofile/Modify";
@@ -34,6 +37,8 @@ import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
 import "./styles/globalstyle.scss";
+
+Modal.setAppElement("#root");
 
 const App = () => {
   return (
@@ -54,6 +59,7 @@ const App = () => {
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
       <Route path="/petTalk" element={<PetTalk />} />
+      <Route path="/petTalk/:petTaliId" element={<PetTaliDetail />} />
       <Route path="/petTalk/concern" element={<Concern />} />
       <Route path="/petTalk/freetalk" element={<FreeTalk />} />
       <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />

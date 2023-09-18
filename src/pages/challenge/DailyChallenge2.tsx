@@ -5,28 +5,28 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import SaveBS from "./SaveBS";
+import DailySaveBS from "./DailySaveBS";
 import styles from "@/styles/challengejoin.module.scss";
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
 
 const DailyChallenge2 = () => {
-  const scrollRef= useScrollDiv();
+  const scrollRef = useScrollDiv();
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/Daily.json');
+        const response = await fetch("/Daily.json");
         const data = await response.json();
         setChallenges(data.data);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
     fetchData();
-   }, []);
+  }, []);
 
   const head: challengeHead = {
     head: "산책 시키기",
@@ -55,18 +55,18 @@ const DailyChallenge2 = () => {
         <ChallengeContents contents={contents} />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
-          {challenges[1]?.review.map((review, reviewIndex) =>
-              <ChallengeJoin 
-                key={reviewIndex}
-                join={{
-                  participantsImg: review.reviewImgUrl,
-                  participantsName: review.reviewUserNickname
-                }} 
-              />
-          )}
+          {challenges[1]?.review.map((review, reviewIndex) => (
+            <ChallengeJoin
+              key={reviewIndex}
+              join={{
+                participantsImg: review.reviewImgUrl,
+                participantsName: review.reviewUserNickname,
+              }}
+            />
+          ))}
         </div>
         <JoinButton />
-        <SaveBS />
+        <DailySaveBS />
         <MainTab />
       </Background>
     </>
