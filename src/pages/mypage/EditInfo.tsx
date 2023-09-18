@@ -5,13 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosAdd } from 'react-icons/io';
 import { useState } from 'react';
 import Warning from '../../assets/Warning.png';
+import nonCheck from '@/assets/none-checked.png';
+import Checked from '@/assets/checked.png';
 
 const EditInfo = () => {
   const [modal, setModal] = useState(false);
   const [filemodal, setFilemodal] = useState(false);
   const [input, setInput] = useState('');
   const [validation, setValidation] = useState(false);
-  const [overlab, setOverlab] = useState(true);
+  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1);
@@ -65,7 +67,7 @@ const EditInfo = () => {
             <div
               className={styles.nickinput}
               style={
-                validation
+                validation || input.length == 0
                   ? { border: 'none' }
                   : { border: '1px solid #f42a3b' }
               }
@@ -74,7 +76,11 @@ const EditInfo = () => {
                 placeholder="수정을 원하실 경우 입력해주세요"
                 value={input}
                 onChange={changeHandler}
-                style={validation ? { color: '#000000' } : { color: '#f42a3b' }}
+                style={
+                  validation || input.length == 0
+                    ? { color: '#000000' }
+                    : { color: '#f42a3b' }
+                }
               />
               <button
                 style={
@@ -94,7 +100,11 @@ const EditInfo = () => {
               </button>
             </div>
             <span
-              style={validation ? { color: '#ffffff' } : { color: '#f42a3b' }}
+              style={
+                validation || input.length == 0
+                  ? { color: '#ffffff' }
+                  : { color: '#f42a3b' }
+              }
             >
               숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
             </span>
@@ -140,10 +150,18 @@ const EditInfo = () => {
                   이전으로 복구가 불가능합니다
                 </div>
               </div>
-              <div></div>
+              <div
+                className={styles.check}
+                onClick={() => setCheck((old) => !old)}
+              >
+                <img src={check ? Checked : nonCheck} />
+                <label htmlFor="btn1">
+                  안내사항을 모두 확인하였으며 동의합니다
+                </label>
+              </div>
             </div>
             <div className={styles.btnarea}>
-              <button>회원 탈퇴</button>
+              <button disabled={!check}>회원 탈퇴</button>
             </div>
           </div>
         ) : null}
