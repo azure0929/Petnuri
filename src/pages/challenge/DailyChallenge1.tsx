@@ -10,6 +10,7 @@ import { useState, useEffect} from 'react';
 
 const DailyChallenge1 = () => {
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,7 +54,7 @@ const DailyChallenge1 = () => {
         <ChallengeContents contents={contents} />
         {challenges.length > 0 && (
          <ChallengeJoin join={challenges[0].review} />
-       )}
+        )}
         <JoinButton />
         <SaveBS />
         <MainTab />
