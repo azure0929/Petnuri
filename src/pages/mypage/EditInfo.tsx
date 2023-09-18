@@ -14,6 +14,7 @@ const EditInfo = () => {
   const [input, setInput] = useState('');
   const [validation, setValidation] = useState(false);
   const [check, setCheck] = useState(false);
+  const [img, setImg] = useState('');
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1);
@@ -50,7 +51,14 @@ const EditInfo = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <div className={styles.photo}>
+            <div
+              className={styles.photo}
+              style={{
+                backgroundImage: `url(${img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
               <div className={styles.plusbtn}>
                 <IoIosAdd onClick={() => setFilemodal(true)} />
               </div>
@@ -177,8 +185,19 @@ const EditInfo = () => {
                   name="file"
                   id="file"
                   style={{ display: 'none' }}
+                  onChange={(e) => {
+                    setImg(URL.createObjectURL(e.target.files![0]));
+                    setFilemodal(false);
+                  }}
                 />
-                <button>기본 이미지로 변경</button>
+                <button
+                  onClick={() => {
+                    setImg('');
+                    setFilemodal(false);
+                  }}
+                >
+                  기본 이미지로 변경
+                </button>
               </div>
               <div className={styles.exitbtn}>
                 <button onClick={() => setFilemodal(false)}>취소</button>
