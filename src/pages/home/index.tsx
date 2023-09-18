@@ -13,18 +13,25 @@ const Home = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const scrollRef = useScrollUl()
   const [petTalkList, setPetTalkList] = useState<PetTalkMainPage[]>([]);
+  const [daily, setDaily] = useState<ChallengeData>();
+  const [cheonHa, setCheonHa] = useState<CheonHaData>();
+  const [yanado, setYanado] = useState<YanadoData>();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch('/PettalkMain.json');
-        const data = await response.json();
-        setPetTalkList(data.data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      const response1 = await fetch('/PettalkMain.json');
+      const data1 = await response1.json();
+      setPetTalkList(data1.data);
+      const response2 = await fetch('/Daily.json');
+      const data2 = await response2.json();
+      setDaily(data2.data[0]);
+      const response3 = await fetch('/Cheonha.json');
+      const data3 = await response3.json();
+      setCheonHa(data3.data[0]);
+      const response4 = await fetch('/Yanado.json');
+      const data4 = await response4.json();
+      setYanado(data4.data[0]);
     };
-
     fetchData();
    }, []);
 
@@ -32,6 +39,18 @@ const Home = () => {
 
   const onChallenge = () => {
     navigate(`challenge`)
+  }
+
+  const onYanado = () => {
+    navigate(`ecyanado`)
+  }
+
+  const onCheonHa = () => {
+    navigate(`contest`)
+  }
+
+  const onDailyChallenge1 = () => {
+    navigate(`dailychallenge1`)
   }
 
   const onPettalk = () => {
@@ -75,22 +94,23 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <li>
-                <div className={styles.photo}></div>
+              <li onClick={onDailyChallenge1}>
+                <img src={daily?.thumbnail} alt="" className={styles.photo}/>
                 <div className={styles.desc}>
-                  <span>랜선대회 챌린지</span>
+                  <span>{daily?.challengeName}</span>
+                  <p>{daily?.challengeReview}</p>
+                </div>
+              </li>
+              <li onClick={onCheonHa}>
+                <img src={cheonHa?.thumbnail} alt="" className={styles.photo}/>
+                <div className={styles.desc}>
+                  <span>{cheonHa?.title}</span>
+                  {/* event challenge sub text를 api에 넣어야 함 */}
                   <p>카드 디자인 서브 타이틀 카드 디자인 서브</p>
                 </div>
               </li>
-              <li>
-                <div className={styles.photo}></div>
-                <div className={styles.desc}>
-                  <span>대규모 챌린지</span>
-                  <p>카드 디자인 서브 타이틀 카드 디자인 서브</p>
-                </div>
-              </li>
-              <li>
-                <div className={styles.photo}></div>
+              <li onClick={onYanado}>
+                <img src={yanado?.thumbnail} alt="" className={styles.photo}/>
                 <div className={styles.desc}>
                   <span>알파</span>
                   <p>카드 디자인 서브 타이틀 카드 디자인 서브</p>

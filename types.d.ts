@@ -49,6 +49,39 @@ interface ChallengeData {
   status: boolean;
 }
 
+interface CheonHaData {
+  title: string,
+  thumbnail: string,
+  images:string[],
+  kit_start_date: string,
+  kit_end_date: string,
+  reward_start_date: string,
+  reward_end_date: string,
+  rewardList: [
+    {
+      itemId: number,
+      name: string
+    }
+  ],
+  process: string
+}
+
+interface YanadoData {
+  title: string,
+  thumbnail: string,
+  images: string[],
+  rewardStartDate:string,
+  rewardEndDate:string,
+  rewardList:[
+    {
+      eventId:number,
+      itemId:number,
+      name:string
+    }
+  ],
+  process: string
+}
+
 //펫톡
 
 interface PetTalkMainPage {
