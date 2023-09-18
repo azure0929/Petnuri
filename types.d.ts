@@ -17,6 +17,11 @@ interface challengeContents {
   pointInfo: string;
 }
 
+interface challengeJoin {
+  participantsImg: string;
+  participantsName: string;
+}
+
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {
   reviewUserId: number;

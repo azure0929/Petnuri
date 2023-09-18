@@ -6,9 +6,12 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import SaveBS from "./SaveBS";
+import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect} from 'react';
+import { useScroll } from "@/utils/Scroll";
 
 const DailyChallenge1 = () => {
+  const scrollRef= useScroll();
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
 
   useEffect(() => {
@@ -44,17 +47,24 @@ const DailyChallenge1 = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-
-
   return (
     <>
       <Background>
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        {challenges.length > 0 && (
-         <ChallengeJoin join={challenges[0].review} />
-        )}
+        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+        <div className={styles.participants} ref={scrollRef}>
+          {challenges[0]?.review.map((review, reviewIndex) =>
+              <ChallengeJoin 
+                key={reviewIndex}
+                join={{
+                  participantsImg: review.reviewImgUrl,
+                  participantsName: review.reviewUserNickname
+                }} 
+              />
+          )}
+        </div>
         <JoinButton />
         <SaveBS />
         <MainTab />
