@@ -9,6 +9,7 @@ import DailySaveBS from "./DailySaveBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/위생관리.png";
 
 const DailyChallenge3 = () => {
   const scrollRef = useScrollDiv();
@@ -33,7 +34,7 @@ const DailyChallenge3 = () => {
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {

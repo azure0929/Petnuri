@@ -6,10 +6,12 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import DeliveryBS from "./deliverybs/DeliveryBS";
+import ChallengeItem from "@/components/challenge/ChallengeItem";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challengejoin.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/천하제일 집사대회.png";
 
 interface contestData {
   process: string;
@@ -53,7 +55,7 @@ const Contest = () => {
   };
 
   const banner: challengeBanner = {
-    bannerImg: "https://www.naver.com",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {
@@ -84,6 +86,7 @@ const Contest = () => {
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
+        <ChallengeItem />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
           {joinList !== null
