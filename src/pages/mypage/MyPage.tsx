@@ -31,25 +31,45 @@ const MyPage = () => {
           <div>
             자주하는 질문
             <span>
-              <AiOutlineRight />
+              <Link
+                to="https://petnuri.notion.site/e5e6f86a0f3449819df35f848cdf9b71?pvs=4"
+                target="_blank"
+              >
+                <AiOutlineRight />
+              </Link>
             </span>
           </div>
           <div>
             공지사항
             <span>
-              <AiOutlineRight />
+              <Link
+                to="https://petnuri.notion.site/350d52a344a44fa2b7acd4324d6982e3?pvs=4"
+                target="_blank"
+              >
+                <AiOutlineRight />
+              </Link>
             </span>
           </div>
           <div>
             이용안내
             <span>
-              <AiOutlineRight />
+              <Link
+                to="https://petnuri.notion.site/644c4d55df524a22b5fd3bba360ad1ec?pvs=4"
+                target="_blank"
+              >
+                <AiOutlineRight />
+              </Link>
             </span>
           </div>
           <div>
             1:1 채팅상담
             <span>
-              <AiOutlineRight />
+              <Link
+                to="http://pf.kakao.com/_RfxnuG/chat"
+                target="_blank"
+              >
+                <AiOutlineRight />
+              </Link>
             </span>
           </div>
           <div>
