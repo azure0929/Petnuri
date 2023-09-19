@@ -1,0 +1,73 @@
+{
+  "data": 
+		[
+			{
+				"petTalkId" : 1,
+				"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+				"title" : "제목 어쩌구",
+				"content" : "내용 어쩌구",
+				"createdAt" : "2023-09-08 21:45:21",
+				"viewCount" : 32,
+				"likeCount" : 40,
+				"replyCount" : 23,
+				"isLiked" : true,
+				"writer" : {
+						"writerId" : 1,
+					  "profileImageUrl" : "url",
+						"nickname" : "작성자1",
+						"rank" : "PET_GOSU" 
+				}
+			},
+			{
+				"petTalkId" : 2,
+				"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU", 
+				"title" : "제목 어쩌구2",
+				"content" : "내용 어쩌구",
+				"createdAt" : "2023-09-08 21:45:21",
+				"viewCount" : 32,
+				"likeCount" : 40,
+				"replyCount" : 23,
+				"isLiked" : true,
+				"writer" : {
+						"writerId" : 1,
+					  "profileImageUrl" : "url",
+						"nickname" : "작성자2",
+						"rank" : "PET_GOSU"
+				}
+			},
+			{
+				"petTalkId" : 3,
+				"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU", 
+				"title" : "제목 어쩌구3",
+				"content" : "내용 어쩌구",
+				"createdAt" : "2023-09-08 21:45:21",
+				"viewCount" : 32,
+				"likeCount" : 40,
+				"replyCount" : 23,
+				"isLiked" : true,
+				"writer" : {
+						"writerId" : 1,
+					  "profileImageUrl" : "url",
+						"nickname" : "작성자3",
+						"rank" : "PET_GOSU" 
+				}
+			},
+      {
+				"petTalkId" : 4,
+				"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU", 
+				"title" : "제목 어쩌구4",
+				"content" : "내용 어쩌구",
+				"createdAt" : "2023-09-08 21:45:21",
+				"viewCount" : 32,
+				"likeCount" : 40,
+				"replyCount" : 23,
+				"isLiked" : true,
+				"writer" : {
+						"writerId" : 1,
+					  "profileImageUrl" : "url",
+						"nickname" : "작성자4",
+						"rank" : "PET_GOSU" 
+				}
+			}
+	]
+}
