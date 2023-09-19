@@ -104,7 +104,7 @@ const PetTaliDetail = () => {
 
           <div className={styles.reply_wrapper}>
             {/* 댓글 ${count}개 */}
-            <span className={styles.count}>{`댓글 42개`}</span>
+            <span className={styles.count}>{`댓글 42`}</span>
             <div className={styles.item}>
               <div className={styles.user_info}>
                 <img src="" alt="profile" />
@@ -133,6 +133,39 @@ const PetTaliDetail = () => {
                 <button className={styles.reReply}>대댓글 달기</button>
               </div>
             </div>
+            <div className={styles.item}>
+              <div className={styles.user_info}>
+                <img src="" alt="profile" />
+                <span className={styles.name}>닉네임</span>
+                <span className={styles.date}>・ 작성 날짜</span>
+              </div>
+
+              <div className={styles.item_content}>
+                <span
+                  className={
+                    isExpanded ? styles.expandedText : styles.collapsedText
+                  }
+                >
+                  강아지 온 몸 피부에 올라오고 많이 긁어요 ㅠ ㅠ 텍 스트는
+                  두줄까지 가능가능 강아지 온 몸 피부에 올라오고 많이
+                  긁어요ㅠㅠㅠ 텍스트는 두줄까지 가능가능
+                </span>
+                {isExpanded || (
+                  <button
+                    className={styles.expandButton}
+                    onClick={toggleExpand}
+                  >
+                    ...더보기
+                  </button>
+                )}
+                <button className={styles.reReply}>대댓글 달기</button>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.replyWrite_wrapper}>
+            <img src="" alt="profile" />
+            <input type="text" placeholder="댓글을 작성해주세요" />
           </div>
         </div>
       </Background>
