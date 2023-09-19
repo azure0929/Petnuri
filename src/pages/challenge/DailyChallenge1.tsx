@@ -9,6 +9,7 @@ import DailySaveBS from "./DailySaveBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/간식주기.png";
 
 const DailyChallenge1 = () => {
   const scrollRef = useScrollDiv();
@@ -29,16 +30,16 @@ const DailyChallenge1 = () => {
   }, []);
 
   const head: challengeHead = {
-    head: "간식 바치기",
+    head: "간식 주기 챌린지",
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {
-    mainTitle: "간식 바치기",
-    subTitle: "간식 바치기",
+    mainTitle: "간식 주기 챌린지",
+    subTitle: "간식 주기 챌린지",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
