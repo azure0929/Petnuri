@@ -9,6 +9,7 @@ import EventSaveBS from "@/pages/challenge/EventSaveBS";
 import styles from "@/styles/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/반려일기.png";
 
 const ECYanado = () => {
   const scrollRef = useScrollDiv();
@@ -33,7 +34,7 @@ const ECYanado = () => {
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {
