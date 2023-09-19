@@ -171,7 +171,6 @@
           display: flex;
           justify-content: center;
           align-items: center;
-
           color: $gray_0600_707070;
           @include body_regular_16px;
         }
@@ -189,6 +188,10 @@
     align-items: center;
     position: absolute;
     bottom: 0;
+    @media (max-height :600px) {
+      position : static; 
+      bottom : auto; 
+    }
 
     .button {
       width: 327px;
