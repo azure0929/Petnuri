@@ -3,26 +3,42 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Head from "@/components/Head";
+import CommentItem from "@/components/CommentItem";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
 import cute_off from "../../assets/Cute_off.png";
-// import cute_on from "../../assets/Cute_on.png";
+import funny_off from "../../assets/Funny_off.png";
+import kiss_off from "../../assets/kiss_off.png";
+import surprise_off from "../../assets/Surprise_off.png";
+import sad_off from "../../assets/Sad_off.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 
-const PetTaliDetail = () => {
+const PetTalkDetail = () => {
   const navigate = useNavigate();
 
   const onClickBack = () => {
     navigate(-1);
   };
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedButton, setSelectedButton] = useState<number | null>(null);
 
-  const toggleExpand = () => {
-    setIsExpanded((prev) => !prev);
+  const handleButtonClick = (index: number) => {
+    if (selectedButton === index) {
+      setSelectedButton(null);
+    } else {
+      setSelectedButton(index);
+    }
   };
+
+  const emojiData = [
+    { imgSrc: cute_off, altText: "귀여워요", text: "귀여워요" },
+    { imgSrc: funny_off, altText: "웃겨요", text: "웃겨요" },
+    { imgSrc: kiss_off, altText: "뽀뽀", text: "뽀뽀" },
+    { imgSrc: surprise_off, altText: "헉", text: "헉" },
+    { imgSrc: sad_off, altText: "슬퍼요", text: "슬퍼요" },
+  ];
 
   return (
     <>
@@ -80,87 +96,39 @@ const PetTaliDetail = () => {
           </div>
 
           <div className={styles.emoji_wrapper}>
-            <button className={styles.emoji_item}>
-              <img src={cute_off} alt="" />
-              <span>귀여워요</span>
-            </button>
-            <button className={styles.emoji_item}>
-              <img src={cute_off} alt="" />
-              <span>귀여워요</span>
-            </button>
-            <button className={styles.emoji_item}>
-              <img src={cute_off} alt="" />
-              <span>귀여워요</span>
-            </button>
-            <button className={styles.emoji_item}>
-              <img src={cute_off} alt="" />
-              <span>귀여워요</span>
-            </button>
-            <button className={styles.emoji_item}>
-              <img src={cute_off} alt="" />
-              <span>귀여워요</span>
-            </button>
+            {emojiData.map((emoji, index) => (
+              <button
+                key={index}
+                className={`${styles.emoji_item} ${
+                  selectedButton === index ? styles.selected : ""
+                }`}
+                onClick={() => handleButtonClick(index)}
+              >
+                <img
+                  src={
+                    selectedButton === index
+                      ? emoji.imgSrc.replace("_off", "_on")
+                      : emoji.imgSrc
+                  }
+                  alt={emoji.altText}
+                />
+                <span
+                  style={{
+                    fontWeight: selectedButton === index ? 600 : 400,
+                    color: selectedButton === index ? "black" : "gray",
+                  }}
+                >
+                  {emoji.text}
+                </span>
+              </button>
+            ))}
           </div>
 
           <div className={styles.reply_wrapper}>
             {/* 댓글 ${count}개 */}
             <span className={styles.count}>{`댓글 42`}</span>
-            <div className={styles.item}>
-              <div className={styles.user_info}>
-                <img src="" alt="profile" />
-                <span className={styles.name}>닉네임</span>
-                <span className={styles.date}>・ 작성 날짜</span>
-              </div>
-
-              <div className={styles.item_content}>
-                <span
-                  className={
-                    isExpanded ? styles.expandedText : styles.collapsedText
-                  }
-                >
-                  강아지 온 몸 피부에 올라오고 많이 긁어요 ㅠ ㅠ 텍 스트는
-                  두줄까지 가능가능 강아지 온 몸 피부에 올라오고 많이
-                  긁어요ㅠㅠㅠ 텍스트는 두줄까지 가능가능
-                </span>
-                {isExpanded || (
-                  <button
-                    className={styles.expandButton}
-                    onClick={toggleExpand}
-                  >
-                    ...더보기
-                  </button>
-                )}
-                <button className={styles.reReply}>대댓글 달기</button>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.user_info}>
-                <img src="" alt="profile" />
-                <span className={styles.name}>닉네임</span>
-                <span className={styles.date}>・ 작성 날짜</span>
-              </div>
-
-              <div className={styles.item_content}>
-                <span
-                  className={
-                    isExpanded ? styles.expandedText : styles.collapsedText
-                  }
-                >
-                  강아지 온 몸 피부에 올라오고 많이 긁어요 ㅠ ㅠ 텍 스트는
-                  두줄까지 가능가능 강아지 온 몸 피부에 올라오고 많이
-                  긁어요ㅠㅠㅠ 텍스트는 두줄까지 가능가능
-                </span>
-                {isExpanded || (
-                  <button
-                    className={styles.expandButton}
-                    onClick={toggleExpand}
-                  >
-                    ...더보기
-                  </button>
-                )}
-                <button className={styles.reReply}>대댓글 달기</button>
-              </div>
-            </div>
+            <CommentItem />
+            <CommentItem />
           </div>
 
           <div className={styles.replyWrite_wrapper}>
@@ -172,4 +140,4 @@ const PetTaliDetail = () => {
     </>
   );
 };
-export default PetTaliDetail;
+export default PetTalkDetail;

@@ -127,14 +127,13 @@
   justify-content: space-between;
   border-bottom: 1px solid $gray_0200_EBEBEB;
   .emoji_item {
-    height: 76px;
+    height: 65px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
     img {
       width: 32px;
-      margin: 13px;
     }
     span {
       color: $gray_0500_999999;
