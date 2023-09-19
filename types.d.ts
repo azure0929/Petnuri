@@ -48,3 +48,58 @@ interface ChallengeData {
   review: Review[];
   status: boolean;
 }
+
+interface CheonHaData {
+  title: string,
+  thumbnail: string,
+  images:string[],
+  kit_start_date: string,
+  kit_end_date: string,
+  reward_start_date: string,
+  reward_end_date: string,
+  rewardList: [
+    {
+      itemId: number,
+      name: string
+    }
+  ],
+  process: string
+}
+
+interface YanadoData {
+  title: string,
+  thumbnail: string,
+  images: string[],
+  rewardStartDate:string,
+  rewardEndDate:string,
+  rewardList:[
+    {
+      eventId:number,
+      itemId:number,
+      name:string
+    }
+  ],
+  process: string
+}
+
+//펫톡
+
+interface PetTalkMainPage {
+  petTalkId : number;
+  thumbnail : string;
+  title : string;
+  content : string;
+  createdAt : string;
+  viewCount : number;
+  likeCount : number;
+  replyCount : number;
+  isLiked : true;
+  writer : writer;
+}
+
+interface writer {
+  writerId : number;
+  profileImageUrl : string;
+  nickname : string;
+  rank : string;
+}

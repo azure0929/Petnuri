@@ -27,6 +27,7 @@
     .sub{
       @include body_regular_12px;
       color: $gray_0600_707070;
+      margin-top: 2px;
     }
   }
 }
@@ -41,15 +42,13 @@
 
 .quetion {
   height: 56px;
-  background-color: #D9D9D9;
-  border: none;
-  border-radius: 10px;
+  text-align: left;
+  @include title_bold_14px;
 }
 
 .answer {
   height: 20px;
   display: flex;
-  align-items: flex-start;
   gap: 16px;
 
   .selected {
@@ -70,6 +69,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   @include title_bold_14px;
 }
 

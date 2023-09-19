@@ -18,6 +18,8 @@ const Challenge = () => {
   const [hour, setHour] = useState(0);
   const [participated, setParticipated] = useState<{[key: number]: boolean}>({});
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  const [cheonHa, setCheonHa] = useState<CheonHaData>();
+  const [yanado, setYanado] = useState<YanadoData>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,13 +47,15 @@ const Challenge = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch('/Daily.json');
-        const data = await response.json();
-        setChallenges(data.data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      const response = await fetch('/Daily.json');
+      const data = await response.json();
+      setChallenges(data.data);
+      const response2 = await fetch('/Cheonha.json');
+      const data2 = await response2.json();
+      setCheonHa(data2.data[0]);
+      const response3 = await fetch('/Yanado.json');
+      const data3 = await response3.json();
+      setYanado(data3.data[0]);
     };
     fetchData();
    }, []);
@@ -95,14 +99,17 @@ const Challenge = () => {
           </div>
           <div className={styles.body}>
             <div className={styles.section} onClick={() => navigate("/contest")}>
-              <div className={styles.img}>
-                asd
-              </div>
+              <img src={cheonHa?.thumbnail} alt="" className={styles.img}/>
               <div className={styles.text}>
-                <div className={styles.title}>
-                  랜선대회 챌린지
-                </div>
-                <div className={styles.subtitle}>카드 디자인 서브 타이틀</div>
+                <div className={styles.title}> {cheonHa?.title} </div>
+                <div className={styles.subtitle}>데이터 필요함</div>
+              </div>
+            </div>
+            <div className={styles.section} onClick={() => navigate("/ecyanado")}>
+              <img src={yanado?.thumbnail} alt="" className={styles.img}/>
+              <div className={styles.text}>
+                <div className={styles.title}> {yanado?.title} </div>
+                <div className={styles.subtitle}>데이터 필요함</div>
               </div>
             </div>
           </div>
