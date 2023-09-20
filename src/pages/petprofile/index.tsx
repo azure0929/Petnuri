@@ -13,7 +13,7 @@ const PetProfileAdd = () => {
   const [gender, setGender] = useState('남');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string | null>(null);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -25,13 +25,15 @@ const PetProfileAdd = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e:any) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage(reader.result);
+      if (typeof reader.result === 'string') {
+        setImage(reader.result);
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -41,7 +43,7 @@ const PetProfileAdd = () => {
     formData.append('name', name);
     formData.append('age', age);
     formData.append('gender', gender);
-    formData.append('isSelected', isSelected);
+    formData.append('isSelected', isSelected.toString());
     if (image) {
       const file = new File([image], 'petProfile.jpg');
       formData.append('image', file);

@@ -23,7 +23,9 @@ interface challengeJoin {
 }
 
 interface joinList {
-  images: string;
+  challengeId?: number;
+  imageId?: number;
+  imageUrl: string;
   nickName: string;
   // process: string;
 }
@@ -49,37 +51,17 @@ interface ChallengeData {
   status: boolean;
 }
 
-interface CheonHaData {
-  title: string,
-  thumbnail: string,
-  images:string[],
-  kit_start_date: string,
-  kit_end_date: string,
-  reward_start_date: string,
-  reward_end_date: string,
-  rewardList: [
-    {
-      itemId: number,
-      name: string
-    }
-  ],
-  process: string
-}
-
-interface YanadoData {
-  title: string,
-  thumbnail: string,
-  images: string[],
-  rewardStartDate:string,
-  rewardEndDate:string,
-  rewardList:[
-    {
-      eventId:number,
-      itemId:number,
-      name:string
-    }
-  ],
-  process: string
+interface EventChallengeData {
+  thumbnail: string
+  challengeId: number
+  name: string
+  subName: string
+  authMethod: string
+  payment: string
+  startDate: string
+  endDate: string
+  status: string
+  rewardStatus: string
 }
 
 //펫톡

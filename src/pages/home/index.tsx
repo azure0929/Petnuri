@@ -14,8 +14,8 @@ const Home = () => {
   const scrollRef = useScrollUl()
   const [petTalkList, setPetTalkList] = useState<PetTalkMainPage[]>([]);
   const [daily, setDaily] = useState<ChallengeData>();
-  const [cheonHa, setCheonHa] = useState<CheonHaData>();
-  const [yanado, setYanado] = useState<YanadoData>();
+  const [cheonHa, setCheonHa] = useState<EventChallengeData>();
+  const [yanado, setYanado] = useState<EventChallengeData>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,16 +104,15 @@ const Home = () => {
               <li onClick={onCheonHa}>
                 <img src={cheonHa?.thumbnail} alt="" className={styles.photo}/>
                 <div className={styles.desc}>
-                  <span>{cheonHa?.title}</span>
-                  {/* event challenge sub text를 api에 넣어야 함 */}
-                  <p>카드 디자인 서브 타이틀 카드 디자인 서브</p>
+                  <span>{cheonHa?.name}</span>
+                  <p>{cheonHa?.subName}</p>
                 </div>
               </li>
               <li onClick={onYanado}>
                 <img src={yanado?.thumbnail} alt="" className={styles.photo}/>
                 <div className={styles.desc}>
-                  <span>알파</span>
-                  <p>카드 디자인 서브 타이틀 카드 디자인 서브</p>
+                  <span>{yanado?.name}</span>
+                  <p>{yanado?.subName}</p>
                 </div>
               </li>
             </ul>

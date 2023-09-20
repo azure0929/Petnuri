@@ -18,8 +18,8 @@ const Challenge = () => {
   const [hour, setHour] = useState(0);
   const [participated, setParticipated] = useState<{[key: number]: boolean}>({});
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
-  const [cheonHa, setCheonHa] = useState<CheonHaData>();
-  const [yanado, setYanado] = useState<YanadoData>();
+  const [cheonHa, setCheonHa] = useState<EventChallengeData>();
+  const [yanado, setYanado] = useState<EventChallengeData>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,15 +101,15 @@ const Challenge = () => {
             <div className={styles.section} onClick={() => navigate("/contest")}>
               <img src={cheonHa?.thumbnail} alt="" className={styles.img}/>
               <div className={styles.text}>
-                <div className={styles.title}> {cheonHa?.title} </div>
-                <div className={styles.subtitle}>데이터 필요함</div>
+                <div className={styles.title}> {cheonHa?.name} </div>
+                <div className={styles.subtitle}>{cheonHa?.subName}</div>
               </div>
             </div>
             <div className={styles.section} onClick={() => navigate("/ecyanado")}>
               <img src={yanado?.thumbnail} alt="" className={styles.img}/>
               <div className={styles.text}>
-                <div className={styles.title}> {yanado?.title} </div>
-                <div className={styles.subtitle}>데이터 필요함</div>
+                <div className={styles.title}> {yanado?.name} </div>
+                <div className={styles.subtitle}>{yanado?.subName}</div>
               </div>
             </div>
           </div>
