@@ -11,63 +11,6 @@
 
 }
 
-.name {
-  width: 100%;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  margin: 70px 0 4px 0;
-  padding: 0 24px;
-
-  .img {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background-color: #b8bac1;
-    margin-right: 5px;
-  }
-
-  .nickname {
-    @include title_bold_14px;
-    color: $gray_0700_5C5C5C;
-  }
-
-  .petname{
-    width: 58px;
-    height: 18px;
-    background-color: $brand_blue_100_3F54D11A;
-    border-radius: 4px;
-    color: $brand_blue_200_3F54D1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 4px;
-    @include body_regular_12px;
-  }
-
-  .date {
-    @include body_regular_12px;
-    color: $gray_0600_707070;
-    margin-left: 8px;
-  }
-}
-
-.credit {
-  width: 100%;
-  height: 34px;
-  display: flex;
-  margin-top: 10px;
-  padding: 0 24px;
-  @include title_bold_24px;
-
-  img {
-    width: 24px;
-    height: 24px;
-    margin-left: 3px;
-    margin-top: 5px;
-  }
-}
-
 .shop {
   width: 100%;
   height: 52px;

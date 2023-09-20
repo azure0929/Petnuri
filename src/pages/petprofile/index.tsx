@@ -39,11 +39,21 @@ const PetProfileAdd = () => {
   };
 
   const handleSubmit = async () => {
+    // json으로 보낼때
     const formData = new FormData();
+    const data = {
+      name,
+      age,
+      gender,
+      isSelected: isSelected.toString(),
+    };
+    formData.append("data", JSON.stringify(data));
+    // formdata로 보낼때
     formData.append('name', name);
     formData.append('age', age);
     formData.append('gender', gender);
     formData.append('isSelected', isSelected.toString());
+    
     if (image) {
       const file = new File([image], 'petProfile.jpg');
       formData.append('image', file);
@@ -56,7 +66,6 @@ const PetProfileAdd = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
     } catch (error) {
       console.error(error); 
     }

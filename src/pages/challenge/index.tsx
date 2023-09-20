@@ -1,7 +1,6 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
-import credit from "@/assets/credit.svg";
 import fire from "@/assets/fire.svg";
 import vector from "@/assets/vector.svg";
 import { useRef, useState, useEffect } from "react";
@@ -11,6 +10,7 @@ import Header from '@/components/Head'
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
+import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -70,16 +70,7 @@ const Challenge = () => {
             <span>챌린지</span>
           </div>
         </Header>
-        <div className={styles.name}>
-          <div className={styles.img}></div>
-          <div className={styles.nickname}>닉네임</div>
-          <div className={styles.petname}>꿍이집사</div>
-          <div className={styles.date}> 23.03.06</div>
-        </div>
-        <div className={styles.credit}>
-          1220 크레딧
-          <img src={credit} alt="credit" />
-        </div>
+        <ChallengeProfile/>
 
         <div className={styles.shop}>
           <div className={styles.container}>
