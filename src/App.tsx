@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Modal from "react-modal";
-// 홈, 로그인, 온보딩
+// 홈, 로그인, 회원가입, 온보딩
 import Home from "@/pages/home";
 import Login from "@/pages/login";
+import SignUp from "./pages/signup";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
 import RegistSuccess from "./pages/onboarding/RegistSuccess";
@@ -43,9 +44,10 @@ Modal.setAppElement("#root");
 const App = () => {
   return (
     <Routes>
-      {/* home, login, 온보딩 */}
+      {/* 홈, 로그인, 회원가입, 온보딩 */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/onboarding" element={<OnBoarding />} />
       <Route path="/petregist" element={<PetRegist />} />
       <Route path="/registsuccess" element={<RegistSuccess />} />
