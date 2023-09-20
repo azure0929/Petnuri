@@ -29,6 +29,17 @@ interface joinList {
   nickName: string;
   // process: string;
 }
+interface Item {
+  thumbnail?: string;
+  name?: string;
+  subName?: string;
+  challengeReview?: string;
+}
+
+interface HomeEventListProps {
+  item: Item | undefined; 
+  onClick: () => void; 
+}
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {

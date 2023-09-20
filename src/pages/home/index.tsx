@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
+import EventList from "@/components/EventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
@@ -73,27 +74,9 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <li onClick={onDailyChallenge1}>
-                <img src={daily?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{daily?.challengeName}</span>
-                  <p>{daily?.challengeReview}</p>
-                </div>
-              </li>
-              <li onClick={onCheonHa}>
-                <img src={cheonHa?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{cheonHa?.name}</span>
-                  <p>{cheonHa?.subName}</p>
-                </div>
-              </li>
-              <li onClick={onYanado}>
-                <img src={yanado?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{yanado?.name}</span>
-                  <p>{yanado?.subName}</p>
-                </div>
-              </li>
+              <EventList item={daily} onClick={onDailyChallenge1} />
+              <EventList item={cheonHa} onClick={onCheonHa} />
+              <EventList item={yanado} onClick={onYanado} />
             </ul>
           </div>
           <div className={styles.hot}>
