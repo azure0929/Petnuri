@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import styles from "@/styles/deliverybs/deliverybsaddress.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsaddress.module.scss";
 import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal"; // 추가
 

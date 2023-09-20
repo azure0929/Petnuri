@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Pagination from "../Pagination";
-import styles from "@/styles/challengeitem.module.scss";
+import styles from "@/styles/challenge/challengeitem.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
 
 const ChallengeItem = () => {

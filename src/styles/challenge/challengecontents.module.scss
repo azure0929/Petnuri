@@ -1,42 +1,46 @@
 .title {
   display: block;
-  margin-top: 30px;
-  padding: 16px 24px;
+  margin-top: 24px;
   .mainTitle {
-    display: block;
     text-align: start;
     font-weight: 600;
-    height: 24px;
-    size: 18px;
+    line-height: 24px;
+    font-size: 18px;
+    padding: auto 0;
+    margin-left: 24px;
+    margin-bottom: 2px;
   }
   .subTitle {
-    display: block;
     text-align: start;
     width: 327px;
-    height: 20px;
-    size: 14px;
-    margin-top: 5px;
+    line-height: 20px;
+    padding: auto 0;
+    font-size: 14px;
     color: #707070;
+    margin-left: 24px;
   }
 }
 
 .contents {
   display: block;
   width: 375px;
+  margin-top: 16px;
   .how {
     display: flex;
-    padding: 16px 24px;
+    padding: 16px 0 16px 24px;
     .howTitle {
       display: block;
       width: 120px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
     .howInfo {
       display: block;
       width: 208px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
   }
 
@@ -46,14 +50,16 @@
     .periodTitle {
       display: block;
       width: 120px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
     .periodInfo {
       display: block;
       width: 208px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
   }
 
@@ -63,14 +69,16 @@
     .pointTitle {
       display: block;
       width: 120px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
     .pointInfo {
       display: block;
       width: 208px;
-      height: 20px;
       text-align: start;
+      padding: auto 0;
+      line-height: 20px;
     }
   }
 }

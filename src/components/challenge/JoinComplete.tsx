@@ -1,4 +1,4 @@
-import styles from "@/styles/joincomplete.module.scss";
+import styles from "@/styles/challenge/joincomplete.module.scss";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 

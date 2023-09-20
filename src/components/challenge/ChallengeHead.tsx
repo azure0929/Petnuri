@@ -1,4 +1,4 @@
-import styles from "@/styles/challengehead.module.scss";
+import styles from "@/styles/challenge/challengehead.module.scss";
 import leftArrow from "@/assets/arrow_left_mid.svg";
 import { useNavigate } from "react-router-dom";
 

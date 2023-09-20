@@ -1,4 +1,4 @@
-import styles from "@/styles/deliverybs/deliverybsbtn.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsbtn.module.scss";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 

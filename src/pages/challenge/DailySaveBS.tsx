@@ -1,5 +1,5 @@
 import BottomSheet from "@/pages/challenge/SaveBSLayout";
-import styles from "@/styles/dailysavebs.module.scss";
+import styles from "@/styles/challenge/dailysavebs.module.scss";
 import addIcon from "@/assets/icon-plus-circle-mono.svg";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";

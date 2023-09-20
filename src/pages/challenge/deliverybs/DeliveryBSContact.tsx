@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import styles from "@/styles/deliverybs/deliverybscontact.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybscontact.module.scss";
 
 const DeliveryBSContact = ({ onContactComplete }) => {
   const [contactState, setContactState] = useState("");

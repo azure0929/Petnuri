@@ -1,4 +1,4 @@
-import styles from "@/styles/joinbutton.module.scss";
+import styles from "@/styles/challenge/joinbutton.module.scss";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 

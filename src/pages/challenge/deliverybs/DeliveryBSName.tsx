@@ -1,5 +1,5 @@
-import { useState, ChangeEvent, useEffect } from "react";
-import styles from "@/styles/deliverybs/deliverybsname.module.scss";
+import { useState, ChangeEvent } from "react";
+import styles from "@/styles/challenge/deliverybs/deliverybsname.module.scss";
 
 interface DeliveryBSNameProps {
   onNameComplete: any;

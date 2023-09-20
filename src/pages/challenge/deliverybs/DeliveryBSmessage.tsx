@@ -1,4 +1,4 @@
-import styles from "@/styles/deliverybs/deliverybsmessage.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsmessage.module.scss";
 import { useState, ChangeEvent } from "react";
 
 const DeliveryBSmessage = ({ onMessageComplete }) => {

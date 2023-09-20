@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "@/styles/deliverybs/deliverybsagree.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsagree.module.scss";
 import rightArrow from "@/assets/arrow_right_small.svg";
-import Modal from "react-modal";
 import AgreeModal from "./AgreeModal";
 
 const DeliveryBSAgree = () => {

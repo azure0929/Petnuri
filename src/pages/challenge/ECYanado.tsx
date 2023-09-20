@@ -6,7 +6,7 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import EventSaveBS from "@/pages/challenge/EventSaveBS";
-import styles from "@/styles/challengejoin.module.scss";
+import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
 import BannerImg from "@/assets/반려일기.png";
