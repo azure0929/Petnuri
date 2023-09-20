@@ -32,7 +32,6 @@ import EditInfo from "./pages/mypage/EditInfo";
 import Admin from "@/pages/admin";
 import Daily from "@/pages/admin/Daily";
 import Yanado from "@/pages/admin/Yanado";
-import Nayegi from "./pages/admin/Nayegi";
 import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
@@ -75,7 +74,6 @@ const App = () => {
         <Route path="/admin" element={<Admin />} />
         <Route path="daily" element={<Daily />} />
         <Route path="yanado" element={<Yanado />} />
-        <Route path="nayegi" element={<Nayegi />} />
         <Route path="cheonha" element={<Cheonha />} />
       </Route>
     </Routes>
