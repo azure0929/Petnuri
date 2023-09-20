@@ -17,7 +17,7 @@ import DailyChallenge3 from "./pages/challenge/DailyChallenge3";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
 import PetTalk from "@/pages/petTalk";
-import PetTaliDetail from "./pages/petTalk/Detail";
+import PetTalkDetail from "./pages/petTalk/Detail";
 import Concern from "@/pages/petTalk/Concern";
 import FreeTalk from "@/pages/petTalk/Freetalk";
 import ConcernWrite from "./pages/petTalk/ConcernWrite";
@@ -59,8 +59,9 @@ const App = () => {
       <Route path="/dailychallenge3" element={<DailyChallenge3 />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
+      {/* <Route path="/petTalk" element={<PetTalk />} /> */}
       <Route path="/petTalk" element={<PetTalk />} />
-      <Route path="/petTalk/:petTaliId" element={<PetTaliDetail />} />
+      <Route path="/petTalk/:petTalkId" element={<PetTalkDetail />} />
       <Route path="/petTalk/concern" element={<Concern />} />
       <Route path="/petTalk/freetalk" element={<FreeTalk />} />
       <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />
