@@ -9,6 +9,7 @@ import ServiceHBS from "@/pages/signup/ServiceHBS";
 import PrivacyHBS from "@/pages/signup/PrivacyHBS";
 import { useSetRecoilState } from "recoil";
 import { serviceSheetState, privacySheetState } from "@/store/signupState";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -29,8 +30,20 @@ const SignUp = () => {
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState<boolean>(false);
   const [isMarketingAgreed, setIsMarketingAgreed] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   const isAllAgreed = isServiceAgreed && isPrivacyAgreed;
   const isButtonEnabled = isNicknameValid && !nicknameError && !isDuplicateChecked && isAllAgreed && (referralCode === '' || referralCodeError === '');
+
+  const handleAgreeButtonClick = () => {
+    if (isButtonEnabled) {
+      navigate('/onboarding');
+    }
+  };
+
+  const onLogin = () => {
+    navigate(`/login`);
+  }
 
   const handlePrivacyConfirm = () => {
     setPrivacyVisible(false);
@@ -147,7 +160,7 @@ const SignUp = () => {
       <Background>
         <div className={styles.head}>
           <div role="button" className={styles.prev}>
-            <img src={arrow_left_mid} alt="prev" />
+            <img src={arrow_left_mid} alt="prev" onClick={onLogin}/>
           </div>
           <p>카카오톡 회원가입</p>
         </div>
@@ -286,6 +299,7 @@ const SignUp = () => {
         <div className={styles.agreebtn}>
           <div
             role="button"
+            onClick={handleAgreeButtonClick}
             className={`${styles.agreeactive} ${isButtonEnabled ? '' : styles.disabled}`}
           >
             동의하고 가입하기
