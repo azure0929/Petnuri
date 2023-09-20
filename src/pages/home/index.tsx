@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
-import EventList from "@/components/EventList";
+import HomeEventList from "@/components/HomeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
@@ -74,9 +74,9 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <EventList item={daily} onClick={onDailyChallenge1} />
-              <EventList item={cheonHa} onClick={onCheonHa} />
-              <EventList item={yanado} onClick={onYanado} />
+              <HomeEventList item={daily} onClick={onDailyChallenge1} />
+              <HomeEventList item={cheonHa} onClick={onCheonHa} />
+              <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
           </div>
           <div className={styles.hot}>

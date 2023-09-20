@@ -1,6 +1,6 @@
-import styles from '@/styles/eventlist.module.scss'
+import styles from '@/styles/homeeventlist.module.scss'
 
-const EventList: React.FC<HomeEventListProps> = ({ item, onClick }) => {
+const HomeEventList: React.FC<HomeEventListProps> = ({ item, onClick }) => {
   return (
     <li className={styles.list} onClick={onClick}>
       <img src={item?.thumbnail} alt="" className={styles.photo}/>
@@ -12,4 +12,4 @@ const EventList: React.FC<HomeEventListProps> = ({ item, onClick }) => {
   );
 };
 
-export default EventList
+export default HomeEventList
