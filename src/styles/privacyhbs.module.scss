@@ -1,0 +1,107 @@
+@import "@/styles/common.scss";
+
+.head {
+  height: 44px;
+  padding: 28px 0 16px 0;
+  display: flex;
+  align-items: center;
+  @include title_bold_18px;
+  border-bottom: 1px solid $gray_0200_EBEBEB;
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 0 24px;
+  }
+}
+
+.emphasis {
+  color: $gray_0900_171717;
+  font-weight: 600;
+}
+
+.emphasisred {
+  color: $red_accent_F42A3B;
+  font-weight: 600;
+}
+
+.tg {
+  font-size: 12px;
+  th {
+    border: 1px solid #000;
+    padding: 10px 5px;
+    width: 30%;
+    font-weight: bold;
+  }
+  td {
+    border: 1px solid #000;
+    padding: 10px 5px;
+  }
+  .tg1wig {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+  }
+  .tg0lax {
+    text-align: left;
+    vertical-align: top;
+  }
+}
+
+.contents {
+  margin-top: 16px;
+  padding: 0 16px;
+  height: 390px;
+  text-align: left;
+  overflow: hidden;
+  overflow-y: scroll;
+  .intro {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .list {
+    margin-top: 16px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-top: 24px;
+    }
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+    p {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+}
+.contents::-webkit-scrollbar {
+  width: 0;
+}
+
+.confirm {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 86px;
+  border-radius: 0 0 24px 24px;
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 54px;
+    border-radius: 12px;
+    color: $base_white_ffffff;
+    background-color: $brand_blue_200_3F54D1;
+    cursor: pointer;
+  }
+}
