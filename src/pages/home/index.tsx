@@ -36,34 +36,13 @@ const Home = () => {
    }, []);
 
   const navigate = useNavigate();
-
-  const onChallenge = () => {
-    navigate(`challenge`)
-  }
-
-  const onYanado = () => {
-    navigate(`ecyanado`)
-  }
-
-  const onCheonHa = () => {
-    navigate(`contest`)
-  }
-
-  const onDailyChallenge1 = () => {
-    navigate(`dailychallenge1`)
-  }
-
-  const onPettalk = () => {
-    navigate(`PetTalk`)
-  }
-
-  const onPetProfileAdd = () => {
-    navigate(`petprofileadd`)
-  }
-
-  const onPetProfileModify = () => {
-    navigate(`petprofilemodify`)
-  }
+  const onChallenge = () => navigate(`challenge`)
+  const onYanado = () => navigate(`ecyanado`)
+  const onCheonHa = () => navigate(`contest`)
+  const onDailyChallenge1 = () => navigate(`dailychallenge1`)
+  const onPettalk = () => navigate(`PetTalk`)
+  const onPetProfileAdd = () => navigate(`petprofileadd`)
+  const onPetProfileModify = () => navigate(`petprofilemodify`)
 
   return (
     <>
