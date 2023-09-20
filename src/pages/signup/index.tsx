@@ -5,6 +5,10 @@ import arrow_right_small from "@/assets/arrow_right_small.svg";
 import check_circle_gray from "@/assets/check_circle_gray.svg";
 import check_circle_blue from "@/assets/check_circle_blue.svg";
 import styles from "@/styles/signup.module.scss";
+import ServiceHBS from "@/pages/signup/ServiceHBS";
+import PrivacyHBS from "@/pages/signup/PrivacyHBS";
+import { useSetRecoilState } from "recoil";
+import { serviceSheetState, privacySheetState } from "@/store/signupState";
 
 const SignUp = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -14,6 +18,12 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState<string>("");
   const [referralCodeError, setReferralCodeError] = useState<string>("");
 
+  const setserviceBottomIsOpen = useSetRecoilState(serviceSheetState);
+  const setprivacyBottomIsOpen = useSetRecoilState(privacySheetState);
+
+  const [privacyVisible, setPrivacyVisible] = useState(true);
+  const [serviceVisible, setServiceVisible] = useState(true);
+  
   const [isAgreeAll, setIsAgreeAll] = useState<boolean>(false);
   const [isServiceAgreed, setIsServiceAgreed] = useState<boolean>(false);
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState<boolean>(false);
@@ -21,6 +31,14 @@ const SignUp = () => {
 
   const isAllAgreed = isServiceAgreed && isPrivacyAgreed;
   const isButtonEnabled = isNicknameValid && !nicknameError && !isDuplicateChecked && isAllAgreed && (referralCode === '' || referralCodeError === '');
+
+  const handlePrivacyConfirm = () => {
+    setPrivacyVisible(false);
+  };
+
+  const handleServiceConfirm = () => {
+    setServiceVisible(false);
+  };
 
   const handleNicknameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -129,7 +147,7 @@ const SignUp = () => {
       <Background>
         <div className={styles.head}>
           <div role="button" className={styles.prev}>
-            <img src={arrow_left_mid} alt="prev"/>
+            <img src={arrow_left_mid} alt="prev" />
           </div>
           <p>카카오톡 회원가입</p>
         </div>
@@ -220,8 +238,9 @@ const SignUp = () => {
                 <div
                   role="button"
                   className={styles.right}
+                  onClick={() => setserviceBottomIsOpen(true)} // Open ServiceHBS Bottom Sheet
                 >
-                  <img src={arrow_right_small} alt="arrow_right_small"/>
+                  <img src={arrow_right_small} alt="arrow_right_small" onClick={() => setserviceBottomIsOpen(true)} />
                 </div>
               </li>
               <li className={styles.checklist}>
@@ -237,8 +256,9 @@ const SignUp = () => {
                 <div
                   role="button"
                   className={styles.right}
+                  onClick={() => setprivacyBottomIsOpen(true)} // Open PrivacyHBS Bottom Sheet
                 >
-                  <img src={arrow_right_small} alt="arrow_right_small" />
+                  <img src={arrow_right_small} alt="arrow_right_small" onClick={() => setprivacyBottomIsOpen(true)} />
                 </div>
               </li>
               <li className={styles.checklist}>
@@ -271,6 +291,8 @@ const SignUp = () => {
             동의하고 가입하기
           </div>
         </div>
+        {serviceVisible && <ServiceHBS onConfirm={handleServiceConfirm}/>}
+        {privacyVisible && <PrivacyHBS onConfirm={handlePrivacyConfirm} />}
       </Background>
     </>
   )
