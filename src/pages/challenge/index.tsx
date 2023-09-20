@@ -7,10 +7,12 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
 import Header from '@/components/Head'
+import ChallengeProfile from "@/components/challenge/ChallengeProfile";
+import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
-import ChallengeProfile from "@/components/challenge/ChallengeProfile";
+
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -89,20 +91,8 @@ const Challenge = () => {
             <span>이벤트 챌린지</span>
           </div>
           <div className={styles.body}>
-            <div className={styles.section} onClick={() => navigate("/contest")}>
-              <img src={cheonHa?.thumbnail} alt="" className={styles.img}/>
-              <div className={styles.text}>
-                <div className={styles.title}> {cheonHa?.name} </div>
-                <div className={styles.subtitle}>{cheonHa?.subName}</div>
-              </div>
-            </div>
-            <div className={styles.section} onClick={() => navigate("/ecyanado")}>
-              <img src={yanado?.thumbnail} alt="" className={styles.img}/>
-              <div className={styles.text}>
-                <div className={styles.title}> {yanado?.name} </div>
-                <div className={styles.subtitle}>{yanado?.subName}</div>
-              </div>
-            </div>
+            <ChallengeEventList item={cheonHa} path="/contest"/>
+            <ChallengeEventList item={yanado} path="/ecyanado"/>
           </div>
         </div>
 

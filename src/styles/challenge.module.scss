@@ -73,39 +73,6 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
-
-    .section {
-      width: 156px;
-      height: 188px;
-      cursor: pointer;
-
-      .img {
-        width: 156px;
-        height: 156px;
-        border-radius: 12px;
-        margin-bottom: 8px;
-      }
-
-      .text {
-        width: 156px;
-        height: 40px;
-        padding: 0px, 0px, 2px, 0px;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-
-        .title {
-          height: 20px;
-          @include title_bold_14px
-        }
-        .subtitle {
-          height: 20px;
-          @include body_regular_12px;
-          color: $gray_0600_707070;
-          margin-top: 4px;
-        }
-      }
-    }
   }
 }
 

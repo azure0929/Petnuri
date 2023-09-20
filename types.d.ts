@@ -41,6 +41,11 @@ interface HomeEventListProps {
   onClick: () => void; 
 }
 
+interface ChallengeEventListProps {
+  item: Item | undefined
+  path: string;
+}
+
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {
   reviewUserId: number;
