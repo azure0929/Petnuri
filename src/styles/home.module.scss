@@ -22,12 +22,12 @@
     .tabmenu {
       display: flex;
       font-size: 14px;
-      line-height: 20px; /* 142.857% */
+      line-height: 20px;
       letter-spacing: -0.1px;
-      > div {
+      gap: 8px;
+      .add {
         border: 1px solid #d6d6d6;
         border-radius: 24px;
-        width: 100px;
         height: 32px;
         padding: 6px 8px;
         display: flex;
@@ -43,6 +43,23 @@
           border-radius: 50%;
         }
       }
+      .active {
+        background-color: #333;
+        border-radius: 24px;
+        height: 32px;
+        padding: 6px 8px;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        cursor: pointer;
+        .icon {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+        }
+      }
     }
     .detail {
       margin-top: 32px;
@@ -55,15 +72,32 @@
         border-radius: 24px;
         background-color: #d6d6d6;
       }
-      .name {
-        h3 {
+      .info {
+        .nga {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-top: 12px;
-          font-size: 18px;
-          font-weight: 600;
-          line-height: 24px;
-          letter-spacing: -0.1px;
+          .name {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: -0.1px;
+          }
+          .gender {
+            font-size: 18px;
+            line-height: 24px;
+            letter-spacing: -0.1px;
+            color: #707070;
+          }
+          .age {
+            font-size: 12px;
+            line-height: 28px;
+            letter-spacing: -0.1px;
+            color: #707070;
+          }
         }
-        div {
+        .modify {
           border: none;
           border-radius: 24px;
           margin-top: 16px;
@@ -96,6 +130,20 @@
         font-style: normal;
         font-weight: 600;
         line-height: 24px; 
+        letter-spacing: -0.1px;
+      }
+      h4{
+        color: #707070;
+        font-size: 18px;
+        font-style: normal;
+        line-height: 24px; 
+        letter-spacing: -0.1px;
+      }
+      h5{
+        color: #707070;
+        font-size: 12px;
+        font-style: normal;
+        line-height: 18px; 
         letter-spacing: -0.1px;
       }
       div {

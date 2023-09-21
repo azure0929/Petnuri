@@ -80,6 +80,14 @@ interface EventChallengeData {
   rewardStatus: string
 }
 
+interface HomePet {
+  image: string
+  name: string
+  age: number
+  isSelected?: boolean
+  gender: string
+}
+
 //펫톡
 
 interface PetTalkMainPage {
