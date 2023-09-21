@@ -15,7 +15,8 @@ const ConcernWrite = () => {
     navigate(-1);
   };
 
-  const isFreeTalkWrite = location.pathname === "/petTalk/freetalkwrite";
+  const isFreeTalkWrite = location.pathname === "/pettalk/freetalkwrite";
+
   return (
     <Background>
       <div className={styles.contain}>
