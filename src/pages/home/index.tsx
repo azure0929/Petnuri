@@ -68,7 +68,7 @@ const Home = () => {
   const onDailyChallenge1 = () => navigate(`dailychallenge1`)
   const onPettalk = () => navigate(`PetTalk`)
   const onPetProfileAdd = () => navigate(`petprofileadd`)
-  const onPetProfileModify = () => navigate(`petprofilemodify`)
+  const onPetProfileModify = () => navigate(`petprofilemodify`, { state: { profile: selectedProfile } })
 
   return (
     <>
@@ -102,7 +102,7 @@ const Home = () => {
                 <img src={selectedProfile?.image} alt="" className={styles.photo}/>
                 <div className={styles.nga}>
                   <span className={styles.name}>{selectedProfile?.name}</span>
-                  <span className={styles.gender}>·{selectedProfile?.gender}</span>
+                  <span className={styles.gender}> · {selectedProfile?.gender}</span>
                   <span className={styles.age}>({selectedProfile?.age}세)</span>
                 </div>
                 <div className={styles.modify} onClick={onPetProfileModify}>수정하기</div>

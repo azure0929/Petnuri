@@ -25,7 +25,7 @@ import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
 
 //펫 프로필
 import PetProfileAdd from "@/pages/petprofile";
-import Modify from "@/pages/petprofile/Modify";
+import PetProfileModify from "@/pages/petprofile/PetProfileModify";
 // 마이페이지
 import MyPage from "./pages/mypage/MyPage";
 import EditInfo from "./pages/mypage/EditInfo";
@@ -68,7 +68,7 @@ const App = () => {
       <Route path="/petTalk/freetalkwrite" element={<FreetalkWrite />} />
       {/* 펫 프로필 */}
       <Route path="/petprofileadd" element={<PetProfileAdd />} />
-      <Route path="/petprofilemodify" element={<Modify />} />
+      <Route path="/petprofilemodify" element={<PetProfileModify />} />
       {/* 마이페이지 */}
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/mypage/editinfo" element={<EditInfo />} />
