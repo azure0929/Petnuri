@@ -59,7 +59,7 @@ type ChallengeJoinProps = {
 
 interface ChallengeData {
   challengeId: number;
-  challengeName: string;
+  name: string;
   challengeReview: string;
   thumbnail: string;
   userId: number;

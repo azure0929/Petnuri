@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import styles from '@/styles/bottomsheet.module.scss'
-import { useRecoilState } from 'recoil'
-import { bottomSheetState } from "@/store/challengeState";
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { bottomSheetState, loginModalState } from "@/store/challengeState";
 
 interface BottomSheetProps {
   children: ReactNode;
@@ -10,6 +10,7 @@ interface BottomSheetProps {
 
 const BottomSheet: React.FC<BottomSheetProps> = ({ children, height = 60 }) => {
   const [isOpen, setIsOpen] = useRecoilState(bottomSheetState);
+  const setLogin = useSetRecoilState(loginModalState)
   const [isVisible, setIsVisible] = useState(false);
   const [sheetHeight, setSheetHeight] = useState(height);
   const minBottomSheetHeight = 1;
@@ -58,13 +59,18 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ children, height = 60 }) => {
     setSheetHeight(newHeight);
   }
 
+  const handleBackgroundClick = () => {
+    setIsOpen(false);
+    setLogin(false); 
+  };
+
   return (
     <>
       {isOpen && (
         <>
           <div
             className={`${styles.background} ${isVisible ? styles.visible : ''}`}
-            onClick={() => setIsOpen(false)}
+            onClick={handleBackgroundClick}
           ></div>
           <div className={styles.wrapper}>
             <div 
