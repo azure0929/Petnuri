@@ -118,6 +118,7 @@ const PetProfileAdd = () => {
               placeholder='이름을 입력해주세요' 
               className={styles.input}
               value={name}
+              maxLength={10}
               onChange={(e) => setName(e.target.value)}/>
             </div>
             <div className={styles.contents}>
@@ -149,10 +150,10 @@ const PetProfileAdd = () => {
           {/* 버튼 */}
           <form className={styles.btnwrapper} onSubmit={handleSubmit}>
             <button 
-              disabled={!name || !age || !image}
+              disabled={!name || !age }
               className={
                 `${styles.button} 
-                ${(name && age && image) 
+                ${(name && age ) 
                   ? styles.able 
                   : styles.disable}`} 
             >
