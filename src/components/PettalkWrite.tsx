@@ -2,7 +2,7 @@ import styles from "@/styles/write.module.scss";
 import { AiOutlinePlus } from "react-icons/ai";
 
 interface PettalkWriteProps {
-  isFreeTalkWrite: boolean; // isFreeTalkWrite prop의 타입을 boolean으로 지정합니다
+  isFreeTalkWrite: boolean;
 }
 
 const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {

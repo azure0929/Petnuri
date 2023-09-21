@@ -1,6 +1,7 @@
 import Background from "@/components/Background";
 import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
+import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
@@ -31,6 +32,22 @@ const PetTalkDetail = () => {
       setSelectedButton(index);
     }
   };
+
+  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    arrows: false,
+  };
+
+  if (images.length === 0) {
+    return null;
+  }
 
   const emojiData = [
     { imgSrc: cute_off, altText: "귀여워요", text: "귀여워요" },
@@ -73,9 +90,14 @@ const PetTalkDetail = () => {
                 </div>
               </div>
 
-              {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
-              <div className={styles.content_img}>
-                <img src="" alt="예시이미지" />
+              <div className={styles.imgWrapper}>
+                <Slider {...settings}>
+                  {images.map((image, index) => (
+                    <div className={styles.content_img} key={index}>
+                      <img src={image} alt={`Image ${index + 1}`} />
+                    </div>
+                  ))}
+                </Slider>
               </div>
 
               <div className={styles.response_wrapper}>
