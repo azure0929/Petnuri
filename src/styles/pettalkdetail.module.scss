@@ -83,20 +83,24 @@
         margin-left: 35px;
       }
     }
-
-    .content_img {
-      background-color: $gray_0300_D6D6D6;
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .imgWrapper {
       margin-left: 35px;
+      margin-bottom: 30px;
 
-      img {
-        width: 293px;
-        height: 194px;
+      .content_img {
+        background-color: $gray_0300_D6D6D6;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 293px;
+          height: 194px;
+        }
       }
     }
+
     .response_wrapper {
       display: flex;
       gap: 8px;
