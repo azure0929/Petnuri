@@ -2,18 +2,20 @@ import { useState, useRef } from 'react';
 import styles from '@/styles/petprofile.module.scss'
 import Background from '@/components/Background';
 import Header from '@/components/Head';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
 
-const PetProfileAdd = () => {
+const PetProfileModify = () => {
+  const location = useLocation();
+  const profile = location.state?.profile;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [isSelected, setIsSelected] = useState(false);
-  const [gender, setGender] = useState('남');
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [image, setImage] = useState<string | null>(null);
+  const [isSelected, setIsSelected] = useState(profile?.isSelected || false);
+  const [gender, setGender] = useState(profile?.gender || '남');
+  const [name, setName] = useState(profile?.name || '');
+  const [age, setAge] = useState(profile?.age || '');
+  const [image, setImage] = useState<string | null>(profile?.image || null);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -165,4 +167,4 @@ const PetProfileAdd = () => {
   );
 };
 
-export default PetProfileAdd
+export default PetProfileModify

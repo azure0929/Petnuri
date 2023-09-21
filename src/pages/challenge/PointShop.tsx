@@ -1,7 +1,6 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from '@/styles/pointshop.module.scss'
-import credit from '@/assets/credit.svg'
 import dog from '@/assets/dog.svg'
 import product1 from '@/assets/product1.svg'
 import product2 from '@/assets/product2.svg'
@@ -10,6 +9,7 @@ import product4 from '@/assets/product4.svg'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link } from "react-router-dom";
 import Header from '@/components/Head'
+import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 import { simpleToast } from "@/utils/ToastUtils";
 
 const PointShop = () => {
@@ -29,17 +29,7 @@ const PointShop = () => {
           <div className={styles.eorl}></div>
         </div>
         </Header>
-
-        <div className={styles.name}>
-          <div className={styles.img}></div>
-          <div className={styles.nickname}>닉네임</div>
-          <div className={styles.date}> 23.03.06</div>
-        </div>
-
-        <div className={styles.credit}>
-          1220 크레딧 
-          <img src={credit} alt="credit" />
-        </div>
+        <ChallengeProfile />
 
         <div className={styles.ad}>
           <img src={dog} alt="dog" />

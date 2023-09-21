@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
+import HomeEventList from "@/components/HomeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
@@ -16,6 +17,9 @@ const Home = () => {
   const [daily, setDaily] = useState<ChallengeData>();
   const [cheonHa, setCheonHa] = useState<EventChallengeData>();
   const [yanado, setYanado] = useState<EventChallengeData>();
+  const [petProfile, setPetProfile] = useState<HomePet[]>([])
+  const [activePetName, setActivePetName] = useState<string | null>(null);
+  const [selectedProfile, setSelectedProfile] = useState<HomePet | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,39 +35,40 @@ const Home = () => {
       const response4 = await fetch('/Yanado.json');
       const data4 = await response4.json();
       setYanado(data4.data[0]);
+      const response5 = await fetch('/HomePet.json');
+      const data5 = await response5.json();
+      setPetProfile(data5.data);
     };
     fetchData();
    }, []);
 
+   useEffect(() => {
+    // 선택한 펫을 active로 설정
+    let selectedProfileFromList = petProfile.find(profile => profile.isSelected);
+    // 선택된 펫이 없다면 첫 번째 펫을 선택
+    if (!selectedProfileFromList && petProfile.length > 0) 
+    selectedProfileFromList = petProfile[0];
+     
+    if (selectedProfileFromList) {
+      setActivePetName(selectedProfileFromList.name);
+      setSelectedProfile(selectedProfileFromList); // 첫 렌더링 시 선택된 프로필 설정
+    }
+  }, [petProfile]);
+
+  // 클릭한 펫 이름으로 active 상태 변경
+  const handleItemClick = (name: string) => {
+    setActivePetName(name);
+    setSelectedProfile(petProfile.find(profile => profile.name === name) || null);
+  }
+
   const navigate = useNavigate();
-
-  const onChallenge = () => {
-    navigate(`challenge`)
-  }
-
-  const onYanado = () => {
-    navigate(`ecyanado`)
-  }
-
-  const onCheonHa = () => {
-    navigate(`contest`)
-  }
-
-  const onDailyChallenge1 = () => {
-    navigate(`dailychallenge1`)
-  }
-
-  const onPettalk = () => {
-    navigate(`PetTalk`)
-  }
-
-  const onPetProfileAdd = () => {
-    navigate(`petprofileadd`)
-  }
-
-  const onPetProfileModify = () => {
-    navigate(`petprofilemodify`)
-  }
+  const onChallenge = () => navigate(`challenge`)
+  const onYanado = () => navigate(`ecyanado`)
+  const onCheonHa = () => navigate(`contest`)
+  const onDailyChallenge1 = () => navigate(`dailychallenge1`)
+  const onPettalk = () => navigate(`PetTalk`)
+  const onPetProfileAdd = () => navigate(`petprofileadd`)
+  const onPetProfileModify = () => navigate(`petprofilemodify`, { state: { profile: selectedProfile } })
 
   return (
     <>
@@ -74,18 +79,35 @@ const Home = () => {
         <div className={styles.contents}>
           <div className={styles.profile}>
             <div className={styles.tabmenu}>
-              {/* <div></div> */}
-              <div role="button" className={styles.add} onClick={onPetProfileAdd}>
-                <div className={styles.icon}></div>
-                <span>추가하기</span>
-              </div>
+              {petProfile.map((profile) =>
+                <div 
+                  key={profile.name} 
+                  onClick={() => handleItemClick(profile.name)}
+                  className={activePetName === profile.name ? styles.active : styles.add}
+                >
+                  <img src={profile.image} alt="" className={styles.icon}/>
+                  <span>{profile.name}</span>
+                </div>
+              )}
+              {petProfile.length < 3 && (
+                <div role="button" className={styles.add} onClick={onPetProfileAdd}>
+                  <div className={styles.icon}></div>
+                  <span>추가하기</span>
+                </div>
+              )}
             </div>
             <div className={styles.detail}>
-              <div className={styles.photo}></div>
-              <div className={styles.name}>
-                <h3>익명의 집사</h3>
-                <div role="button" onClick={onPetProfileModify}>수정하기</div>
+              {selectedProfile && (
+              <div className={styles.info}>
+                <img src={selectedProfile?.image} alt="" className={styles.photo}/>
+                <div className={styles.nga}>
+                  <span className={styles.name}>{selectedProfile?.name}</span>
+                  <span className={styles.gender}> · {selectedProfile?.gender}</span>
+                  <span className={styles.age}>({selectedProfile?.age}세)</span>
+                </div>
+                <div className={styles.modify} onClick={onPetProfileModify}>수정하기</div>
               </div>
+            )}
             </div>
           </div>
           <div className={styles.recommend}>
@@ -94,27 +116,9 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <li onClick={onDailyChallenge1}>
-                <img src={daily?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{daily?.challengeName}</span>
-                  <p>{daily?.challengeReview}</p>
-                </div>
-              </li>
-              <li onClick={onCheonHa}>
-                <img src={cheonHa?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{cheonHa?.name}</span>
-                  <p>{cheonHa?.subName}</p>
-                </div>
-              </li>
-              <li onClick={onYanado}>
-                <img src={yanado?.thumbnail} alt="" className={styles.photo}/>
-                <div className={styles.desc}>
-                  <span>{yanado?.name}</span>
-                  <p>{yanado?.subName}</p>
-                </div>
-              </li>
+              <HomeEventList item={daily} onClick={onDailyChallenge1} />
+              <HomeEventList item={cheonHa} onClick={onCheonHa} />
+              <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
           </div>
           <div className={styles.hot}>
