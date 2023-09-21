@@ -116,7 +116,7 @@ const Challenge = () => {
                 <div 
                 className={styles.main}
                 onClick={()=>navigate(`/dailychallenge${challengeData.challengeId}`)}>
-                  <div className={styles.title}>{challengeData.challengeName}</div>
+                  <div className={styles.title}>{challengeData.name}</div>
                   <div className={styles.time}>
                     <div className={styles.vectorWrapper}>
                       <img src={vector} alt="vector" style={{marginRight:'6px'}}/> 
@@ -149,8 +149,6 @@ const Challenge = () => {
                 )}
               </div>
             ))}
-            
-            
           </div>
         </div>
 

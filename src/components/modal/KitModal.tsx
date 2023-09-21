@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useSetRecoilState } from 'recoil';
-import { bottomSheetState } from "@/store/challengeState";
+import { kitModalState } from "@/store/challengeState";
 import dog from '@/assets/dog.svg'
 import product1 from '@/assets/product1.svg'
 import product2 from '@/assets/product2.svg'
@@ -13,7 +13,7 @@ import product4 from '@/assets/product4.svg'
 
 
 const KitModal = () => {
-  const setIsOpen = useSetRecoilState(bottomSheetState); 
+  const setIsOpen = useSetRecoilState(kitModalState); 
   const images = [dog,product1,product2,product3,product4]
   
   const handleClose = () => {
@@ -32,7 +32,7 @@ const KitModal = () => {
 
 return (
   <>
-    <Modal height={562} transformY={-130}>
+    <Modal height={562} modalType='kit'>
       <p className={styles.head}>펫 누리 비대면 검진키트</p>
       <div className={styles.sliderWrapper}>
         <Slider {...settings}>
@@ -44,7 +44,7 @@ return (
         </Slider>
       </div>
       <div className={styles.okWrapper}>
-        <button onClick={handleClose} className={styles.ok}> 확인 </button>
+        <button onClick={handleClose} className={styles.ok}> 닫기 </button>
       </div>
     </Modal>
   </>

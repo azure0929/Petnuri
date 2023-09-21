@@ -4,14 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
+import LoginModal from "@/components/modal/LoginModal";
 import HomeEventList from "@/components/HomeEventList";
 import { useSetRecoilState } from "recoil";
-import { bottomSheetState } from "@/store/challengeState";
+import { kitModalState, loginModalState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
 import { useState,useEffect } from 'react'
+import { getCookie } from "@/utils/Cookie";
 
 const Home = () => {
-  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const setKitOpen = useSetRecoilState(kitModalState);
+  const setLoginOpen = useSetRecoilState(loginModalState);
   const scrollRef = useScrollUl()
   const [petTalkList, setPetTalkList] = useState<PetTalkMainPage[]>([]);
   const [daily, setDaily] = useState<ChallengeData>();
@@ -20,6 +23,7 @@ const Home = () => {
   const [petProfile, setPetProfile] = useState<HomePet[]>([])
   const [activePetName, setActivePetName] = useState<string | null>(null);
   const [selectedProfile, setSelectedProfile] = useState<HomePet | null>(null);
+  const token = getCookie("token")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,6 +65,14 @@ const Home = () => {
     setSelectedProfile(petProfile.find(profile => profile.name === name) || null);
   }
 
+  const openLoginModal = (callback: () => void) => {
+    if (!token) {
+      setLoginOpen(true);
+    } else {
+      callback();
+    }
+  };
+
   const navigate = useNavigate();
   const onChallenge = () => navigate(`challenge`)
   const onYanado = () => navigate(`ecyanado`)
@@ -90,7 +102,7 @@ const Home = () => {
                 </div>
               )}
               {petProfile.length < 3 && (
-                <div role="button" className={styles.add} onClick={onPetProfileAdd}>
+                <div role="button" className={styles.add} onClick={()=>{openLoginModal(onPetProfileAdd)}}>
                   <div className={styles.icon}></div>
                   <span>추가하기</span>
                 </div>
@@ -121,6 +133,7 @@ const Home = () => {
               <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
           </div>
+          <LoginModal />
           <div className={styles.hot}>
             <div className={styles.title}>
               <h3>펫톡 인기글</h3>
@@ -155,7 +168,7 @@ const Home = () => {
           
           <div className={styles.kit}>
             <div className={styles.title}> 검진 키트 결과 보기 </div>
-            <div className={styles.image} onClick={() => setBottomIsOpen(true)}>
+            <div className={styles.image} onClick={() => setKitOpen(true)}>
               커밍순
             </div>
           </div>   
