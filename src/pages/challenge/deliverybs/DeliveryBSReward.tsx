@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import styles from "@/styles/deliverybs/deliverybsreward.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsreward.module.scss";
 
 const DeliveryBSReward: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");

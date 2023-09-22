@@ -6,19 +6,20 @@ import vector from "@/assets/vector.svg";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
-import Header from '@/components/Head'
+import Header from "@/components/Head";
 import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
 
-
 const Challenge = () => {
   const intervalId = useRef(0);
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const [hour, setHour] = useState(0);
-  const [participated, setParticipated] = useState<{[key: number]: boolean}>({});
+  const [participated, setParticipated] = useState<{ [key: number]: boolean }>(
+    {}
+  );
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
   const [cheonHa, setCheonHa] = useState<EventChallengeData>();
   const [yanado, setYanado] = useState<EventChallengeData>();
@@ -49,18 +50,18 @@ const Challenge = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/Daily.json');
+      const response = await fetch("/Daily.json");
       const data = await response.json();
       setChallenges(data.data);
-      const response2 = await fetch('/Cheonha.json');
+      const response2 = await fetch("/Cheonha.json");
       const data2 = await response2.json();
       setCheonHa(data2.data[0]);
-      const response3 = await fetch('/Yanado.json');
+      const response3 = await fetch("/Yanado.json");
       const data3 = await response3.json();
       setYanado(data3.data[0]);
     };
     fetchData();
-   }, []);
+  }, []);
 
   const wrong = () => createToast("error", "추후 오픈 예정입니다");
 
@@ -70,11 +71,14 @@ const Challenge = () => {
         <Header>
           <span>챌린지</span>
         </Header>
-        <ChallengeProfile/>
+        <ChallengeProfile />
 
         <div className={styles.shop}>
           <div className={styles.container}>
-            <div className={styles.button} onClick={()=>navigate('/pointshop')}>
+            <div
+              className={styles.button}
+              onClick={() => navigate("/pointshop")}
+            >
               포인트샵 가기
             </div>
             <span>|</span>
@@ -89,8 +93,8 @@ const Challenge = () => {
             <span>이벤트 챌린지</span>
           </div>
           <div className={styles.body}>
-            <ChallengeEventList item={cheonHa} path="/contest"/>
-            <ChallengeEventList item={yanado} path="/ecyanado"/>
+            <ChallengeEventList item={cheonHa} path="/contest" />
+            <ChallengeEventList item={yanado} path="/ecyanado" />
           </div>
         </div>
 
@@ -103,21 +107,30 @@ const Challenge = () => {
         </div>
         <div className={styles.daily_body}>
           <div className={styles.challenge}>
-            {challenges.map(challengeData => (
+            {challenges.map((challengeData) => (
               <div key={challengeData.challengeId} className={styles.key}>
-                <img 
-                className={styles.img}
-                src={challengeData.thumbnail} 
-                alt="섬네일"
-                onClick={()=>navigate(`/dailychallenge${challengeData.challengeId}`)}
-                  />
-                <div 
-                className={styles.main}
-                onClick={()=>navigate(`/dailychallenge${challengeData.challengeId}`)}>
+                <img
+                  className={styles.img}
+                  src={challengeData.thumbnail}
+                  alt="섬네일"
+                  onClick={() =>
+                    navigate(`/dailychallenge${challengeData.challengeId}`)
+                  }
+                />
+                <div
+                  className={styles.main}
+                  onClick={() =>
+                    navigate(`/dailychallenge${challengeData.challengeId}`)
+                  }
+                >
                   <div className={styles.title}>{challengeData.name}</div>
                   <div className={styles.time}>
                     <div className={styles.vectorWrapper}>
-                      <img src={vector} alt="vector" style={{marginRight:'6px'}}/> 
+                      <img
+                        src={vector}
+                        alt="vector"
+                        style={{ marginRight: "6px" }}
+                      />
                       <div className={styles.square}></div>
                     </div>
                     {hour}시간 후
@@ -128,9 +141,12 @@ const Challenge = () => {
                 {participated[challengeData.challengeId] ? (
                   <button
                     className={styles.participate_off}
-                    onClick={() => 
-                      setParticipated(prevParticipation => 
-                        ({...prevParticipation,[challengeData.challengeId]: false}))}
+                    onClick={() =>
+                      setParticipated((prevParticipation) => ({
+                        ...prevParticipation,
+                        [challengeData.challengeId]: false,
+                      }))
+                    }
                     disabled
                   >
                     지급완료
@@ -139,8 +155,11 @@ const Challenge = () => {
                   <button
                     className={styles.participate_on}
                     onClick={() =>
-                      setParticipated(prevParticipation => 
-                        ({...prevParticipation,[challengeData.challengeId]: true}))}
+                      setParticipated((prevParticipation) => ({
+                        ...prevParticipation,
+                        [challengeData.challengeId]: true,
+                      }))
+                    }
                   >
                     참여하기
                   </button>

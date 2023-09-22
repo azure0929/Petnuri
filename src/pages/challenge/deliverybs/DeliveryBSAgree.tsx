@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import styles from "@/styles/deliverybs/deliverybsagree.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybsagree.module.scss";
 import rightArrow from "@/assets/arrow_right_small.svg";
-import Modal from "react-modal";
 import AgreeModal from "./AgreeModal";
 
-const DeliveryBSAgree = () => {
+const DeliveryBSAgree = ({
+  onAgreedCheckChange,
+  onRuleCheckChange,
+  onExchangeCheckChange,
+  onMarketingCheckChange,
+}) => {
   // 약관 동의
   const [allCheck, setAllCheck] = useState(false);
   const [agreedCheck, setAgreeCheck] = useState(false);
@@ -82,6 +86,15 @@ const DeliveryBSAgree = () => {
       setMarketingCheck(true);
     }
   }, [allCheck]);
+
+  // marketingCheck 상태가 변경될 때, 부모 컴포넌트로 값을 전달
+  useEffect(() => {
+    onAgreedCheckChange(agreedCheck);
+    onRuleCheckChange(ruleCheck);
+    onExchangeCheckChange(exchangeCheck);
+    onMarketingCheckChange(marketingCheck);
+  }, [agreedCheck, ruleCheck, exchangeCheck, marketingCheck]);
+
   // 모달
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 

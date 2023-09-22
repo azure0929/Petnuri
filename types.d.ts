@@ -37,12 +37,12 @@ interface Item {
 }
 
 interface HomeEventListProps {
-  item: Item | undefined; 
-  onClick: () => void; 
+  item: Item | undefined;
+  onClick: () => void;
 }
 
 interface ChallengeEventListProps {
-  item: Item | undefined
+  item: Item | undefined;
   path: string;
 }
 
@@ -68,16 +68,16 @@ interface ChallengeData {
 }
 
 interface EventChallengeData {
-  thumbnail: string
-  challengeId: number
-  name: string
-  subName: string
-  authMethod: string
-  payment: string
-  startDate: string
-  endDate: string
-  status: string
-  rewardStatus: string
+  thumbnail: string;
+  challengeId: number;
+  name: string;
+  subName: string;
+  authMethod: string;
+  payment: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  rewardStatus: string;
 }
 
 interface PrivacyData {
@@ -94,31 +94,42 @@ interface Privacy {
 }
 
 interface HomePet {
-  image: string
-  name: string
-  age: number
-  isSelected?: boolean
-  gender: string
+  image: string;
+  name: string;
+  age: number;
+  isSelected?: boolean;
+  gender: string;
 }
 
 //펫톡
 
 interface PetTalkMainPage {
-  petTalkId : number;
-  thumbnail : string;
-  title : string;
-  content : string;
-  createdAt : string;
-  viewCount : number;
-  likeCount : number;
-  replyCount : number;
-  isLiked : true;
-  writer : writer;
+  petTalkId: number;
+  thumbnail: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  viewCount: number;
+  likeCount: number;
+  replyCount: number;
+  isLiked: true;
+  writer: writer;
 }
 
 interface writer {
-  writerId : number;
-  profileImageUrl : string;
-  nickname : string;
-  rank : string;
+  writerId: number;
+  profileImageUrl: string;
+  nickname: string;
+  rank: string;
 }
+
+interface DefaultAddress {
+  name: string;
+  phone: string;
+  add1: string;
+  add2: string;
+  zoneCode: string;
+  default?: boolean;
+}
+
+type defaultAddressArray = DefaultAddress[];

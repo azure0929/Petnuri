@@ -1,0 +1,19 @@
+.joinButton {
+  width: 327px;
+  height: 54px;
+  border-radius: 12px;
+  padding: 16px, 134px;
+  background-color: #3d54d1;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  margin-top: 40px;
+  .buttonText {
+    width: 56px;
+    height: 22px;
+    font-weight: 600;
+    size: 16px;
+    color: #fff;
+    text-align: center;
+  }
+}

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import styles from "@/styles/deliverybs/deliverybslayout.module.scss";
+import styles from "@/styles/challenge/deliverybs/deliverybslayout.module.scss";
 import { useRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 
