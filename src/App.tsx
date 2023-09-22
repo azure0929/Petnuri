@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Modal from "react-modal";
-// 홈, 로그인, 온보딩
+// 홈, 로그인, 회원가입, 온보딩
 import Home from "@/pages/home";
 import Login from "@/pages/login";
+import SignUp from "./pages/signup";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
 import RegistSuccess from "./pages/onboarding/RegistSuccess";
@@ -16,7 +17,7 @@ import DailyChallenge3 from "./pages/challenge/DailyChallenge3";
 import PointShop from "@/pages/challenge/PointShop";
 // 펫톡
 import PetTalk from "@/pages/petTalk";
-import PetTaliDetail from "./pages/petTalk/Detail";
+import PetTalkDetail from "./pages/petTalk/Detail";
 import Concern from "@/pages/petTalk/Concern";
 import FreeTalk from "@/pages/petTalk/Freetalk";
 import ConcernWrite from "./pages/petTalk/ConcernWrite";
@@ -24,7 +25,7 @@ import FreetalkWrite from "./pages/petTalk/FreetalkWrite";
 
 //펫 프로필
 import PetProfileAdd from "@/pages/petprofile";
-import Modify from "@/pages/petprofile/Modify";
+import PetProfileModify from "@/pages/petprofile/PetProfileModify";
 // 마이페이지
 import MyPage from "./pages/mypage/MyPage";
 import EditInfo from "./pages/mypage/EditInfo";
@@ -32,7 +33,6 @@ import EditInfo from "./pages/mypage/EditInfo";
 import Admin from "@/pages/admin";
 import Daily from "@/pages/admin/Daily";
 import Yanado from "@/pages/admin/Yanado";
-import Nayegi from "./pages/admin/Nayegi";
 import Cheonha from "./pages/admin/Cheonha";
 
 import "./styles/common.scss";
@@ -43,9 +43,10 @@ Modal.setAppElement("#root");
 const App = () => {
   return (
     <Routes>
-      {/* home, login, 온보딩 */}
+      {/* 홈, 로그인, 회원가입, 온보딩 */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/onboarding" element={<OnBoarding />} />
       <Route path="/petregist" element={<PetRegist />} />
       <Route path="/registsuccess" element={<RegistSuccess />} />
@@ -58,15 +59,16 @@ const App = () => {
       <Route path="/dailychallenge3" element={<DailyChallenge3 />} />
       <Route path="/pointshop" element={<PointShop />} />
       {/* 펫톡 */}
+      {/* <Route path="/petTalk" element={<PetTalk />} /> */}
       <Route path="/petTalk" element={<PetTalk />} />
-      <Route path="/petTalk/:petTaliId" element={<PetTaliDetail />} />
+      <Route path="/petTalk/:petTalkId" element={<PetTalkDetail />} />
       <Route path="/petTalk/concern" element={<Concern />} />
       <Route path="/petTalk/freetalk" element={<FreeTalk />} />
       <Route path="/petTalk/concernwrite" element={<ConcernWrite />} />
       <Route path="/petTalk/freetalkwrite" element={<FreetalkWrite />} />
       {/* 펫 프로필 */}
       <Route path="/petprofileadd" element={<PetProfileAdd />} />
-      <Route path="/petprofilemodify" element={<Modify />} />
+      <Route path="/petprofilemodify" element={<PetProfileModify />} />
       {/* 마이페이지 */}
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/mypage/editinfo" element={<EditInfo />} />
@@ -75,7 +77,6 @@ const App = () => {
         <Route path="/admin" element={<Admin />} />
         <Route path="daily" element={<Daily />} />
         <Route path="yanado" element={<Yanado />} />
-        <Route path="nayegi" element={<Nayegi />} />
         <Route path="cheonha" element={<Cheonha />} />
       </Route>
     </Routes>

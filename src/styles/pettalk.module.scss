@@ -87,7 +87,7 @@
         .user_info {
           display: flex;
           align-items: center;
-          column-gap: 4px;
+          column-gap: 8px;
           img {
             width: 26px;
             height: 26px;
@@ -99,7 +99,7 @@
             font-size: 14px;
             font-weight: 600;
           }
-          .today_date {
+          .date {
             color: $gray_0600_707070;
             font-size: 12px;
             font-weight: 400;
@@ -108,15 +108,15 @@
         .title {
           color: $gray_0900_171717;
           margin: 8px 0;
-          margin-left: 30px;
+          margin-left: 35px;
           font-size: 14px;
           font-weight: 600;
         }
         .text_wrapper {
           margin-bottom: 12px;
           .content_text {
-            color: $gray_0900_171717;
-            margin-left: 30px;
+            color: $gray_0700_5C5C5C;
+            margin-left: 35px;
             font-size: 14px;
             font-weight: 400;
             width: 293px;
@@ -139,7 +139,7 @@
             padding: 0;
             overflow: visible;
             cursor: pointer;
-            margin-left: 30px;
+            margin-left: 35px;
           }
         }
 
@@ -149,7 +149,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-left: 30px;
+          margin-left: 35px;
 
           img {
             width: 293px;
@@ -159,7 +159,7 @@
         .response_wrapper {
           display: flex;
           gap: 8px;
-          margin-left: 30px;
+          margin-left: 35px;
           margin-top: 12px;
           .icon_area {
             display: flex;

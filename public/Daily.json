@@ -2,7 +2,7 @@
   "data":[
     {
       "challengeId": 1,
-      "challengeName": "간식 바치기", 
+      "name": "간식 바치기", 
       "challengeReview": "간식주는 사진 인증하기",
       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
       "userId": 1, 
@@ -37,7 +37,7 @@
     },
     {
       "challengeId": 2,
-      "challengeName": "산책 시키기", 
+      "name": "산책 시키기", 
       "challengeReview": "반려동물과 산책하는 사진 인증하기",
       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
       "userId": 1, 
@@ -72,7 +72,7 @@
     },
     {
       "challengeId": 3,
-      "challengeName": "위생 관리", 
+      "name": "위생 관리", 
       "challengeReview": "청소하는 사진 인증하기",
       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
       "userId": 1, 

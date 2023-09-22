@@ -1,0 +1,22 @@
+@import '@/styles/common.scss';
+
+.container {
+  display: flex;
+  width: 54px;
+  height: 30px;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  @include title_bold_12px;
+}
+
+.light {
+  background-color: $gray_0200_EBEBEB; 
+  color:$gray_0700_5C5C5C; 
+}
+
+.dark {
+  background-color: $gray_0900_171717; 
+  color:$gray_0100_F5F5F5; 
+}

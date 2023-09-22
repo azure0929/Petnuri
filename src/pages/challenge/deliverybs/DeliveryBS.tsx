@@ -95,6 +95,8 @@ const DeliveryBS = () => {
     <BottomSheet>
       <DeliveryBSHead />
       {/* <DeliveryBSName onNameComplete={handleNameComplete} />
+      <DeliveryBSHead text = '배송지 입력'/>
+      <DeliveryBSName onNameComplete={handleNameComplete} />
       <DeliveryBSContact onContactComplete={handleContactComplete} />
       <DeliveryBSAddress onAddressComplete={handleAddressComplete} /> */}
       {/* <DeliveryBSmessage onMessageComplete={handleMessageComplete} /> */}

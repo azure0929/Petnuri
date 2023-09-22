@@ -13,7 +13,11 @@ import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 
-const PetTalk = () => {
+interface PetTalkProps {
+  petTalkId?: number;
+}
+
+const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
 
@@ -89,121 +93,124 @@ const PetTalk = () => {
 
             <div className={styles.talk_list}>
               <div className={styles.border}>
-                {/* item 클릭하면 상세페이지 연결 추가하기 */}
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
+                <Link to={`/pettalk/${petTalkId}`}>
+                  <div className={styles.item}>
+                    <div className={styles.user_info}>
+                      <img src="" alt="profile-img" />
+                      <span className={styles.user_name}>닉네임</span>
+                      <span className={styles.date}>・ 게시된 날짜 넣기</span>
                     </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
+                    <div className={styles.title}>제목 텍스트 입니다.</div>
+                    <div className={styles.text_wrapper}>
+                      <div className={styles.content_text}>
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ
+                      </div>
+                      <button className={styles.plus_button}>더보기</button>
+                    </div>
 
-                  {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
-                  <div className={styles.content_img}>
-                    <img src="" alt="예시이미지" />
+                    {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
+                    <div className={styles.content_img}>
+                      <img src="" alt="예시이미지" />
+                    </div>
+                    <div className={styles.response_wrapper}>
+                      <div className={styles.icon_area}>
+                        <img src={heart} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={talk} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={view} alt="" />
+                        <span>100</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
-                    </div>
-                  </div>
-                </div>
+                </Link>
               </div>
               <div className={styles.border}>
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
+                <Link to={`/pettalk/${petTalkId}`}>
+                  <div className={styles.item}>
+                    <div className={styles.user_info}>
+                      <img src="" alt="profile-img" />
+                      <span className={styles.user_name}>닉네임</span>
+                      <span className={styles.today_date}>
+                        ・ 게시된 날짜 넣기
+                      </span>
                     </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
+                    <div className={styles.title}>제목 텍스트 입니다.</div>
+                    <div className={styles.text_wrapper}>
+                      <div className={styles.content_text}>
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ
+                      </div>
+                      <button className={styles.plus_button}>더보기</button>
+                    </div>
 
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
+                    <div className={styles.response_wrapper}>
+                      <div className={styles.icon_area}>
+                        <img src={heart} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={talk} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={view} alt="" />
+                        <span>100</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               <div className={styles.border}>
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
+                <Link to={`/pettalk/${petTalkId}`}>
+                  <div className={styles.item}>
+                    <div className={styles.user_info}>
+                      <img src="" alt="profile-img" />
+                      <span className={styles.user_name}>닉네임</span>
+                      <span className={styles.today_date}>
+                        ・ 게시된 날짜 넣기
+                      </span>
                     </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
-                  {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
-                  <div className={styles.content_img}>
-                    <img src="" alt="예시이미지" />
-                  </div>
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
+                    <div className={styles.title}>제목 텍스트 입니다.</div>
+                    <div className={styles.text_wrapper}>
+                      <div className={styles.content_text}>
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
+                        꿍이가 아파요 어뜩하죠ㅠㅠ
+                      </div>
+                      <button className={styles.plus_button}>더보기</button>
                     </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
+                    {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
+                    <div className={styles.content_img}>
+                      <img src="" alt="예시이미지" />
                     </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
+                    <div className={styles.response_wrapper}>
+                      <div className={styles.icon_area}>
+                        <img src={heart} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={talk} alt="" />
+                        <span>100</span>
+                      </div>
+                      <div className={styles.icon_area}>
+                        <img src={view} alt="" />
+                        <span>100</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
 

@@ -1,13 +1,14 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
-import credit from "@/assets/credit.svg";
 import fire from "@/assets/fire.svg";
 import vector from "@/assets/vector.svg";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
 import Header from "@/components/Head";
+import ChallengeProfile from "@/components/challenge/ChallengeProfile";
+import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
@@ -20,8 +21,8 @@ const Challenge = () => {
     {}
   );
   const [challenges, setChallenges] = useState<ChallengeData[]>([]);
-  const [cheonHa, setCheonHa] = useState<CheonHaData>();
-  const [yanado, setYanado] = useState<YanadoData>();
+  const [cheonHa, setCheonHa] = useState<EventChallengeData>();
+  const [yanado, setYanado] = useState<EventChallengeData>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,20 +69,9 @@ const Challenge = () => {
     <>
       <Background>
         <Header>
-          <div className={styles.mainHead}>
-            <span>챌린지</span>
-          </div>
+          <span>챌린지</span>
         </Header>
-        <div className={styles.name}>
-          <div className={styles.img}></div>
-          <div className={styles.nickname}>닉네임</div>
-          <div className={styles.petname}>꿍이집사</div>
-          <div className={styles.date}> 23.03.06</div>
-        </div>
-        <div className={styles.credit}>
-          1220 크레딧
-          <img src={credit} alt="credit" />
-        </div>
+        <ChallengeProfile />
 
         <div className={styles.shop}>
           <div className={styles.container}>
@@ -103,26 +93,8 @@ const Challenge = () => {
             <span>이벤트 챌린지</span>
           </div>
           <div className={styles.body}>
-            <div
-              className={styles.section}
-              onClick={() => navigate("/contest")}
-            >
-              <img src={cheonHa?.thumbnail} alt="" className={styles.img} />
-              <div className={styles.text}>
-                <div className={styles.title}> {cheonHa?.title} </div>
-                <div className={styles.subtitle}>데이터 필요함</div>
-              </div>
-            </div>
-            <div
-              className={styles.section}
-              onClick={() => navigate("/ecyanado")}
-            >
-              <img src={yanado?.thumbnail} alt="" className={styles.img} />
-              <div className={styles.text}>
-                <div className={styles.title}> {yanado?.title} </div>
-                <div className={styles.subtitle}>데이터 필요함</div>
-              </div>
-            </div>
+            <ChallengeEventList item={cheonHa} path="/contest" />
+            <ChallengeEventList item={yanado} path="/ecyanado" />
           </div>
         </div>
 
@@ -151,9 +123,7 @@ const Challenge = () => {
                     navigate(`/dailychallenge${challengeData.challengeId}`)
                   }
                 >
-                  <div className={styles.title}>
-                    {challengeData.challengeName}
-                  </div>
+                  <div className={styles.title}>{challengeData.name}</div>
                   <div className={styles.time}>
                     <div className={styles.vectorWrapper}>
                       <img

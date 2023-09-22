@@ -6,7 +6,7 @@
       "add1": "서울시 강남구 1로",
       "add2": "123동 123호",
       "zoneCode": "12345",
-      "default": false
+      "default": true
     },
     {
       "name": "leeJungHwan",

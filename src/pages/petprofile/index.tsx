@@ -13,7 +13,7 @@ const PetProfileAdd = () => {
   const [gender, setGender] = useState('남');
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string | null>(null);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -25,23 +25,35 @@ const PetProfileAdd = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e:any) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage(reader.result);
+      if (typeof reader.result === 'string') {
+        setImage(reader.result);
+      }
     };
     reader.readAsDataURL(file);
   };
 
   const handleSubmit = async () => {
+    // json으로 보낼때
     const formData = new FormData();
+    const data = {
+      name,
+      age,
+      gender,
+      isSelected: isSelected.toString(),
+    };
+    formData.append("data", JSON.stringify(data));
+    // formdata로 보낼때
     formData.append('name', name);
     formData.append('age', age);
     formData.append('gender', gender);
-    formData.append('isSelected', isSelected);
+    formData.append('isSelected', isSelected.toString());
+    
     if (image) {
       const file = new File([image], 'petProfile.jpg');
       formData.append('image', file);
@@ -54,7 +66,6 @@ const PetProfileAdd = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
     } catch (error) {
       console.error(error); 
     }
@@ -107,6 +118,7 @@ const PetProfileAdd = () => {
               placeholder='이름을 입력해주세요' 
               className={styles.input}
               value={name}
+              maxLength={10}
               onChange={(e) => setName(e.target.value)}/>
             </div>
             <div className={styles.contents}>
@@ -138,10 +150,10 @@ const PetProfileAdd = () => {
           {/* 버튼 */}
           <form className={styles.btnwrapper} onSubmit={handleSubmit}>
             <button 
-              disabled={!name || !age || !image}
+              disabled={!name || !age }
               className={
                 `${styles.button} 
-                ${(name && age && image) 
+                ${(name && age ) 
                   ? styles.able 
                   : styles.disable}`} 
             >

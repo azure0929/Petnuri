@@ -20,7 +20,7 @@ const ECYanado = () => {
       try {
         const response = await fetch("/Chamyo.json");
         const data = await response.json();
-        setJoinList(data.joinList);
+        setJoinList(data.data);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -60,7 +60,7 @@ const ECYanado = () => {
             <ChallengeJoin
               key={index}
               join={{
-                participantsImg: joinItem.images,
+                participantsImg: joinItem.imageUrl,
                 participantsName: joinItem.nickName,
               }}
             />

@@ -23,9 +23,27 @@ interface challengeJoin {
 }
 
 interface joinList {
-  images: string;
+  challengeId?: number;
+  imageId?: number;
+  imageUrl: string;
   nickName: string;
   // process: string;
+}
+interface Item {
+  thumbnail?: string;
+  name?: string;
+  subName?: string;
+  challengeReview?: string;
+}
+
+interface HomeEventListProps {
+  item: Item | undefined;
+  onClick: () => void;
+}
+
+interface ChallengeEventListProps {
+  item: Item | undefined;
+  path: string;
 }
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
@@ -41,7 +59,7 @@ type ChallengeJoinProps = {
 
 interface ChallengeData {
   challengeId: number;
-  challengeName: string;
+  name: string;
   challengeReview: string;
   thumbnail: string;
   userId: number;
@@ -49,37 +67,38 @@ interface ChallengeData {
   status: boolean;
 }
 
-interface CheonHaData {
-  title: string;
+interface EventChallengeData {
   thumbnail: string;
-  images: string[];
-  kit_start_date: string;
-  kit_end_date: string;
-  reward_start_date: string;
-  reward_end_date: string;
-  rewardList: [
-    {
-      itemId: number;
-      name: string;
-    }
-  ];
-  process: string;
+  challengeId: number;
+  name: string;
+  subName: string;
+  authMethod: string;
+  payment: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  rewardStatus: string;
 }
 
-interface YanadoData {
-  title: string;
-  thumbnail: string;
-  images: string[];
-  rewardStartDate: string;
-  rewardEndDate: string;
-  rewardList: [
-    {
-      eventId: number;
-      itemId: number;
-      name: string;
-    }
-  ];
-  process: string;
+interface PrivacyData {
+  data: Privacy[];
+}
+
+interface Privacy {
+  name: string;
+  phone: string;
+  add1: string;
+  add2: string;
+  zonecode: number;
+  default: boolean;
+}
+
+interface HomePet {
+  image: string;
+  name: string;
+  age: number;
+  isSelected?: boolean;
+  gender: string;
 }
 
 //펫톡
