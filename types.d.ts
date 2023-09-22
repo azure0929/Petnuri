@@ -80,6 +80,19 @@ interface EventChallengeData {
   rewardStatus: string
 }
 
+interface PrivacyData {
+  data: Privacy[];
+}
+
+interface Privacy {
+  name: string;
+  phone: string;
+  add1: string;
+  add2: string;
+  zonecode: number;
+  default: boolean;
+}
+
 interface HomePet {
   image: string
   name: string
