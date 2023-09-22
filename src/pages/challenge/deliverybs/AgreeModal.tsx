@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import styles from "@/styles/deliverybs/agreemodal.module.scss";
+import styles from "@/styles/challenge/deliverybs/agreemodal.module.scss";
 
 const AgreeModal = ({ isOpen, closeModal, setAllCheck }) => {
   const customStyles = {

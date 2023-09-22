@@ -1,4 +1,4 @@
-import styles from "@/styles/challengejoin.module.scss";
+import styles from "@/styles/challenge/challengejoin.module.scss";
 
 interface joinProps {
   join: challengeJoin;

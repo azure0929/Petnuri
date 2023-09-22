@@ -1,4 +1,4 @@
-import styles from "@/styles/challengebanner.module.scss";
+import styles from "@/styles/challenge/challengebanner.module.scss";
 
 interface bannerProps {
   banner: challengeBanner;

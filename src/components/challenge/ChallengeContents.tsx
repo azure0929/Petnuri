@@ -1,4 +1,4 @@
-import styles from "@/styles/challengecontents.module.scss";
+import styles from "@/styles/challenge/challengecontents.module.scss";
 
 interface contentsProps {
   contents: challengeContents;
