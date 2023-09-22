@@ -113,7 +113,11 @@ const Home = () => {
               <div className={styles.info}>
                 <img src={selectedProfile?.image} alt="" className={styles.photo}/>
                 <div className={styles.nga}>
-                  <span className={styles.name}>{selectedProfile?.name}</span>
+                  <span className={styles.name}>
+                    {selectedProfile?.name && selectedProfile.name.length > 4 
+                    ? selectedProfile.name.substring(0, 4) 
+                    : selectedProfile?.name}
+                  </span>
                   <span className={styles.gender}> · {selectedProfile?.gender}</span>
                   <span className={styles.age}>({selectedProfile?.age}세)</span>
                 </div>
