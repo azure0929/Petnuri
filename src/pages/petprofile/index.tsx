@@ -70,6 +70,12 @@ const PetProfileAdd = () => {
       console.error(error); 
     }
   }
+  const handleAgeChange = (e:any) => {
+    const inputValue = e.target.value.replace('세', '');
+    if (!isNaN(inputValue)) {
+      setAge(inputValue);
+    }
+  };
   return(
     <>
       <Background>
@@ -143,8 +149,8 @@ const PetProfileAdd = () => {
               <input 
               placeholder='나이를 입력해주세요' 
               className={styles.input}
-              value={age}
-              onChange={(e) => setAge(e.target.value)}/>
+              value={age ? `${age}세` : ''}
+              onChange={handleAgeChange}/>
             </div>
           </div>
           {/* 버튼 */}
