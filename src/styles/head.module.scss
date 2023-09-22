@@ -7,6 +7,9 @@
   background-color: #ffffff03;
   backdrop-filter: blur(12px);
   display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 50;
+  @include title_bold_18px;
 }

@@ -10,7 +10,8 @@
       "startDate":"2023-10-09",
       "endDate":"2023-10-15",
       "status":"READY",
-      "rewardStatus":"false"
+      "rewardStatus":"false",
+      "process": "unprocessed"
     }
   ]
 }

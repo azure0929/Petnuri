@@ -68,9 +68,7 @@ const Challenge = () => {
     <>
       <Background>
         <Header>
-          <div className={styles.mainHead}>
-            <span>챌린지</span>
-          </div>
+          <span>챌린지</span>
         </Header>
         <ChallengeProfile/>
 
