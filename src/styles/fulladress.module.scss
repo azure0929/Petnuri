@@ -1,0 +1,39 @@
+@import '@/styles/common.scss';
+
+.head {
+  display: flex;
+  justify-content: left;
+  margin-top: 24px;
+  color: $gray_0000_333333;
+  @include title_bold_16px;
+  &.active {
+    color: $brand_blue_200_3F54D1;
+  }
+}
+
+.body {
+  width: 327px;
+  height: 162px;
+  padding: 16px;
+  margin-top: 9px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background: $gray_0100_F5F5F5;
+  @include body_regular_14px;
+
+  .box1 {
+    display: flex;
+    gap: 8px;
+  }
+  .box2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+  .box3 {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+  }
+}
