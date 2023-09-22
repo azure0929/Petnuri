@@ -1,6 +1,11 @@
 import styles from '@/styles/editbtn.module.scss'
 
-const EditBtn = ({ version, text }) => {
+interface EditBtnProps {
+  version: 'dark' | 'light'
+  text: string
+}
+
+const EditBtn = ({ version, text }:EditBtnProps) => {
   const btnStyle = version === 'dark' ? styles.dark : styles.light;
   
   return (
