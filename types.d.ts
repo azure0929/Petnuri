@@ -50,56 +50,67 @@ interface ChallengeData {
 }
 
 interface CheonHaData {
-  title: string,
-  thumbnail: string,
-  images:string[],
-  kit_start_date: string,
-  kit_end_date: string,
-  reward_start_date: string,
-  reward_end_date: string,
+  title: string;
+  thumbnail: string;
+  images: string[];
+  kit_start_date: string;
+  kit_end_date: string;
+  reward_start_date: string;
+  reward_end_date: string;
   rewardList: [
     {
-      itemId: number,
-      name: string
+      itemId: number;
+      name: string;
     }
-  ],
-  process: string
+  ];
+  process: string;
 }
 
 interface YanadoData {
-  title: string,
-  thumbnail: string,
-  images: string[],
-  rewardStartDate:string,
-  rewardEndDate:string,
-  rewardList:[
+  title: string;
+  thumbnail: string;
+  images: string[];
+  rewardStartDate: string;
+  rewardEndDate: string;
+  rewardList: [
     {
-      eventId:number,
-      itemId:number,
-      name:string
+      eventId: number;
+      itemId: number;
+      name: string;
     }
-  ],
-  process: string
+  ];
+  process: string;
 }
 
 //펫톡
 
 interface PetTalkMainPage {
-  petTalkId : number;
-  thumbnail : string;
-  title : string;
-  content : string;
-  createdAt : string;
-  viewCount : number;
-  likeCount : number;
-  replyCount : number;
-  isLiked : true;
-  writer : writer;
+  petTalkId: number;
+  thumbnail: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  viewCount: number;
+  likeCount: number;
+  replyCount: number;
+  isLiked: true;
+  writer: writer;
 }
 
 interface writer {
-  writerId : number;
-  profileImageUrl : string;
-  nickname : string;
-  rank : string;
+  writerId: number;
+  profileImageUrl: string;
+  nickname: string;
+  rank: string;
 }
+
+interface DefaultAddress {
+  name: string;
+  phone: string;
+  add1: string;
+  add2: string;
+  zoneCode: string;
+  default?: boolean;
+}
+
+type defaultAddressArray = DefaultAddress[];

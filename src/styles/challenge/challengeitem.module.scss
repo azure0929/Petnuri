@@ -16,9 +16,11 @@
     margin-left: 24px;
     margin-right: 24px;
     .img {
-      width: 327px;
-      height: 380px;
-      border: 1px solid black;
+      img {
+        width: 327px;
+        height: 380px;
+        border-radius: 12px;
+      }
     }
   }
 }

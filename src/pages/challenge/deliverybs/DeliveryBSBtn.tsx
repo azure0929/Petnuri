@@ -11,20 +11,22 @@ const DeliveryBSBtn: React.FC<DeliveryBSBtnProps> = ({ data }) => {
 
   // 추가
   const clickHandler = () => {
-    if (data.address === "") {
-      alert("상세주소를 입력해주세요.");
-      console.log(data);
-    } else {
+    if (data.address) {
+      alert("신청이 완료되었습니다.");
+      console.log(data.address);
       setBottomIsOpen(false);
-      console.log(data);
+    } else {
+      alert("필수 입력을 확인해주세요.");
     }
   };
 
   return (
     <>
-      <button className={styles.checkBtn} onClick={clickHandler}>
-        <span>참여 신청</span>
-      </button>
+      <>
+        <button className={styles.checkBtn} onClick={clickHandler}>
+          <span>참여 신청</span>
+        </button>
+      </>
     </>
   );
 };

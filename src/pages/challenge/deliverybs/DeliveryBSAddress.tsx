@@ -10,13 +10,16 @@ interface DeliveryBSAddressProps {
 const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   onAddressComplete,
 }) => {
+  const [zipCode, setZipCode] = useState("");
   const [roadAddress, setRoadAddress] = useState<string>("");
   const [detailAddress, setDetailAddress] = useState<string>(""); // 추가
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
 
   const completeHandler = (data: any) => {
     setRoadAddress(data.roadAddress);
+    setZipCode(data.zonecode);
     setIsOpen(false); //추가
+    console.log(data);
   };
 
   // Modal 스타일
@@ -52,7 +55,9 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
     <>
       <div className={styles.addressContainer}>
         <div className={styles.inputTitle}>배송지 입력</div>
-        {/* <input value={zipCode} readOnly placeholder="우편번호" /> */}
+        <input value={zipCode} readOnly placeholder="우편번호" />
+        <div>{zipCode}</div>
+
         <input
           onClick={toggle}
           value={roadAddress}

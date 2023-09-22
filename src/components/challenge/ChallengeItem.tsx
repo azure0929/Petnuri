@@ -2,19 +2,21 @@ import { useState } from "react";
 import Pagination from "../Pagination";
 import styles from "@/styles/challenge/challengeitem.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
+import 표지 from "@/assets/표지.png";
+import 커밍순 from "@/assets/커밍순.png";
+import 홍보1 from "@/assets/홍보1.png";
+import 홍보2 from "@/assets/홍보2.png";
+import 홍보3 from "@/assets/홍보3.png";
+import 홍보4 from "@/assets/홍보4.png";
 
 const ChallengeItem = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 5; // 전체 페이지
 
   // 각 페이지에 해당하는 이미지 URL 배열
-  const imageUrls = [
-    "url_페이지1_이미지",
-    "url_페이지2_이미지",
-    "url_페이지3_이미지",
-    "url_페이지4_이미지",
-    "url_페이지5_이미지",
-  ];
+
+  const imageUrls = [표지, 홍보1, 홍보2, 홍보3, 홍보4, 커밍순];
+
+  const totalPages = imageUrls.length; // 전체 페이지
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);

@@ -1,13 +1,8 @@
 import styles from "@/styles/challenge/joincomplete.module.scss";
-import { bottomSheetState } from "@/store/challengeState";
-import { useSetRecoilState } from "recoil";
 
 const JoinButton = () => {
-  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
-
   const handleComplete = () => {
     alert("이미 신청완료 된 상태입니다");
-    setBottomIsOpen(true);
   };
 
   return (
