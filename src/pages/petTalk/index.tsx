@@ -93,7 +93,7 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
 
             <div className={styles.talk_list}>
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />
@@ -133,7 +133,7 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
                 </Link>
               </div>
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />
@@ -170,7 +170,7 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
               </div>
 
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />

@@ -216,13 +216,13 @@ const FreeTalk = () => {
             </button>
             {isMenuOpen && (
               <div className={styles.menu}>
-                <Link to="/pettalk/concernwrite">
+                <Link to="/petTalk/concernwrite">
                   <button className={styles.item}>
                     <img src={concern_icon} alt="" />
                     <span>고민상담</span>
                   </button>
                 </Link>
-                <Link to="/pettalk/freetalkwrite">
+                <Link to="/petTalk/freetalkwrite">
                   <button className={styles.item}>
                     <img src={freetalk_icon} alt="" />
                     <span>자유수다</span>
