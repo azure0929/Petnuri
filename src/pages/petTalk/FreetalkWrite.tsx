@@ -15,7 +15,7 @@ const FreetalkWrite = () => {
     navigate(-1);
   };
 
-  const isFreeTalkWrite = location.pathname === "/pettalk/freetalkwrite";
+  const isFreeTalkWrite = location.pathname === "/petTalk/freetalkwrite";
 
   return (
     <Background>
