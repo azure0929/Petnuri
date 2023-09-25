@@ -1,5 +1,5 @@
 import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
-import DeliveryBSHead from './deliverybs/DeliveryBSHead';
+import DeliveryBSHead from '@/pages/challenge/deliverybs/DeliveryBSHead';
 import FullAdress from '@/components/challenge/FullAdress';
 import BottomButton from '@/components/challenge/BottomButton';
 import { useState, useEffect } from 'react'
