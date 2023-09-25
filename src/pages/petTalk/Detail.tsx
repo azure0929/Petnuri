@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
+import LoginModal from "@/components/modal/LoginModal";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
@@ -24,12 +25,21 @@ const PetTalkDetail = () => {
   };
 
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = (index: number) => {
     if (selectedButton === index) {
       setSelectedButton(null);
     } else {
       setSelectedButton(index);
+    }
+  };
+
+  const handleInputFocus = () => {
+    const isLoggedIn = true;
+
+    if (!isLoggedIn) {
+      setIsModalOpen(true); //로그인이 안된 경우
     }
   };
 
@@ -72,7 +82,6 @@ const PetTalkDetail = () => {
               고민상담
             </div>
           </Head>
-
           <div className={styles.content_wrapper}>
             <div className={styles.item}>
               <div className={styles.user_info}>
@@ -116,7 +125,6 @@ const PetTalkDetail = () => {
               </div>
             </div>
           </div>
-
           <div className={styles.emoji_wrapper}>
             {emojiData.map((emoji, index) => (
               <button
@@ -148,18 +156,21 @@ const PetTalkDetail = () => {
               </button>
             ))}
           </div>
-
           <div className={styles.reply_wrapper}>
             {/* 댓글 ${count}개 */}
             <span className={styles.count}>{`댓글 42`}</span>
             <CommentItem />
             <CommentItem />
           </div>
-
           <div className={styles.replyWrite_wrapper}>
             <img src="" alt="profile" />
-            <input type="text" placeholder="댓글을 작성해주세요" />
+            <input
+              type="text"
+              placeholder="댓글을 작성해주세요"
+              onFocus={handleInputFocus}
+            />
           </div>
+          {isModalOpen && <LoginModal />}
         </div>
       </Background>
     </>

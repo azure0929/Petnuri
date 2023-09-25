@@ -1,6 +1,7 @@
 @import "@/styles/common.scss";
 
 .header {
+  width: 100%;
   height: 56px;
   font-size: 18px;
   line-height: 24px;
@@ -264,5 +265,6 @@
     border: none;
     border-radius: 19px;
     padding: 9px 0 9px 16px;
+    margin-top: 0;
   }
 }

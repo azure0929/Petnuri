@@ -94,9 +94,7 @@ const FreeTalk = () => {
                   <div className={styles.user_info}>
                     <img src="" alt="profile-img" />
                     <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
+                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
                   </div>
                   <div className={styles.title}>제목 텍스트 입니다.</div>
                   <div className={styles.text_wrapper}>
@@ -134,9 +132,7 @@ const FreeTalk = () => {
                   <div className={styles.user_info}>
                     <img src="" alt="profile-img" />
                     <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
+                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
                   </div>
                   <div className={styles.title}>제목 텍스트 입니다.</div>
                   <div className={styles.text_wrapper}>
@@ -171,9 +167,7 @@ const FreeTalk = () => {
                   <div className={styles.user_info}>
                     <img src="" alt="profile-img" />
                     <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.today_date}>
-                      ・ 게시된 날짜 넣기
-                    </span>
+                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
                   </div>
                   <div className={styles.title}>제목 텍스트 입니다.</div>
                   <div className={styles.text_wrapper}>
@@ -222,13 +216,13 @@ const FreeTalk = () => {
             </button>
             {isMenuOpen && (
               <div className={styles.menu}>
-                <Link to="/pettalk/concernwrite">
+                <Link to="/petTalk/concernwrite">
                   <button className={styles.item}>
                     <img src={concern_icon} alt="" />
                     <span>고민상담</span>
                   </button>
                 </Link>
-                <Link to="/pettalk/freetalkwrite">
+                <Link to="/petTalk/freetalkwrite">
                   <button className={styles.item}>
                     <img src={freetalk_icon} alt="" />
                     <span>자유수다</span>
