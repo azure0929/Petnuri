@@ -25,7 +25,7 @@ const ChallengeItem = () => {
 
   const scrollRef = useScrollDiv();
 
-  const handleWheel = (e) => {
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
       // 아래로 스크롤: 다음 페이지로 이동
       if (currentPage < totalPages) {

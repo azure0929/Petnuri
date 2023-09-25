@@ -16,7 +16,7 @@ const DeliveryBSHead = () => {
         <div className={styles.arrowImg} onClick={onClickBack}>
           <img src={leftArrow}></img>
         </div>
-        <div className={styles.header}>참여 신청</div>
+        <div className={styles.header}>참여</div>
       </div>
     </>
   );
