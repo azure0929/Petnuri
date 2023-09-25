@@ -1,19 +1,20 @@
+import React from "react";
 import Background from "@/components/Background";
 import { useNavigate } from "react-router-dom";
+import LottieAnimation from "@/components/lottie/LottieAnimation";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
-import styles from '@/styles/registsuccess.module.scss';
+import styles from "@/styles/registsuccess.module.scss";
 
-const RegistSuccess = () => {
-
+const RegistSuccess: React.FC = () => {
   const navigate = useNavigate();
 
   const onPetRegist = () => {
     navigate(`/petregist`);
-  }
+  };
 
   const onMain = () => {
     navigate(`/`);
-  }
+  };
 
   return (
     <>
@@ -30,14 +31,11 @@ const RegistSuccess = () => {
             <span>펫누리의 공간에 여러분을 초대합니다!</span>
           </div>
         </div>
-        <div className={styles.lottie}>
-          <p>로티파일</p>
+        <div className={styles.lottiecontainer}>
+          <LottieAnimation />
         </div>
         <div className={styles.next}>
-          <div
-            role="button"
-            onClick={onMain}
-          >
+          <div role="button" onClick={onMain}>
             펫누리 시작하기
           </div>
         </div>
