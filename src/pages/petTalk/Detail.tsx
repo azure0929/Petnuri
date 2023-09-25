@@ -14,6 +14,7 @@ import funny_off from "../../assets/Funny_off.png";
 import kiss_off from "../../assets/kiss_off.png";
 import surprise_off from "../../assets/Surprise_off.png";
 import sad_off from "../../assets/Sad_off.png";
+import default_user from "../../assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 
@@ -36,10 +37,9 @@ const PetTalkDetail = () => {
   };
 
   const handleInputFocus = () => {
-    const isLoggedIn = true;
-
+    const isLoggedIn = false;
     if (!isLoggedIn) {
-      setIsModalOpen(true); //로그인이 안된 경우
+      setIsModalOpen(true);
     }
   };
 
@@ -163,7 +163,12 @@ const PetTalkDetail = () => {
             <CommentItem />
           </div>
           <div className={styles.replyWrite_wrapper}>
-            <img src="" alt="profile" />
+            <img src={default_user} alt="profile" />
+            {/* user_profile 이미지 불러오기 */}
+            {/* <img
+              src={isLoggedIn ? "user_profile" : default_user}
+              alt="profile"
+            /> */}
             <input
               type="text"
               placeholder="댓글을 작성해주세요"
