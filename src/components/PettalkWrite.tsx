@@ -21,8 +21,15 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
 
     if (imageLists) {
       for (let i = 0; i < imageLists.length; i++) {
-        const currentImageUrl = URL.createObjectURL(imageLists[i]) as never;
-        imageUrlLists.push(currentImageUrl);
+        const currentImage = imageLists[i];
+        const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+        if (validImageTypes.includes(currentImage.type)) {
+          const currentImageUrl = URL.createObjectURL(currentImage) as never;
+          imageUrlLists.push(currentImageUrl);
+        } else {
+          alert("올바른 이미지 형식이 아닙니다.");
+        }
       }
 
       if (imageUrlLists.length > 4) {
