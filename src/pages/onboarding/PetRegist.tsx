@@ -14,6 +14,8 @@ const PetRegist = () => {
   const [ageError, setAgeError] = useState("");
   const [showGender, setShowGender] = useState(false);
   const [showAge, setShowAge] = useState(false);
+  const [inPettypeValid, setInPettypeValid] = useState(true);
+  const [inAgeValid, setInAgeValid] = useState(true);
 
   const handlePettypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPettype = event.target.value;
@@ -21,19 +23,22 @@ const PetRegist = () => {
 
     const regex = /^[가-힣a-zA-Z0-9]*$/;
     if (newPettype.length === 0) {
-      setPettypeError("");
+      setPettypeError('');
+      setInPettypeValid(true);
     } else if (!regex.test(newPettype) || newPettype.length < 1 || newPettype.length > 10) {
-      setPettypeError("닉네임이 잘못 입력되었습니다.");
+      setPettypeError('특수문자 및 공백을 제외한 최소 1자~10자 입력');
+      setInPettypeValid(false); 
     } else {
-      setPettypeError("");
+      setPettypeError('');
       setShowGender(true);
+      setInPettypeValid(true);
     }
   };
 
   const handlePetSelection = (male: MaleType) => {
     if (selectedMale === male) {
       setSelectedMale(null);
-      setShowAge(false); // 클릭하면 나이 입력 영역 숨김
+      setShowAge(false);
     } else {
       setSelectedMale(male);
       setShowAge(true);
@@ -42,22 +47,24 @@ const PetRegist = () => {
 
   const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newAge = event.target.value;
-    // 입력값이 숫자인지 확인
     if (!isNaN(Number(newAge))) {
       setAge(newAge);
 
       const ageValue = Number(newAge);
       const ageRegex = /^[1-9][0-9]?$|^25$/;
-      
+
       if (ageValue >= 1 && ageValue <= 25 && ageRegex.test(newAge)) {
-        setAgeError("");
+        setAgeError('');
+        setInAgeValid(true); 
       } else {
-        setAgeError("나이를 1세에서 25세 사이의 숫자로 입력해주세요.");
+        setAgeError('나이를 1세에서 25세 사이의 숫자로 입력해주세요.');
+        setInAgeValid(false); 
       }
     } else {
-      setAgeError(""); // 입력값이 비어있으면 오류 메시지를 지움
+      setAgeError('숫자만 입력해주세요.');
+      setInAgeValid(false); // Set age as invalid
     }
-  }
+  };
 
   const navigate = useNavigate();
 
@@ -88,9 +95,7 @@ const PetRegist = () => {
               placeholder="ex) 말티즈, 브리티쉬 숏헤어"
               value={pettype}
               onChange={handlePettypeChange}
-              style={{
-                borderColor: pettypeError ? '#F42A3B' : undefined
-              }}
+              className={inPettypeValid ? '' : styles.invalid}
             />
             {pettypeError && (
               <p>{pettypeError}</p>
@@ -122,9 +127,7 @@ const PetRegist = () => {
               placeholder="숫자만 입력해 주세요"
               value={age}
               onChange={handleAgeChange}
-              style={{
-                borderColor: ageError ? '#F42A3B' : undefined
-              }}
+              className={inAgeValid ? '' : styles.invalid}
             />
             {ageError && (
               <p>{ageError}</p>
