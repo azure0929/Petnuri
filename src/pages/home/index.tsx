@@ -6,6 +6,7 @@ import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
 import LoginModal from "@/components/modal/LoginModal";
 import HomeEventList from "@/components/HomeEventList";
+import dog from '@/assets/위생관리.png'
 import { useSetRecoilState } from "recoil";
 import { kitModalState, loginModalState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
@@ -56,6 +57,14 @@ const Home = () => {
     if (selectedProfileFromList) {
       setActivePetName(selectedProfileFromList.name);
       setSelectedProfile(selectedProfileFromList); // 첫 렌더링 시 선택된 프로필 설정
+    } else {
+      // 데이터가 없는 경우 기본 값을 설정합니다.
+      setSelectedProfile({
+        image: dog,
+        name: '익명의 집사',
+        gender: '',
+        age: null
+      });
     }
   }, [petProfile]);
 
@@ -113,17 +122,26 @@ const Home = () => {
               <div className={styles.info}>
                 <img src={selectedProfile?.image} alt="" className={styles.photo}/>
                 <div className={styles.nga}>
-                  <span className={styles.name}>
-                    {selectedProfile?.name && selectedProfile.name.length > 4 
-                    ? selectedProfile.name.substring(0, 4) 
+                  {/* 데이터가 없을 때는 이름 전체를 출력 */}
+                  <span className={styles.name}> 
+                    {(selectedProfile?.name && petProfile.length > 0 && selectedProfile.name.length > 4)
+                    ? selectedProfile.name.substring(0,4)
                     : selectedProfile?.name}
                   </span>
-                  <span className={styles.gender}> · {selectedProfile?.gender}</span>
-                  <span className={styles.age}>({selectedProfile?.age}세)</span>
-                </div>
-                <div className={styles.modify} onClick={onPetProfileModify}>수정하기</div>
-              </div>
-            )}
+                  {selectedProfile.gender && selectedProfile.age &&
+                   <>
+                     <span className={styles.gender}> · {selectedProfile?.gender}</span>
+                     <span className={styles.age}>({selectedProfile?.age}세)</span>
+                   </>
+                 }
+               </div>
+               {/* 데이터가 있을 때는 "수정하기", 없을 때는 "등록하기"를 표시 */}
+               <div className={styles.modify} onClick={() => 
+                petProfile.length > 0 ? onPetProfileModify() : onPetProfileAdd()}>
+                 {petProfile.length > 0 ? '수정하기' : '등록하기'}
+               </div>
+             </div>
+           )}
             </div>
           </div>
           <div className={styles.recommend}>
@@ -137,7 +155,7 @@ const Home = () => {
               <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
           </div>
-          <LoginModal />
+
           <div className={styles.hot}>
             <div className={styles.title}>
               <h3>펫톡 인기글</h3>
@@ -177,6 +195,7 @@ const Home = () => {
             </div>
           </div>   
         </div>
+        <LoginModal />
         <KitModal/> 
       </Background>
       <MainTab />
