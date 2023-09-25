@@ -1,4 +1,4 @@
-import styles from '@/styles/deliverybs/deliverybsagree.module.scss'
+import styles from '@/styles/challenge/deliverybs/deliverybsagree.module.scss'
 import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
 import DeliveryBSHead from '@/pages/challenge/deliverybs/DeliveryBSHead';
 import BottomButton from '@/components/challenge/BottomButton';
@@ -6,12 +6,18 @@ import DeliveryBSName from '@/pages/challenge/deliverybs/DeliveryBSName';
 import DeliveryBSContact from '@/pages/challenge/deliverybs/DeliveryBSContact'
 import DeliveryBSAddress from '@/pages/challenge/deliverybs/DeliveryBSAddress'
 import { useState, useEffect } from 'react'
-
+import { useSetRecoilState } from 'recoil';
+import { BSTypeState } from '@/store/challengeState';
 
 
 const DeliveryReg = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [agreedCheck, setAgreeCheck] = useState(false);
+  const setBSType = useSetRecoilState(BSTypeState);
+
+  const handleReg = () => {
+    setBSType('DeliveryBS');
+  };
 
   const agreedBtnEvent = () => {
     if (agreedCheck === false) {
@@ -56,7 +62,7 @@ const DeliveryReg = () => {
   return (
     <>
       <BottomSheet>
-        <DeliveryBSHead text={'배송지 등록'}/>
+        <DeliveryBSHead text={'배송지 등록'} onClick={handleReg}/>
         <DeliveryBSName onNameComplete={handleNameComplete} />
         <DeliveryBSContact onContactComplete={handleContactComplete} />
         <DeliveryBSAddress onAddressComplete={handleAddressComplete} />
@@ -74,7 +80,11 @@ const DeliveryReg = () => {
             </label>
           </div>
         </div>
-        <BottomButton text={'배송지 등록하기'} isDisabled={isButtonDisabled}/>
+        <BottomButton 
+        text={'배송지 등록하기'} 
+        isDisabled={isButtonDisabled}
+        onClick={handleReg}
+        />
       </BottomSheet>
     </>
   )

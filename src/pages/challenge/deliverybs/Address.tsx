@@ -1,6 +1,18 @@
 import styles from "@/styles/challenge/deliverybs/address.module.scss";
+import { useSetRecoilState } from 'recoil';
+import { BSTypeState } from '@/store/challengeState';
 
 const Address = ({ addressData }) => {
+  const setBSType = useSetRecoilState(BSTypeState);
+
+  const handleReg = () => {
+    setBSType('DeliveryReg');
+  };
+
+  const handleList = () => {
+    setBSType('DeliveryList');
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -31,9 +43,9 @@ const Address = ({ addressData }) => {
           <>
             <div className={styles.noAddressContainer}>
               <div className={styles.title}>배송 정보</div>
-              <div className={styles.addressList}>배송지 목록</div>
+              <div className={styles.addressList} onClick={handleList}>배송지 목록</div>
             </div>
-            <button className={styles.registBtn}>배송지 등록</button>
+            <button className={styles.registBtn} onClick={handleReg}>배송지 등록</button>
           </>
         )}
       </div>

@@ -23,6 +23,7 @@
 
   .box1 {
     display: flex;
+    justify-content: space-between;
     gap: 8px;
   }
   .box2 {
@@ -36,4 +37,9 @@
     justify-content: end;
     gap: 8px;
   }
+}
+
+.bottom_text{
+  color: $gray_0500_999999;
+  @include body_regular_14px;
 }

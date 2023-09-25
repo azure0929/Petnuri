@@ -3,15 +3,16 @@ import styles from '@/styles/editbtn.module.scss'
 interface EditBtnProps {
   version: 'dark' | 'light'
   text: string
+  onClick?: () => void;
 }
 
-const EditBtn = ({ version, text }:EditBtnProps) => {
+const EditBtn = ({ version, text, onClick }:EditBtnProps) => {
   const btnStyle = version === 'dark' ? styles.dark : styles.light;
   
   return (
-    <button className={`${styles.container} ${btnStyle}`}>
+    <div className={`${styles.container} ${btnStyle}`} onClick={onClick}>
       {text}
-    </button>
+    </div>
   )
 }
 

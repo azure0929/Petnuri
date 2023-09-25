@@ -1,5 +1,8 @@
 import styles from '@/styles/fulladress.module.scss'
 import EditBtn from './EditBtn'
+import close from '@/assets/close.svg'
+import { useSetRecoilState } from 'recoil';
+import { deliveryDataState, BSTypeState } from '@/store/challengeState';
 
 interface FullAdressProps {
   item:Privacy
@@ -7,7 +10,21 @@ interface FullAdressProps {
   onSelect: () => void;
 }
 
-const FullAdress = ({item, isSelected, onSelect}: FullAdressProps) => {
+const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
+  const setDeliveryData = useSetRecoilState(deliveryDataState);
+  const setBSType = useSetRecoilState(BSTypeState);
+
+  const handleEdit = () => {
+    setDeliveryData({
+      name: item.name,
+      phone: item.phone,
+      address1: item.add1,
+      address2: item.add2,
+      zonecode:item.zonecode,
+      isSelected:item.default
+     });
+    setBSType('DeliveryReg')
+  };
 
   return (
     <>
@@ -17,9 +34,12 @@ const FullAdress = ({item, isSelected, onSelect}: FullAdressProps) => {
 
       <div className={styles.body}>
         <div className={styles.box1}>
-          <div>{item.name}</div>
-          <span>|</span>
-          <div>{item.phone}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div>{item.name}</div>
+            <span>|</span>
+            <div>{item.phone}</div>
+          </div>
+          <img src={close} alt="" />
         </div>
 
         <div className={styles.box2}>
@@ -29,7 +49,7 @@ const FullAdress = ({item, isSelected, onSelect}: FullAdressProps) => {
         </div>
 
         <div className={styles.box3}>
-          <EditBtn version='light' text='수정'/>
+          <EditBtn version='light' text='수정' onClick={handleEdit}/>
           <button onClick={onSelect}>
               <EditBtn version='dark' text='선택'/>
           </button>
