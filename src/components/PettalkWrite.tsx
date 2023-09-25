@@ -8,11 +8,20 @@ interface PettalkWriteProps {
 
 const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
   const [showImages, setShowImages] = useState([]);
-  const inputFileRef = useRef<HTMLInputElement>(null);
-
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [inputCount, setInputCount] = useState(0);
+
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
+  const handleContentChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    const newContent = e.target.value;
+    setContent(newContent);
+    setInputCount(newContent.length);
+  };
 
   const handleCategoryChange = (e: {
     target: { value: SetStateAction<string> };
@@ -26,14 +35,8 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
     setTitle(e.target.value);
   };
 
-  const handleContentChange = (e: {
-    target: { value: SetStateAction<string> };
-  }) => {
-    setContent(e.target.value);
-  };
-
   const isSubmitButtonEnabled = () => {
-    return category !== "" && title !== "" && content !== "";
+    return category !== "" && title !== "" && inputCount !== 0;
   };
 
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,15 +135,21 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
           placeholder="제목을 입력해주세요."
           value={title}
           onChange={handleTitleChange}
+          maxLength={100}
         />
       </div>
       <div className={styles.textarea}>
         <div className={styles.text}>게시글을 입력해주세요</div>
         <textarea
           placeholder="욕설과 비방의 내용은 제재의 대상이 될 수 있습니다."
-          value={content}
           onChange={handleContentChange}
+          maxLength={1000}
+          value={content}
         />
+        <p className={styles.inputCount}>
+          <span>{inputCount}</span>
+          <span>/1000</span>
+        </p>
       </div>
       <div className={styles.btnarea}>
         <button

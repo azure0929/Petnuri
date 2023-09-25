@@ -125,6 +125,7 @@
     flex-direction: column;
     margin: 24px;
     padding-bottom: 40px;
+    margin-bottom: 100px;
     .text {
       text-align: left;
       font-size: 16px;
@@ -136,7 +137,6 @@
     textarea {
       width: 327px;
       height: 250px;
-      margin-bottom: 100px;
       background-color: $gray_0100_F5F5F5;
       border: none;
       border-radius: 12px;
@@ -147,6 +147,13 @@
       color: $gray_0600_707070;
       line-height: 20px;
       letter-spacing: -0.1px;
+    }
+    .inputCount {
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 8px;
+      text-align: right;
+      color: $gray_0600_707070;
     }
   }
 
