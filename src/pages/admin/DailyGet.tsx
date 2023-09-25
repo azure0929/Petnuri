@@ -8,7 +8,7 @@ const DailyGet = () => {
       try {
         const response = await fetch('/Daily.json');
         const data = await response.json();
-        setChallenges(data);
+        setChallenges(data.data);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -21,7 +21,7 @@ const DailyGet = () => {
      <>
        {challenges.map(challengeData => (
          <div key={challengeData.challengeId}>
-           <h1>챌린지 이름 : {challengeData.challengeName}</h1>
+           <h1>챌린지 이름 : {challengeData.name}</h1>
            <p>챌린지 설명 : {challengeData.challengeReview}</p>
            <p>섬네일 : 
             <img 

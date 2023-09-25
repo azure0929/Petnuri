@@ -1,11 +1,47 @@
-[
-  {
-    "challengeId": 1,
-    "challengeName": "간식 바치기", 
-    "challengeReview": "반려동물에게 간식주는 사진 인증하기",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-    "userId": 1, 
-    "review": [ 
+{
+  "data":[
+    {
+      "challengeId": 1,
+      "name": "간식 바치기", 
+      "challengeReview": "간식주는 사진 인증하기",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "userId": 1, 
+      "review": [ 
+          {
+            "reviewUserId": 2,
+            "reviewUserNickname": "홍길동",
+            "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          },
+          {
+            "reviewUserId": 3,
+            "reviewUserNickname": "고길동",
+            "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          },
+          {
+            "reviewUserId": 4,
+            "reviewUserNickname": "도우너",
+            "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          },
+          {
+            "reviewUserId": 5,
+            "reviewUserNickname": "둘리",
+            "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          },
+          {
+            "reviewUserId": 6,
+            "reviewUserNickname": "희동이",
+            "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          }
+      ],
+      "status": true
+    },
+    {
+      "challengeId": 2,
+      "name": "산책 시키기", 
+      "challengeReview": "반려동물과 산책하는 사진 인증하기",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "userId": 1, 
+      "review": [ 
         {
           "reviewUserId": 2,
           "reviewUserNickname": "홍길동",
@@ -15,17 +51,32 @@
           "reviewUserId": 3,
           "reviewUserNickname": "고길동",
           "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+        },
+        {
+          "reviewUserId": 4,
+          "reviewUserNickname": "도우너",
+          "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+        },
+        {
+          "reviewUserId": 5,
+          "reviewUserNickname": "둘리",
+          "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+        },
+        {
+          "reviewUserId": 6,
+          "reviewUserNickname": "희동이",
+          "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
         }
-    ],
-    "status": true
-  },
-  {
-    "challengeId": 2,
-    "challengeName": "산책 시키기", 
-    "challengeReview": "반려동물과 산책하는 사진 인증하기",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-    "userId": 1, 
-    "review": [ 
+      ],
+      "status": true
+    },
+    {
+      "challengeId": 3,
+      "name": "위생 관리", 
+      "challengeReview": "청소하는 사진 인증하기",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "userId": 1, 
+      "review": [ 
         {
           "reviewUserId": 2,
           "reviewUserNickname": "홍길동",
@@ -35,28 +86,25 @@
           "reviewUserId": 3,
           "reviewUserNickname": "고길동",
           "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
-        }
-    ],
-    "status": true
-  },
-  {
-    "challengeId": 3,
-    "challengeName": "위생 관리", 
-    "challengeReview": "청소하는 사진 인증하기",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-    "userId": 1, 
-    "review": [ 
+        },
         {
-          "reviewUserId": 2,
-          "reviewUserNickname": "홍길동",
+          "reviewUserId": 4,
+          "reviewUserNickname": "도우너",
           "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
         },
         {
-          "reviewUserId": 3,
-          "reviewUserNickname": "고길동",
+          "reviewUserId": 5,
+          "reviewUserNickname": "둘리",
+          "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+        },
+        {
+          "reviewUserId": 6,
+          "reviewUserNickname": "희동이",
           "reviewImgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
         }
-    ],
-    "status": true
-  }
-]
+      ],
+      "status": true
+    }  
+  ]
+}
+  

@@ -1,19 +1,16 @@
 {
-  "title": "야너도? 야나도!",
-  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-  "images": [
-    "url",
-    "url"
-  ],
-  "rewardStartDate":"2023-09-01",
-  "rewardEndDate":"2023-09-13",
-  "rewardList":[
+  "data": [
     {
-      "eventId":1,
-      "itemId":1,
-      "name":"14일중 원하는 날에 반려일기 10회작성"
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+      "challengeId": 1,
+      "name":"슬기로운 반려생활",
+      "subName":"검진키트 무료체험 해보기",
+      "authMethod":"인증 사진 업로드",
+      "payment":1,
+      "startDate":"2023-10-09",
+      "endDate":"2023-10-15",
+      "status":"READY",
+      "rewardStatus":"false"
     }
-  ],
-  "process": "unprocessed"
-
+  ]
 }

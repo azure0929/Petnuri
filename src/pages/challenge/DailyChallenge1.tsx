@@ -5,20 +5,41 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import SaveBS from "./SaveBS";
+import DailySaveBS from "./DailySaveBS";
+import styles from "@/styles/challenge/challengejoin.module.scss";
+import { useState, useEffect } from "react";
+import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/간식주기.png";
 
 const DailyChallenge1 = () => {
+  const scrollRef = useScrollDiv();
+  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/Daily.json");
+        const data = await response.json();
+        setChallenges(data.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const head: challengeHead = {
-    head: "간식 바치기",
+    head: "간식 주기 챌린지",
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {
-    mainTitle: "간식 바치기",
-    subTitle: "간식 바치기",
+    mainTitle: "간식 주기 챌린지",
+    subTitle: "간식 주기 챌린지",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
@@ -27,21 +48,26 @@ const DailyChallenge1 = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-  const join: challengeJoin = {
-    participantsTitle: "다른 집사들도 참여중이에요!",
-    participantsImg: "이미지",
-    participantsName: "아이디",
-  };
-
   return (
     <>
       <Background>
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin join={join} />
+        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+        <div className={styles.participants} ref={scrollRef}>
+          {challenges[0]?.review.map((review, reviewIndex) => (
+            <ChallengeJoin
+              key={reviewIndex}
+              join={{
+                participantsImg: review.reviewImgUrl,
+                participantsName: review.reviewUserNickname,
+              }}
+            />
+          ))}
+        </div>
         <JoinButton />
-        <SaveBS />
+        <DailySaveBS />
         <MainTab />
       </Background>
     </>

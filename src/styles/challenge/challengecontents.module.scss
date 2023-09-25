@@ -1,0 +1,84 @@
+.title {
+  display: block;
+  margin-top: 24px;
+  .mainTitle {
+    text-align: start;
+    font-weight: 600;
+    line-height: 24px;
+    font-size: 18px;
+    padding: auto 0;
+    margin-left: 24px;
+    margin-bottom: 2px;
+  }
+  .subTitle {
+    text-align: start;
+    width: 327px;
+    line-height: 20px;
+    padding: auto 0;
+    font-size: 14px;
+    color: #707070;
+    margin-left: 24px;
+  }
+}
+
+.contents {
+  display: block;
+  width: 375px;
+  margin-top: 16px;
+  .how {
+    display: flex;
+    padding: 16px 0 16px 24px;
+    .howTitle {
+      display: block;
+      width: 120px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+    .howInfo {
+      display: block;
+      width: 208px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+  }
+
+  .period {
+    display: flex;
+    padding: 16px 24px;
+    .periodTitle {
+      display: block;
+      width: 120px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+    .periodInfo {
+      display: block;
+      width: 208px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+  }
+
+  .point {
+    display: flex;
+    padding: 16px 24px;
+    .pointTitle {
+      display: block;
+      width: 120px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+    .pointInfo {
+      display: block;
+      width: 208px;
+      text-align: start;
+      padding: auto 0;
+      line-height: 20px;
+    }
+  }
+}

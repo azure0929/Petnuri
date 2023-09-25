@@ -33,6 +33,7 @@
 
 .content_wrapper {
   padding: 80px 0 65px 0;
+  overflow: hidden;
   .select_wrap {
     display: flex;
     margin: 0 24px;
@@ -86,7 +87,7 @@
         .user_info {
           display: flex;
           align-items: center;
-          column-gap: 4px;
+          column-gap: 8px;
           img {
             width: 26px;
             height: 26px;
@@ -98,7 +99,7 @@
             font-size: 14px;
             font-weight: 600;
           }
-          .today_date {
+          .date {
             color: $gray_0600_707070;
             font-size: 12px;
             font-weight: 400;
@@ -107,15 +108,15 @@
         .title {
           color: $gray_0900_171717;
           margin: 8px 0;
-          margin-left: 30px;
+          margin-left: 35px;
           font-size: 14px;
           font-weight: 600;
         }
         .text_wrapper {
           margin-bottom: 12px;
           .content_text {
-            color: $gray_0900_171717;
-            margin-left: 30px;
+            color: $gray_0700_5C5C5C;
+            margin-left: 35px;
             font-size: 14px;
             font-weight: 400;
             width: 293px;
@@ -138,7 +139,7 @@
             padding: 0;
             overflow: visible;
             cursor: pointer;
-            margin-left: 30px;
+            margin-left: 35px;
           }
         }
 
@@ -148,7 +149,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-left: 30px;
+          margin-left: 35px;
 
           img {
             width: 293px;
@@ -158,7 +159,7 @@
         .response_wrapper {
           display: flex;
           gap: 8px;
-          margin-left: 30px;
+          margin-left: 35px;
           margin-top: 12px;
           .icon_area {
             display: flex;
@@ -188,7 +189,6 @@
     align-items: center;
     background-color: $brand_blue_200_3F54D1;
     border-radius: 100%;
-    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
     cursor: pointer;
     position: fixed;
     right: 320px;
@@ -204,6 +204,31 @@
       transform: rotate(45deg);
     }
     z-index: 50;
+  }
+  .category_wrapper {
+    width: 327px;
+    display: flex;
+    margin: 0 24px;
+    padding-bottom: 24px;
+    white-space: nowrap;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    button {
+      border: 1px solid $gray_0300_D6D6D6;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-right: 8px;
+      &.active_button {
+        color: $base_white_ffffff;
+        background-color: $base_black_000000;
+      }
+    }
   }
 }
 .menu {
@@ -246,6 +271,28 @@
 }
 
 .modal_backdrop.active {
-  opacity: 1; /* active일 때 불투명한 상태 */
-  visibility: visible; /* active일 때 화면에 보이도록 설정 */
+  opacity: 1;
+  visibility: visible;
+}
+
+.category_wrapper {
+  width: 327px;
+  display: flex;
+  margin: 0 24px;
+  padding-bottom: 24px;
+  white-space: nowrap;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  button {
+    border: 1px solid $gray_0300_D6D6D6;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-right: 8px;
+  }
 }

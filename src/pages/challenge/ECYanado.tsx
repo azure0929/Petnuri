@@ -5,15 +5,36 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import SaveBS from "./SaveBS";
+import EventSaveBS from "@/pages/challenge/EventSaveBS";
+import styles from "@/styles/challenge/challengejoin.module.scss";
+import { useState, useEffect } from "react";
+import { useScrollDiv } from "@/utils/Scroll";
+import BannerImg from "@/assets/반려일기.png";
 
 const ECYanado = () => {
+  const scrollRef = useScrollDiv();
+  const [joinList, setJoinList] = useState<joinList[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/Chamyo.json");
+        const data = await response.json();
+        setJoinList(data.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const head: challengeHead = {
-    head: "천하제일 집사대회",
+    head: "야 너도? 야 나도!",
   };
 
   const banner: challengeBanner = {
-    bannerImg: "배너 이미지",
+    bannerImg: BannerImg,
   };
 
   const contents: challengeContents = {
@@ -27,21 +48,26 @@ const ECYanado = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
-  const join: challengeJoin = {
-    participantsTitle: "다른 집사들도 참여중이에요!",
-    participantsImg: "이미지",
-    participantsName: "아이디",
-  };
-
   return (
     <>
       <Background>
         <ChallengeHead head={head} />
         <ChallengeBanner banner={banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin join={join} />
+        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+        <div className={styles.participants} ref={scrollRef}>
+          {joinList.map((joinItem, index) => (
+            <ChallengeJoin
+              key={index}
+              join={{
+                participantsImg: joinItem.imageUrl,
+                participantsName: joinItem.nickName,
+              }}
+            />
+          ))}
+        </div>
         <JoinButton />
-        <SaveBS />
+        <EventSaveBS />
         <MainTab />
       </Background>
     </>

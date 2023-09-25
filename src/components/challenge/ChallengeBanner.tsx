@@ -1,4 +1,4 @@
-import styles from "@/styles/challengebanner.module.scss";
+import styles from "@/styles/challenge/challengebanner.module.scss";
 
 interface bannerProps {
   banner: challengeBanner;
@@ -12,7 +12,7 @@ const ChallengeBanner: React.FC<bannerProps> = ({ banner }) => {
   return (
     <>
       <div className={styles.bannerImg} onClick={handleDivClick}>
-        asd
+        <img src={banner.bannerImg}></img>
       </div>
     </>
   );
