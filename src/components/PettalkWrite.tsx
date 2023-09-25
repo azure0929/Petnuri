@@ -1,11 +1,42 @@
 import styles from "@/styles/write.module.scss";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import { useState, useRef } from "react";
 
 interface PettalkWriteProps {
   isFreeTalkWrite: boolean;
 }
 
 const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
+  const [showImages, setShowImages] = useState([]);
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
+  const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const imageLists = event.target.files;
+    let imageUrlLists = [...showImages];
+
+    if (imageUrlLists.length > 4) {
+      alert("더 이상 이미지를 추가할 수 없습니다.");
+      return;
+    }
+
+    if (imageLists) {
+      for (let i = 0; i < imageLists.length; i++) {
+        const currentImageUrl = URL.createObjectURL(imageLists[i]) as never;
+        imageUrlLists.push(currentImageUrl);
+      }
+
+      if (imageUrlLists.length > 4) {
+        imageUrlLists = imageUrlLists.slice(0, 10);
+      }
+
+      setShowImages(imageUrlLists);
+    }
+  };
+
+  const handleDeleteImage = (id: number) => {
+    setShowImages(showImages.filter((_, index) => index !== id));
+  };
+
   return (
     <div className={styles.all}>
       {!isFreeTalkWrite ? (
@@ -21,18 +52,37 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
       ) : null}
       <div className={styles.photoarea}>
         <div className={styles.photo}>사진 등록하기</div>
-        <div>
-          <label htmlFor="file">
-            <div className={styles.upload}>
+        <div className={styles.photoInput}>
+          <div className={styles.label}>
+            <div
+              className={styles.upload}
+              onClick={() => {
+                if (showImages.length < 3) {
+                  inputFileRef.current?.click();
+                }
+              }}
+            >
               <AiOutlinePlus className={styles.icon} />
             </div>
-          </label>
+            <div className={styles.imageList}>
+              {showImages.map((image, id) => (
+                <div className={styles.imageContainer} key={id}>
+                  <img src={image} alt={`${image}-${id}`} />
+                  <button onClick={() => handleDeleteImage(id)}>
+                    <AiOutlineClose />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
           <input
             type="file"
-            name="file"
-            id="file"
-            style={{ display: "none" }}
+            id="input-file"
             multiple
+            name="file"
+            style={{ display: "none" }}
+            onChange={handleAddImages}
+            ref={inputFileRef}
           />
         </div>
       </div>
