@@ -117,12 +117,6 @@ const EditInfo = () => {
               숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
             </span>
           </div>
-          <div className={styles.numinputarea}>
-            휴대폰번호
-            <div className={styles.numinput}>
-              <input placeholder="010-0000-0000" />
-            </div>
-          </div>
         </div>
         <div
           className={styles.exit}
