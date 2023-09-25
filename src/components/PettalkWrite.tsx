@@ -1,6 +1,6 @@
 import styles from "@/styles/write.module.scss";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
-import { useState, useRef } from "react";
+import { useState, useRef, SetStateAction } from "react";
 
 interface PettalkWriteProps {
   isFreeTalkWrite: boolean;
@@ -9,6 +9,32 @@ interface PettalkWriteProps {
 const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
   const [showImages, setShowImages] = useState([]);
   const inputFileRef = useRef<HTMLInputElement>(null);
+
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const handleCategoryChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setCategory(e.target.value);
+  };
+
+  const handleTitleChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setTitle(e.target.value);
+  };
+
+  const handleContentChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setContent(e.target.value);
+  };
+
+  const isSubmitButtonEnabled = () => {
+    return category !== "" && title !== "" && content !== "";
+  };
 
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageLists = event.target.files;
@@ -52,8 +78,15 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
             name="category"
             className={styles.category}
             disabled={isFreeTalkWrite}
+            onChange={handleCategoryChange}
+            value={category}
           >
-            <option>카테고리를 선택하세요</option>
+            <option value="">카테고리를 선택하세요</option>
+            <option value="질병/질환">질병/질환</option>
+            <option value="미용/패션">미용/패션</option>
+            <option value="교육/훈련">교육/훈련</option>
+            <option value="양육/관리">양육/관리</option>
+            <option value="반려용품">반려용품</option>
           </select>
         </div>
       ) : null}
@@ -95,14 +128,30 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
       </div>
       <div className={styles.titlearea}>
         <div className={styles.title}>제목을 입력해주세요</div>
-        <input placeholder="제목을 입력해주세요." />
+        <input
+          placeholder="제목을 입력해주세요."
+          value={title}
+          onChange={handleTitleChange}
+        />
       </div>
       <div className={styles.textarea}>
         <div className={styles.text}>게시글을 입력해주세요</div>
-        <textarea placeholder="욕설과 비방의 내용은 제재의 대상이 될 수 있습니다." />
+        <textarea
+          placeholder="욕설과 비방의 내용은 제재의 대상이 될 수 있습니다."
+          value={content}
+          onChange={handleContentChange}
+        />
       </div>
       <div className={styles.btnarea}>
-        <button>작성 완료</button>
+        <button
+          style={{
+            backgroundColor: isSubmitButtonEnabled() ? "#3F54D1" : "",
+            color: isSubmitButtonEnabled() ? "#fff" : "",
+          }}
+          disabled={!isSubmitButtonEnabled()}
+        >
+          작성 완료
+        </button>
       </div>
     </div>
   );
