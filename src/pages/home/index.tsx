@@ -60,6 +60,7 @@ const Home = () => {
     } else {
       // 데이터가 없는 경우 기본 값을 설정합니다.
       setSelectedProfile({
+        id: null,
         image: dog,
         name: '익명의 집사',
         gender: '',
@@ -102,7 +103,7 @@ const Home = () => {
             <div className={styles.tabmenu}>
               {petProfile.map((profile) =>
                 <div 
-                  key={profile.name} 
+                  key={profile.id} 
                   onClick={() => handleItemClick(profile.name)}
                   className={activePetName === profile.name ? styles.active : styles.add}
                 >

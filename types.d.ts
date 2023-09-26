@@ -96,6 +96,7 @@ interface Privacy {
 }
 
 interface HomePet {
+  id: number | null
   image: string;
   name: string;
   age: number | null;

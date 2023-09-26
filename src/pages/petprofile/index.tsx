@@ -10,6 +10,7 @@ import { createPetProfile } from '@/lib/apis/petProfileApi';
 
 const PetProfileAdd = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isSelected, setIsSelected] = useState(false);
   const [gender, setGender] = useState('남');
   const [name, setName] = useState('');
@@ -34,12 +35,14 @@ const PetProfileAdd = () => {
     reader.onloadend = () => {
       if (typeof reader.result === 'string') {
         setImage(reader.result);
+        setImageFile(file);
       }
     };
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
     const formData = new FormData();
 
     const data = {
@@ -54,8 +57,8 @@ const PetProfileAdd = () => {
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
   
-    if (image) {
-      formData.append('file', image);
+    if (imageFile) {
+      formData.append('file', imageFile);
     }
 
     try {
