@@ -12,6 +12,7 @@ import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
 import BannerImg from "@/assets/천하제일 집사대회.png";
+import KitModal from "@/components/modal/KitModal";
 
 interface contestData {
   process: string;
@@ -102,6 +103,7 @@ const Contest = () => {
             : null}
         </div>
         {renderButton}
+        <KitModal />
         <DeliveryBS />
         <MainTab />
       </Background>

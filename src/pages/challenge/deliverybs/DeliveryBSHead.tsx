@@ -3,7 +3,7 @@ import leftArrow from "@/assets/arrow_left_mid.svg";
 import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 
-const DeliveryBSHead = () => {
+const DeliveryBSHead = ({ text }) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
   const onClickBack = () => {
@@ -16,7 +16,7 @@ const DeliveryBSHead = () => {
         <div className={styles.arrowImg} onClick={onClickBack}>
           <img src={leftArrow}></img>
         </div>
-        <div className={styles.header}>참여</div>
+        <div className={styles.header}>{text}</div>
       </div>
     </>
   );

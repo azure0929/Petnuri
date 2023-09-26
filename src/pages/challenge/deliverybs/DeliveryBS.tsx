@@ -93,7 +93,7 @@ const DeliveryBS = () => {
 
   return (
     <BottomSheet>
-      <DeliveryBSHead />
+      <DeliveryBSHead text={"참여 신청"} />
       {/* <DeliveryBSName onNameComplete={handleNameComplete} />
       <DeliveryBSHead text = '배송지 입력'/>
       <DeliveryBSName onNameComplete={handleNameComplete} />
@@ -108,15 +108,15 @@ const DeliveryBS = () => {
             onMessageComplete={handleMessageComplete}
             defaultAddress={defaultAddress}
           />
+          <DeliveryBSAgree
+            defaultAddress={defaultAddress}
+            onAgreedCheckChange={handleAgreedCheckChange}
+            onRuleCheckChange={handleRuleCheckChange}
+            onExchangeCheckChange={handleExchangeCheckChange}
+            onMarketingCheckChange={handleMarketingCheck}
+          />
         </>
       ) : null}
-
-      <DeliveryBSAgree
-        onAgreedCheckChange={handleAgreedCheckChange}
-        onRuleCheckChange={handleRuleCheckChange}
-        onExchangeCheckChange={handleExchangeCheckChange}
-        onMarketingCheckChange={handleMarketingCheck}
-      />
 
       {defaultAddress.length > 0 &&
       agreedCheck &&

@@ -5,14 +5,17 @@ import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
+import { createToast } from "@/utils/ToastUtils";
 
 const DailySaveBS = () => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const sucess = () => createToast("success", "포인트 지급이 완료되었습니다.");
 
   // 이미지 업로드
   const [newUserImg, setNewUserImg] = useState<string>();
 
   const closeBS = () => {
+    sucess();
     setBottomIsOpen(false);
   };
 

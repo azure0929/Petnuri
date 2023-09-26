@@ -8,6 +8,7 @@ const DeliveryBSAgree = ({
   onRuleCheckChange,
   onExchangeCheckChange,
   onMarketingCheckChange,
+  defaultAddress,
 }) => {
   // 약관 동의
   const [allCheck, setAllCheck] = useState(false);
@@ -109,87 +110,168 @@ const DeliveryBSAgree = ({
   return (
     <>
       {/* 약관 동의 */}
-      <div>
-        <div className={styles.form_agreement_box}>
-          <div className={styles.form_agreement_all}>
-            <input
-              type="checkbox"
-              id="all-check"
-              checked={allCheck}
-              onChange={allBtnEvent}
-              className={styles.allCheck}
-            />
-            <label htmlFor="all-check" className={styles.agreementLabel}>
-              <span>약관 전체동의</span>
-            </label>
-          </div>
-          <div className={styles.form_agreement_item}>
-            <input
-              type="checkbox"
-              id="check1"
-              checked={agreedCheck}
-              onChange={agreedBtnEvent}
-              className="check"
-            />
-            <label htmlFor="check1" className={styles.agreementLabel}>
-              <div className={styles.agreeTitle}>이용약관</div>
-              <span className={styles.red}>*</span>
-            </label>
-            <div onClick={openModal} className={styles.arrowImg}>
-              <img src={rightArrow} className={styles.rightArrow} />
+      {defaultAddress && defaultAddress.length > 0 ? (
+        <div>
+          <div className={styles.form_agreement_box}>
+            <div className={styles.form_agreement_all}>
+              <input
+                type="checkbox"
+                id="all-check"
+                checked={allCheck}
+                onChange={allBtnEvent}
+                className={styles.allCheck}
+              />
+              <label htmlFor="all-check" className={styles.agreementLabel}>
+                <span>약관 전체동의</span>
+              </label>
             </div>
-          </div>
-          <div className={styles.form_agreement_item}>
-            <input
-              type="checkbox"
-              id="check2"
-              checked={ruleCheck}
-              onChange={ruleBtnEvent}
-              className="check"
-            />
-            <label htmlFor="check2" className={styles.agreementLabel}>
-              <div className={styles.agreeTitle}>참가규칙</div>
-              <span className={styles.red}>*</span>
-            </label>
-            <div onClick={openModal}>
-              <img src={rightArrow} className={styles.rightArrow} />
-            </div>
-          </div>
-          <div className={styles.form_agreement_item}>
-            <input
-              type="checkbox"
-              id="check3"
-              checked={exchangeCheck}
-              onChange={exchangeBtnEvent}
-              className="check"
-            />
-            <label htmlFor="check3" className={styles.agreementLabel}>
-              <div className={styles.agreeTitle}>교환 및 반품 정책</div>
-              <span className={styles.red}>*</span>
-            </label>
-            <div onClick={openModal}>
-              <img src={rightArrow} className={styles.rightArrow} />
-            </div>
-          </div>
-          <div className={styles.form_agreement_item}>
-            <input
-              type="checkbox"
-              id="check4"
-              checked={marketingCheck}
-              onChange={marketingBtnEvent}
-              className="check"
-            />
-            <label htmlFor="check4" className={styles.agreementLabel}>
-              <div className={styles.agreeTitle}>
-                개인정보 제 3자 정보 제공 활용 동의
+            <div className={styles.form_agreement_item}>
+              <input
+                type="checkbox"
+                id="check1"
+                checked={agreedCheck}
+                onChange={agreedBtnEvent}
+                className="check"
+              />
+              <label htmlFor="check1" className={styles.agreementLabel}>
+                <div className={styles.agreeTitle}>이용약관</div>
+                <span className={styles.red}>*</span>
+              </label>
+              <div onClick={openModal} className={styles.arrowImg}>
+                <img src={rightArrow} className={styles.rightArrow} />
               </div>
-            </label>
-            <div onClick={openModal}>
-              <img src={rightArrow} className={styles.rightArrow} />
+            </div>
+            <div className={styles.form_agreement_item}>
+              <input
+                type="checkbox"
+                id="check2"
+                checked={ruleCheck}
+                onChange={ruleBtnEvent}
+                className="check"
+              />
+              <label htmlFor="check2" className={styles.agreementLabel}>
+                <div className={styles.agreeTitle}>참가규칙</div>
+                <span className={styles.red}>*</span>
+              </label>
+              <div onClick={openModal}>
+                <img src={rightArrow} className={styles.rightArrow} />
+              </div>
+            </div>
+            <div className={styles.form_agreement_item}>
+              <input
+                type="checkbox"
+                id="check3"
+                checked={exchangeCheck}
+                onChange={exchangeBtnEvent}
+                className="check"
+              />
+              <label htmlFor="check3" className={styles.agreementLabel}>
+                <div className={styles.agreeTitle}>교환 및 반품 정책</div>
+                <span className={styles.red}>*</span>
+              </label>
+              <div onClick={openModal}>
+                <img src={rightArrow} className={styles.rightArrow} />
+              </div>
+            </div>
+            <div className={styles.form_agreement_item}>
+              <input
+                type="checkbox"
+                id="check4"
+                checked={marketingCheck}
+                onChange={marketingBtnEvent}
+                className="check"
+              />
+              <label htmlFor="check4" className={styles.agreementLabel}>
+                <div className={styles.agreeTitle}>
+                  개인정보 제 3자 정보 제공 활용 동의
+                </div>
+              </label>
+              <div onClick={openModal}>
+                <img src={rightArrow} className={styles.rightArrow} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div>
+            <div className={styles.form_agreement_box}>
+              <div className={styles.form_agreement_all}>
+                <input
+                  type="checkbox"
+                  id="all-check"
+                  checked={allCheck}
+                  className={styles.allCheck}
+                />
+                <label htmlFor="all-check" className={styles.agreementLabel}>
+                  <span>약관 전체동의</span>
+                </label>
+              </div>
+              <div className={styles.form_agreement_item}>
+                <input
+                  type="checkbox"
+                  id="check1"
+                  checked={agreedCheck}
+                  className="check"
+                />
+                <label htmlFor="check1" className={styles.agreementLabel}>
+                  <div className={styles.agreeTitle}>이용약관</div>
+                  <span className={styles.red}>*</span>
+                </label>
+                <div className={styles.arrowImg}>
+                  <img src={rightArrow} className={styles.rightArrow} />
+                </div>
+              </div>
+              <div className={styles.form_agreement_item}>
+                <input
+                  type="checkbox"
+                  id="check2"
+                  checked={ruleCheck}
+                  className="check"
+                />
+                <label htmlFor="check2" className={styles.agreementLabel}>
+                  <div className={styles.agreeTitle}>참가규칙</div>
+                  <span className={styles.red}>*</span>
+                </label>
+                <div>
+                  <img src={rightArrow} className={styles.rightArrow} />
+                </div>
+              </div>
+              <div className={styles.form_agreement_item}>
+                <input
+                  type="checkbox"
+                  id="check3"
+                  checked={exchangeCheck}
+                  className="check"
+                />
+                <label htmlFor="check3" className={styles.agreementLabel}>
+                  <div className={styles.agreeTitle}>교환 및 반품 정책</div>
+                  <span className={styles.red}>*</span>
+                </label>
+                <div>
+                  <img src={rightArrow} className={styles.rightArrow} />
+                </div>
+              </div>
+              <div className={styles.form_agreement_item}>
+                <input
+                  type="checkbox"
+                  id="check4"
+                  checked={marketingCheck}
+                  className="check"
+                />
+                <label htmlFor="check4" className={styles.agreementLabel}>
+                  <div className={styles.agreeTitle}>
+                    개인정보 제 3자 정보 제공 활용 동의
+                  </div>
+                </label>
+                <div>
+                  <img src={rightArrow} className={styles.rightArrow} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <AgreeModal
         isOpen={modalOpen}
         closeModal={closeModal}
