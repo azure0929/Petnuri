@@ -31,18 +31,17 @@ const DeliveryReg = () => {
   };
 
   // 배송지 주소
-  const [roadAdressState, setRoadAdressState] = useState(
+  const [roadAddressState, setRoadAddressState] = useState(
     deliveryData.address1 || ""
   );
-  const [detailAdressState, setDetailAdressState] = useState(
+  const [detailAddressState, setDetailAddressState] = useState(
     deliveryData.address2 || ""
   );
-  const [zipCodeState] = useState(deliveryData.zonecode || "");
 
   const handleAddressComplete = (address: string) => {
     const [road, detail] = address.split(' ');
-    setRoadAdressState(road);
-    setDetailAdressState(detail);
+    setRoadAddressState(road);
+    setDetailAddressState(detail);
   };
 
   // 기본 배송지 설정 여부
@@ -58,9 +57,8 @@ const DeliveryReg = () => {
     if (
       nameState &&
       contactState &&
-      roadAdressState &&
-      detailAdressState &&
-      zipCodeState
+      roadAddressState &&
+      detailAddressState 
     ) {
       setButtonDisabled(false);
     } else {
@@ -69,9 +67,8 @@ const DeliveryReg = () => {
   }, [
     nameState,
     contactState,
-    roadAdressState,
-    detailAdressState,
-    zipCodeState,
+    roadAddressState,
+    detailAddressState,
   ]);
 
   return (
