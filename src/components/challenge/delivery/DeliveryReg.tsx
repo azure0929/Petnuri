@@ -39,7 +39,8 @@ const DeliveryReg = () => {
   );
   const [zipCodeState] = useState(deliveryData.zonecode || "");
 
-  const handleAddressComplete = (road: string, detail: string) => {
+  const handleAddressComplete = (address: string) => {
+    const [road, detail] = address.split(' ');
     setRoadAdressState(road);
     setDetailAdressState(detail);
   };
