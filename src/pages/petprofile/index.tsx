@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
+import { createPetProfile } from '@/lib/apis/petProfileApi';
 
 const PetProfileAdd = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -58,12 +59,12 @@ const PetProfileAdd = () => {
     }
 
     try {
-      await createPetProfile(formData, data);
+      await createPetProfile(formData);
    } catch (error) {
      console.error(error); 
    }
   }
-  
+
   const handleAgeChange = (e:any) => {
     const inputValue = e.target.value.replace('세', '');
     if (!isNaN(inputValue)) {
