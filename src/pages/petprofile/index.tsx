@@ -39,37 +39,31 @@ const PetProfileAdd = () => {
   };
 
   const handleSubmit = async () => {
-    // json으로 보낼때
     const formData = new FormData();
+
     const data = {
-      name,
-      age,
-      gender,
-      isSelected: isSelected.toString(),
+      petName: name,
+      petGender: gender === '남' ? '남' : '여',
+      petAge: age,
+      isSelected,
     };
-    formData.append("data", JSON.stringify(data));
-    // formdata로 보낼때
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('gender', gender);
-    formData.append('isSelected', isSelected.toString());
-    
+
+    formData.append(
+      "petProfileReq",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+  
     if (image) {
-      const file = new File([image], 'petProfile.jpg');
-      formData.append('image', file);
+      formData.append('file', image);
     }
+
     try {
-      const response = await fetch('/api/pet-profiles', { 
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error(error); 
-    }
+      await createPetProfile(formData, data);
+   } catch (error) {
+     console.error(error); 
+   }
   }
+  
   const handleAgeChange = (e:any) => {
     const inputValue = e.target.value.replace('세', '');
     if (!isNaN(inputValue)) {
