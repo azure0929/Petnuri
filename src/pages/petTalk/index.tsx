@@ -93,7 +93,7 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
 
             <div className={styles.talk_list}>
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />
@@ -133,14 +133,12 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
                 </Link>
               </div>
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />
                       <span className={styles.user_name}>닉네임</span>
-                      <span className={styles.today_date}>
-                        ・ 게시된 날짜 넣기
-                      </span>
+                      <span className={styles.date}>・ 게시된 날짜 넣기</span>
                     </div>
                     <div className={styles.title}>제목 텍스트 입니다.</div>
                     <div className={styles.text_wrapper}>
@@ -172,14 +170,12 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
               </div>
 
               <div className={styles.border}>
-                <Link to={`/pettalk/${petTalkId}`}>
+                <Link to={`/petTalk/${petTalkId}`}>
                   <div className={styles.item}>
                     <div className={styles.user_info}>
                       <img src="" alt="profile-img" />
                       <span className={styles.user_name}>닉네임</span>
-                      <span className={styles.today_date}>
-                        ・ 게시된 날짜 넣기
-                      </span>
+                      <span className={styles.date}>・ 게시된 날짜 넣기</span>
                     </div>
                     <div className={styles.title}>제목 텍스트 입니다.</div>
                     <div className={styles.text_wrapper}>

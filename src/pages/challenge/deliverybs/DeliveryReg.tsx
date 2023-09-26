@@ -1,10 +1,10 @@
 import styles from '@/styles/deliverybs/deliverybsagree.module.scss'
 import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
-import DeliveryBSHead from './deliverybs/DeliveryBSHead';
+import DeliveryBSHead from '@/pages/challenge/deliverybs/DeliveryBSHead';
 import BottomButton from '@/components/challenge/BottomButton';
-import DeliveryBSName from "./deliverybs/DeliveryBSName";
-import DeliveryBSContact from "./deliverybs/DeliveryBSContact";
-import DeliveryBSAddress from "./deliverybs/DeliveryBSAddress";
+import DeliveryBSName from '@/pages/challenge/deliverybs/DeliveryBSName';
+import DeliveryBSContact from '@/pages/challenge/deliverybs/DeliveryBSContact'
+import DeliveryBSAddress from '@/pages/challenge/deliverybs/DeliveryBSAddress'
 import { useState, useEffect } from 'react'
 
 
