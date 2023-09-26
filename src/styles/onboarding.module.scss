@@ -86,6 +86,9 @@
       ::placeholder {
         color: $gray_0500_999999;
       }
+      &.invalid {
+        border: 1px solid $red_accent_F42A3B;
+      }
     }
     p {
       margin-top: 6px;
