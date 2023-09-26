@@ -10,6 +10,7 @@ const OnBoarding = () => {
   const [showName, setShowName] = useState(false);
   const [nickname, setNickname] = useState('');
   const [nicknameError, setNicknameError] = useState('');
+  const [isNicknameValid, setIsNicknameValid] = useState(true);
   
   const navigate = useNavigate();
 
@@ -23,8 +24,8 @@ const OnBoarding = () => {
 
   const handlePetSelection = (pet: PetType) => {
     if (selectedPet === pet) {
-      setSelectedPet(null); // 버튼을 다시 클릭하면 active 상태 해제
-      setShowName(false); // 이름 입력 영역 숨김
+      setSelectedPet(null); 
+      setShowName(false);
     } else {
       setSelectedPet(pet);
       setShowName(true);
@@ -39,10 +40,13 @@ const OnBoarding = () => {
     const regex = /^[가-힣a-zA-Z0-9]*$/;
     if (newNickname.length === 0) {
       setNicknameError('');
+      setIsNicknameValid(true);
     } else if (!regex.test(newNickname) || newNickname.length < 1 || newNickname.length > 10) {
-      setNicknameError('닉네임이 잘못 입력되었습니다.');
+      setNicknameError('특수문자 및 공백을 제외한 최소 1자~10자 입력');
+      setIsNicknameValid(false);
     } else {
       setNicknameError('');
+      setIsNicknameValid(true);
     }
   };
 
@@ -88,9 +92,7 @@ const OnBoarding = () => {
               placeholder="반려동물의 이름이 뭔가요?"
               value={nickname}
               onChange={handleNicknameChange}
-              style={{
-                borderColor: nicknameError ? '#F42A3B' : undefined
-              }}
+              className={isNicknameValid ? '' : styles.invalid}
             />
             {nicknameError && (
               <p>{nicknameError}</p>
