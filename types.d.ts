@@ -89,10 +89,10 @@ interface Privacy {
   id: number;
   name: string;
   phone: string;
-  add1: string;
-  add2: string;
-  zonecode: string;
-  default: boolean;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased: boolean;
 }
 
 interface HomePet {

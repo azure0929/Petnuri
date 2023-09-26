@@ -5,19 +5,19 @@
 				"id": 1,
 				"name": "오유진",
 				"phone": "010-1111-2222",
-				"add1" : "서울시 강남구 1로", 
-				"add2" : "123동 123호",
-				"zonecode": "12345",
-				"default" : false
+				"roadAddress" : "서울시 강남구 1로", 
+				"address" : "123동 123호",
+				"zipcode": "12345",
+				"isBased" : false
 			},
 			{
 				"id": 2,
 				"name": "황인승",
 				"phone": "010-3333-4444",
-				"add1" : "서울시 여러분 담배꽁초",
-				"add2" : "버리지 마세요",
-				"zonecode": "제발",
-				"default": true
+				"roadAddress" : "서울시 여러분 담배꽁초",
+				"address" : "버리지 마세요",
+				"zipcode": "제발",
+				"isBased": true
 			}
 		]
 }
