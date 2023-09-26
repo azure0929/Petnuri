@@ -1,25 +1,60 @@
 {
-	"data": [
-	  {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-      "isSelected": false,
-      "name": "1번개",
-      "gender": "남",
-      "age": 1
-		},
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-      "isSelected": true,
-      "name": "2번개개개",
-      "gender": "여",
-      "age": 2
-		},
-    {
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-      "isSelected": false,
-      "name": "3번개",
-      "gender": "여",
-      "age": 3
-		}
-	]
+  "content": {
+      "petList": [
+          {
+              "id": 1,
+              "petName": "봄이",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+              "petGender": "male", 
+              "petAge": 12,
+              "isSeleceted": true 
+           },
+          {
+              "id": 2,
+              "petName": "봄이",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+              "petGender": "male", 
+              "petAge": 12,
+              "isSeleceted": false
+           }
+      ],
+      "challengeList": {
+          "rewardChallengeList": [ 
+              {
+                  "id": 1,
+                  "title": "천하제일 집사대회1",
+                  "subTitle": "펫누리 비대면 검진키트 이용후기 올리고 선물세트 받기",
+                  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+              },
+              {
+                  "id": 3,
+                  "title": "천하제일 집사대회3",
+                  "subTitle": "펫누리 비대면 검진키트 이용후기 올리고 선물세트 받기",
+                  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+              }
+          ],
+          "dailyChallenge": { 
+              "id": 2,
+              "title": "데일리 놀아주기",
+              "subTitle": "펫누리 비대면 검진키트 이용후기 올리고 선물세트 받기",
+              "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU"
+          }
+      },
+      "petTalkList": [
+          {
+              "id": 1,
+              "title": "string",
+              "writer": "string",
+              "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+              "createdAt": "2023-10-09"
+           },
+          {
+              "id": 1,
+              "title": "string",
+              "writer": "string",
+              "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+              "createdAt": "2023-10-09"
+           }
+      ]
+  }
 }
