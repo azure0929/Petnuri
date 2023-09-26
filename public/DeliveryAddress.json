@@ -1,20 +1,5 @@
 {
   "data": [
-    {
-      "name": "이정환",
-      "phone": "010-1234-1234",
-      "add1": "서울시 강남구 1로",
-      "add2": "123동 123호",
-      "zoneCode": "12345",
-      "default": true
-    },
-    {
-      "name": "leeJungHwan",
-      "phone": "010-4567-4567",
-      "add1": "서울시 서초구 14로",
-      "add2": "456동 456호",
-      "zoneCode": "45678",
-      "default": false
-    }
+
   ]
 }

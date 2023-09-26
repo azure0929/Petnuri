@@ -12,6 +12,10 @@ import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
 import BannerImg from "@/assets/천하제일 집사대회.png";
+import DeliveryReg from "@/pages/challenge/deliverybs/DeliveryReg";
+import DeliveryList from "@/pages/challenge/deliverybs/DeliveryList";
+import { BSTypeState } from "@/store/challengeState";
+import { useRecoilValue } from "recoil";
 
 interface contestData {
   process: string;
@@ -21,6 +25,7 @@ const Contest = () => {
   const scrollRef = useScrollDiv();
   const [joinList, setJoinList] = useState<joinList[]>([]);
   const [contestData, setContestData] = useState<contestData | null>(null);
+  const BSType = useRecoilValue(BSTypeState);
 
   useEffect(() => {
     const contestApi = async () => {
@@ -102,7 +107,9 @@ const Contest = () => {
             : null}
         </div>
         {renderButton}
-        <DeliveryBS />
+        {BSType === 'DeliveryBS' && <DeliveryBS />}
+        {BSType === 'DeliveryReg' && <DeliveryReg />}
+        {BSType === 'DeliveryList' && <DeliveryList />}
         <MainTab />
       </Background>
     </>

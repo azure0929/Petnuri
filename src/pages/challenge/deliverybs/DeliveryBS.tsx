@@ -8,7 +8,7 @@ import DeliveryBSmessage from "./DeliveryBSmessage";
 import DeliveryBSAgree from "./DeliveryBSAgree";
 import DeliveryBSBtn from "./DeliveryBSBtn";
 import DeliveryBSReward from "./DeliveryBSReward";
-import Address from "./Address";
+import Address from "@/pages/challenge/deliverybs/Address";
 import { SizeContextProvider } from "antd/es/config-provider/SizeContext";
 import styles from "@/styles/challenge/deliverybs/deliverybs.module.scss";
 
@@ -103,7 +103,7 @@ const DeliveryBS = () => {
       <DeliveryBSReward />
       {defaultAddress ? (
         <>
-          <Address addressData={defaultAddress} />
+         <Address addressData={defaultAddress}/>
           <DeliveryBSmessage
             onMessageComplete={handleMessageComplete}
             defaultAddress={defaultAddress}

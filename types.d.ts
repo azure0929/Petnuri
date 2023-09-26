@@ -85,11 +85,12 @@ interface PrivacyData {
 }
 
 interface Privacy {
+  id: number
   name: string;
   phone: string;
   add1: string;
   add2: string;
-  zonecode: number;
+  zonecode: string;
   default: boolean;
 }
 

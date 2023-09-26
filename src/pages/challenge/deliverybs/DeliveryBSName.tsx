@@ -3,10 +3,11 @@ import styles from "@/styles/challenge/deliverybs/deliverybsname.module.scss";
 
 interface DeliveryBSNameProps {
   onNameComplete: any;
+  initialName?: string;
 }
 
-const DeliveryBSName: React.FC<DeliveryBSNameProps> = ({ onNameComplete }) => {
-  const [nameState, setNameState] = useState("");
+const DeliveryBSName: React.FC<DeliveryBSNameProps> = ({ onNameComplete, initialName = '' }) => {
+  const [nameState, setNameState] = useState(initialName);
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

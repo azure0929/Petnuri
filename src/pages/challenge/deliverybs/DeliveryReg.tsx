@@ -1,4 +1,4 @@
-import styles from '@/styles/deliverybs/deliverybsagree.module.scss'
+import styles from '@/styles/challenge/deliverybs/deliverybsagree.module.scss'
 import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
 import DeliveryBSHead from '@/pages/challenge/deliverybs/DeliveryBSHead';
 import BottomButton from '@/components/challenge/BottomButton';
@@ -6,60 +6,68 @@ import DeliveryBSName from '@/pages/challenge/deliverybs/DeliveryBSName';
 import DeliveryBSContact from '@/pages/challenge/deliverybs/DeliveryBSContact'
 import DeliveryBSAddress from '@/pages/challenge/deliverybs/DeliveryBSAddress'
 import { useState, useEffect } from 'react'
-
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { BSTypeState, deliveryDataState } from '@/store/challengeState';
 
 
 const DeliveryReg = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
-  const [agreedCheck, setAgreeCheck] = useState(false);
+  const deliveryData = useRecoilValue(deliveryDataState);
+  const setBSType = useSetRecoilState(BSTypeState);
 
-  const agreedBtnEvent = () => {
-    if (agreedCheck === false) {
-      setAgreeCheck(true);
-    } else {
-      setAgreeCheck(false);
-    }
+  const handleReg = () => {
+    setBSType('DeliveryBS');
   };
+
   // 수령인 이름
-  const [nameState, setNameState] = useState("");
+  const [nameState, setNameState] = useState(deliveryData.name);
   const handleNameComplete = (name: string) => {
     setNameState(name);
   };
 
   // 수령인 연착서
-  const [contactState, setContactState] = useState("");
+  const [contactState, setContactState] = useState(deliveryData.phone);
   const handleContactComplete = (contact: string) => {
     setContactState(contact);
   };
 
   // 배송지 주소
-  const [addressState, setAddressState] = useState("");
-  const handleAddressComplete = (address: string) => {
-    setAddressState(address);
+  const [roadAdressState, setRoadAdressState] = useState(deliveryData.address1 || "");
+  const [detailAdressState, setDetailAdressState] = useState(deliveryData.address2 || "");
+  const [zipCodeState] = useState(deliveryData.zonecode || "");
+
+  const handleAddressComplete = (road: string, detail: string) => {
+    setRoadAdressState(road);
+    setDetailAdressState(detail);
   };
 
-  const data = {
-    name: nameState,
-    contact: contactState,
-    address: addressState,
-  };
+  // 기본 배송지 설정 여부
+  const [agreedCheck, setAgreeCheck] = useState(deliveryData.isSelected || false);
 
+  const agreedBtnEvent = () => {
+    setAgreeCheck(!agreedCheck);
+  };
     
   useEffect(() => {
-    if (nameState && contactState && addressState) {
+    if (nameState && contactState && roadAdressState && detailAdressState && zipCodeState) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [nameState, contactState, addressState]);
+  }, [nameState, contactState, roadAdressState, detailAdressState, zipCodeState]);
 
   return (
     <>
       <BottomSheet>
-        <DeliveryBSHead text={'배송지 등록'}/>
-        <DeliveryBSName onNameComplete={handleNameComplete} />
-        <DeliveryBSContact onContactComplete={handleContactComplete} />
-        <DeliveryBSAddress onAddressComplete={handleAddressComplete} />
+        <DeliveryBSHead text={'배송지 등록'} onClick={handleReg}/>
+        <DeliveryBSName onNameComplete={handleNameComplete} initialName={nameState}/>
+        <DeliveryBSContact onContactComplete={handleContactComplete} initialContact={contactState}/>
+        <DeliveryBSAddress 
+        onAddressComplete={handleAddressComplete} 
+        initialRoadAddress={deliveryData.address1}
+        initialDetailAddress={deliveryData.address2}
+        initialZipCode={deliveryData.zonecode}/>
+
         <div className={styles.form_agreement_box}>
           <div className={styles.form_agreement_item}>
             <input
@@ -74,7 +82,11 @@ const DeliveryReg = () => {
             </label>
           </div>
         </div>
-        <BottomButton text={'배송지 등록하기'} isDisabled={isButtonDisabled}/>
+        <BottomButton 
+        text={'배송지 등록하기'} 
+        isDisabled={isButtonDisabled}
+        onClick={handleReg}
+        />
       </BottomSheet>
     </>
   )

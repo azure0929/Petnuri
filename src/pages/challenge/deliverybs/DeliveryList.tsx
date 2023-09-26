@@ -1,13 +1,21 @@
+import styles from '@/styles/fulladress.module.scss'
 import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
 import DeliveryBSHead from '@/pages/challenge/deliverybs/DeliveryBSHead';
 import FullAdress from '@/components/challenge/FullAdress';
 import BottomButton from '@/components/challenge/BottomButton';
 import { useState, useEffect } from 'react'
+import { useSetRecoilState } from 'recoil';
+import { BSTypeState } from '@/store/challengeState';
 
 const DeliveryList = () => {
   const [privacy,setPrivacy] = useState<Privacy[]>()
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [selectedItem, setSelectedItem] = useState<Privacy | null>(null);
+  const setBSType = useSetRecoilState(BSTypeState);
+
+  const handleReg = () => {
+    setBSType('DeliveryBS');
+  };
 
   const handleSelect = (item: Privacy) => {
     setSelectedItem(item);
@@ -35,20 +43,24 @@ const DeliveryList = () => {
   return (
     <>
       <BottomSheet>
-        <DeliveryBSHead text='배송지 목록'/>
+        <DeliveryBSHead text='배송지 목록' onClick={handleReg}/>
         {privacy?.map((item) =>
           <FullAdress 
-          key={item.name} 
+          key={item.id} 
           item={item} 
           isSelected={selectedItem === item}
           onSelect={() => handleSelect(item)}
           />
         )}
         {privacy && privacy.length >= 2 && (
-          <p>배송지는 최대 2개까지 등록이 가능합니다. <br />
-          기존 배송지 정보를 수정해주세요</p>
+          <p className={styles.bottom_text}>
+          배송지는 최대 2개까지 등록이 가능합니다. <br />
+          삭제 후 등록하거나 배송지 정보를 수정해주세요</p>
         )}
-        <BottomButton text={'추가하기'} isDisabled={isButtonDisabled}/>
+        <BottomButton 
+        text={'추가하기'} 
+        isDisabled={isButtonDisabled}
+        onClick={handleReg}/>
       </BottomSheet>
     </>
   )
