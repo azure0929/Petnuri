@@ -8,7 +8,10 @@ interface DeliveryBSHeadProps {
   onClick?: () => void;
 }
 
-const DeliveryBSHead = ({text='참여 신청', onClick}: DeliveryBSHeadProps) => {
+const DeliveryBSHead = ({
+  text = "참여 신청",
+  onClick,
+}: DeliveryBSHeadProps) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
   const handleClick = onClick || (() => setBottomIsOpen(false));

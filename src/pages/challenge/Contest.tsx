@@ -12,8 +12,9 @@ import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
 import BannerImg from "@/assets/천하제일 집사대회.png";
-import DeliveryReg from "@/pages/challenge/deliverybs/DeliveryReg";
-import DeliveryList from "@/pages/challenge/deliverybs/DeliveryList";
+import KitModal from "@/components/modal/KitModal";
+import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
+import DeliveryList from "@/components/challenge/delivery/DeliveryList";
 import { BSTypeState } from "@/store/challengeState";
 import { useRecoilValue } from "recoil";
 
@@ -55,15 +56,15 @@ const Contest = () => {
     fetchData();
   }, []);
 
-  const head: challengeHead = {
+  const head: ChallengeHead = {
     head: "천하제일 집사대회",
   };
 
-  const banner: challengeBanner = {
+  const banner: ChallengeBanner = {
     bannerImg: BannerImg,
   };
 
-  const contents: challengeContents = {
+  const contents: ChallengeContents = {
     mainTitle: "천하제일 집사대회",
     subTitle: "천하제일 집사대회",
     howTitle: "인증방법",
@@ -107,9 +108,10 @@ const Contest = () => {
             : null}
         </div>
         {renderButton}
-        {BSType === 'DeliveryBS' && <DeliveryBS />}
-        {BSType === 'DeliveryReg' && <DeliveryReg />}
-        {BSType === 'DeliveryList' && <DeliveryList />}
+        <KitModal />
+        {BSType === "DeliveryBS" && <DeliveryBS />}
+        {BSType === "DeliveryReg" && <DeliveryReg />}
+        {BSType === "DeliveryList" && <DeliveryList />}
         <MainTab />
       </Background>
     </>

@@ -1,12 +1,13 @@
-interface challengeHead {
+// 이벤트 챌린지 타입
+interface ChallengeHead {
   head: string;
 }
 
-interface challengeBanner {
+interface ChallengeBanner {
   bannerImg: string;
 }
 
-interface challengeContents {
+interface ChallengeContents {
   mainTitle: string;
   subTitle: string;
   howTitle: string;
@@ -17,7 +18,7 @@ interface challengeContents {
   pointInfo: string;
 }
 
-interface challengeJoin {
+interface ChallengeJoin {
   participantsImg: string;
   participantsName: string;
 }
@@ -85,7 +86,7 @@ interface PrivacyData {
 }
 
 interface Privacy {
-  id: number
+  id: number;
   name: string;
   phone: string;
   add1: string;
@@ -133,4 +134,4 @@ interface DefaultAddress {
   default?: boolean;
 }
 
-type defaultAddressArray = DefaultAddress[];
+type DefaultAddressArray = DefaultAddress[];

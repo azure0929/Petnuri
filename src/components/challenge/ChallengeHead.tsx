@@ -3,7 +3,7 @@ import leftArrow from "@/assets/arrow_left_mid.svg";
 import { useNavigate } from "react-router-dom";
 
 interface headProps {
-  head: challengeHead;
+  head: ChallengeHead;
 }
 
 const ChallengeHead: React.FC<headProps> = ({ head }) => {

@@ -5,7 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import EventSaveBS from "@/pages/challenge/EventSaveBS";
+import EventSaveBS from "@/components/challenge/EventSaveBS";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -29,15 +29,15 @@ const ECYanado = () => {
     fetchData();
   }, []);
 
-  const head: challengeHead = {
+  const head: ChallengeHead = {
     head: "야 너도? 야 나도!",
   };
 
-  const banner: challengeBanner = {
+  const banner: ChallengeBanner = {
     bannerImg: BannerImg,
   };
 
-  const contents: challengeContents = {
+  const contents: ChallengeContents = {
     mainTitle: "야 너도? 야 나도!",
     subTitle: "야 너도? 야 나도!",
     howTitle: "인증방법",

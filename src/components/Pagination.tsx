@@ -3,7 +3,17 @@ import { useScrollUl } from "@/utils/Scroll";
 import activeDot from "@/assets/active dot.svg";
 import activeNoDot from "@/assets/active no dot.svg";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (newPage: number) => void;
+}
+
+const Pagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) => {
   const scrollRef = useScrollUl();
   const pageNumbers = Array.from(
     { length: totalPages },

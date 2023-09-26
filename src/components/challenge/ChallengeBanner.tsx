@@ -1,7 +1,7 @@
 import styles from "@/styles/challenge/challengebanner.module.scss";
 
 interface bannerProps {
-  banner: challengeBanner;
+  banner: ChallengeBanner;
 }
 
 const ChallengeBanner: React.FC<bannerProps> = ({ banner }) => {

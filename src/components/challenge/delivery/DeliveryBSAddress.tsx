@@ -4,24 +4,30 @@ import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal"; // 추가
 
 interface DeliveryBSAddressProps {
-  onAddressComplete: any;
+  onAddressComplete: (address: string) => void;
   initialRoadAddress?: string;
   initialDetailAddress?: string;
   initialZipCode?: string;
 }
 
+interface DaumPostcodeData {
+  roadAddress: string;
+  zonecode: string;
+}
+
 const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   onAddressComplete,
-  initialRoadAddress = '',
-  initialDetailAddress = '',
-  initialZipCode = '',
+  initialRoadAddress = "",
+  initialDetailAddress = "",
+  initialZipCode = "",
 }) => {
   const [zipCode, setZipCode] = useState(initialZipCode);
   const [roadAddress, setRoadAddress] = useState<string>(initialRoadAddress);
-  const [detailAddress, setDetailAddress] = useState<string>(initialDetailAddress); // 추가
+  const [detailAddress, setDetailAddress] =
+    useState<string>(initialDetailAddress); // 추가
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
 
-  const completeHandler = (data: any) => {
+  const completeHandler = (data: DaumPostcodeData) => {
     setRoadAddress(data.roadAddress);
     setZipCode(data.zonecode);
     setIsOpen(false); //추가
