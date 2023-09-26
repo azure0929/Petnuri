@@ -1,7 +1,17 @@
 import Modal from "react-modal";
 import styles from "@/styles/challenge/deliverybs/agreemodal.module.scss";
 
-const AgreeModal = ({ isOpen, closeModal, setAllCheck }) => {
+interface AgreeModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  setAllCheck: (value: boolean) => void;
+}
+
+const AgreeModal: React.FC<AgreeModalProps> = ({
+  isOpen,
+  closeModal,
+  setAllCheck,
+}) => {
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",

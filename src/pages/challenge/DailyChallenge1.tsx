@@ -5,7 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import DailySaveBS from "./DailySaveBS";
+import DailySaveBS from "../../components/challenge/DailySaveBS";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -29,15 +29,15 @@ const DailyChallenge1 = () => {
     fetchData();
   }, []);
 
-  const head: challengeHead = {
+  const head: ChallengeHead = {
     head: "간식 주기 챌린지",
   };
 
-  const banner: challengeBanner = {
+  const banner: ChallengeBanner = {
     bannerImg: BannerImg,
   };
 
-  const contents: challengeContents = {
+  const contents: ChallengeContents = {
     mainTitle: "간식 주기 챌린지",
     subTitle: "간식 주기 챌린지",
     howTitle: "인증방법",

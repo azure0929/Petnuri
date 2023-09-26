@@ -1,7 +1,15 @@
 import styles from "@/styles/challenge/deliverybs/deliverybsmessage.module.scss";
 import { useState, ChangeEvent } from "react";
 
-const DeliveryBSmessage = ({ onMessageComplete, defaultAddress }) => {
+interface DeliveryBSMessageProps {
+  onMessageComplete: (value: string) => void;
+  defaultAddress: DefaultAddressArray;
+}
+
+const DeliveryBSmessage: React.FC<DeliveryBSMessageProps> = ({
+  onMessageComplete,
+  defaultAddress,
+}) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [customInput, setCustomInput] = useState("");
 

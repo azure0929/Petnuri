@@ -3,7 +3,15 @@ import styles from "@/styles/challenge/deliverybs/deliverybsagree.module.scss";
 import rightArrow from "@/assets/arrow_right_small.svg";
 import AgreeModal from "./AgreeModal";
 
-const DeliveryBSAgree = ({
+interface DeliveryBSAgreeProps {
+  onAgreedCheckChange: (value: boolean) => void;
+  onRuleCheckChange: (value: boolean) => void;
+  onExchangeCheckChange: (value: boolean) => void;
+  onMarketingCheckChange: (value: boolean) => void;
+  defaultAddress: DefaultAddressArray;
+}
+
+const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
   onAgreedCheckChange,
   onRuleCheckChange,
   onExchangeCheckChange,

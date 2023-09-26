@@ -1,8 +1,16 @@
 import { useState, ChangeEvent } from "react";
 import styles from "@/styles/challenge/deliverybs/deliverybscontact.module.scss";
 
-const DeliveryBSContact = ({ onContactComplete }) => {
-  const [contactState, setContactState] = useState("");
+interface DeliveryBSContactProps {
+  onContactComplete: (value: string) => void;
+  initialContact?: string;
+}
+
+const DeliveryBSContact = ({
+  onContactComplete,
+  initialContact = "",
+}: DeliveryBSContactProps) => {
+  const [contactState, setContactState] = useState(initialContact);
 
   const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;

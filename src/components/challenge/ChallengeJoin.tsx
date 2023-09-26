@@ -1,7 +1,7 @@
 import styles from "@/styles/challenge/challengejoin.module.scss";
 
 interface joinProps {
-  join: challengeJoin;
+  join: ChallengeJoin;
 }
 
 const ChallengeJoin: React.FC<joinProps> = ({ join }) => {

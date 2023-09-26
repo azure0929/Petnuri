@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import BottomSheet from "@/pages/challenge/deliverybs/DeliveryBSLayout";
-import DeliveryBSHead from "./DeliveryBSHead";
+import BottomSheet from "@/components/challenge/delivery/DeliveryBSLayout";
+import DeliveryBSHead from "@/components/challenge/delivery/DeliveryBSHead";
 // import DeliveryBSName from "./DeliveryBSName";
 // import DeliveryBSContact from "./DeliveryBSContact";
 // import DeliveryBSAddress from "./DeliveryBSAddress";
-import DeliveryBSmessage from "./DeliveryBSmessage";
-import DeliveryBSAgree from "./DeliveryBSAgree";
-import DeliveryBSBtn from "./DeliveryBSBtn";
-import DeliveryBSReward from "./DeliveryBSReward";
-import Address from "./Address";
-import { SizeContextProvider } from "antd/es/config-provider/SizeContext";
+import DeliveryBSmessage from "@/components/challenge/delivery/DeliveryBSmessage";
+import DeliveryBSAgree from "@/components/challenge/delivery/DeliveryBSAgree";
+import DeliveryBSBtn from "@/components/challenge/delivery/DeliveryBSBtn";
+import DeliveryBSReward from "@/components/challenge/delivery/DeliveryBSReward";
+import Address from "@/components/challenge/delivery/Address";
 import styles from "@/styles/challenge/deliverybs/deliverybs.module.scss";
 
 const DeliveryBS = () => {
@@ -34,7 +33,7 @@ const DeliveryBS = () => {
   //   setAddressState(address);
   // };
 
-  const [addressData, setAddressData] = useState<defaultAddressArray>([]);
+  const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
 
   useEffect(() => {
     const AddressApi = async () => {

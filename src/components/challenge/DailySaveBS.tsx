@@ -1,4 +1,4 @@
-import BottomSheet from "@/pages/challenge/SaveBSLayout";
+import BottomSheet from "@/components/challenge/SaveBSLayout";
 import styles from "@/styles/challenge/dailysavebs.module.scss";
 import addIcon from "@/assets/icon-plus-circle-mono.svg";
 import { bottomSheetState } from "@/store/challengeState";
@@ -19,7 +19,7 @@ const DailySaveBS = () => {
     setBottomIsOpen(false);
   };
 
-  const uploadImage = (e) => {
+  const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files as FileList;
     for (const file of Array.from(files)) {
       const reader = new FileReader();
@@ -30,7 +30,7 @@ const DailySaveBS = () => {
     }
   };
 
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
