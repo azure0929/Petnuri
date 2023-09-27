@@ -25,8 +25,8 @@ const DeliveryList = () => {
     const fetchData = async () => {
       const response = await fetch("/Privacy.json");
       const data = await response.json();
-      setPrivacy(data.data);
-      const defaultItem = data.data.find((item: Privacy) => item.default);
+      setPrivacy(data.address);
+      const defaultItem = data.address.find((item: Privacy) => item.isBased);
       setSelectedItem(defaultItem);
     };
     fetchData();

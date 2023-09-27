@@ -24,17 +24,14 @@ interface ChallengeJoin {
 }
 
 interface joinList {
-  challengeId?: number;
-  imageId?: number;
+  memberId?: number;
   imageUrl: string;
   nickName: string;
-  // process: string;
 }
 interface Item {
   thumbnail?: string;
-  name?: string;
-  subName?: string;
-  challengeReview?: string;
+  title?: string;
+  subTitle?: string;
 }
 
 interface HomeEventListProps {
@@ -68,17 +65,11 @@ interface ChallengeData {
   status: boolean;
 }
 
-interface EventChallengeData {
-  thumbnail: string;
-  challengeId: number;
-  name: string;
-  subName: string;
-  authMethod: string;
-  payment: string;
-  startDate: string;
-  endDate: string;
-  status: string;
-  rewardStatus: string;
+interface DailyAllList {
+  challengeId: number
+  title: string
+  thumbnail: string
+  status: boolean
 }
 
 interface PrivacyData {
@@ -89,19 +80,58 @@ interface Privacy {
   id: number;
   name: string;
   phone: string;
-  add1: string;
-  add2: string;
-  zonecode: string;
-  default: boolean;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased: boolean;
 }
 
-interface HomePet {
+type Pet = {
+  id: number | null;
+  petName: string;
   image: string;
-  name: string;
-  age: number | null;
+  petGender: string;
+  petAge: number | null;
   isSelected?: boolean;
-  gender: string;
+};
+
+type EventChallenge = {
+  id: number
+  title: string
+  subTitle: string
+  thumbnail: string
+};
+
+type DailyChallenge = {
+    id:number
+    title:string
+    subTitle: string
+    thumbnail:string
 }
+
+type PetTalk = {
+    id:number
+    title:string
+    writer:string
+    thumbnail:string
+    createdAt:string
+}
+
+type ChallengeList ={
+   eventChallengeList : EventChallenge[];
+   dailyChallenge : DailyChallenge; 
+}
+
+interface DataContent{
+   petList : Pet[];
+   challengeList : ChallengeList ;
+   petTalkList : PetTalk[]; 
+}
+
+interface DataResponse{
+ content : DataContent ;
+}
+
 
 //펫톡
 

@@ -6,16 +6,20 @@ import { Link, useLocation } from 'react-router-dom';
 import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
+import { modifyPetProfile } from '@/lib/apis/petProfileApi';
 
 const PetProfileModify = () => {
   const location = useLocation();
   const profile = location.state?.profile;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [isSelected, setIsSelected] = useState(profile?.isSelected || false);
-  const [gender, setGender] = useState(profile?.gender || '남');
-  const [name, setName] = useState(profile?.name || '');
-  const [age, setAge] = useState(profile?.age || '');
-  const [image, setImage] = useState<string | null>(profile?.image || null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const [isSelected, setIsSelected] = useState(profile.isSelected || false);
+  const [gender, setGender] = useState(profile.petGender || '남');
+  const [name, setName] = useState(profile.petName || '');
+  const [age, setAge] = useState(profile.petAge || '');
+  const [image, setImage] = useState<string | null>(profile.image || null);
+  const [id] = useState(profile.id);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -35,43 +39,46 @@ const PetProfileModify = () => {
     reader.onloadend = () => {
       if (typeof reader.result === 'string') {
         setImage(reader.result);
+        setImageFile(file);
       }
     };
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = async () => {
-    // json으로 보낼때
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
     const formData = new FormData();
+
     const data = {
-      name,
-      age,
-      gender,
-      isSelected: isSelected.toString(),
+      petId: id,
+      petName: name,
+      petGender: gender === '남' ? '남' : '여',
+      petAge: age,
+      isSelected,
     };
-    formData.append("data", JSON.stringify(data));
-    // formdata로 보낼때
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('gender', gender);
-    formData.append('isSelected', isSelected.toString());
-    
-    if (image) {
-      const file = new File([image], 'petProfile.jpg');
-      formData.append('image', file);
+
+    formData.append(
+      "petProfileReq",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+  
+    if (imageFile) {
+      formData.append('file', imageFile);
     }
+
     try {
-      const response = await fetch('/api/pet-profiles', { 
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error(error); 
-    }
+      await modifyPetProfile(formData);
+   } catch (error) {
+     console.error(error); 
+   }
   }
+
+  const handleAgeChange = (e:any) => {
+    const inputValue = e.target.value.replace('세', '');
+    if (!isNaN(inputValue)) {
+      setAge(inputValue);
+    }
+  };
   return(
     <>
       <Background>
@@ -145,7 +152,7 @@ const PetProfileModify = () => {
               placeholder='나이를 입력해주세요' 
               className={styles.input}
               value={age}
-              onChange={(e) => setAge(e.target.value)}/>
+              onChange={handleAgeChange}/>
             </div>
           </div>
           {/* 버튼 */}

@@ -18,10 +18,10 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
     setDeliveryData({
       name: item.name,
       phone: item.phone,
-      address1: item.add1,
-      address2: item.add2,
-      zonecode:item.zonecode,
-      isSelected:item.default
+      address1: item.roadAddress,
+      address2: item.address,
+      zonecode:item.zipcode,
+      isSelected:item.isBased
      });
     setBSType('DeliveryReg')
   };
@@ -43,9 +43,9 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
         </div>
 
         <div className={styles.box2}>
-          <div>{item.add1}</div>
-          <div>{item.add2}</div>
-          <div>{item.zonecode}</div>
+          <div>{item.roadAddress}</div>
+          <div>{item.address}</div>
+          <div>{item.zipcode}</div>
         </div>
 
         <div className={styles.box3}>
