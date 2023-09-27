@@ -7,7 +7,7 @@
               "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
               "petGender": "male", 
               "petAge": 12,
-              "isSeleceted": true 
+              "isSelected": true 
            },
           {
               "id": 2,
@@ -15,7 +15,7 @@
               "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
               "petGender": "male", 
               "petAge": 12,
-              "isSeleceted": false
+              "isSelected": false
            }
       ],
       "challengeList": {
@@ -49,7 +49,7 @@
               "createdAt": "2023-10-09"
            },
           {
-              "id": 1,
+              "id": 2,
               "title": "string",
               "writer": "string",
               "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",

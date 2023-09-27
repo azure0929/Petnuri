@@ -13,11 +13,13 @@ const PetProfileModify = () => {
   const profile = location.state?.profile;
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+
   const [isSelected, setIsSelected] = useState(profile.isSelected || false);
-  const [gender, setGender] = useState(profile.gender || '남');
-  const [name, setName] = useState(profile.name || '');
-  const [age, setAge] = useState(profile.age || '');
+  const [gender, setGender] = useState(profile.petGender || '남');
+  const [name, setName] = useState(profile.petName || '');
+  const [age, setAge] = useState(profile.petAge || '');
   const [image, setImage] = useState<string | null>(profile.image || null);
+  const [id] = useState(profile.id);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -48,7 +50,7 @@ const PetProfileModify = () => {
     const formData = new FormData();
 
     const data = {
-      petId: profile.id,
+      petId: id,
       petName: name,
       petGender: gender === '남' ? '남' : '여',
       petAge: age,

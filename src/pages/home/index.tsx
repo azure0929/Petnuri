@@ -7,6 +7,7 @@ import KitModal from "@/components/modal/KitModal";
 import LoginModal from "@/components/modal/LoginModal";
 import HomeEventList from "@/components/HomeEventList";
 import dog from '@/assets/위생관리.png'
+import defaultImage from '@/assets/defaultImage.png'
 import 키트배너 from '@/assets/키트배너.png'
 import { useSetRecoilState } from "recoil";
 import { kitModalState, loginModalState } from "@/store/challengeState";
@@ -36,7 +37,6 @@ const Home = () => {
       setDaily(data.content.challengeList.dailyChallenge)
       setCheonHa(data.content.challengeList.rewardChallengeList[0])
       setYanado(data.content.challengeList.rewardChallengeList[1])
-
     };
     fetchData();
    }, []);
@@ -95,9 +95,9 @@ const Home = () => {
         <div className={styles.contents}>
           <div className={styles.profile}>
             <div className={styles.tabmenu}>
-              {petProfile.map((profile,index) =>
+              {petProfile.map((profile) =>
                 <div 
-                  key={index} 
+                  key={profile.id} 
                   onClick={() => handleItemClick(profile.petName)}
                   className={activePetName === profile.petName ? styles.active : styles.add}
                 >
@@ -157,15 +157,19 @@ const Home = () => {
               <div role="button" onClick={onPettalk}>더보기</div>
             </div>
             <ul className={styles.list}>
-              {petTalkList.slice(0, 4).map((item, index) => {
+              {petTalkList.slice(0, 4).map((item) => {
                 const date = new Date(item.createdAt);
                 const hours = ("0" + date.getHours()).slice(-2);
                 const minutes = ("0" + date.getMinutes()).slice(-2);
+                let thumbnailSrc = item.thumbnail;
+                if (!thumbnailSrc) {
+                  thumbnailSrc = defaultImage;
+                }
 
                 return (
-                  <li key={index}>
+                  <li key={item.id}>
                     <div className={styles.content}>
-                      <img src={item.thumbnail} className={styles.photo} alt="thumbnail" />
+                      <img src={thumbnailSrc} className={styles.photo} alt="thumbnail" />
                       <div className={styles.detail}>
                         <div className={styles.info}>
                           <span>{item.title}</span>
