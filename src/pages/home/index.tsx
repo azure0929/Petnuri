@@ -83,6 +83,7 @@ const Home = () => {
   const onCheonHa = () => navigate(`contest`)
   const onDailyChallenge1 = () => navigate(`dailychallenge1`)
   const onPettalk = () => navigate(`PetTalk`)
+  const onPettalkList = (id:number) => navigate(`petTalk/${id}`)
   const onPetProfileAdd = () => navigate(`petprofileadd`)
   const onPetProfileModify = () => navigate(`petprofilemodify`, { state: { profile: selectedProfile } })
 
@@ -172,7 +173,7 @@ const Home = () => {
                       <img src={thumbnailSrc} className={styles.photo} alt="thumbnail" />
                       <div className={styles.detail}>
                         <div className={styles.info}>
-                          <span>{item.title}</span>
+                          <span onClick={() => onPettalkList(item.id)}>{item.title}</span>
                         </div>
                         <div className={styles.user}>
                           <span>{item.writer}</span>
@@ -180,7 +181,9 @@ const Home = () => {
                           <p>{`${hours}:${minutes}`}</p> 
                         </div>
                       </div>
-                      <div className={styles.icon}><IoIosArrowForward /></div>
+                      <div className={styles.icon} onClick={() => onPettalkList(item.id)}>
+                        <IoIosArrowForward />
+                      </div>
                     </div>
                   </li>)
               })}
