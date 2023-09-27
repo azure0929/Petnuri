@@ -56,9 +56,9 @@ const ECYanado = () => {
         <ChallengeContents contents={contents} />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
-          {joinList.map((joinItem, index) => (
+          {joinList.map((joinItem) => (
             <ChallengeJoin
-              key={index}
+              key={joinItem.memberId}
               join={{
                 participantsImg: joinItem.imageUrl,
                 participantsName: joinItem.nickName,

@@ -2,7 +2,7 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/challenge.module.scss";
 import fire from "@/assets/fire.svg";
-import vector from "@/assets/vector.svg";
+import Voting from "@/assets/Voting.svg";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ChallengeHBS from "@/pages/challenge/ChallengeHBS";
@@ -17,12 +17,9 @@ const Challenge = () => {
   const intervalId = useRef(0);
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const [hour, setHour] = useState(0);
-  const [participated, setParticipated] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
-  const [cheonHa, setCheonHa] = useState<EventChallengeData>();
-  const [yanado, setYanado] = useState<EventChallengeData>();
+  const [challenges, setChallenges] = useState<DailyAllList[]>([]);
+  const [cheonHa, setCheonHa] = useState<EventChallenge>();
+  const [yanado, setYanado] = useState<EventChallenge>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,9 +32,6 @@ const Challenge = () => {
       const diffInMs = nextDay.getTime() - now.getTime();
       const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
       setHour(diffInHours);
-      if (diffInHours === 24) {
-        setParticipated({});
-      }
     };
     setTimeout(() => {
       calculateTime();
@@ -50,9 +44,9 @@ const Challenge = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/Daily.json");
+      const response = await fetch("/DailyAllList.json");
       const data = await response.json();
-      setChallenges(data.data);
+      setChallenges(data.challenges);
       const response2 = await fetch("/Cheonha.json");
       const data2 = await response2.json();
       setCheonHa(data2.data[0]);
@@ -123,46 +117,21 @@ const Challenge = () => {
                     navigate(`/dailychallenge${challengeData.challengeId}`)
                   }
                 >
-                  <div className={styles.title}>{challengeData.name}</div>
+                  <div className={styles.title}>{challengeData.title}</div>
                   <div className={styles.time}>
-                    <div className={styles.vectorWrapper}>
-                      <img
-                        src={vector}
-                        alt="vector"
-                        style={{ marginRight: "6px" }}
-                      />
-                      <div className={styles.square}></div>
-                    </div>
+                    <img
+                      src={Voting}
+                      alt="Voting"
+                      style={{ marginRight: "6px" }}
+                    />
                     {hour}시간 후
                   </div>
                 </div>
 
-                {/* f5시 참여완료를 참여하기로 바뀌지 않게 하려면 백엔드 필요  */}
-                {participated[challengeData.challengeId] ? (
-                  <button
-                    className={styles.participate_off}
-                    onClick={() =>
-                      setParticipated((prevParticipation) => ({
-                        ...prevParticipation,
-                        [challengeData.challengeId]: false,
-                      }))
-                    }
-                    disabled
-                  >
-                    지급완료
-                  </button>
+                {challengeData.status ? (
+                  <button className={styles.participate_off} disabled> 지급완료 </button>
                 ) : (
-                  <button
-                    className={styles.participate_on}
-                    onClick={() =>
-                      setParticipated((prevParticipation) => ({
-                        ...prevParticipation,
-                        [challengeData.challengeId]: true,
-                      }))
-                    }
-                  >
-                    참여하기
-                  </button>
+                  <button className={styles.participate_on}>참여하기</button>
                 )}
               </div>
             ))}

@@ -24,11 +24,9 @@ interface ChallengeJoin {
 }
 
 interface joinList {
-  challengeId?: number;
-  imageId?: number;
+  memberId?: number;
   imageUrl: string;
   nickName: string;
-  // process: string;
 }
 interface Item {
   thumbnail?: string;
@@ -65,6 +63,13 @@ interface ChallengeData {
   userId: number;
   review: Review[];
   status: boolean;
+}
+
+interface DailyAllList {
+  challengeId: number
+  title: string
+  thumbnail: string
+  status: boolean
 }
 
 interface PrivacyData {

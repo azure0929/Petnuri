@@ -4,7 +4,7 @@ interface joinProps {
   join: ChallengeJoin;
 }
 
-const ChallengeJoin: React.FC<joinProps> = ({ join }) => {
+const ChallengeJoin = ({ join }:joinProps) => {
   return (
     <>
       <div className={styles.info}>
