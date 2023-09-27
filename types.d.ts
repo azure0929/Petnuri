@@ -28,6 +28,15 @@ interface joinList {
   imageUrl: string;
   nickName: string;
 }
+
+interface joinListEvent {
+  id: number
+  photoUrl: string
+  photoName: string
+  content: string
+  createdAt: string
+}
+
 interface Item {
   thumbnail?: string;
   title?: string;

@@ -13,14 +13,14 @@ import BannerImg from "@/assets/반려일기.png";
 
 const ECYanado = () => {
   const scrollRef = useScrollDiv();
-  const [joinList, setJoinList] = useState<joinList[]>([]);
+  const [joinList, setJoinList] = useState<joinListEvent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/Chamyo.json");
+        const response = await fetch("/ChamyoEvent.json");
         const data = await response.json();
-        setJoinList(data.data);
+        setJoinList(data.reviews);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -58,10 +58,10 @@ const ECYanado = () => {
         <div className={styles.participants} ref={scrollRef}>
           {joinList.map((joinItem) => (
             <ChallengeJoin
-              key={joinItem.memberId}
+              key={joinItem.id}
               join={{
-                participantsImg: joinItem.imageUrl,
-                participantsName: joinItem.nickName,
+                participantsImg: joinItem.photoUrl,
+                participantsName: joinItem.photoName,
               }}
             />
           ))}
