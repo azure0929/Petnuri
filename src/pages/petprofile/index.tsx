@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
+import { createPetProfile } from '@/lib/apis/petProfileApi';
 
 const PetProfileAdd = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isSelected, setIsSelected] = useState(false);
   const [gender, setGender] = useState('남');
   const [name, setName] = useState('');
@@ -33,43 +35,39 @@ const PetProfileAdd = () => {
     reader.onloadend = () => {
       if (typeof reader.result === 'string') {
         setImage(reader.result);
+        setImageFile(file);
       }
     };
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = async () => {
-    // json으로 보낼때
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
     const formData = new FormData();
+
     const data = {
-      name,
-      age,
-      gender,
-      isSelected: isSelected.toString(),
+      petName: name,
+      petGender: gender === '남' ? '남' : '여',
+      petAge: age,
+      isSelected,
     };
-    formData.append("data", JSON.stringify(data));
-    // formdata로 보낼때
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('gender', gender);
-    formData.append('isSelected', isSelected.toString());
-    
-    if (image) {
-      const file = new File([image], 'petProfile.jpg');
-      formData.append('image', file);
+
+    formData.append(
+      "petProfileReq",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+  
+    if (imageFile) {
+      formData.append('file', imageFile);
     }
+
     try {
-      const response = await fetch('/api/pet-profiles', { 
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error(error); 
-    }
+      await createPetProfile(formData);
+   } catch (error) {
+     console.error(error); 
+   }
   }
+
   const handleAgeChange = (e:any) => {
     const inputValue = e.target.value.replace('세', '');
     if (!isNaN(inputValue)) {
