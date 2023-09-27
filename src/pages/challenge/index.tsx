@@ -49,10 +49,10 @@ const Challenge = () => {
       setChallenges(data.challenges);
       const response2 = await fetch("/Cheonha.json");
       const data2 = await response2.json();
-      setCheonHa(data2.data[0]);
+      setCheonHa(data2);
       const response3 = await fetch("/Yanado.json");
       const data3 = await response3.json();
-      setYanado(data3.data[0]);
+      setYanado(data3);
     };
     fetchData();
   }, []);
@@ -131,7 +131,11 @@ const Challenge = () => {
                 {challengeData.status ? (
                   <button className={styles.participate_off} disabled> 지급완료 </button>
                 ) : (
-                  <button className={styles.participate_on}>참여하기</button>
+                  <button 
+                    className={styles.participate_on}
+                    onClick={() =>
+                      navigate(`/dailychallenge${challengeData.challengeId}`)
+                    }>참여하기</button>
                 )}
               </div>
             ))}

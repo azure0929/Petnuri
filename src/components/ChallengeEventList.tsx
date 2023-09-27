@@ -9,8 +9,8 @@ const ChallengeEventList: React.FC<ChallengeEventListProps> = ({ item, path }) =
     <div className={styles.section} onClick={() => navigate(path)}>
       <img src={item?.thumbnail} alt="" className={styles.img}/>
       <div className={styles.text}>
-        <div className={styles.title}> {item?.name} </div>
-        <div className={styles.subtitle}>{item?.subName}</div>
+        <div className={styles.title}> {item?.title} </div>
+        <div className={styles.subtitle}>{item?.subTitle}</div>
       </div>
     </div>
   );
