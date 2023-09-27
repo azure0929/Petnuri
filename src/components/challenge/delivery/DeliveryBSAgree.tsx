@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/challenge/deliverybs/deliverybsagree.module.scss";
 import rightArrow from "@/assets/arrow_right_small.svg";
-import AgreeModal from "./AgreeModal";
+import ModalAgree from "./ModalAgree";
+import ModalRule from "./ModalRule";
+import ModalExchange from "./ModalExchange";
+import ModalMarkgeting from "./ModalMarketing";
 
 interface DeliveryBSAgreeProps {
   onAgreedCheckChange: (value: boolean) => void;
@@ -104,15 +107,48 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
     onMarketingCheckChange(marketingCheck);
   }, [agreedCheck, ruleCheck, exchangeCheck, marketingCheck]);
 
-  // 모달
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  // agree 모달
+  const [agreeModalOpen, setAgreeModalOpen] = useState<boolean>(false);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const openAgreeModal = () => {
+    setAgreeModalOpen(true);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
+  const closeAgreeModal = () => {
+    setAgreeModalOpen(false);
+  };
+
+  // rule모달
+  const [ruleModalOpen, setRuleModalOpen] = useState<boolean>(false);
+
+  const openRuleModal = () => {
+    setRuleModalOpen(true);
+  };
+
+  const closeRuleModal = () => {
+    setRuleModalOpen(false);
+  };
+
+  // exchange 모달
+  const [exchangeModalOpen, setExchangeModalOpen] = useState<boolean>(false);
+
+  const openExchangeModal = () => {
+    setExchangeModalOpen(true);
+  };
+
+  const closeExchangeModal = () => {
+    setExchangeModalOpen(false);
+  };
+
+  // Marketing 모달
+  const [marketingModalOpen, setMarketingModalOpen] = useState<boolean>(false);
+
+  const openMarketingModal = () => {
+    setMarketingModalOpen(true);
+  };
+
+  const closeMarketingModal = () => {
+    setMarketingModalOpen(false);
   };
 
   return (
@@ -145,7 +181,7 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
                 <div className={styles.agreeTitle}>이용약관</div>
                 <span className={styles.red}>*</span>
               </label>
-              <div onClick={openModal} className={styles.arrowImg}>
+              <div onClick={openAgreeModal} className={styles.arrowImg}>
                 <img src={rightArrow} className={styles.rightArrow} />
               </div>
             </div>
@@ -161,7 +197,7 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
                 <div className={styles.agreeTitle}>참가규칙</div>
                 <span className={styles.red}>*</span>
               </label>
-              <div onClick={openModal}>
+              <div onClick={openRuleModal}>
                 <img src={rightArrow} className={styles.rightArrow} />
               </div>
             </div>
@@ -177,7 +213,7 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
                 <div className={styles.agreeTitle}>교환 및 반품 정책</div>
                 <span className={styles.red}>*</span>
               </label>
-              <div onClick={openModal}>
+              <div onClick={openExchangeModal}>
                 <img src={rightArrow} className={styles.rightArrow} />
               </div>
             </div>
@@ -194,7 +230,7 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
                   개인정보 제 3자 정보 제공 활용 동의
                 </div>
               </label>
-              <div onClick={openModal}>
+              <div onClick={openMarketingModal}>
                 <img src={rightArrow} className={styles.rightArrow} />
               </div>
             </div>
@@ -280,10 +316,25 @@ const DeliveryBSAgree: React.FC<DeliveryBSAgreeProps> = ({
           </div>
         </>
       )}
-      <AgreeModal
-        isOpen={modalOpen}
-        closeModal={closeModal}
-        setAllCheck={setAllCheck}
+      <ModalAgree
+        isOpen={agreeModalOpen}
+        closeModal={closeAgreeModal}
+        setAgreeCheck={setAgreeCheck}
+      />
+      <ModalRule
+        isOpen={ruleModalOpen}
+        closeModal={closeRuleModal}
+        setRuleCheck={setRuleCheck}
+      />
+      <ModalExchange
+        isOpen={exchangeModalOpen}
+        closeModal={closeExchangeModal}
+        setExchangeCheck={setExchangeCheck}
+      />
+      <ModalMarkgeting
+        isOpen={marketingModalOpen}
+        closeModal={closeMarketingModal}
+        setMarketingCheck={setMarketingCheck}
       />
     </>
   );

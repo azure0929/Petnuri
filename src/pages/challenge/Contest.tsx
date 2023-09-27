@@ -17,6 +17,7 @@ import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
 import DeliveryList from "@/components/challenge/delivery/DeliveryList";
 import { BSTypeState } from "@/store/challengeState";
 import { useRecoilValue } from "recoil";
+import { ContestCheckApi } from "@/lib/apis/challengeApi";
 
 interface contestData {
   process: string;
@@ -27,6 +28,19 @@ const Contest = () => {
   const [joinList, setJoinList] = useState<joinList[]>([]);
   const [contestData, setContestData] = useState<contestData | null>(null);
   const BSType = useRecoilValue(BSTypeState);
+
+  useEffect(() => {
+    const ContestApi = async () => {
+      try {
+        const response = await ContestCheckApi();
+        console.log(response);
+      } catch (error) {
+        console.error("api error : " + error);
+      }
+    };
+
+    ContestApi();
+  }, []);
 
   useEffect(() => {
     const contestApi = async () => {
