@@ -1,7 +1,7 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from '@/styles/pointshop.module.scss'
-import dog from '@/assets/dog.svg'
+import KitBanner from '@/assets/키트배너.png'
 import product1 from '@/assets/product1.svg'
 import product2 from '@/assets/product2.svg'
 import product3 from '@/assets/product3.svg'
@@ -32,7 +32,7 @@ const PointShop = () => {
         <ChallengeProfile />
 
         <div className={styles.ad}>
-          <img src={dog} alt="dog" />
+          <img src={KitBanner} alt="" />
           <div className={styles.banner}>프로모션 배너</div>
           <div className={styles.banner_sub}>프로모션 배너 서브텍스트</div>
         </div>
