@@ -1,12 +1,18 @@
 import styles from "@/styles/write.module.scss";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { useState, useRef, SetStateAction } from "react";
+import { writingOut } from "@/lib/apis/pettalkApi";
+import { useNavigate } from "react-router-dom";
 
 interface PettalkWriteProps {
   isFreeTalkWrite: boolean;
+  petType: string;
 }
 
-const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
+const PettalkWrite: React.FC<PettalkWriteProps> = ({
+  isFreeTalkWrite,
+  petType,
+}) => {
   const [showImages, setShowImages] = useState([]);
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -14,6 +20,8 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
   const [inputCount, setInputCount] = useState(0);
 
   const inputFileRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const handleContentChange = (e: {
     target: { value: SetStateAction<string> };
@@ -71,6 +79,43 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
 
   const handleDeleteImage = (id: number) => {
     setShowImages(showImages.filter((_, index) => index !== id));
+  };
+
+  //api post
+  const handlePostData = async () => {
+    try {
+      // const accessToken = "YOUR_ACCESS_TOKEN";
+
+      const request = {
+        petType,
+        mainCategory: 1,
+        subCategory: 1,
+        title,
+        content,
+      };
+      console.log(request);
+
+      const imageFile = inputFileRef.current?.files?.[0];
+
+      const response = await writingOut({
+        // accessToken,
+        image: imageFile || undefined,
+        request,
+      });
+
+      if (response.status === 200) {
+        console.log("게시물이 성공적으로 작성되었습니다.", response.data);
+        navigate("/petTalk");
+      } else {
+        console.error(
+          "게시물 작성 중 오류 발생:",
+          response.status,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("게시물 작성 중 오류 발생:", error);
+    }
   };
 
   return (
@@ -158,6 +203,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({ isFreeTalkWrite }) => {
             color: isSubmitButtonEnabled() ? "#fff" : "",
           }}
           disabled={!isSubmitButtonEnabled()}
+          onClick={handlePostData}
         >
           작성 완료
         </button>

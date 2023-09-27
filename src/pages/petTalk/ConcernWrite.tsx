@@ -31,12 +31,17 @@ const ConcernWrite = () => {
           <div className={styles.tab}>
             {active ? (
               <>
-                <div className={styles.active} onClick={() => setActive(true)}>
+                <div
+                  className={styles.active}
+                  onClick={() => setActive(true)}
+                  data-pet-type="DOG"
+                >
                   강아지
                 </div>
                 <div
                   className={styles.unactive}
                   onClick={() => setActive(false)}
+                  data-pet-type="CAT"
                 >
                   고양이
                 </div>
@@ -46,17 +51,25 @@ const ConcernWrite = () => {
                 <div
                   className={styles.unactive}
                   onClick={() => setActive(true)}
+                  data-pet-type="DOG"
                 >
                   강아지
                 </div>
-                <div className={styles.active} onClick={() => setActive(false)}>
+                <div
+                  className={styles.active}
+                  onClick={() => setActive(false)}
+                  data-pet-type="CAT"
+                >
                   고양이
                 </div>
               </>
             )}
           </div>
         </Head>
-        <PettalkWrite isFreeTalkWrite={isFreeTalkWrite} />
+        <PettalkWrite
+          isFreeTalkWrite={isFreeTalkWrite}
+          petType={active ? "DOG" : "CAT"}
+        />
       </div>
     </Background>
   );
