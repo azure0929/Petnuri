@@ -2,8 +2,10 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
+import { allList } from "@/lib/apis/pettalkApi";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import heart from "../../assets/heart_18px.svg";
@@ -26,6 +28,11 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
   const handleFloating = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const { data } = useQuery("allList", allList);
+
+  if (data) {
+    console.log("모든 리스트", data);
+  }
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
