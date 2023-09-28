@@ -64,13 +64,11 @@ type ChallengeJoinProps = {
   join: Review[];
 };
 
-interface ChallengeData {
+interface DailyDetailList {
   challengeId: number;
-  name: string;
+  challengeName: string;
   challengeReview: string;
-  thumbnail: string;
-  userId: number;
-  review: Review[];
+  dailyReview: Review[];
   status: boolean;
 }
 

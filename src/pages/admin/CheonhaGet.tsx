@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 
-interface Review {
-  itemId?: number,
-  name: string
-}
-
 interface RewardData {
-  title: string;
-  thumbnail: string;
-  kit_start_date: string;
-  kit_end_date: string;
-  reward_start_date: string;
-  reward_end_date: string;
-  rewardList: Review[];
+  id: number
+  title: string
+  subTitle: string
+  notice: string
+  thumbnail: string
+  poster: string
+  status: string
+  startDate:string
+  endDate: string
+  kitStartDate: string
+  kitEndDate: string
+  rewardStartDate: string
+  rewardEndDate: string
 }
 
 const CheonhaGet = () => {
@@ -23,7 +24,7 @@ const CheonhaGet = () => {
       try {
         const response = await fetch('/Cheonha.json');
         const data = await response.json();
-        setRewardData(data.data[0]);
+        setRewardData(data);
       } catch (error) {
         console.error('CheonhaGet Error:', error);
       }
@@ -40,16 +41,16 @@ const CheonhaGet = () => {
       src={rewardData?.thumbnail} 
       alt="Thumbnail" 
       style={{ maxWidth: '100px', maxHeight: '100px' }}/>
-      <p>키트 시작일: {rewardData?.kit_start_date}</p>
-      <p>키트 종료일: {rewardData?.kit_end_date}</p>
-      <p>챌린지 시작일: {rewardData?.reward_start_date}</p>
-      <p>챌린지 종료일: {rewardData?.reward_end_date}</p>
-
-      <div>
-         {rewardData?.rewardList.map((rewardList, index) => (
-           <p key={index}>{rewardList.name}</p>
-         ))}
-       </div>
+      <p>서브타이틀: {rewardData?.subTitle}</p>
+      <p>유의사항: {rewardData?.notice}</p>
+      <p>상세 포스터: {rewardData?.poster}</p>
+      <p>상태?: {rewardData?.status}</p>
+      <p>시작일: {rewardData?.startDate}</p>
+      <p>종료일: {rewardData?.endDate}</p>
+      <p>키트 시작일: {rewardData?.kitStartDate}</p>
+      <p>키트 종료일: {rewardData?.kitEndDate}</p>
+      <p>챌린지 시작일: {rewardData?.rewardStartDate}</p>
+      <p>챌린지 종료일: {rewardData?.rewardEndDate}</p>
     </div>
   );
 };
