@@ -45,7 +45,7 @@ export const useScrollDiv = () => {
 };
 
 export const useScrollUl = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLUListElement>(null);
   let startTouchX = 0;
 
   useEffect(() => {
