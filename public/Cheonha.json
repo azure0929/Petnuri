@@ -1,17 +1,15 @@
 {
-  "data": [
-    {
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
-      "challengeId": 1,
-      "name":"천하제일 집사대회",
-      "subName":"검진키트 무료체험 해보기",
-      "authMethod":"인증 사진 업로드",
-      "payment":1,
-      "startDate":"2023-10-09",
-      "endDate":"2023-10-15",
-      "status":"READY",
-      "rewardStatus":"false",
-      "process": "unprocessed"
-    }
-  ]
+  "id": 1,
+  "title":"천하제일 집사대회",
+  "subTitle":"검진키트 무료체험 해보기",
+  "notice": "유의사항",
+  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
+  "poster": "상세 포스터 url" ,
+  "status": "OPENED",
+  "startDate": "2023-10-09" ,
+  "endDate": "2023-10-09" ,           
+  "kitStartDate": "2023-10-09" ,     
+  "kitEndDate": "2023-10-09" ,       
+  "reviewStartDate": "2023-10-09" , 
+  "reviewEndDate": "2023-10-09"
 }

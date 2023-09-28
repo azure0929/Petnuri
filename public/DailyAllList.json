@@ -7,13 +7,13 @@
 	    "status": false 
 		},
 		{
-			"id": 2,
+			"challengeId": 2,
 	    "title": "매일매일 놀아주기",
 			"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
 	    "status": true 
 		},
 		{
-			"id": 3,
+			"challengeId": 3,
 	    "title": "매일매일 산책하기",
 			"thumbnail" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRp0xN4URcOq2KtcxwNAd8cbjNaSc0KnT2OqyeEPiEs4zMffxomu4zP4ihz-lOJcnpCGc&usqp=CAU",
 	    "status": true 

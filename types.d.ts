@@ -28,6 +28,15 @@ interface joinList {
   imageUrl: string;
   nickName: string;
 }
+
+interface joinListEvent {
+  id: number
+  photoUrl: string
+  photoName: string
+  content: string
+  createdAt: string
+}
+
 interface Item {
   thumbnail?: string;
   title?: string;
@@ -55,13 +64,11 @@ type ChallengeJoinProps = {
   join: Review[];
 };
 
-interface ChallengeData {
+interface DailyDetailList {
   challengeId: number;
-  name: string;
+  challengeName: string;
   challengeReview: string;
-  thumbnail: string;
-  userId: number;
-  review: Review[];
+  dailyReview: Review[];
   status: boolean;
 }
 

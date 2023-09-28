@@ -8,7 +8,7 @@
   display: flex;
   border-top: 1px solid $gray_0200_EBEBEB;
   position: fixed;
-  right: 300px;
+  right: 18%;
   bottom: 0;
 }
 .main-tab-item {
@@ -25,5 +25,11 @@
 
   &.active {
     color: $brand_blue_200_3F54D1;
+  }
+}
+
+@media (max-width:1280px) {
+  .main-tab {
+    right : 2%;
   }
 }
