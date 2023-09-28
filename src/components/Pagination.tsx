@@ -1,5 +1,5 @@
 import styles from "@/styles/pagination.module.scss";
-import { useScrollUl } from "@/utils/Scroll";
+import { useScrollDiv } from "@/utils/Scroll";
 import activeDot from "@/assets/active dot.svg";
 import activeNoDot from "@/assets/active no dot.svg";
 
@@ -14,7 +14,7 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
-  const scrollRef = useScrollUl();
+  const scrollRef = useScrollDiv();
   const pageNumbers = Array.from(
     { length: totalPages },
     (_, index) => index + 1
