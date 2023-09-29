@@ -12,6 +12,7 @@ import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
+import { ContestCheckApi } from "@/lib/apis/challengeApi";
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -47,14 +48,24 @@ const Challenge = () => {
       const response = await fetch("/DailyAllList.json");
       const data = await response.json();
       setChallenges(data.challenges);
-      const response2 = await fetch("/Cheonha.json");
-      const data2 = await response2.json();
-      setCheonHa(data2);
       const response3 = await fetch("/Yanado.json");
       const data3 = await response3.json();
       setYanado(data3);
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const ContestApi = async () => {
+      try {
+        const data2 = await ContestCheckApi();
+        setCheonHa(data2);
+        console.log(data2);
+      } catch (error) {
+        console.error("api error : " + error);
+      }
+    };
+    ContestApi();
   }, []);
 
   const wrong = () => createToast("error", "추후 오픈 예정입니다");

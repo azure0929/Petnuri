@@ -33,7 +33,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const isAllAgreed = isServiceAgreed && isPrivacyAgreed;
-  const isButtonEnabled = isNicknameValid && !nicknameError && !isDuplicateChecked && isAllAgreed && (referralCode === '' || referralCodeError === '');
+  const isButtonEnabled = isNicknameValid && !nicknameError && isDuplicateChecked && isAllAgreed && (referralCode === '' || referralCodeError === '');
 
   const handleAgreeButtonClick = () => {
     if (isButtonEnabled) {
