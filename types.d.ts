@@ -69,7 +69,7 @@ interface DailyDetailList {
   challengeName: string;
   challengeReview: string;
   dailyReview: Review[];
-  status: boolean;
+  status?: boolean;
 }
 
 interface DailyAllList {

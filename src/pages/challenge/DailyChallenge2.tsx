@@ -13,7 +13,7 @@ import BannerImg from "@/assets/놀아주기.png";
 
 const DailyChallenge2 = () => {
   const scrollRef = useScrollDiv();
-  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  const [challenges, setChallenges] = useState<DailyDetailList[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +56,7 @@ const DailyChallenge2 = () => {
         <ChallengeContents contents={contents} />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
-          {challenges[1]?.review.map((review, reviewIndex) => (
+          {challenges[1]?.dailyReview.map((review, reviewIndex) => (
             <ChallengeJoin
               key={reviewIndex}
               join={{
