@@ -3,13 +3,14 @@ import MainTab from "@/components/MainTab";
 import login_screen from "@/assets/login_screen.svg";
 import kakao from "@/assets/kakao.svg";
 import styles from "@/styles/login.module.scss";
-import { REST_API } from "@/lib/apis/base";
+import { REST_API_KEY } from "@/lib/apis/base";
 
 const Login = () => {
-  const REDIRECT_URL = 'http://localhost:5173/kakaologin'
   const handleKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API}&redirect_uri=${REDIRECT_URL}`;
-  }
+    const REDIRECT_URL = `http://localhost:5173/KaKaoLogin`;
+  
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
+  };
 
   // 1 : 1 채팅 상담하기 클릭 시 이동
   const chatLink = "http://pf.kakao.com/_RfxnuG/chat";
