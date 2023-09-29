@@ -16,12 +16,6 @@ export const login = async (code: string) => {
       }
     });
 
-    if (response.data.isRegistered) {
-      localStorage.setItem('code', code);
-      window.location.href = '/';
-    } else {
-      window.location.href = '/signup';
-    }
     return response;
   } catch (error) {
     console.error("로그인 실패", error);

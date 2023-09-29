@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { kakaoCodeState } from '@/store/kakaoCodeState';
-import { login } from "@/components/lib/apis/userApi";
+import { login } from '@/lib/apis/userApi';
 
 const OAuth = () => {
   const kakaoCode = useRecoilValue(kakaoCodeState);
