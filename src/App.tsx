@@ -7,6 +7,7 @@ import SignUp from "./pages/signup";
 import OnBoarding from "./pages/onboarding";
 import PetRegist from "./pages/onboarding/PetRegist";
 import RegistSuccess from "./pages/onboarding/RegistSuccess";
+import OAuth2RedirectHandler from "@/pages/login/OAuth2RedirectHandeler";
 // 챌린지
 import Challenge from "./pages/challenge";
 import Contest from "./pages/challenge/Contest";
@@ -50,6 +51,7 @@ const App = () => {
       <Route path="/onboarding" element={<OnBoarding />} />
       <Route path="/petregist" element={<PetRegist />} />
       <Route path="/registsuccess" element={<RegistSuccess />} />
+      <Route path="/kakaologin" element={<OAuth2RedirectHandler />} />
       {/* 챌린지 */}
       <Route path="/challenge" element={<Challenge />} />
       <Route path="/contest" element={<Contest />} />
