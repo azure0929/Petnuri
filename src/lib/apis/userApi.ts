@@ -5,28 +5,23 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-
 // 로그인
-export const login = async (code: string) => {
+export const login = async (request: LoginRequest): Promise<AxiosResponse<LoginResponse>> => {
   try {
-    const response = await api.post("/auth/kakao/login", 
-    { code }, {
-      headers: {
-        Authorization: `Bearer ${code}`
-      }
-    });
-
+    const response: AxiosResponse<LoginResponse> = await api.post("/auth/kakao/login", request);
+    console.log("로그인 응답 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("로그인 실패", error);
     throw error;
   }
-}
+};
 
 // 회원가입
 export const join = async (request: SignUpRequest): Promise<AxiosResponse<SignUpResponse>> => {
   try {
     const response: AxiosResponse<SignUpResponse> = await api.post("/auth/join", request);
+    console.log("회원가입 응답 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("회원가입 실패", error);
@@ -34,10 +29,12 @@ export const join = async (request: SignUpRequest): Promise<AxiosResponse<SignUp
   }
 };
 
+
 // 닉네임
 export const checknickname = async (nickname: string): Promise<AxiosResponse<NicknameResponse>> => {
   try {
     const response: AxiosResponse<NicknameResponse> = await api.get("/member/nickname", { params: { nickname } });
+    console.log("닉네임 응답 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("중복확인 실패", error);
@@ -49,6 +46,7 @@ export const checknickname = async (nickname: string): Promise<AxiosResponse<Nic
 export const checkreferralCode = async (referralCode: string): Promise<AxiosResponse<ReferralCodeResponse>> => {
   try {
     const response: AxiosResponse<ReferralCodeResponse> = await api.get("/member/referralCode", { params: { referralCode } });
+    console.log("추천인 코드 응답 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("추천인 코드 확인 실패", error);
@@ -60,12 +58,25 @@ export const checkreferralCode = async (referralCode: string): Promise<AxiosResp
 export const petRegistration = async (request: PetRegistrationRequest): Promise<AxiosResponse<PetRegistrationResponse>> => {
   try {
     const response: AxiosResponse<PetRegistrationResponse> = await api.post("/member/pet", request);
+    console.log("펫 등록 응답 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("펫 등록 실패", error);
     throw error;
   }
 };
+
+// 로그인
+export interface LoginRequest {
+  code: string;
+}
+
+export interface LoginResponse {
+  jwtToken: string;
+  refreshToken: string;
+  kakaoAccessToken: string;
+  email: string;
+}
 
 // 회원가입
 export interface SignUpRequest {
