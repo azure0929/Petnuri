@@ -39,10 +39,15 @@ const KaKaoLogin = () => {
           )
           .then((userRes) => {
             console.log("유저 정보", userRes);
-            const { id } = userRes.data;
+            const { kakao_account } = userRes.data;
+            const { email } = kakao_account;
 
-            localStorage.setItem("id", id);
+            // 추가: JWT 토큰 저장
+            const jwtToken = userRes.headers["Authorization"];
+
+            localStorage.setItem("email", email);
             localStorage.setItem("kakaoAccessToken", access_token);
+            localStorage.setItem("jwtToken", jwtToken); // JWT 토큰 저장
 
             navigate("/signup");
           })
