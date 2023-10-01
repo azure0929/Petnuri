@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FocusEvent } from "react";
+import { useState, useEffect, ChangeEvent, FocusEvent } from "react";
 import Background from "@/components/Background";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 import arrow_right_small from "@/assets/arrow_right_small.svg";
@@ -10,6 +10,7 @@ import PrivacyHBS from "@/pages/signup/PrivacyHBS";
 import { useSetRecoilState } from "recoil";
 import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -155,6 +156,28 @@ const SignUp = () => {
     setIsMarketingAgreed(newAgreeAll);
   };
 
+  useEffect(() => {
+    const fetchKakaoEmail = async () => {
+      try {
+        const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("kakaoAccessToken")}`,
+          },
+        });
+
+        const { kakao_account } = response.data;
+        const { email } = kakao_account;
+
+        const emailInput = document.querySelector("#email-input") as HTMLInputElement;
+        emailInput.placeholder = email;
+      } catch (error) {
+        console.error("Kakao 이메일 조회 오류:", error);
+      }
+    };
+
+    fetchKakaoEmail();
+  }, []);
+
   return (
     <>
       <Background>
@@ -169,9 +192,8 @@ const SignUp = () => {
             <div className={styles.box}>
               <h2 className={styles.title}>이메일</h2>
               <input
-                type="text"
-                readOnly
-                placeholder="petnuri@kakao.talk"
+                id="email-input"
+                readOnly // 읽기 전용 상태로 변경
               />
             </div>
           </div>
