@@ -29,6 +29,14 @@ const MyPage = () => {
         <div className={styles.space}></div>
         <div className={styles.contents}>
           <div>
+            배송지 등록
+            <span>
+              <Link to="/mypage/adress">
+                <AiOutlineRight />
+              </Link>
+            </span>
+          </div>
+          <div>
             자주하는 질문
             <span>
               <Link
