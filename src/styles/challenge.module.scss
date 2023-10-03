@@ -133,11 +133,13 @@
       }
   
       .main {
-        margin-right: 35%;
+        margin-right: 10%;
         cursor: pointer;
   
         .title {
+          width: 150px;
           height: 20px;
+          display: flex;
           @include title_bold_14px
         }
         .time {
@@ -148,23 +150,8 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 4px;
           @include body_regular_12px;
-  
-          .vectorWrapper {
-            position: relative;
-            display: inline-block; 
-          }
-          
-          .square {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 3px;
-            height:3px;
-            transform: translate(-120%, -50%);
-            background-color:#ffba08; 
-            border-radius: 1px;
-          }
         }
       }
   

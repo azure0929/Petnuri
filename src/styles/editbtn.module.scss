@@ -9,6 +9,7 @@
   align-items: center;
   border-radius: 8px;
   @include title_bold_12px;
+  cursor: pointer;
 }
 
 .light {

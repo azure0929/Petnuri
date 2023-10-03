@@ -222,6 +222,7 @@
                 font-size: 14px;
                 font-weight: 600;
                 letter-spacing: -0.1px;
+                cursor: pointer;
               }
             }
             .user {
@@ -239,6 +240,7 @@
             height: 16px;
             font-size: 14px;
             margin-left: 24px;
+            cursor: pointer;
           }
         }
       }
@@ -264,16 +266,7 @@
     .image {
       width: 326px;
       height: 176px;
-      background-color: #D6D6D6;
       border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      font-weight: 300;
-      line-height: 150%;
-      letter-spacing: -0.5px;
-      color: #000;
       cursor: pointer;
     }
   }

@@ -12,6 +12,12 @@ import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useScrollDiv } from "@/utils/Scroll";
 import BannerImg from "@/assets/천하제일 집사대회.png";
+import KitModal from "@/components/modal/KitModal";
+import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
+import DeliveryList from "@/components/challenge/delivery/DeliveryList";
+import { BSTypeState } from "@/store/challengeState";
+import { useRecoilValue } from "recoil";
+import { ContestCheckApi } from "@/lib/apis/challengeApi";
 
 interface contestData {
   process: string;
@@ -21,6 +27,20 @@ const Contest = () => {
   const scrollRef = useScrollDiv();
   const [joinList, setJoinList] = useState<joinList[]>([]);
   const [contestData, setContestData] = useState<contestData | null>(null);
+  const BSType = useRecoilValue(BSTypeState);
+
+  useEffect(() => {
+    const ContestApi = async () => {
+      try {
+        const response = await ContestCheckApi();
+        console.log(response);
+      } catch (error) {
+        console.error("api error : " + error);
+      }
+    };
+
+    ContestApi();
+  }, []);
 
   useEffect(() => {
     const contestApi = async () => {
@@ -50,15 +70,15 @@ const Contest = () => {
     fetchData();
   }, []);
 
-  const head: challengeHead = {
+  const head: ChallengeHead = {
     head: "천하제일 집사대회",
   };
 
-  const banner: challengeBanner = {
+  const banner: ChallengeBanner = {
     bannerImg: BannerImg,
   };
 
-  const contents: challengeContents = {
+  const contents: ChallengeContents = {
     mainTitle: "천하제일 집사대회",
     subTitle: "천하제일 집사대회",
     howTitle: "인증방법",
@@ -90,9 +110,9 @@ const Contest = () => {
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
           {joinList !== null
-            ? joinList.map((joinItem, index) => (
+            ? joinList.map((joinItem) => (
                 <ChallengeJoin
-                  key={index}
+                  key={joinItem.memberId}
                   join={{
                     participantsImg: joinItem.imageUrl,
                     participantsName: joinItem.nickName,
@@ -102,7 +122,10 @@ const Contest = () => {
             : null}
         </div>
         {renderButton}
-        <DeliveryBS />
+        <KitModal />
+        {BSType === "DeliveryBS" && <DeliveryBS />}
+        {BSType === "DeliveryReg" && <DeliveryReg />}
+        {BSType === "DeliveryList" && <DeliveryList />}
         <MainTab />
       </Background>
     </>

@@ -1,7 +1,7 @@
 import styles from "@/styles/challenge/challengecontents.module.scss";
 
 interface contentsProps {
-  contents: challengeContents;
+  contents: ChallengeContents;
 }
 
 const ChallengeContents: React.FC<contentsProps> = ({ contents }) => {

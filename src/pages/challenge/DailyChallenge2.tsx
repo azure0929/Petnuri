@@ -5,7 +5,7 @@ import ChallengeBanner from "@/components/challenge/ChallengeBanner";
 import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
-import DailySaveBS from "./DailySaveBS";
+import DailySaveBS from "../../components/challenge/DailySaveBS";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -13,7 +13,7 @@ import BannerImg from "@/assets/놀아주기.png";
 
 const DailyChallenge2 = () => {
   const scrollRef = useScrollDiv();
-  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  const [challenges, setChallenges] = useState<DailyDetailList[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,15 +29,15 @@ const DailyChallenge2 = () => {
     fetchData();
   }, []);
 
-  const head: challengeHead = {
+  const head: ChallengeHead = {
     head: "산책 시키기",
   };
 
-  const banner: challengeBanner = {
+  const banner: ChallengeBanner = {
     bannerImg: BannerImg,
   };
 
-  const contents: challengeContents = {
+  const contents: ChallengeContents = {
     mainTitle: "산책 시키기",
     subTitle: "산책 시키기",
     howTitle: "인증방법",
@@ -56,7 +56,7 @@ const DailyChallenge2 = () => {
         <ChallengeContents contents={contents} />
         <span className={styles.title}>다른 집사들도 참여중이에요!</span>
         <div className={styles.participants} ref={scrollRef}>
-          {challenges[1]?.review.map((review, reviewIndex) => (
+          {challenges[1]?.dailyReview.map((review, reviewIndex) => (
             <ChallengeJoin
               key={reviewIndex}
               join={{

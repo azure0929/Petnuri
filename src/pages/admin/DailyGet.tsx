@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const DailyGet = () => {
-  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  const [challenges, setChallenges] = useState<DailyDetailList[]>([]);
 
    useEffect(() => {
     const fetchData = async () => {
@@ -21,16 +21,12 @@ const DailyGet = () => {
      <>
        {challenges.map(challengeData => (
          <div key={challengeData.challengeId}>
-           <h1>챌린지 이름 : {challengeData.name}</h1>
+           <h1>챌린지 이름 : {challengeData.challengeName}</h1>
            <p>챌린지 설명 : {challengeData.challengeReview}</p>
-           <p>섬네일 : 
-            <img 
-            src={challengeData.thumbnail} 
-            alt="섬네일"
-            style={{ maxWidth: '100px', maxHeight: '100px' }}  /></p>
+           <p>인증 상황 : {challengeData.status}</p>
 
-           {challengeData.review.map((review, index) => (
-             <div key={index}>
+           {challengeData.dailyReview.map((review) => (
+             <div key={review.reviewUserId}>
                <h3>리뷰 유저 닉넴 : {review.reviewUserNickname}</h3>
                <img 
                src={review.reviewImgUrl} 

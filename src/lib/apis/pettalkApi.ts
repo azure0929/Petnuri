@@ -1,15 +1,51 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "",
+  baseURL: "http://3.34.154.62:8080/",
 });
 
-//아래는 예시입니다 담당자분이 수정 후 주석도 지워주세요!
-export const checkEmail = async (email: string) => {
+export const allList = async () => {
   try {
-    const response = await api.post("/user/email", { email });
+    const response = await api.get("/pet-talk");
+    console.log("모든 리스트", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error in checkEmail:", error);
+    console.error("no List:", error);
+  }
+};
+
+interface WritingOutParams {
+  // accessToken: string;
+  image?: File;
+  request: object;
+}
+
+export const writingOut = async ({
+  // accessToken,
+  image,
+  request,
+}: WritingOutParams) => {
+  try {
+    const formData = new FormData();
+
+    if (image) {
+      formData.append("image", image);
+    }
+
+    formData.append("request", JSON.stringify(request));
+
+    //여기
+    const response = await axios.post("/pet-talk", formData, {
+      headers: {
+        // Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log("성공", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("실패", error);
+    throw error;
   }
 };
