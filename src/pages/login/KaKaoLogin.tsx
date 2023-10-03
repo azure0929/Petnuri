@@ -16,6 +16,7 @@ const KaKaoLogin = () => {
       .post(
         `https://kauth.kakao.com/oauth/token?grant_type=${grantType}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&code=${code}`,
         {},
+        // kauth.kakao.com/oauth/authorize?response_type=code&client_id=a7286a7a260984d746ba0d10d2a4a07a&redirect_uri=http://3.34.154.62:8080/auth/kakao/login
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",

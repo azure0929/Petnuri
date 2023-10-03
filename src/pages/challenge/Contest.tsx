@@ -35,7 +35,6 @@ const Contest = () => {
     };
 
     contestApi();
-    console.log(contestData);
   }, []);
 
   useEffect(() => {
@@ -49,7 +48,6 @@ const Contest = () => {
     };
 
     joinAPi();
-    console.log(joinList);
   }, []);
 
   const contents: ChallengeContents = {
