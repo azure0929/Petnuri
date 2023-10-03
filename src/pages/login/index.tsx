@@ -4,10 +4,11 @@ import login_screen from "@/assets/login_screen.svg";
 import kakao from "@/assets/kakao.svg";
 import styles from "@/styles/login.module.scss";
 import { REST_API_KEY } from "@/lib/apis/base";
+import {useEffect} from 'react'
 
 const Login = () => {
   const handleKakaoLogin = () => {
-    const REDIRECT_URL = `http://localhost:5173/KaKaoLogin`;
+    const REDIRECT_URL = `http://3.34.154.62:8080/auth/kakao/login`;
   
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
   };
@@ -18,6 +19,17 @@ const Login = () => {
   const handleChatClick = () => {
     window.location.href = chatLink;
   };
+
+  useEffect(() => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const jwtToken = hashParams.get('jwtToken');
+
+    if (jwtToken === null) {
+      window.location.href = '/signup';
+    } else {
+      window.location.href = '/';
+    }
+  }, []);
 
   return (
     <>

@@ -8,18 +8,18 @@ const KaKaoLogin = () => {
   useEffect(() => {
     // 콜백 URL에서 인가 코드 추출
     const urlParams = new URLSearchParams(window.location.search);
-    const kakaoCode = urlParams.get("code");
+    const code = urlParams.get("code");
 
-    if (!kakaoCode) {
+    if (!code) {
       console.error("카카오 로그인 코드가 없습니다.");
       return;
     }
 
     const performLogin = async () => {
       try {
-        const response = await login(kakaoCode);
+        const response = await login(code);
 
-        if (response && response.status === 200 && response.data) {
+        if (response?.status === 200) {
           const { email, kakaoAccessToken, jwtToken } = response.data;
 
           localStorage.setItem("email", email);

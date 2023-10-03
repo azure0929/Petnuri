@@ -9,3 +9,12 @@ export const ContestCheckApi = async () => {
     console.error("Error in ContestCheckApi:", error);
   }
 };
+
+export const YanadoCheckApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/point/1`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in YanadoCheckApi:", error);
+  }
+};

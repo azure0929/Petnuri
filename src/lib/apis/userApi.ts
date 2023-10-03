@@ -8,8 +8,9 @@ const api = axios.create({
 // 로그인
 export const login = async (code) => {
   try {
-    const response = await api.get("/auth/kakao/login", code);
-    return response;
+    const response = await api.get("/auth/kakao/login", { params: { code } });
+    console.log(response);
+    return response;    
   } catch (error) {
     console.log(error);
   }
