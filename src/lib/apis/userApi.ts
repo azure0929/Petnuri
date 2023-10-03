@@ -5,16 +5,6 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-// 로그인
-export const login = async (code) => {
-  try {
-    const response = await api.get("/auth/kakao/login", code);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 // 회원가입
 export const join = async ({ email, nickname, referralCode, isAgreed }: Join) => {
   try {
@@ -62,17 +52,6 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
     throw error;
   }
 };
-
-// 로그인
-/* export interface Login {
-  code: string;
-}
-export interface LoginResponse {
-  jwtToken: null | string;
-  refreshToken: null | string;
-  kakaoAccessToken: string;
-  email: string;
-} */
 
 // 회원가입
 export interface Join {
