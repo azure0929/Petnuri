@@ -1,63 +1,41 @@
 import { useEffect } from "react";
-import { REST_API_KEY } from "@/lib/apis/base";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { login } from "@/lib/apis/userApi";
 
 const KaKaoLogin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get("code");
-    const grantType = "authorization_code";
-    const REDIRECT_URL = "http://localhost:5173/KaKaoLogin";
+    // 콜백 URL에서 인가 코드 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const kakaoCode = urlParams.get("code");
 
-    axios
-      .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=${grantType}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&code=${code}`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-          },
+    if (!kakaoCode) {
+      console.error("카카오 로그인 코드가 없습니다.");
+      return;
+    }
+
+    const performLogin = async () => {
+      try {
+        const response = await login(kakaoCode);
+
+        if (response && response.status === 200 && response.data) {
+          const { email, kakaoAccessToken, jwtToken } = response.data;
+
+          localStorage.setItem("email", email);
+          localStorage.setItem("kakaoAccessToken", kakaoAccessToken);
+          localStorage.setItem("jwtToken", jwtToken);
+
+          navigate("/signup");
+        } else {
+          console.error("서버 응답 오류");
         }
-      )
-      .then((res) => {
-        console.log("로그인 성공", res);
-        const { access_token } = res.data;
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
-        axios
-          .post(
-            `https://kapi.kakao.com/v2/user/me`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${access_token}`,
-                "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-              },
-            }
-          )
-          .then((userRes) => {
-            console.log("유저 정보", userRes);
-            const { kakao_account } = userRes.data;
-            const { email } = kakao_account;
-
-            // 추가: JWT 토큰 저장
-            const jwtToken = userRes.headers["Authorization"];
-
-            localStorage.setItem("email", email);
-            localStorage.setItem("kakaoAccessToken", access_token);
-            localStorage.setItem("jwtToken", jwtToken); // JWT 토큰 저장
-
-            navigate("/signup");
-          })
-          .catch((userError) => {
-            console.log("유저 정보 조회 실패", userError);
-          });
-      })
-      .catch((error) => {
-        console.log("로그인 실패", error);
-      });
+    performLogin();
   }, [navigate]);
 
   return <div>인가 코드 페이지입니다.</div>;
