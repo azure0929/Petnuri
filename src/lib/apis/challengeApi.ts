@@ -25,9 +25,18 @@ export const ContestJoinApi = async () => {
 
 export const ECyanadoCheckApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/reward/2`);
+    const response = await axios.get(`${API_URL}/challenge/point/1`);
     return response.data;
   } catch (error) {
     console.error("Error in ContestCheckApi:", error);
+  }
+};
+
+export const ECyanadoJoinApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/point/1/reviews`);
+    return response.data;
+  } catch (error) {
+    console.log("Error in ECyanadoJoinApi: " + error);
   }
 };

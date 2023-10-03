@@ -9,37 +9,46 @@ import EventSaveBS from "@/components/challenge/EventSaveBS";
 import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
-import BannerImg from "@/assets/반려일기.png";
+import { ECyanadoCheckApi, ECyanadoJoinApi } from "@/lib/apis/challengeApi";
 
 const ECYanado = () => {
   const scrollRef = useScrollDiv();
-  const [joinList, setJoinList] = useState<joinListEvent[]>([]);
+  const [yanadoData, setYanadoData] = useState<YanadoData | null>(null);
+  const [joinList, setJoinList] = useState<JoinList[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const ecyanadoApi = async () => {
       try {
-        const response = await fetch("/ChamyoEvent.json");
-        const data = await response.json();
-        setJoinList(data.reviews);
+        const response = await ECyanadoCheckApi();
+        console.log("res" + response);
+
+        setYanadoData(response);
       } catch (error) {
         console.error("Error:", error);
       }
     };
-
-    fetchData();
+    ecyanadoApi();
   }, []);
 
-  const head: ChallengeHead = {
-    head: "야 너도? 야 나도!",
-  };
+  useEffect(() => {
+    const joinAPi = async () => {
+      try {
+        const response = await ECyanadoJoinApi();
+        setJoinList(response);
+      } catch (error) {
+        console.error("joinAPi Error:", error);
+      }
+    };
 
-  const banner: ChallengeBanner = {
-    bannerImg: BannerImg,
-  };
+    joinAPi();
+    console.log(joinList);
+  }, []);
+
+  console.log(joinList);
 
   const contents: ChallengeContents = {
-    mainTitle: "야 너도? 야 나도!",
-    subTitle: "야 너도? 야 나도!",
+    mainTitle: yanadoData?.title || "",
+    subTitle: yanadoData?.subTitle || "",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
@@ -51,24 +60,34 @@ const ECYanado = () => {
   return (
     <>
       <Background>
-        <ChallengeHead head={head} />
-        <ChallengeBanner banner={banner} />
-        <ChallengeContents contents={contents} />
-        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
-        <div className={styles.participants} ref={scrollRef}>
-          {joinList.map((joinItem) => (
-            <ChallengeJoin
-              key={joinItem.id}
-              join={{
-                participantsImg: joinItem.photoUrl,
-                participantsName: joinItem.photoName,
-              }}
-            />
-          ))}
-        </div>
-        <JoinButton />
-        <EventSaveBS />
-        <MainTab />
+        {yanadoData ? (
+          <>
+            <ChallengeHead head={"야 너도? 야 나두!"} />
+            <ChallengeBanner banner={yanadoData.poster} />
+            <ChallengeContents contents={contents} />
+            <span className={styles.title}>다른 집사들도 참여중이에요!</span>
+            <div className={styles.participants} ref={scrollRef}>
+              {joinList ? (
+                joinList.map((joinItem) => (
+                  <ChallengeJoin
+                    key={joinItem.id}
+                    join={{
+                      participantsImg: joinItem.photoUrl,
+                      participantsName: joinItem.photoName,
+                    }}
+                  />
+                ))
+              ) : (
+                <>
+                  <div>아직 아무도 참여를 안했습니다.</div>
+                </>
+              )}
+            </div>
+            <JoinButton />
+            <EventSaveBS />
+            <MainTab />
+          </>
+        ) : null}
       </Background>
     </>
   );

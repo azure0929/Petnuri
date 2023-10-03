@@ -1,7 +1,4 @@
 // 이벤트 챌린지 타입
-interface ChallengeHead {
-  head: string;
-}
 
 interface ChallengeBanner {
   bannerImg: string;
@@ -24,17 +21,16 @@ interface ChallengeJoin {
 }
 
 interface JoinList {
-  memberId: number;
-  imageUrl: string;
-  nickName: string;
+  id: number;
+  photoName: string;
+  photoUrl: string;
 }
 
-interface joinListEvent {
-  id: number;
-  photoUrl: string;
-  photoName: string;
-  content: string;
-  createdAt: string;
+interface YanadoData {
+  title: string;
+  status: string;
+  poster: string;
+  subTitle: string;
 }
 
 interface Item {

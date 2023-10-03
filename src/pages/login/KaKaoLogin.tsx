@@ -33,7 +33,8 @@ const KaKaoLogin = () => {
             {
               headers: {
                 Authorization: `Bearer ${access_token}`,
-                "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+                "Content-type":
+                  "application/x-www-form-urlencoded;charset=utf-8",
               },
             }
           )
