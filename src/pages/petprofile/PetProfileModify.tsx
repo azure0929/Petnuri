@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import styles from '@/styles/petprofile.module.scss'
 import Background from '@/components/Background';
 import Header from '@/components/Head';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
@@ -20,6 +20,7 @@ const PetProfileModify = () => {
   const [age, setAge] = useState(profile.petAge || '');
   const [image, setImage] = useState<string | null>(profile.image || null);
   const [id] = useState(profile.id);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setIsSelected(!isSelected);
@@ -56,6 +57,7 @@ const PetProfileModify = () => {
       petAge: age,
       isSelected,
     };
+    console.log(data)
 
     formData.append(
       "petProfileReq",
@@ -68,6 +70,12 @@ const PetProfileModify = () => {
 
     try {
       await modifyPetProfile(formData);
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
+      console.log(JSON.stringify(data));
+
+      navigate('/');
    } catch (error) {
      console.error(error); 
    }
