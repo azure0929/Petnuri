@@ -2,28 +2,31 @@ import styles from '@/styles/fulladress.module.scss'
 import EditBtn from './EditBtn'
 import close from '@/assets/close.svg'
 import { useSetRecoilState } from 'recoil';
-import { deliveryDataState, BSTypeState } from '@/store/challengeState';
+import { deliveryUpdateDataState, BSTypeState } from '@/store/challengeState';
 
 interface FullAdressProps {
   item:Privacy
   isSelected: boolean;
   onSelect: () => void;
+  onDelete: () => void;
+  onUpdate: () => void;
 }
 
-const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
-  const setDeliveryData = useSetRecoilState(deliveryDataState);
+const FullAdress = ({item, isSelected, onSelect, onDelete, onUpdate }: FullAdressProps) => {
+  const setDeliveryData = useSetRecoilState(deliveryUpdateDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
-  const handleEdit = () => {
+  const handleUpdate = () => {
     setDeliveryData({
+      id: item.id,
       name: item.name,
       phone: item.phone,
-      address1: item.roadAddress,
-      address2: item.address,
-      zonecode:item.zipcode,
+      roadAddress: item.roadAddress,
+      address: item.address,
+      zipCode:item.zipcode,
       isSelected:item.isBased
      });
-    setBSType('DeliveryReg')
+    setBSType('DeliveryUpdate')
   };
 
   return (
@@ -39,7 +42,7 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
             <span>|</span>
             <div>{item.phone}</div>
           </div>
-          <img src={close} alt="" />
+          <img src={close} alt="" onClick={onDelete}/>
         </div>
 
         <div className={styles.box2}>
@@ -49,9 +52,9 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
         </div>
 
         <div className={styles.box3}>
-          <EditBtn version='light' text='수정' onClick={handleEdit}/>
+          <EditBtn version='light' text='수정' onClick={handleUpdate}/>
           <button onClick={onSelect}>
-              <EditBtn version='dark' text='선택'/>
+              <EditBtn version='dark' text='선택' onClick={onUpdate}/>
           </button>
         </div>
       </div>

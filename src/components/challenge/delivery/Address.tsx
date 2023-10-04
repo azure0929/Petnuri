@@ -31,14 +31,12 @@ const Address: React.FC<AddressProps> = ({ addressData }) => {
                   <div className={styles.phone}>{addressItem.phone}</div>
                 </div>
                 <div className={styles.addressContainer}>
-                  <div className={styles.address}>{addressItem.add1}</div>
-                  <div className={styles.detailAddress}>{addressItem.add2}</div>
-                  <div className={styles.zoneCode}>
-                    ({addressItem.zoneCode})
-                  </div>
+                  <div className={styles.address}>{addressItem.roadAddress}</div>
+                  <div className={styles.detailAddress}>{addressItem.address}</div>
+                  <div className={styles.zoneCode}>({addressItem.zipcode})</div>
                 </div>
                 <div className={styles.btn}>
-                  <button className={styles.updateBtn}>수정</button>
+                  <button className={styles.updateBtn} onClick={handleList}>수정</button>
                 </div>
               </div>
             ))}

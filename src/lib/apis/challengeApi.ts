@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "./base";
+import { getCookie } from "@/utils/Cookie";
 
 // 집사대회 api
 export const ContestCheckApi = async () => {
@@ -63,6 +64,95 @@ export const ECyanadoCheckApi = async () => {
     return response.data;
   } catch (error) {
     console.error("Error in ContestCheckApi:", error);
+  }
+};
+
+export const YanadoCheckApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/point/1`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in YanadoCheckApi:", error);
+  }
+};
+
+export const DeliveryListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/delivery/address`, {
+      headers: {
+        'Authorization': getCookie('jwtToken')
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in YanadoCheckApi:", error);
+  }
+};
+
+export const DeliveryRegApi = async (deliveryInfo:any) => {
+  try {
+    const response = await axios.post(`${API_URL}/delivery/address`, deliveryInfo, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie('jwtToken')
+      }
+    });
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.error('Failed to register delivery:', error);
+    throw error;
+  }
+};
+
+export const DeliveryUpdateApi = async (deliveryInfo:any) => {
+  try {
+    const response = await axios.put(`${API_URL}/delivery/address`, deliveryInfo, {
+      headers: {
+        'Authorization': getCookie('jwtToken'), 
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+export const DeliveryTrueUpdateApi = async (item: Privacy) => {
+  const response = await axios.put(
+    `${API_URL}/delivery/address`,
+    {
+      id: item.id,
+      name: item.name,
+      phone: item.phone,
+      roadAddress: item.roadAddress,
+      address: item.address,
+      zipcode: item.zipcode,
+      isBased: true
+    },
+    {
+      headers:{
+        'Authorization': getCookie('jwtToken')
+       }
+    }
+  );
+  return response.data;
+}
+
+export const DeliveryDelApi = async (deliveryAddressId: number) => {
+  try {
+    const response = await axios.delete(`${API_URL}/delivery/address/${deliveryAddressId}`, {
+      headers: {
+        'Authorization': getCookie('jwtToken')
+      }
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Failed to delete delivery address:', error);
+    throw error;
   }
 };
 

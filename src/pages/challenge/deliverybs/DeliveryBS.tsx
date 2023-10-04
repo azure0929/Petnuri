@@ -10,6 +10,7 @@ import DeliveryBSBtn from "@/components/challenge/delivery/DeliveryBSBtn";
 import DeliveryBSReward from "@/components/challenge/delivery/DeliveryBSReward";
 import Address from "@/components/challenge/delivery/Address";
 import styles from "@/styles/challenge/deliverybs/deliverybs.module.scss";
+import { DeliveryListApi } from "@/lib/apis/challengeApi";
 
 const DeliveryBS = () => {
   // 수령인 이름
@@ -35,21 +36,9 @@ const DeliveryBS = () => {
 
   const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
 
-  useEffect(() => {
-    const AddressApi = async () => {
-      try {
-        const response = await fetch("/DeliveryAddress.json");
-        const data = await response.json();
-        setAddressData(data.data);
-      } catch (error) {
-        console.error("Address Api error : " + error);
-      }
-    };
+  
 
-    AddressApi();
-  }, []);
-
-  const defaultAddress = addressData.filter((item) => item.default === true);
+  const defaultAddress = addressData.filter((item) => item.isBased === true);
   // 배송 메세지
   const [messageState, setMessageState] = useState("부재시 문앞에 놓아주세요");
 
@@ -89,6 +78,14 @@ const DeliveryBS = () => {
     messageState: messageState,
     marketingCheck: marketingCheck,
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await DeliveryListApi();
+      setAddressData(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <BottomSheet>

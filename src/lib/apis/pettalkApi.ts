@@ -1,10 +1,39 @@
 import axios from "axios";
 import { API_URL } from "./base";
 
+//펫톡 전체 리스트
 export const allList = async (petType: string) => {
   try {
     const response = await axios.get(
       `${API_URL}/pet-talk?pet=${petType}&order=BEST`
+    );
+    return response.data.petTalkPosts;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
+//펫톡 고민상담 리스트
+export const concernList = async (
+  petType: string,
+  mainCategory: number,
+  subCategory: number
+) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/pet-talk?pet=${petType}&order=BEST&mainCategory=${mainCategory}&subCategory=${subCategory}`
+    );
+    return response.data.petTalkPosts;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
+//펫톡 자유수다 리스트
+export const freetalkList = async (petType: string, mainCategory: number) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/pet-talk?pet=${petType}&order=BEST&mainCategory=${mainCategory}&subCategory`
     );
     return response.data.petTalkPosts;
   } catch (error) {
