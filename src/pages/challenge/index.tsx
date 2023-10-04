@@ -12,7 +12,7 @@ import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
-import { ContestCheckApi, YanadoCheckApi } from "@/lib/apis/challengeApi";
+import { ContestCheckApi, YanadoCheckApi, dailyAllListApi } from "@/lib/apis/challengeApi";
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -45,9 +45,8 @@ const Challenge = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/DailyAllList.json");
-      const data = await response.json();
-      setChallenges(data.challenges);
+      const data = await dailyAllListApi()
+      setChallenges(data);
     };
     fetchData();
   }, []);

@@ -12,7 +12,7 @@ import { loginModalState } from "@/store/challengeState";
 const ChallengeHBS = () => {
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const [selected, setSelected] = useState<number | null>(null);
-  const token = getCookie("token")
+  const token = getCookie("jwtToken")
 
   const openLoginModal = (callback: () => void) => {
     if (!token) {
@@ -78,7 +78,7 @@ const ChallengeHBS = () => {
           </div>
         </div>
 
-        <div className={styles.check}> 정답 확인 </div>
+        <div className={styles.check} onClick={() => openLoginModal(wrong)}> 정답 확인 </div>
 
         <div className={styles.invite}>
           <div className={styles.text_box}>

@@ -5,16 +5,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useSetRecoilState } from 'recoil';
 import { kitModalState } from "@/store/challengeState";
-import dog from '@/assets/dog.svg'
-import product1 from '@/assets/product1.svg'
-import product2 from '@/assets/product2.svg'
-import product3 from '@/assets/product3.svg'
-import product4 from '@/assets/product4.svg'
+import 표지 from '@/assets/표지.png'
+import 홍보1 from '@/assets/홍보1.png'
+import 홍보2 from '@/assets/홍보2.png'
+import 홍보3 from '@/assets/홍보3.png'
+import 홍보4 from '@/assets/홍보4.png'
 
 
 const KitModal = () => {
   const setIsOpen = useSetRecoilState(kitModalState); 
-  const images = [dog,product1,product2,product3,product4]
+  const images = [표지,홍보1,홍보2,홍보3,홍보4]
   
   const handleClose = () => {
     setIsOpen(false);

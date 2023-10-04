@@ -2,6 +2,12 @@ import axios from "axios";
 import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
 
+// 토큰 임시 값
+const locakStorageToken =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMTIiLCJleHAiOjE2OTY0NDQzMzMsImlkIjo1Mywicm9sZSI6IlVTRVIifQ.BFSpWK-pqTwtiW-_Ci87aC9Tcl7z_jV2WkEGvaU-l5Q";
+// const token = localstorage.getItem('jwtToken')
+// const locakStorageToken = `Bearer ${token}`
+
 // 집사대회 api
 export const ContestCheckApi = async () => {
   try {
@@ -312,7 +318,12 @@ export const dailyReviewApi = async (imageFile: File, id: number) => {
   }
 };
 
-const locakStorageToken =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMTIiLCJleHAiOjE2OTY0NDQzMzMsImlkIjo1Mywicm9sZSI6IlVTRVIifQ.BFSpWK-pqTwtiW-_Ci87aC9Tcl7z_jV2WkEGvaU-l5Q";
-// const token = localstorage.getItem('jwtToken')
-// const locakStorageToken = `Bearer ${token}`
+//데일리 전체 조회
+export const dailyAllListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in dailyAllListApi: " + error);
+  }
+};

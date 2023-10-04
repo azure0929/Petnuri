@@ -46,13 +46,13 @@ const KaKaoLogin = () => {
               console.log("유저 정보", userRes);
               const { kakao_account } = userRes.data;
               const { email } = kakao_account;
-              const jwtToken = userRes.headers["Authorization"];
+              //const jwtToken = userRes.headers["Authorization"];
               const { access_token } = res.data;
               const jwtRefreshToken = userRes.headers["jwt_refresh_token"];
 
               sessionStorage.setItem("email", email);
               sessionStorage.setItem("kakaoAccessToken", access_token);
-              sessionStorage.setItem("jwtToken", jwtToken);
+              // sessionStorage.setItem("jwtToken", jwtToken);
               sessionStorage.setItem("jwtRefreshToken", jwtRefreshToken);
 
               navigate("/signup");
