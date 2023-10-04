@@ -15,7 +15,7 @@ const KaKaoLogin = () => {
       codeProcessed.current = true;
 
       const grantType = "authorization_code";
-      const REDIRECT_URL = "http://localhost:5173/KaKaoLogin";
+      const REDIRECT_URL = "https://petnuri.netlify.app/KaKaoLogin";
 
       axios
         .post(
