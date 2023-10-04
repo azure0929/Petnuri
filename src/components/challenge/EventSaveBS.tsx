@@ -27,11 +27,24 @@ const EventSaveBS = () => {
 
   // 이미지 업로드
   const [newUserImg, setNewUserImg] = useState<File | null>(null);
+  
+  const isFileSizeValid = (file: File, maxSizeInBytes: number) => {
+    return file.size <= maxSizeInBytes;
+  };
+
+  const MAX_FILE_SIZE = 1024 * 1024; // 1MB, 바이트 단위로 설정
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) return;
 
-    setNewUserImg(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (!isFileSizeValid(selectedFile, MAX_FILE_SIZE)) {
+      alert("이미지 파일 크기가 너무 큽니다. mb 이하의 이미지를 선택해주세요.");
+      return;
+    }
+  
+    setNewUserImg(selectedFile);
   };
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -42,6 +55,8 @@ const EventSaveBS = () => {
 
   const closeBS = () => {
     if (newUserImg) {
+      console.log(content)
+      console.log(newUserImg)
       review();
       sucess();
       setBottomIsOpen(false);

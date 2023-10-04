@@ -16,10 +16,13 @@ export const ContestJoinApi = async () => {
     const response = await axios.get(
       `${API_URL}/challenge/reward/1/join/other`
     );
+    if(response.status > 300) {
+      throw new Error('기록 작성에 실패하셨습니다.')
+    }
     return response.data;
   } catch (error) {
-    console.error("Error in ContestJoinApi: " + error);
-    // throw error; // 에러 재throw
+    throw error
+    // throw error; // 에러 throw
   }
 };
 
@@ -47,8 +50,9 @@ export const ContestReviewApi = async (
     await axios.post(`${API_URL}/challenge/point/1/review`, request, {
       headers,
     });
+
   } catch (error) {
-    console.error("Error in ContestReviewApi: " + error);
+    throw error
   }
 };
 
@@ -79,22 +83,23 @@ export const ECyanadoReviewApi = async (imageFile: File, content: string) => {
     formData.append("file", imageFile); // 파일 추가
     formData.append("content", content); // JSON 데이터 추가
 
+  //   const getCookie = function(name: string) {
+  //     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  //     return value? value[2] : null;
+  // };
+
+    const locakStorageToken = localStorage.getItem('token')
+    
     const headers = {
-      // Authorization: `Bearer ${accessToken}`,
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTA1IiwiZXhwIjoxNjk2MzUxNTQ4LCJpZCI6MTUsInJvbGUiOiJVU0VSIn0.bmQSU089F_R7eWfT0-8nPBgmgSeAV7noA7wQo1Z4u1c",
-      "Content-Type": "multipart/form-data",
+      Authorization: `${locakStorageToken}`,
     };
+
+    console.log(locakStorageToken)
 
     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
       headers,
     });
 
-    const request = { content };
-
-    await axios.post(`${API_URL}/challenge/point/1/review`, request, {
-      headers,
-    });
   } catch (error) {
     console.error("Error in ECyanadoReviewApi: " + error);
   }
@@ -117,6 +122,27 @@ export const daily1JoinListApi = async() => {
     return response.data
   }catch(error){
     console.error("Error in daily3JoinListApi: " + error)
+  }
+}
+
+// 데일리 이벤트 - 간식주기 참여신청
+export const dailyReviewApi = async (imageFile: File) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", imageFile); // 파일 추가
+
+    const locakStorageToken = localStorage.getItem('token')
+    
+    const headers = {
+      Authorization: `${locakStorageToken}`,
+    };
+
+    await axios.post(`${API_URL}/challenge/daily/1`, formData, {
+      headers,
+    })
+    
+  } catch (error) {
+    throw error
   }
 }
 
@@ -159,3 +185,4 @@ export const daily3JoinListApi = async() => {
     console.error("Error in daily3JoinListApi: " + error)
   }
 }
+
