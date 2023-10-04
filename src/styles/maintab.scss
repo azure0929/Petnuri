@@ -33,3 +33,9 @@
     right : 2%;
   }
 }
+
+@media (max-width:1024px) {
+  .main-tab {
+    right : auto;
+  }
+}

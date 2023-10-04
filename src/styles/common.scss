@@ -102,6 +102,24 @@
   }
 }
 
+@media (max-width:1024px) {
+  .back_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+    .background, .back_chat {
+      display:none;
+   }
+
+   .back_content {
+      position:relative; 
+      right:auto; 
+    }
+  }
+}
+
 @media (max-height:768px) {
   .back_container{
     .background {
