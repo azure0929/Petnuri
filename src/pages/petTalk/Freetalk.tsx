@@ -2,10 +2,9 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
-import { freetalkList } from "@/lib/apis/pettalkApi";
+import { useFreetalkList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import heart from "../../assets/heart_18px.svg";
@@ -15,6 +14,7 @@ import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 import default_user from "../../assets/user.png";
+import banner from "../../assets/키트배너.png";
 
 const FreeTalk = () => {
   const location = useLocation();
@@ -27,24 +27,19 @@ const FreeTalk = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const { data } = useQuery("queryKey", () =>
-    freetalkList(selectedPet, mapTabToNumber(activeTab))
-  );
+  const { data } = useFreetalkList(selectedPet, mapTabToNumber(activeTab));
+  console.log("자유수다 리스트", data);
 
   const handlePetSelect = (e: { target: { value: string } }) => {
     const selectedValue = e.target.value;
     setSelectedPet(selectedValue);
 
     if (selectedValue === "DOG") {
-      freetalkList("DOG", 2);
+      setSelectedPet("DOG");
     } else if (selectedValue === "CAT") {
-      freetalkList("CAT", 2);
+      setSelectedPet("CAT");
     }
   };
-
-  if (data) {
-    console.log(`${selectedPet}, ${activeTab}`, data);
-  }
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
@@ -105,7 +100,7 @@ const FreeTalk = () => {
             </div>
 
             <div className={styles.banner}>
-              <img src="" alt="프로모션 배너" />
+              <img src={banner} alt="프로모션 배너" />
             </div>
 
             <div className={styles.select_wrap}>

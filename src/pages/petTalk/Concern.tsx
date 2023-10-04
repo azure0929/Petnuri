@@ -2,10 +2,9 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
-import { concernList } from "@/lib/apis/pettalkApi";
+import { useConcernList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -16,6 +15,7 @@ import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 import default_user from "../../assets/user.png";
+import banner from "../../assets/키트배너.png";
 
 const Concern = () => {
   const location = useLocation();
@@ -36,15 +36,18 @@ const Concern = () => {
     setSelectedPet(selectedValue);
 
     if (selectedValue === "DOG") {
-      concernList("DOG", 1, 1);
+      setSelectedPet("DOG");
     } else if (selectedValue === "CAT") {
-      concernList("CAT", 1, 1);
+      setSelectedPet("CAT");
     }
   };
 
-  const { data, refetch } = useQuery("queryKey", () =>
-    concernList(selectedPet, mapTabToNumber(activeTab), subCategory)
+  const { data, refetch } = useConcernList(
+    selectedPet,
+    mapTabToNumber(activeTab),
+    subCategory
   );
+  console.log("고민상담 리스트", data);
 
   const handleSubCategorySelect = (subCategory: number) => {
     setSubCategory(subCategory);
@@ -145,7 +148,7 @@ const Concern = () => {
             </div>
 
             <div className={styles.banner}>
-              <img src="" alt="프로모션 배너" />
+              <img src={banner} alt="프로모션 배너" />
             </div>
 
             <div className={styles.select_wrap}>

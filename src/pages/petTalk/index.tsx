@@ -14,20 +14,21 @@ import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 import default_user from "../../assets/user.png";
+import banner from "../../assets/키트배너.png";
 
 interface PetTalkItem {
   id: number;
   title: string;
   content: string;
-  thumbnail: string | null;
+  thumbnail?: string;
   viewCount: number;
-  emojiCount: number | null;
-  replyCount: number | null;
+  emojiCount?: number;
+  replyCount?: number;
   reacted: boolean;
   writer: {
     id: number;
     nickname: string;
-    profileImageUrl: string | null;
+    profileImageUrl?: string;
   };
 }
 
@@ -56,6 +57,7 @@ const PetTalk = () => {
   };
 
   const { data } = useAllList(selectedPet);
+  console.log("모든리스트", data);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
@@ -116,7 +118,7 @@ const PetTalk = () => {
             </div>
 
             <div className={styles.banner}>
-              <img src="" alt="프로모션 배너" />
+              <img src={banner} alt="프로모션 배너" />
             </div>
 
             <div className={styles.select_wrap}>
