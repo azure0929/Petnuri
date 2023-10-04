@@ -6,23 +6,26 @@ import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
 import { createToast } from "@/utils/ToastUtils";
-import { dailyReviewApi } from "@/lib/apis/challengeApi"
+import { dailyReviewApi } from "@/lib/apis/challengeApi";
 
-const DailySaveBS = () => {
+interface DailySaveBSProps {
+  id: number;
+}
+
+const DailySaveBS: React.FC<DailySaveBSProps> = ({ id }) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const sucess = () => createToast("success", "포인트 지급이 완료되었습니다.");
 
-    const review = async () => {
+  const review = async () => {
     try {
       if (!newUserImg) {
         throw new Error("이미지 파일을 선택해주세요.");
       }
-      await dailyReviewApi(newUserImg);
+      await dailyReviewApi(newUserImg, id);
     } catch (error) {
       console.error("Error in reivew: " + error);
     }
   };
-
 
   // 이미지 업로드
   const [newUserImg, setNewUserImg] = useState<File | null>(null);
@@ -42,7 +45,7 @@ const DailySaveBS = () => {
       alert("이미지 파일 크기가 너무 큽니다. mb 이하의 이미지를 선택해주세요.");
       return;
     }
-  
+
     setNewUserImg(selectedFile);
   };
 
@@ -54,8 +57,8 @@ const DailySaveBS = () => {
     }
   };
 
-    const closeBS = () => {
-      review()
+  const closeBS = () => {
+    review();
     sucess();
     setBottomIsOpen(false);
   };
@@ -81,7 +84,8 @@ const DailySaveBS = () => {
                 src={`${URL.createObjectURL(newUserImg)}`}
                 alt="uploaded-img"
                 className={styles.saveImg}
-              />            ) : (
+              />
+            ) : (
               <img src={addIcon} className={styles.addIcon} />
             )}
           </div>

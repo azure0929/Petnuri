@@ -21,13 +21,14 @@ const EventSaveBS = () => {
       }
       await ECyanadoReviewApi(newUserImg, content, petType);
     } catch (error) {
-      console.error("Error in reivew: " + error);
+      alert(error);
+      console.log(error);
     }
   };
 
   // 이미지 업로드
   const [newUserImg, setNewUserImg] = useState<File | null>(null);
-  
+
   const isFileSizeValid = (file: File, maxSizeInBytes: number) => {
     return file.size <= maxSizeInBytes;
   };
@@ -43,7 +44,7 @@ const EventSaveBS = () => {
       alert("이미지 파일 크기가 너무 큽니다. mb 이하의 이미지를 선택해주세요.");
       return;
     }
-  
+
     setNewUserImg(selectedFile);
   };
 
@@ -54,23 +55,25 @@ const EventSaveBS = () => {
   };
 
   const closeBS = () => {
-    if (newUserImg) {
+    if (newUserImg && content && petType) {
       review();
       sucess();
       setBottomIsOpen(false);
     } else {
       error();
+      setContent("");
+      setNewUserImg(null);
+      setPetType("");
       setBottomIsOpen(false);
     }
   };
 
-  const [petType, setPetType] = useState<string>("DOG"); // 초기값은 강아지
+  const [petType, setPetType] = useState<string>(""); // 초기값은 강아지
 
   // 반려동물 종 선택 핸들러
   const handlePetTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPetType(event.target.value);
   };
-
 
   return (
     <>
@@ -99,30 +102,34 @@ const EventSaveBS = () => {
             )}
           </div>
           <div className={styles.selectContainer}>
-          <div>반려동물의 종을 선택해주세요</div>
-          <div>
-            <label>
+            <div className={styles.selectTitle}>
+              반려동물의 종을 선택해주세요
+            </div>
+            <div className={styles.selectPet}>
               <input
                 type="radio"
+                id="all-check"
                 name="petType"
                 value="DOG"
-                checked={petType === "DOG"}
+                // checked={petType === "DOG"}
                 onChange={handlePetTypeChange}
               />
-              강아지
-            </label>
-            <label>
+              <label htmlFor="all-check" className={styles.agreementLabel}>
+                <span>강아지</span>
+              </label>
               <input
                 type="radio"
+                id="check"
                 name="petType"
                 value="CAT"
-                checked={petType === "CAT"}
+                // checked={petType === "CAT"}
                 onChange={handlePetTypeChange}
               />
-              고양이
-            </label>
+              <label htmlFor="check" className={styles.agreementLabel}>
+                <span>고양이</span>
+              </label>
+            </div>
           </div>
-        </div>
           <input
             className={styles.addText}
             placeholder="게시글을 입력해주세요"

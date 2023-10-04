@@ -17,45 +17,40 @@ export const ContestJoinApi = async () => {
     const response = await axios.get(
       `${API_URL}/challenge/reward/1/join/other`
     );
-    if(response.status > 300) {
-      throw new Error('기록 작성에 실패하셨습니다.')
-    }
     return response.data;
   } catch (error) {
-    throw error
-    // throw error; // 에러 throw
+    console.error("Error in ContestJoinApi: " + error);
   }
 };
 
 // 집사대회 참여신청 api
-export const ContestReviewApi = async (
-  accessToken: string,
-  imageFile: File,
-  content: string
-) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", imageFile);
+// export const ContestReviewApi = async (
+//   accessToken: string,
+//   imageFile: File,
+//   content: string
+// ) => {
+//   try {
+//     const formData = new FormData();
+//     formData.append("file", imageFile);
 
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "multipart/form-data",
-    };
+//     const headers = {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "multipart/form-data",
+//     };
 
-    await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-      headers,
-    });
+//     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
+//       headers,
+//     });
 
-    const request = { content };
+//     const request = { content };
 
-    await axios.post(`${API_URL}/challenge/point/1/review`, request, {
-      headers,
-    });
-
-  } catch (error) {
-    throw error
-  }
-};
+//     await axios.post(`${API_URL}/challenge/point/1/review`, request, {
+//       headers,
+//     });
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 // 야너도? 야 너도!
 export const ECyanadoCheckApi = async () => {
@@ -80,8 +75,8 @@ export const DeliveryListApi = async () => {
   try {
     const response = await axios.get(`${API_URL}/delivery/address`, {
       headers: {
-        'Authorization': getCookie('jwtToken')
-      }
+        Authorization: getCookie("jwtToken"),
+      },
     });
     return response.data;
   } catch (error) {
@@ -89,36 +84,43 @@ export const DeliveryListApi = async () => {
   }
 };
 
-export const DeliveryRegApi = async (deliveryInfo:any) => {
+export const DeliveryRegApi = async (deliveryInfo: any) => {
   try {
-    const response = await axios.post(`${API_URL}/delivery/address`, deliveryInfo, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': getCookie('jwtToken')
+    const response = await axios.post(
+      `${API_URL}/delivery/address`,
+      deliveryInfo,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: getCookie("jwtToken"),
+        },
       }
-    });
-    console.log(response.data)
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error('Failed to register delivery:', error);
+    console.error("Failed to register delivery:", error);
     throw error;
   }
 };
 
-export const DeliveryUpdateApi = async (deliveryInfo:any) => {
+export const DeliveryUpdateApi = async (deliveryInfo: any) => {
   try {
-    const response = await axios.put(`${API_URL}/delivery/address`, deliveryInfo, {
-      headers: {
-        'Authorization': getCookie('jwtToken'), 
-      },
-    });
+    const response = await axios.put(
+      `${API_URL}/delivery/address`,
+      deliveryInfo,
+      {
+        headers: {
+          Authorization: getCookie("jwtToken"),
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
-
 
 export const DeliveryTrueUpdateApi = async (item: Privacy) => {
   const response = await axios.put(
@@ -130,28 +132,31 @@ export const DeliveryTrueUpdateApi = async (item: Privacy) => {
       roadAddress: item.roadAddress,
       address: item.address,
       zipcode: item.zipcode,
-      isBased: true
+      isBased: true,
     },
     {
-      headers:{
-        'Authorization': getCookie('jwtToken')
-       }
+      headers: {
+        Authorization: getCookie("jwtToken"),
+      },
     }
   );
   return response.data;
-}
+};
 
 export const DeliveryDelApi = async (deliveryAddressId: number) => {
   try {
-    const response = await axios.delete(`${API_URL}/delivery/address/${deliveryAddressId}`, {
-      headers: {
-        'Authorization': getCookie('jwtToken')
+    const response = await axios.delete(
+      `${API_URL}/delivery/address/${deliveryAddressId}`,
+      {
+        headers: {
+          Authorization: getCookie("jwtToken"),
+        },
       }
-    });
-    
+    );
+
     return response.data;
   } catch (error) {
-    console.error('Failed to delete delivery address:', error);
+    console.error("Failed to delete delivery address:", error);
     throw error;
   }
 };
@@ -167,7 +172,11 @@ export const ECyanadoJoinApi = async () => {
 };
 
 // 야너도?야나두 참여신청
-export const ECyanadoReviewApi = async (imageFile: File, content: string, petType: string) => {
+export const ECyanadoReviewApi = async (
+  imageFile: File,
+  content: string,
+  petType: string
+) => {
   try {
     // 파일 Blob 생성
     const fileBlob = new Blob([imageFile], { type: imageFile.type });
@@ -177,16 +186,14 @@ export const ECyanadoReviewApi = async (imageFile: File, content: string, petTyp
       petType,
       content,
     };
-    const requestBlob = new Blob([JSON.stringify(requestData)], { type: 'application/json' });
+    const requestBlob = new Blob([JSON.stringify(requestData)], {
+      type: "application/json",
+    });
 
     // FormData에 Blob 추가
     const formData = new FormData();
     formData.append("file", fileBlob, "file.png");
     formData.append("request", requestBlob);
-
-    const locakStorageToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMDMiLCJleHAiOjE2OTY0MzIwMDgsImlkIjo0NCwicm9sZSI6IlVTRVIifQ.eUJkBVN5WOwDEGlzJJ9V1VkS1A8d77hLISfMRkmiYoQ"
-    // const token = localstorage.getItem('jwtToken')
-    // const locakStorageToken = `Bearer ${token}`
 
     const headers = {
       Authorization: locakStorageToken,
@@ -196,34 +203,83 @@ export const ECyanadoReviewApi = async (imageFile: File, content: string, petTyp
     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
       headers,
     });
+    // const response = await axios.post(
+    //   `${API_URL}/challenge/point/1/review`,
+    //   formData,
+    //   {
+    //     headers,
+    //   }
+    // );
 
+    // if (response.status === 400) {
+    //   console.log(response);
+    // }
   } catch (error) {
-    console.error("Error in ECyanadoReviewApi: " + error);
+    console.error(error);
   }
 };
 
 // 데일리 이벤트 - 간식주기 조회
-export const dailyChallenge1Api = async() => {
+export const dailyChallenge1Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/1`)
-    return response.data
+    const response = await axios.get(`${API_URL}/challenge/daily/1`);
+    return response.data;
   } catch (error) {
-    console.error("Error in dailyChallange1Api: " + error)
+    console.error("Error in dailyChallange1Api: " + error);
   }
-}
+};
 
 // 데일리 이벤트 - 간식주기 참여자 조회
-export const daily1JoinListApi = async() => {
-  try{
-    const response = await axios(`${API_URL}/challenge/daily/1/auth`)
-    return response.data
-  }catch(error){
-    console.error("Error in daily3JoinListApi: " + error)
+export const daily1JoinListApi = async () => {
+  try {
+    const response = await axios(`${API_URL}/challenge/daily/1/auth`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in daily3JoinListApi: " + error);
   }
-}
+};
 
-// 데일리 이벤트 - 간식주기 참여신청
-export const dailyReviewApi = async (imageFile: File) => {
+// 데일리 이벤트 - 놀아주기 조회
+export const dailyChallenge2Api = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/2`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in dailyChallenge2Api: " + error);
+  }
+};
+
+// 데일리 이벤트 - 놀아주기 참여자 조회
+export const daily2JoinListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/2/auth`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in daily2JoinListApi: " + error);
+  }
+};
+
+// 데일리 이벤트 - 위생관리 조회
+export const dailyChallenge3Api = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/3`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in dailyChallenge3Api: " + error);
+  }
+};
+
+// 데일리 이벤트 - 위생관리 참여자 조회
+export const daily3JoinListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/3/auth`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in daily3JoinListApi: " + error);
+  }
+};
+// 데일리 이벤트 -  참여신청
+export const dailyReviewApi = async (imageFile: File, id: number) => {
   try {
     // 파일 Blob 생성
     const fileBlob = new Blob([imageFile], { type: imageFile.type });
@@ -232,63 +288,31 @@ export const dailyReviewApi = async (imageFile: File) => {
     const formData = new FormData();
     formData.append("file", fileBlob, "file.png");
 
-    const locakStorageToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMDMiLCJleHAiOjE2OTY0MzIwMDgsImlkIjo0NCwicm9sZSI6IlVTRVIifQ.eUJkBVN5WOwDEGlzJJ9V1VkS1A8d77hLISfMRkmiYoQ"
-    // const token = localstorage.getItem('jwtToken')
-    // const locakStorageToken = `Bearer ${token}`
-
     const headers = {
       Authorization: locakStorageToken,
       "Content-Type": "application/octet-stream",
     };
 
-    await axios.post(`${API_URL}/challenge/daily/1`, formData, {
+    await axios.post(`${API_URL}/challenge/daily/${id}`, formData, {
       headers,
-    })
-    
+    });
+    const response = await axios.post(
+      `${API_URL}/challenge/point/1/review`,
+      formData,
+      {
+        headers,
+      }
+    );
+
+    if (response.status > 300) {
+      console.log(response.status);
+    }
   } catch (error) {
-    throw error
+    console.error("Error in daily1ReviewApi: " + error);
   }
-}
+};
 
-// 데일리 이벤트 - 놀아주기 조회
-export const dailyChallenge2Api = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/challenge/daily/2`)
-    return response.data
-  } catch (error ) {
-    console.error("Error in dailyChallenge2Api: " + error)
-  }
-}
-
-// 데일리 이벤트 - 놀아주기 참여자 조회
-export const daily2JoinListApi = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/challenge/daily/2/auth`)
-    return response.data
-  } catch (error) {
-    console.error("Error in daily2JoinListApi: " + error)
-  }
-}
-
-// 데일리 이벤트 - 놀아주기 참여신청
-
-// 데일리 이벤트 - 위생관리 조회
-export const dailyChallenge3Api = async() => {
-  try {
-    const response = await axios.get(`${API_URL}/challenge/daily/3`)
-    return response.data
-  } catch (error) {
-    console.error("Error in dailyChallenge3Api: " + error)
-  }
-}
-
-// 데일리 이벤트 - 위생관리 참여자 조회
-export const daily3JoinListApi = async() => {
-  try {
-    const response = await axios.get(`${API_URL}/challenge/daily/3/auth`)
-    return response.data
-  } catch (error) {
-    console.error("Error in daily3JoinListApi: " + error)
-  }
-}
-
+const locakStorageToken =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMTIiLCJleHAiOjE2OTY0NDQzMzMsImlkIjo1Mywicm9sZSI6IlVTRVIifQ.BFSpWK-pqTwtiW-_Ci87aC9Tcl7z_jV2WkEGvaU-l5Q";
+// const token = localstorage.getItem('jwtToken')
+// const locakStorageToken = `Bearer ${token}`
