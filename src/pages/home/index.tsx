@@ -137,7 +137,7 @@ const Home = () => {
                </div>
                {/* 데이터가 있을 때는 "수정하기", 없을 때는 "등록하기"를 표시 */}
                <div className={styles.modify} onClick={() => 
-                petProfile.length > 0 ? onPetProfileModify() : onPetProfileAdd()}>
+                petProfile.length > 0 ? openLoginModal(onPetProfileModify) : openLoginModal(onPetProfileAdd)}>
                  {petProfile.length > 0 ? '수정하기' : '등록하기'}
                </div>
              </div>
