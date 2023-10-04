@@ -16,7 +16,7 @@ export const getMypage = async () => {
 
 export const editProfile = async () => {
   try {
-    const res = await api.get('/member/mypage/profile');
+    const res = await api.put('/member/mypage/profile');
     console.log('res:', res);
     return res;
   } catch (error) {
@@ -26,7 +26,17 @@ export const editProfile = async () => {
 
 export const withdraw = async () => {
   try {
-    const res = await api.get('/member/mypage/withdraw');
+    const res = await api.delete('/member/mypage/withdraw');
+    console.log('res:', res);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logout = async () => {
+  try {
+    const res = await api.post('/member/logout');
     console.log('res:', res);
     return res;
   } catch (error) {

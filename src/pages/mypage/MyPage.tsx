@@ -4,8 +4,15 @@ import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { getMypage } from '@/lib/apis/mypageApi';
+import { useEffect } from 'react';
 
 const MyPage = () => {
+  useEffect(() => {
+    const a = getMypage();
+    getMypage();
+    console.log(a);
+  }, []);
   return (
     <>
       <Background>
