@@ -27,7 +27,7 @@ const Home = () => {
   const [petProfile, setPetProfile] = useState<Pet[]>([])
   const [activePetName, setActivePetName] = useState<string | null>(null);
   const [selectedProfile, setSelectedProfile] = useState<Pet | null>(null);
-  const token = getCookie("token")
+  const token = getCookie("jwtToken")
 
   useEffect(() => {
     const HomeData = async () => {
