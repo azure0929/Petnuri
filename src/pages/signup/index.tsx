@@ -71,16 +71,20 @@ const SignUp = () => {
 
   const handleDuplicateCheck = async () => {
     try {
-      const response = await axios.get("http://3.34.154.62:8080/member/nickname");
+      const response = await axios.get("http://3.34.154.62:8080/auth/nickname", {
+        params: { nickname: name },
+      });
   
       const { isExists } = response.data;
   
       if (isExists) {
         setIsNicknameValid(false);
         setNameError("이미 사용 중인 닉네임입니다.");
+        console.log("사용 가능한 닉네임: ", name);
       } else {
         setIsNicknameValid(true);
         setNameError("");
+        console.log("사용 가능한 닉네임: ", name);
       }
   
       setIsDuplicateChecked(true);
