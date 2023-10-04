@@ -1,5 +1,6 @@
 import axios  from "axios";
 import { API_URL } from "./base";
+import { getCookie } from "@/utils/Cookie";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -60,7 +61,11 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
 // 홈 페이지 불러오기 
 export const HomeApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/member/main`);
+    const response = await axios.get(`${API_URL}/member/main`, {
+      headers: {
+        Authorization: getCookie('jwtToken')
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error in HomeApi:", error);
