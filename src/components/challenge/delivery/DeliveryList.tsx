@@ -6,7 +6,7 @@ import BottomButton from "@/components/challenge/BottomButton";
 import { useState, useEffect } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { BSTypeState, deliveryListState } from "@/store/challengeState";
-import { DeliveryListApi, DeliveryDelApi } from "@/lib/apis/challengeApi";
+import { DeliveryListApi, DeliveryDelApi, DeliveryUpdateApi } from "@/lib/apis/challengeApi";
 
 const DeliveryList = () => {
   const [privacy, setPrivacy] = useRecoilState(deliveryListState);
@@ -40,6 +40,18 @@ const DeliveryList = () => {
     }
   }, [privacy]);
 
+  const handleUpdate = async (item: Privacy) => {
+    try {
+      await DeliveryUpdateApi(item); 
+      const data = await DeliveryListApi();
+      setPrivacy(data);
+      const defaultItem = data.find((item: Privacy) => item.isBased);
+      setSelectedItem(defaultItem);
+    } catch (error) {
+       console.error("Failed to update delivery address:", error);
+     }
+  };
+
   const handleDelete = async (id:number) => {
     try {
       await DeliveryDelApi(id);
@@ -59,6 +71,7 @@ const DeliveryList = () => {
             item={item}
             isSelected={selectedItem === item}
             onSelect={() => handleSelect(item)}
+            onUpdate={()=> handleUpdate(item)}
             onDelete={() => handleDelete(item.id)}
           />
         ))}

@@ -101,6 +101,27 @@ export const DeliveryRegApi = async (deliveryInfo:any) => {
   }
 };
 
+export const DeliveryUpdateApi = async (item: Privacy) => {
+  const response = await axios.put(
+    `${API_URL}/delivery/address`,
+    {
+      id: item.id,
+      name: item.name,
+      phone: item.phone,
+      roadAddress: item.roadAddress,
+      address: item.address,
+      zipcode: item.zipcode,
+      isBased: true
+    },
+    {
+      headers:{
+        'Authorization': getCookie('jwtToken')
+       }
+    }
+  );
+  return response.data;
+}
+
 export const DeliveryDelApi = async (deliveryAddressId: number) => {
   try {
     const response = await axios.delete(`${API_URL}/delivery/address/${deliveryAddressId}`, {

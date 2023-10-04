@@ -9,9 +9,10 @@ interface FullAdressProps {
   isSelected: boolean;
   onSelect: () => void;
   onDelete: () => void;
+  onUpdate: () => void;
 }
 
-const FullAdress = ({item, isSelected, onSelect, onDelete }: FullAdressProps) => {
+const FullAdress = ({item, isSelected, onSelect, onDelete, onUpdate }: FullAdressProps) => {
   const setDeliveryData = useSetRecoilState(deliveryDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
@@ -52,7 +53,7 @@ const FullAdress = ({item, isSelected, onSelect, onDelete }: FullAdressProps) =>
         <div className={styles.box3}>
           <EditBtn version='light' text='수정' onClick={handleEdit}/>
           <button onClick={onSelect}>
-              <EditBtn version='dark' text='선택'/>
+              <EditBtn version='dark' text='선택' onClick={onUpdate}/>
           </button>
         </div>
       </div>
