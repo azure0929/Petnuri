@@ -1,11 +1,11 @@
-import styles from "@/styles/fulladress.module.scss";
-import BottomSheet from "@/components/challenge/delivery/DeliveryBSLayout";
-import DeliveryBSHead from "@/components/challenge/delivery/DeliveryBSHead";
-import FullAdress from "@/components/challenge/FullAdress";
-import BottomButton from "@/components/challenge/BottomButton";
-import { useState, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { BSTypeState } from "@/store/challengeState";
+import styles from '@/styles/fulladress.module.scss';
+import BottomSheet from '@/components/challenge/delivery/DeliveryBSLayout';
+import DeliveryBSHead from '@/components/challenge/delivery/DeliveryBSHead';
+import FullAdress from '@/components/challenge/FullAdress';
+import BottomButton from '@/components/challenge/BottomButton';
+import { useState, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { BSTypeState } from '@/store/challengeState';
 
 const DeliveryList = () => {
   const [privacy, setPrivacy] = useState<Privacy[]>();
@@ -14,7 +14,7 @@ const DeliveryList = () => {
   const setBSType = useSetRecoilState(BSTypeState);
 
   const handleReg = () => {
-    setBSType("DeliveryBS");
+    setBSType('DeliveryBS');
   };
 
   const handleSelect = (item: Privacy) => {
@@ -23,7 +23,7 @@ const DeliveryList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/Privacy.json");
+      const response = await fetch('/Privacy.json');
       const data = await response.json();
       setPrivacy(data.address);
       const defaultItem = data.address.find((item: Privacy) => item.isBased);
@@ -43,7 +43,10 @@ const DeliveryList = () => {
   return (
     <>
       <BottomSheet>
-        <DeliveryBSHead text="배송지 목록" onClick={handleReg} />
+        <DeliveryBSHead
+          text="배송지 목록"
+          onClick={handleReg}
+        />
         {privacy?.map((item) => (
           <FullAdress
             key={item.id}
@@ -59,7 +62,7 @@ const DeliveryList = () => {
           </p>
         )}
         <BottomButton
-          text={"추가하기"}
+          text={'추가하기'}
           isDisabled={isButtonDisabled}
           onClick={handleReg}
         />

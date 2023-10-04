@@ -31,7 +31,7 @@ const MyPage = () => {
           <div>
             배송지 등록
             <span>
-              <Link to="/mypage/adress">
+              <Link to="/mypage/delivery">
                 <AiOutlineRight />
               </Link>
             </span>
