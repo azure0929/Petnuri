@@ -42,6 +42,10 @@ const FreeTalk = () => {
     }
   };
 
+  if (data) {
+    console.log(`${selectedPet}, ${activeTab}`, data);
+  }
+
   useEffect(() => {
     if (location.pathname === "/petTalk") {
       setActiveTab("전체");

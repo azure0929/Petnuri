@@ -29,6 +29,7 @@ export const concernList = async (
   }
 };
 
+//펫톡 자유수다 리스트
 export const freetalkList = async (petType: string, mainCategory: number) => {
   try {
     const response = await axios.get(

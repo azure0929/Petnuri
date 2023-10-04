@@ -2,10 +2,9 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
-import { allList } from "@/lib/apis/pettalkApi";
+import { useAllList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { SetStateAction, useEffect, useState } from "react";
 import heart from "../../assets/heart_18px.svg";
@@ -50,17 +49,13 @@ const PetTalk = () => {
     setSelectedPet(selectedValue);
 
     if (selectedValue === "DOG") {
-      allList("DOG");
+      setSelectedPet("DOG");
     } else if (selectedValue === "CAT") {
-      allList("CAT");
+      setSelectedPet("CAT");
     }
   };
 
-  const { data } = useQuery("queryKey", () => allList(selectedPet));
-
-  if (data) {
-    console.log(`${selectedPet}`, data);
-  }
+  const { data } = useAllList(selectedPet);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {

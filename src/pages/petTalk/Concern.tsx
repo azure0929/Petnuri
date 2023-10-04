@@ -51,10 +51,6 @@ const Concern = () => {
     refetch();
   };
 
-  if (data) {
-    console.log(`${selectedPet}, ${activeTab}, ${subCategory}`, data);
-  }
-
   useEffect(() => {
     if (location.pathname === "/petTalk") {
       setActiveTab("전체");
