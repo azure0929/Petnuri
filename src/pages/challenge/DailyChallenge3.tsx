@@ -7,11 +7,11 @@ import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import DailySaveBS from "../../components/challenge/DailySaveBS";
 import { useState, useEffect } from "react";
-import { dailyChallenge3Api } from "@/lib/apis/challengeApi";
+import { dailyChallenge3Api, daily3JoinListApi } from "@/lib/apis/challengeApi";
 
 const DailyChallenge3 = () => {
   const [daily3Data, setDaily3Data] = useState<DailyData>()
-  const [challenges, setChallenges] = useState<ChallengeJoin[]>([]);
+  const [joinList, setjoinList] = useState<ChallengeJoin[]>([]);
 
   useEffect(() => {
     const daily3 = async () => {
@@ -24,6 +24,19 @@ const DailyChallenge3 = () => {
     };
     daily3();
   }, []);
+
+  useEffect(() => {
+    const daily1Join = async () => {
+      try {
+        const response = await daily3JoinListApi()
+        setjoinList(response.content)
+      } catch(error) {
+        console.error("Error in daily1Join: " + error)
+      }
+    }
+
+    daily1Join()
+  }, [])
 
   const contents: ChallengeContents = {
     mainTitle: daily3Data?.title || '',
@@ -43,7 +56,7 @@ const DailyChallenge3 = () => {
           <ChallengeHead head={daily3Data.title} />
         <ChallengeBanner banner={daily3Data.banner} />
         <ChallengeContents contents={contents} />
-        <ChallengeJoin joinLists={challenges || []}/>
+        <ChallengeJoin joinLists={joinList || []}/>
         <JoinButton />
         <DailySaveBS />
         <MainTab />

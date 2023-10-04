@@ -130,6 +130,16 @@ export const dailyChallenge2Api = async () => {
   }
 }
 
+// 데일리 이벤트 - 놀아주기 참여자 조회
+export const daily2JoinListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/2/auth`)
+    return response.data
+  } catch (error) {
+    console.error("Error in daily2JoinListApi: " + error)
+  }
+}
+
 // 데일리 이벤트 - 위생관리 조회
 export const dailyChallenge3Api = async() => {
   try {
@@ -137,5 +147,15 @@ export const dailyChallenge3Api = async() => {
     return response.data
   } catch (error) {
     console.error("Error in dailyChallenge3Api: " + error)
+  }
+}
+
+// 데일리 이벤트 - 위생관리 참여자 조회
+export const daily3JoinListApi = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/3/auth`)
+    return response.data
+  } catch (error) {
+    console.error("Error in daily3JoinListApi: " + error)
   }
 }
