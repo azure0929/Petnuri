@@ -1,0 +1,59 @@
+@import "@/styles/common.scss";
+
+.contain {
+  width: 345px;
+  .header {
+    width: 100%;
+    height: 56px;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.1px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+    .icon {
+      position: absolute;
+      left: 25px;
+      top: 50%;
+      transform: translate(0, -50%);
+      color: $gray_0600_707070;
+      cursor: pointer;
+    }
+  }
+
+  .tab {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+
+    .active {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid $base_black_000000;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.1px;
+      color: $gray_0900_171717;
+    }
+    .unactive {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.1px;
+      color: $gray_0800_333333;
+    }
+  }
+}

@@ -1,16 +1,35 @@
+@import "@/styles/common.scss";
+
 .main-tab {
   width: 375px;
-  height: 74px;
-  background-color: lightgray;
+  height: 65px;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
   display: flex;
-
+  border-top: 1px solid $gray_0200_EBEBEB;
   position: fixed;
-  right: 300px;
+  right: 18%;
   bottom: 0;
 }
 .main-tab-item {
-  width: 20%;
+  width: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  margin-bottom: 5px;
+  color: $gray_0600_707070;
+
+  &.active {
+    color: $brand_blue_200_3F54D1;
+  }
+}
+
+@media (max-width:1280px) {
+  .main-tab {
+    right : 2%;
+  }
 }

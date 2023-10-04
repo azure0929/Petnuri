@@ -1,0 +1,113 @@
+@import '@/styles/common.scss';
+
+.head {
+  height: 44px;
+  padding: 28px 24px 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include title_bold_18px;
+}
+
+@mixin body($height) {
+  height: $height;
+  border-top: 0.6px solid #EDEDEF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .text_box{
+    height: 42px;
+    text-align: left;
+
+    .title {
+      @include title_bold_18px;
+      color: $gray_0900_171717;
+    }
+    .sub{
+      @include body_regular_12px;
+      color: $gray_0600_707070;
+      margin-top: 2px;
+    }
+  }
+}
+
+.attend {
+  @include body(85px);
+}
+
+.quiz {
+  @include body(72px);
+}
+
+.quetion {
+  height: 56px;
+  text-align: left;
+  @include title_bold_14px;
+}
+
+.answer {
+  height: 20px;
+  display: flex;
+  gap: 16px;
+
+  .selected {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    @include body_regular_14px;
+  }
+}
+
+.check {
+  height: 50px;
+  background-color: $brand_blue_100_3F54D11A;
+  border-radius: 12px;
+  color: $brand_blue_200_3F54D1;
+  margin: 16px 0;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @include title_bold_14px;
+}
+
+.invite {
+  @include body(90px);
+}
+
+.btn_1 {
+  width: 78px;
+  height: 30px;
+  background-color: $brand_blue_200_3F54D1;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  padding: 6px 8px 6px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include body_regular_12px;
+}
+
+.code {
+  height: 44px;
+  background-color: $gray_0100_F5F5F5;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 16px;
+
+  .text {
+    color: #333;
+    @include title_bold_14px;
+  }
+
+  .btn_2 {
+    height: 20px;
+    color: $gray_0600_707070;
+    @include body_regular_14px;
+  }
+}

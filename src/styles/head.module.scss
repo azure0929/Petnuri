@@ -1,0 +1,15 @@
+@import "@/styles/common.scss";
+
+.container {
+  width: 375px;
+  height: 56px;
+  border-bottom: 1px solid $gray_0200_EBEBEB;
+  background-color: #ffffff03;
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 50;
+  @include title_bold_18px;
+}

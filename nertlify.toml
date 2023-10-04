@@ -1,0 +1,5 @@
+[dev]
+  framework = "vite" 
+  command = "npm run dev"
+
+  #http://localhost:8888/.netlify/functions/test

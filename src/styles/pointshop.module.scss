@@ -1,0 +1,106 @@
+@import '@/styles/common.scss';
+
+.head {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid $gray_0200_EBEBEB; 
+	display: flex;
+  align-items: center;
+	justify-content: space-between;
+  @include title_bold_18px;
+  .eorl {
+    width: 54px;
+  }
+  .io {
+    margin-left: 24px;
+    margin-top: 3px;
+    color: $gray_0600_707070;
+  }
+}
+
+.ad {
+  width: 327px;
+  height: 175px;
+  border-radius: 12px;
+  margin-left: 24px;
+  position: relative;
+
+  .banner {
+    @include title_bold_18px;
+    color: #fff;
+    position: absolute;
+    top: 115px;
+    left: 16px;
+  }
+
+  .banner_sub {
+    @include body_regular_14px;
+    color: #DBDBDB;
+    position: absolute;
+    top: 140px;
+    left: 16px;
+  }
+}
+
+.p_title {
+  width: 327px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include title_bold_18px;
+  margin-top: 26px;
+  padding: 0 24px;
+}
+
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-bottom: 70px;
+  .info {
+    width: calc(50% - 10px);
+    height: 202px;
+    margin: 10px 0;
+
+    .box {
+      width: 156px;
+      height: 156px;
+      background: $gray_0100_F5F5F5;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .text {
+      width: 156px;
+      height: 38px;
+      line-height: 18px;
+
+      .price {
+        height: 20px;
+        display: flex;
+        justify-content: flex-start;
+        .sale {
+          @include title_bold_14px;
+          color: $red_accent_F42A3B;
+        }
+        .realPrice {
+          @include title_bold_14px;
+          color: $black_191919;
+          margin-left: 4px;
+        }
+      }
+      .sub {
+        height: 18px;
+        @include body_regular_12px;
+        color: $gray_0600_707070;
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+

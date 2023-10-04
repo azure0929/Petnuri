@@ -143,14 +143,19 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Pretendard-Regular", sans-serif;
-  background-color: pink; //수정예정
 }
 button {
-  display: flex;
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
   cursor: pointer;
-  outline: none;
 }
 input {
   display: flex;
   outline: none;
 }
+
+$sub_font_color: #707070;

@@ -1,0 +1,11 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  //   margin-top: 20px;
+  .paginationNumber {
+    margin-top: 16px;
+    img {
+      margin-left: 8px;
+    }
+  }
+}

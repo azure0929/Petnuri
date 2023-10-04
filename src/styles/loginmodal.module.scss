@@ -1,0 +1,40 @@
+@import "@/styles/common.scss";
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #242424;
+  margin-top: 25px;
+}
+
+.sub {
+  font-size: 14px;
+  color: $gray_0600_707070;
+  margin: 45px 0 46px 0;
+}
+
+.button {
+  display: flex;
+  .cancle,.confirm {
+    width: 50%;
+    height: 56px;
+    padding: 0 15px 0 15px;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cancle {
+    background-color: #c1c1c1;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .confirm {
+    background-color: $brand_blue_200_3F54D1;
+    border-bottom-right-radius: 8px;
+  }
+}

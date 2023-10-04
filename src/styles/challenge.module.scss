@@ -1,0 +1,213 @@
+@import "@/styles/common.scss";
+
+.mainHead {
+  width: 100%;
+  height: 56px;
+  border-bottom: 1px solid $gray_0200_EBEBEB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include title_bold_18px;
+
+}
+
+.shop {
+  width: 100%;
+  height: 52px;
+  margin-top: 5px;
+  padding: 0 24px;
+
+  .container {
+    width: 327px;
+    height: 52px;
+    background-color: #f2f4f6;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .button {
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      align-items: center;
+      background-color: $gray_0100_F5F5F5;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      @include body_regular_14px
+    }
+    .button_right {
+      @extend .button;
+      color: $gray_0500_999999;
+    }
+  }
+}
+
+.event {
+  width: 327px;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  padding: 0 24px;
+
+  .head {
+    width: 327px;
+    height: 26px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 0 24px;
+
+    span {
+      @include title_bold_18px
+    }
+  }
+
+  .body {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.daily_head {
+  width: 375px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+
+  .left_item {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 10px;
+    }
+
+    .head {
+      @include title_bold_18px;
+      margin-left: 4px;
+    }
+  }
+
+  .sort {
+    @include body_regular_12px;
+    color: $gray_0600_707070;
+  }
+}
+
+.daily_body {
+  width: 327px;
+  height: 152px;
+  margin-top: 15px;
+  padding: 0 24px;
+
+  .challenge {
+    width: 327px;
+    height: 176px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    .key {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .img {
+        width: 48px;
+        height: 48px;
+        border-radius: 9px;
+        cursor: pointer;
+      }
+  
+      .main {
+        margin-right: 10%;
+        cursor: pointer;
+  
+        .title {
+          width: 150px;
+          height: 20px;
+          display: flex;
+          @include title_bold_14px
+        }
+        .time {
+          width: 74px;
+          height: 18px;
+          background: #ffba081a;
+          color: #ffba08;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 4px;
+          @include body_regular_12px;
+        }
+      }
+  
+      .participate_on {
+        width: 66px;
+        height: 30px;
+        border: none;
+        border-radius: 8px;
+        background: $brand_blue_100_3F54D11A;
+        color: $brand_blue_200_3F54D1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include body_regular_12px;
+      }
+  
+      .participate_off {
+        width: 66px;
+        height: 30px;
+        border: none;
+        border-radius: 8px;
+        background: $gray_0300_D6D6D6;
+        color: $gray_0600_707070;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        @include body_regular_12px
+      }
+    }
+  }
+}
+
+.bonus {
+  width: 327px;
+  height: 93px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 45px;
+  padding: 0 24px;
+  margin-bottom: 65px;
+
+  .title {
+    margin-bottom: 15px;
+    align-self: flex-start;
+    @include title_bold_18px;
+  }
+  .button {
+    width: 327px;
+    height: 51px;
+    border: none;
+    border-radius: 12px;
+    background: $brand_blue_200_3F54D1;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    @include title_bold_16px;
+  }
+}

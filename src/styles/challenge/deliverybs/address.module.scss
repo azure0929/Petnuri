@@ -1,0 +1,99 @@
+.container {
+  margin-top: 24px;
+  .title {
+    line-height: 22px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: start;
+  }
+  .infoContainer {
+    margin-top: 8px;
+    text-align: center;
+    margin-left: 16px;
+    margin-top: 16px;
+    .userInfo {
+      display: flex;
+    }
+    .name {
+      padding: auto 0;
+      //   width: 37px;
+      line-height: 20px;
+      font-size: 14px;
+    }
+    .border {
+      margin: 4px 8px;
+      //   padding: auto;
+      width: 1px;
+      line-height: 12px;
+      color: #333333;
+    }
+    .phone {
+      padding: auto 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+  .addressContainer {
+    text-align: start;
+    margin-top: 10px;
+    .address {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .detailAddress {
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .zoneCode {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+  .btn {
+    width: 288px;
+    height: 30px;
+    margin: 10px 23px 16px 16px;
+    text-align: end;
+
+    .updateBtn {
+      width: 54px;
+      height: 30px;
+      border-radius: 8px;
+      padding: auto 0;
+      font-family: 600;
+      line-height: 18px;
+      font-size: 12px;
+      background-color: #ebebeb;
+    }
+  }
+}
+
+.noAddressContainer {
+  display: flex;
+  .title {
+    line-height: 22px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: start;
+  }
+  .addressList {
+    line-height: 18px;
+    padding: auto 0;
+    font-size: 12px;
+    margin-left: auto;
+    color: #5c5c5c;
+    cursor: pointer;
+  }
+}
+.registBtn {
+  width: 327px;
+  height: 54px;
+  margin-top: 8px;
+  background-color: #d6d6d6;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+}

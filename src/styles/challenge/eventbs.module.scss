@@ -1,0 +1,97 @@
+.bsContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // margin-bottom: 10px;
+}
+.bsHead {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  //   margin: 40px auto;
+  height: 68px;
+  .bsTitle {
+    display: block;
+    width: 140px; // 133px로 하면 한줄로 안됨
+    height: 24px;
+    line-height: 24px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
+  .closeIcon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+  }
+}
+
+.addImg {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: auto;
+  line-height: 24px;
+  background-color: #d9d9d9;
+  position: relative;
+  cursor: pointer;
+  .addIcon {
+    display: block;
+    position: absolute;
+    border-radius: 1px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .saveImg {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.addText {
+  width: 319px;
+  height: 52px;
+  margin-top: 24px;
+  border-radius: 12px;
+  padding: 10px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.autoSave {
+  display: block;
+  width: 319px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c2c2c2;
+  text-align: start;
+  margin: 24px 16px 4px;
+}
+
+.button {
+  width: 327px;
+  height: 48px;
+  border-radius: 12px;
+  color: #3f54d1;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 24px;
+}
