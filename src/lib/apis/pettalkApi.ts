@@ -12,6 +12,21 @@ export const allList = async (petType: string) => {
   }
 };
 
+export const concernList = async (
+  petType: string,
+  mainCategory: number,
+  subCategory: number
+) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/pet-talk?pet=${petType}&order=BEST&mainCategory=${mainCategory}&subCategory=${subCategory}`
+    );
+    return response.data.petTalkPosts;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
 interface WritingOutParams {
   accessToken: string;
   image?: File;
