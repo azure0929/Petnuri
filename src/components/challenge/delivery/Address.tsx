@@ -38,7 +38,7 @@ const Address: React.FC<AddressProps> = ({ addressData }) => {
                   </div>
                 </div>
                 <div className={styles.btn}>
-                  <button className={styles.updateBtn}>수정</button>
+                  <button className={styles.updateBtn} onClick={handleList}>수정</button>
                 </div>
               </div>
             ))}

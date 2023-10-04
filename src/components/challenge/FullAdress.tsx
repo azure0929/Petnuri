@@ -8,9 +8,10 @@ interface FullAdressProps {
   item:Privacy
   isSelected: boolean;
   onSelect: () => void;
+  onDelete: () => void;
 }
 
-const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
+const FullAdress = ({item, isSelected, onSelect, onDelete }: FullAdressProps) => {
   const setDeliveryData = useSetRecoilState(deliveryDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
@@ -18,9 +19,9 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
     setDeliveryData({
       name: item.name,
       phone: item.phone,
-      address1: item.roadAddress,
-      address2: item.address,
-      zonecode:item.zipcode,
+      roadAddress: item.roadAddress,
+      address: item.address,
+      zipCode:item.zipcode,
       isSelected:item.isBased
      });
     setBSType('DeliveryReg')
@@ -39,7 +40,7 @@ const FullAdress = ({item, isSelected, onSelect }: FullAdressProps) => {
             <span>|</span>
             <div>{item.phone}</div>
           </div>
-          <img src={close} alt="" />
+          <img src={close} alt="" onClick={onDelete}/>
         </div>
 
         <div className={styles.box2}>

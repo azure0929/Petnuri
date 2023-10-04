@@ -76,6 +76,16 @@ interface DailyDetailList {
   status?: boolean;
 }
 
+interface DeliveryAddress {
+  id: number;
+  name: string;
+  phone: string;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased: boolean;
+}
+
 interface DailyAllList {
   challengeId: number;
   title: string;

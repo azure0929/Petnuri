@@ -93,12 +93,29 @@ export const DeliveryRegApi = async (deliveryInfo:any) => {
         'Authorization': getCookie('jwtToken')
       }
     });
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error('Failed to register delivery:', error);
     throw error;
   }
 };
+
+export const DeliveryDelApi = async (deliveryAddressId: number) => {
+  try {
+    const response = await axios.delete(`${API_URL}/delivery/address/${deliveryAddressId}`, {
+      headers: {
+        'Authorization': getCookie('jwtToken')
+      }
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Failed to delete delivery address:', error);
+    throw error;
+  }
+};
+
 // 야너도?야나도 내 참여 현황
 export const ECyanadoJoinApi = async () => {
   try {

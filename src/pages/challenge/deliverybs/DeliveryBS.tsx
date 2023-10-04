@@ -35,19 +35,7 @@ const DeliveryBS = () => {
 
   const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
 
-  useEffect(() => {
-    const AddressApi = async () => {
-      try {
-        const response = await fetch("/DeliveryAddress.json");
-        const data = await response.json();
-        setAddressData(data.data);
-      } catch (error) {
-        console.error("Address Api error : " + error);
-      }
-    };
-
-    AddressApi();
-  }, []);
+  
 
   const defaultAddress = addressData.filter((item) => item.default === true);
   // 배송 메세지

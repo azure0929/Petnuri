@@ -15,22 +15,30 @@ const DeliveryReg = () => {
   const deliveryData = useRecoilValue(deliveryDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
-  const handleReg = async () => {
+  const handleReg = () => {
+    setBSType("DeliveryBS");
+  };
+
+  const regApi = async () => {
     try {
       const deliveryInfo = {
         name: nameState,
         phone: contactState,
-        roadAddress: roadAddressState,
-        address: detailAddressState,
-        zipcode: deliveryData.zonecode, 
+        roadAddress: addressInfoState.roadAddress,
+        address: addressInfoState.detailAddress,
+        zipcode: addressInfoState.zipCode, 
         isBased: agreedCheck
       };
       await DeliveryRegApi(deliveryInfo);
-      setBSType("DeliveryBS");
     } catch (error) {
        console.error('Failed to register delivery:', error);
     }
   };
+
+  const postReg = () => {
+    regApi()
+    handleReg()
+  }
 
   // 수령인 이름
   const [nameState, setNameState] = useState(deliveryData.name);
@@ -44,19 +52,17 @@ const DeliveryReg = () => {
     setContactState(contact);
   };
 
-  // 배송지 주소
-  const [roadAddressState, setRoadAddressState] = useState(
-    deliveryData.address1 || ""
-  );
-  const [detailAddressState, setDetailAddressState] = useState(
-    deliveryData.address2 || ""
+  const [addressInfoState, setAddressInfoState] = useState(
+    {
+     roadAddress : deliveryData.roadAddress || "",
+     detailAddress : deliveryData.address || "",
+     zipCode : deliveryData.zipCode || ""
+    }
   );
 
-  const handleAddressComplete = (address: string) => {
-    const [road, detail] = address.split(' ');
-    setRoadAddressState(road);
-    setDetailAddressState(detail);
-  };
+  const handleAddressComplete = (addressInfo:{roadAddress:string,detailAddress:string,zipCode:string})=>{
+    setAddressInfoState(addressInfo)
+};
 
   // 기본 배송지 설정 여부
   const [agreedCheck, setAgreeCheck] = useState(
@@ -71,8 +77,7 @@ const DeliveryReg = () => {
     if (
       nameState &&
       contactState &&
-      roadAddressState &&
-      detailAddressState 
+      addressInfoState
     ) {
       setButtonDisabled(false);
     } else {
@@ -81,8 +86,7 @@ const DeliveryReg = () => {
   }, [
     nameState,
     contactState,
-    roadAddressState,
-    detailAddressState,
+    addressInfoState
   ]);
 
   return (
@@ -99,9 +103,9 @@ const DeliveryReg = () => {
         />
         <DeliveryBSAddress
           onAddressComplete={handleAddressComplete}
-          initialRoadAddress={deliveryData.address1}
-          initialDetailAddress={deliveryData.address2}
-          initialZipCode={deliveryData.zonecode}
+          initialRoadAddress={deliveryData.roadAddress}
+          initialDetailAddress={deliveryData.address}
+          initialZipCode={deliveryData.zipCode}
         />
 
         <div className={styles.form_agreement_box}>
@@ -121,7 +125,7 @@ const DeliveryReg = () => {
         <BottomButton
           text={"배송지 등록하기"}
           isDisabled={isButtonDisabled}
-          onClick={handleReg}
+          onClick={postReg}
         />
       </BottomSheet>
     </>
