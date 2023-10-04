@@ -67,17 +67,6 @@ export const HomeApi = async () => {
   }
 };
 
-// 로그인
-/* export interface Login {
-  code: string;
-}
-export interface LoginResponse {
-  jwtToken: null | string;
-  refreshToken: null | string;
-  kakaoAccessToken: string;
-  email: string;
-} */
-
 // 회원가입
 export interface Join {
   email: string;
