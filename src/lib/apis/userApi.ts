@@ -6,9 +6,9 @@ const api = axios.create({
 });
 
 // 회원가입
-export const join = async ({ email, nickname, referralCode, isAgreed }: Join) => {
+export const join = async ({ email, nickname, isAgreed, referral }: Join) => {
   try {
-    const response = await api.post("/auth/join", { email, nickname, referralCode, isAgreed });
+    const response = await api.post("/auth/join", { email, nickname, isAgreed, referral });
     console.log("회원가입 응답 데이터:", response.data);
     return response;
   } catch (error) {
@@ -18,9 +18,11 @@ export const join = async ({ email, nickname, referralCode, isAgreed }: Join) =>
 };
 
 // 닉네임 중복 체크
-export const checknickname = async ({ nickname }: CheckNickname) => {
+export const checkNickname = async ({ nickname }: CheckNickname) => {
   try {
-    const response = await api.post("/member/nickname", { nickname });
+    const response = await axios.get("/auth/nickname", {
+      params: { nickname },
+    });
     console.log("중복체크 응답 데이터:", response.data);
     return response;
   } catch (error) {
@@ -30,9 +32,11 @@ export const checknickname = async ({ nickname }: CheckNickname) => {
 };
 
 // 추천인 코드 체크
-export const checkreferralCode = async ({ referralCode }: CheckreferralCode) => {
+export const checkReferral = async ({ referral }: Checkreferral) => {
   try {
-    const response = await api.post("/member/nickname", { referralCode });
+    const response = await axios.get("/auth/referral", {
+      params: { referral },
+    });
     console.log("추천인코드 응답 데이터:", response.data);
     return response;
   } catch (error) {
@@ -57,9 +61,11 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
 export interface Join {
   email: string;
   nickname: string;
-  referralCode: string;
+  referral?: string;
   isAgreed: boolean;
 }
+
+// 로그아웃
 export interface LogoutResponse {
   id: number;
   email: string;
@@ -78,11 +84,11 @@ export interface CheckNicknameResponse {
 }
 
 // 추천인 코드 확인
-export interface CheckreferralCode {
-  referralCode: string;
+export interface Checkreferral {
+  referral: string;
 }
-export interface CheckreferralCodeResponse {
-  referralCode: string;
+export interface CheckreferralResponse {
+  referral: string;
   isExists: boolean;
 }
 

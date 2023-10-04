@@ -6,42 +6,43 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import DailySaveBS from "../../components/challenge/DailySaveBS";
-import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
-import { useScrollDiv } from "@/utils/Scroll";
-import BannerImg from "@/assets/위생관리.png";
+import { dailyChallenge3Api, daily3JoinListApi } from "@/lib/apis/challengeApi";
 
 const DailyChallenge3 = () => {
-  const scrollRef = useScrollDiv();
-  const [challenges, setChallenges] = useState<DailyDetailList[]>([]);
+  const [daily3Data, setDaily3Data] = useState<DailyData>()
+  const [joinList, setjoinList] = useState<ChallengeJoin[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const daily3 = async () => {
       try {
-        const response = await fetch("/Daily.json");
-        const data = await response.json();
-        setChallenges(data.data);
+        const response = await dailyChallenge3Api();
+        setDaily3Data(response);
       } catch (error) {
         console.error("Error:", error);
       }
     };
-
-    fetchData();
+    daily3();
   }, []);
 
-  const head: ChallengeHead = {
-    head: "위생 관리",
-  };
+  useEffect(() => {
+    const daily1Join = async () => {
+      try {
+        const response = await daily3JoinListApi()
+        setjoinList(response.content)
+      } catch(error) {
+        console.error("Error in daily1Join: " + error)
+      }
+    }
 
-  const banner: ChallengeBanner = {
-    bannerImg: BannerImg,
-  };
+    daily1Join()
+  }, [])
 
   const contents: ChallengeContents = {
-    mainTitle: "위생 관리",
-    subTitle: "위생 관리",
+    mainTitle: daily3Data?.title || '',
+    subTitle:  daily3Data?.subTitle || '',
     howTitle: "인증방법",
-    howInfo: "인증사진 업로드",
+    howInfo: daily3Data?.authMethod || '',
     periodTitle: "진행기간",
     periodInfo: "1일",
     pointTitle: "포인트 지급",
@@ -51,24 +52,16 @@ const DailyChallenge3 = () => {
   return (
     <>
       <Background>
-        <ChallengeHead head={head} />
-        <ChallengeBanner banner={banner} />
+      {daily3Data? <>
+          <ChallengeHead head={daily3Data.title} />
+        <ChallengeBanner banner={daily3Data.banner} />
         <ChallengeContents contents={contents} />
-        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
-        <div className={styles.participants} ref={scrollRef}>
-          {challenges[0]?.dailyReview.map((review, reviewIndex) => (
-            <ChallengeJoin
-              key={reviewIndex}
-              join={{
-                participantsImg: review.reviewImgUrl,
-                participantsName: review.reviewUserNickname,
-              }}
-            />
-          ))}
-        </div>
+        <ChallengeJoin joinLists={joinList || []}/>
         <JoinButton />
         <DailySaveBS />
         <MainTab />
+        </>: null}
+
       </Background>
     </>
   );
