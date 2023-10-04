@@ -16,7 +16,7 @@ interface ChallengeContents {
 }
 
 interface ChallengeJoin {
-  id: number
+  id: number;
   participantsImg: string;
   participantsName: string;
 }
@@ -186,3 +186,19 @@ interface DefaultAddress {
 }
 
 type DefaultAddressArray = DefaultAddress[];
+
+interface PetTalkItem {
+  id: number;
+  title: string;
+  content: string;
+  thumbnail: string | null;
+  viewCount: number;
+  emojiCount: number | null;
+  replyCount: number | null;
+  reacted: boolean;
+  writer: {
+    id: number;
+    nickname: string;
+    profileImageUrl: string | null;
+  };
+}
