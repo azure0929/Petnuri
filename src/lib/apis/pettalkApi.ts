@@ -1,13 +1,12 @@
 import axios from "axios";
 import { API_URL } from "./base";
 
-export const allList = async () => {
+export const allList = async (petType: string) => {
   try {
     const response = await axios.get(
-      `${API_URL}/pet-talk/{mainCategory}?pet=DOG&order=LATEST&page=0&size=15`
+      `${API_URL}/pet-talk?pet=${petType}&order=BEST`
     );
-    console.log("모든 리스트", response.data);
-    return response.data;
+    return response.data.petTalkPosts;
   } catch (error) {
     console.error("no List:", error);
   }
