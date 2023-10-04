@@ -16,10 +16,6 @@ import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 import default_user from "../../assets/user.png";
 
-interface PetTalkProps {
-  petTalkId?: number;
-}
-
 interface PetTalkItem {
   id: number;
   title: string;
@@ -36,7 +32,7 @@ interface PetTalkItem {
   };
 }
 
-const PetTalk: React.FC<PetTalkProps> = () => {
+const PetTalk = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");

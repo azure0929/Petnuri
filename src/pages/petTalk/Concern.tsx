@@ -4,7 +4,7 @@ import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
-import { activeTabState } from "../../store/petTalkState";
+import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
 import { concernList } from "@/lib/apis/pettalkApi";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
@@ -39,19 +39,6 @@ const Concern = () => {
       concernList("DOG", 1, 1);
     } else if (selectedValue === "CAT") {
       concernList("CAT", 1, 1);
-    }
-  };
-
-  const mapTabToNumber = (tabName: string) => {
-    switch (tabName) {
-      case "전체":
-        return 0;
-      case "고민상담":
-        return 1;
-      case "자유수다":
-        return 2;
-      default:
-        return 0;
     }
   };
 
