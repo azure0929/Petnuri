@@ -153,3 +153,63 @@ export const ECyanadoReviewApi = async (imageFile: File, content: string) => {
     console.error("Error in ECyanadoReviewApi: " + error);
   }
 };
+
+// 데일리 이벤트 - 간식주기 조회
+export const dailyChallenge1Api = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/1`)
+    return response.data
+  } catch (error) {
+    console.error("Error in dailyChallange1Api: " + error)
+  }
+}
+
+// 데일리 이벤트 - 간식주기 참여자 조회
+export const daily1JoinListApi = async() => {
+  try{
+    const response = await axios(`${API_URL}/challenge/daily/1/auth`)
+    return response.data
+  }catch(error){
+    console.error("Error in daily3JoinListApi: " + error)
+  }
+}
+
+// 데일리 이벤트 - 놀아주기 조회
+export const dailyChallenge2Api = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/2`)
+    return response.data
+  } catch (error ) {
+    console.error("Error in dailyChallenge2Api: " + error)
+  }
+}
+
+// 데일리 이벤트 - 놀아주기 참여자 조회
+export const daily2JoinListApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/2/auth`)
+    return response.data
+  } catch (error) {
+    console.error("Error in daily2JoinListApi: " + error)
+  }
+}
+
+// 데일리 이벤트 - 위생관리 조회
+export const dailyChallenge3Api = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/3`)
+    return response.data
+  } catch (error) {
+    console.error("Error in dailyChallenge3Api: " + error)
+  }
+}
+
+// 데일리 이벤트 - 위생관리 참여자 조회
+export const daily3JoinListApi = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily/3/auth`)
+    return response.data
+  } catch (error) {
+    console.error("Error in daily3JoinListApi: " + error)
+  }
+}

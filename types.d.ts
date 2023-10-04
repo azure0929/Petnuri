@@ -57,6 +57,17 @@ interface ContestData {
   subTitle: string;
 }
 
+interface DailyData {
+  challengeId: number,
+  banner: string,
+  title: string,
+  subTitle: string,
+  authMethod: string,
+  point: number,
+  pointMethod: string,
+  status: boolean
+}
+
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {
   reviewUserId: number;
