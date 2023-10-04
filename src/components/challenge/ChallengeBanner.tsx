@@ -1,18 +1,14 @@
 import styles from "@/styles/challenge/challengebanner.module.scss";
 
 interface bannerProps {
-  banner: ChallengeBanner;
+  banner: string;
 }
 
 const ChallengeBanner: React.FC<bannerProps> = ({ banner }) => {
-  const handleDivClick = () => {
-    window.open(banner.bannerImg, "_blank");
-  };
-
   return (
     <>
-      <div className={styles.bannerImg} onClick={handleDivClick}>
-        <img src={banner.bannerImg}></img>
+      <div className={styles.bannerImg}>
+        <img src={banner}></img>
       </div>
     </>
   );

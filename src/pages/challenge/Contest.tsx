@@ -10,44 +10,23 @@ import ChallengeItem from "@/components/challenge/ChallengeItem";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
-import { useScrollDiv } from "@/utils/Scroll";
-import BannerImg from "@/assets/천하제일 집사대회.png";
 import KitModal from "@/components/modal/KitModal";
 import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
 import DeliveryList from "@/components/challenge/delivery/DeliveryList";
 import { BSTypeState } from "@/store/challengeState";
 import { useRecoilValue } from "recoil";
-import { ContestCheckApi } from "@/lib/apis/challengeApi";
-
-interface contestData {
-  process: string;
-}
+import { ContestCheckApi, ContestJoinApi } from "@/lib/apis/challengeApi";
 
 const Contest = () => {
-  const scrollRef = useScrollDiv();
-  const [joinList, setJoinList] = useState<joinList[]>([]);
-  const [contestData, setContestData] = useState<contestData | null>(null);
+  const [joinList, setJoinList] = useState<ChallengeJoin[] | null>(null);
+  const [contestData, setContestData] = useState<ContestData | null>(null);
   const BSType = useRecoilValue(BSTypeState);
-
-  useEffect(() => {
-    const ContestApi = async () => {
-      try {
-        const response = await ContestCheckApi();
-        console.log(response);
-      } catch (error) {
-        console.error("api error : " + error);
-      }
-    };
-
-    ContestApi();
-  }, []);
 
   useEffect(() => {
     const contestApi = async () => {
       try {
-        const response = await fetch("/Cheonha.json");
-        const data = await response.json();
-        setContestData(data.data[0]);
+        const response = await ContestCheckApi();
+        setContestData(response);
       } catch (error) {
         console.error("contestApi Error : " + error);
       }
@@ -57,30 +36,21 @@ const Contest = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const joinAPi = async () => {
       try {
-        const response = await fetch("/Chamyo.json");
-        const data = await response.json();
-        setJoinList(data.data);
+        const response = await ContestJoinApi();
+        setJoinList(response);
       } catch (error) {
-        console.error("Error:", error);
+        console.error("joinAPi Error:", error);
       }
     };
 
-    fetchData();
+    joinAPi();
   }, []);
 
-  const head: ChallengeHead = {
-    head: "천하제일 집사대회",
-  };
-
-  const banner: ChallengeBanner = {
-    bannerImg: BannerImg,
-  };
-
   const contents: ChallengeContents = {
-    mainTitle: "천하제일 집사대회",
-    subTitle: "천하제일 집사대회",
+    mainTitle: contestData?.title || "",
+    subTitle: contestData?.subTitle || "",
     howTitle: "인증방법",
     howInfo: "인증사진 업로드",
     periodTitle: "진행기간",
@@ -90,43 +60,32 @@ const Contest = () => {
   };
 
   let renderButton;
-  if (contestData !== null && contestData.process === "unprocessed") {
+  if (contestData !== null && contestData.status === "OPENED") {
     renderButton = <JoinButton />;
-  } else if (contestData !== null && contestData.process === "processed") {
+  } else if (contestData !== null && contestData.status === "READY") {
     renderButton = <JoinComplete />;
-  } else if (contestData !== null && contestData.process === "unjoin") {
+  } else if (contestData !== null && contestData.status === "CLOSED") {
     renderButton = <div>인증하기</div>;
-  } else if (contestData !== null && contestData.process === "join") {
-    renderButton = <div>인증완료</div>;
   }
 
   return (
     <>
       <Background>
-        <ChallengeHead head={head} />
-        <ChallengeBanner banner={banner} />
-        <ChallengeContents contents={contents} />
-        <ChallengeItem />
-        <span className={styles.title}>다른 집사들도 참여중이에요!</span>
-        <div className={styles.participants} ref={scrollRef}>
-          {joinList !== null
-            ? joinList.map((joinItem) => (
-                <ChallengeJoin
-                  key={joinItem.memberId}
-                  join={{
-                    participantsImg: joinItem.imageUrl,
-                    participantsName: joinItem.nickName,
-                  }}
-                />
-              ))
-            : null}
-        </div>
-        {renderButton}
-        <KitModal />
-        {BSType === "DeliveryBS" && <DeliveryBS />}
-        {BSType === "DeliveryReg" && <DeliveryReg />}
-        {BSType === "DeliveryList" && <DeliveryList />}
-        <MainTab />
+        {contestData ? (
+          <>
+            <ChallengeHead head={contestData.title} />
+            <ChallengeBanner banner={contestData.poster} />
+            <ChallengeContents contents={contents} />
+            <ChallengeItem />
+            <ChallengeJoin joinLists={joinList || []}/>
+            {renderButton}
+            <KitModal />
+            {BSType === "DeliveryBS" && <DeliveryBS />}
+            {BSType === "DeliveryReg" && <DeliveryReg />}
+            {BSType === "DeliveryList" && <DeliveryList />}
+            <MainTab />
+          </>
+        ) : null}
       </Background>
     </>
   );

@@ -2,11 +2,11 @@ import styles from "@/styles/challenge/challengehead.module.scss";
 import leftArrow from "@/assets/arrow_left_mid.svg";
 import { useNavigate } from "react-router-dom";
 
-interface headProps {
-  head: ChallengeHead;
+interface ChallengeHeadProps {
+  head: string;
 }
 
-const ChallengeHead: React.FC<headProps> = ({ head }) => {
+const ChallengeHead: React.FC<ChallengeHeadProps> = ({ head }) => {
   const navigate = useNavigate();
 
   const onClickBack = () => {
@@ -19,7 +19,7 @@ const ChallengeHead: React.FC<headProps> = ({ head }) => {
         <div className={styles.arrowImg} onClick={onClickBack}>
           <img src={leftArrow}></img>
         </div>
-        <div className={styles.header}>{head.head}</div>
+        <div className={styles.header}>{head}</div>
       </div>
     </>
   );

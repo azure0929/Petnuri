@@ -11,6 +11,7 @@ const KaKaoLogin = () => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
 
+
     if (!codeProcessed.current) {
       console.log("Received code:", code);
       codeProcessed.current = true;

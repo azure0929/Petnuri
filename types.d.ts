@@ -1,7 +1,4 @@
 // 이벤트 챌린지 타입
-interface ChallengeHead {
-  head: string;
-}
 
 interface ChallengeBanner {
   bannerImg: string;
@@ -19,22 +16,22 @@ interface ChallengeContents {
 }
 
 interface ChallengeJoin {
+  id: number
   participantsImg: string;
   participantsName: string;
 }
 
-interface joinList {
-  memberId?: number;
-  imageUrl: string;
-  nickName: string;
+interface JoinList {
+  id: number;
+  photoName: string;
+  photoUrl: string;
 }
 
-interface joinListEvent {
-  id: number
-  photoUrl: string
-  photoName: string
-  content: string
-  createdAt: string
+interface YanadoData {
+  title: string;
+  status: string;
+  poster: string;
+  subTitle: string;
 }
 
 interface Item {
@@ -51,6 +48,13 @@ interface HomeEventListProps {
 interface ChallengeEventListProps {
   item: Item | undefined;
   path: string;
+}
+
+interface ContestData {
+  title: string;
+  status: string;
+  poster: string;
+  subTitle: string;
 }
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
@@ -73,10 +77,10 @@ interface DailyDetailList {
 }
 
 interface DailyAllList {
-  challengeId: number
-  title: string
-  thumbnail: string
-  status: boolean
+  challengeId: number;
+  title: string;
+  thumbnail: string;
+  status: boolean;
 }
 
 interface PrivacyData {
@@ -103,42 +107,41 @@ type Pet = {
 };
 
 type EventChallenge = {
-  id: number
-  title: string
-  subTitle: string
-  thumbnail: string
+  id: number;
+  title: string;
+  subTitle: string;
+  thumbnail: string;
 };
 
 type DailyChallenge = {
-    id:number
-    title:string
-    subTitle: string
-    thumbnail:string
-}
+  id: number;
+  title: string;
+  subTitle: string;
+  thumbnail: string;
+};
 
 type PetTalk = {
-    id:number
-    title:string
-    writer:string
-    thumbnail:string
-    createdAt:string
+  id: number;
+  title: string;
+  writer: string;
+  thumbnail: string;
+  createdAt: string;
+};
+
+type ChallengeList = {
+  eventChallengeList: EventChallenge[];
+  dailyChallenge: DailyChallenge;
+};
+
+interface DataContent {
+  petList: Pet[];
+  challengeList: ChallengeList;
+  petTalkList: PetTalk[];
 }
 
-type ChallengeList ={
-   eventChallengeList : EventChallenge[];
-   dailyChallenge : DailyChallenge; 
+interface DataResponse {
+  content: DataContent;
 }
-
-interface DataContent{
-   petList : Pet[];
-   challengeList : ChallengeList ;
-   petTalkList : PetTalk[]; 
-}
-
-interface DataResponse{
- content : DataContent ;
-}
-
 
 //펫톡
 
