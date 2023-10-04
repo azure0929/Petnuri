@@ -57,7 +57,6 @@ const PetProfileModify = () => {
       petAge: age,
       isSelected,
     };
-    console.log(data)
 
     formData.append(
       "petProfileReq",
@@ -70,11 +69,6 @@ const PetProfileModify = () => {
 
     try {
       await modifyPetProfile(formData);
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
-      console.log(JSON.stringify(data));
-
       navigate('/');
    } catch (error) {
      console.error(error); 
@@ -173,7 +167,7 @@ const PetProfileModify = () => {
                   ? styles.able 
                   : styles.disable}`} 
             >
-              추가하기
+              수정하기
             </button>
           </form>
         </div>

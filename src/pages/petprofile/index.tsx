@@ -64,8 +64,6 @@ const PetProfileAdd = () => {
 
     try {
       await createPetProfile(formData);
-      console.log(formData);
-      
       navigate('/');
    } catch (error) {
      console.error(error); 
