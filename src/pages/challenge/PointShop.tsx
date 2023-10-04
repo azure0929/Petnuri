@@ -11,10 +11,14 @@ import { Link } from "react-router-dom";
 import Header from '@/components/Head'
 import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 import { simpleToast } from "@/utils/ToastUtils";
+import KitModal from "@/components/modal/KitModal";
+import { useSetRecoilState } from "recoil";
+import { kitModalState } from "@/store/challengeState";
 
 const PointShop = () => {
 
   const wrong = () => simpleToast('추후 오픈 예정입니다');
+  const setKitOpen = useSetRecoilState(kitModalState);
 
   return (
     <>
@@ -31,11 +35,12 @@ const PointShop = () => {
         </Header>
         <ChallengeProfile />
 
-        <div className={styles.ad}>
+        <div className={styles.ad} onClick={()=>setKitOpen(true)}>
           <img src={KitBanner} alt="" />
           <div className={styles.banner}>프로모션 배너</div>
           <div className={styles.banner_sub}>프로모션 배너 서브텍스트</div>
         </div>
+        <KitModal />
 
         <div className={styles.p_title}>큰 타이틀</div>
 
