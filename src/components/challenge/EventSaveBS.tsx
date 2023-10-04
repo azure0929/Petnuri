@@ -19,7 +19,7 @@ const EventSaveBS = () => {
       if (!newUserImg) {
         throw new Error("이미지 파일을 선택해주세요.");
       }
-      await ECyanadoReviewApi(newUserImg, content);
+      await ECyanadoReviewApi(newUserImg, content, petType);
     } catch (error) {
       console.error("Error in reivew: " + error);
     }
@@ -55,8 +55,6 @@ const EventSaveBS = () => {
 
   const closeBS = () => {
     if (newUserImg) {
-      console.log(content)
-      console.log(newUserImg)
       review();
       sucess();
       setBottomIsOpen(false);
@@ -65,6 +63,14 @@ const EventSaveBS = () => {
       setBottomIsOpen(false);
     }
   };
+
+  const [petType, setPetType] = useState<string>("DOG"); // 초기값은 강아지
+
+  // 반려동물 종 선택 핸들러
+  const handlePetTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPetType(event.target.value);
+  };
+
 
   return (
     <>
@@ -92,6 +98,31 @@ const EventSaveBS = () => {
               <img src={addIcon} className={styles.addIcon} />
             )}
           </div>
+          <div className={styles.selectContainer}>
+          <div>반려동물의 종을 선택해주세요</div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="petType"
+                value="DOG"
+                checked={petType === "DOG"}
+                onChange={handlePetTypeChange}
+              />
+              강아지
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="petType"
+                value="CAT"
+                checked={petType === "CAT"}
+                onChange={handlePetTypeChange}
+              />
+              고양이
+            </label>
+          </div>
+        </div>
           <input
             className={styles.addText}
             placeholder="게시글을 입력해주세요"

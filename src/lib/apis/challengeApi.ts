@@ -167,24 +167,31 @@ export const ECyanadoJoinApi = async () => {
 };
 
 // 야너도?야나두 참여신청
-export const ECyanadoReviewApi = async (imageFile: File, content: string) => {
+export const ECyanadoReviewApi = async (imageFile: File, content: string, petType: string) => {
   try {
-    const formData = new FormData();
-    formData.append("file", imageFile); // 파일 추가
-    formData.append("content", content); // JSON 데이터 추가
+    // 파일 Blob 생성
+    const fileBlob = new Blob([imageFile], { type: imageFile.type });
 
-  //   const getCookie = function(name: string) {
-  //     var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-  //     return value? value[2] : null;
-  // };
-
-    const locakStorageToken = localStorage.getItem('token')
-    
-    const headers = {
-      Authorization: `${locakStorageToken}`,
+    // JSON 데이터 Blob 생성
+    const requestData = {
+      petType,
+      content,
     };
+    const requestBlob = new Blob([JSON.stringify(requestData)], { type: 'application/json' });
 
-    console.log(locakStorageToken)
+    // FormData에 Blob 추가
+    const formData = new FormData();
+    formData.append("file", fileBlob, "file.png");
+    formData.append("request", requestBlob);
+
+    const locakStorageToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMDMiLCJleHAiOjE2OTY0MzIwMDgsImlkIjo0NCwicm9sZSI6IlVTRVIifQ.eUJkBVN5WOwDEGlzJJ9V1VkS1A8d77hLISfMRkmiYoQ"
+    // const token = localstorage.getItem('jwtToken')
+    // const locakStorageToken = `Bearer ${token}`
+
+    const headers = {
+      Authorization: locakStorageToken,
+      "Content-Type": "application/octet-stream",
+    };
 
     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
       headers,
@@ -218,13 +225,20 @@ export const daily1JoinListApi = async() => {
 // 데일리 이벤트 - 간식주기 참여신청
 export const dailyReviewApi = async (imageFile: File) => {
   try {
-    const formData = new FormData();
-    formData.append("file", imageFile); // 파일 추가
+    // 파일 Blob 생성
+    const fileBlob = new Blob([imageFile], { type: imageFile.type });
 
-    const locakStorageToken = localStorage.getItem('token')
-    
+    // FormData에 Blob 추가
+    const formData = new FormData();
+    formData.append("file", fileBlob, "file.png");
+
+    const locakStorageToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMDMiLCJleHAiOjE2OTY0MzIwMDgsImlkIjo0NCwicm9sZSI6IlVTRVIifQ.eUJkBVN5WOwDEGlzJJ9V1VkS1A8d77hLISfMRkmiYoQ"
+    // const token = localstorage.getItem('jwtToken')
+    // const locakStorageToken = `Bearer ${token}`
+
     const headers = {
-      Authorization: `${locakStorageToken}`,
+      Authorization: locakStorageToken,
+      "Content-Type": "application/octet-stream",
     };
 
     await axios.post(`${API_URL}/challenge/daily/1`, formData, {
@@ -255,6 +269,8 @@ export const daily2JoinListApi = async () => {
     console.error("Error in daily2JoinListApi: " + error)
   }
 }
+
+// 데일리 이벤트 - 놀아주기 참여신청
 
 // 데일리 이벤트 - 위생관리 조회
 export const dailyChallenge3Api = async() => {
