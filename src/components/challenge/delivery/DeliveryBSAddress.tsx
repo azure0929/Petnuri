@@ -4,7 +4,7 @@ import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal"; // 추가
 
 interface DeliveryBSAddressProps {
-  onAddressComplete: (address: string) => void;
+  onAddressComplete: (addressInfo: {roadAddress:string, detailAddress:string, zipCode:string}) => void;
   initialRoadAddress?: string;
   initialDetailAddress?: string;
   initialZipCode?: string;
@@ -30,8 +30,8 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   const completeHandler = (data: DaumPostcodeData) => {
     setRoadAddress(data.roadAddress);
     setZipCode(data.zonecode);
+    onAddressComplete({roadAddress:data.roadAddress,detailAddress:'',zipCode:data.zonecode});
     setIsOpen(false); //추가
-    console.log(data);
   };
 
   // Modal 스타일
@@ -56,7 +56,7 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   // 상세 주소검색 event
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
-    onAddressComplete(roadAddress + e.target.value);
+    onAddressComplete({roadAddress,zipCode,detailAddress:e.target.value});
   };
 
   const closeModal = () => {

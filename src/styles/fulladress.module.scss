@@ -25,6 +25,9 @@
     display: flex;
     justify-content: space-between;
     gap: 8px;
+    img {
+      cursor: pointer;
+    }
   }
   .box2 {
     display: flex;

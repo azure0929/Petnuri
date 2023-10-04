@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosAdd } from 'react-icons/io'
 import checkGray from '@/assets/check_circle_gray.svg'
 import checkBlue from '@/assets/check_circle_blue.svg'
 import { createPetProfile } from '@/lib/apis/petProfileApi';
+import { getCookie } from '@/utils/Cookie';
 
 const PetProfileAdd = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);

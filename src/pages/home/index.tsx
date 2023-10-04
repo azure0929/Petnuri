@@ -14,6 +14,7 @@ import { kitModalState, loginModalState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
 import { useState,useEffect } from 'react'
 import { getCookie } from "@/utils/Cookie";
+import { HomeApi } from "@/lib/apis/userApi";
 
 const Home = () => {
   const setKitOpen = useSetRecoilState(kitModalState);
@@ -29,17 +30,20 @@ const Home = () => {
   const token = getCookie("token")
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/HomePet.json');
-      const data = await response.json();
-      setPetProfile(data.content.petList);
-      setPetTalkList(data.content.petTalkList);
-      setDaily(data.content.challengeList.dailyChallenge)
-      setCheonHa(data.content.challengeList.rewardChallengeList[0])
-      setYanado(data.content.challengeList.rewardChallengeList[1])
+    const HomeData = async () => {
+      try {
+        const data = await HomeApi();
+        setPetProfile(data.content.petList);
+        setPetTalkList(data.content.petTalkList);
+        setDaily(data.content.challengeList.dailyChallenge)
+        setCheonHa(data.content.challengeList.rewardChallengeList[0])
+        setYanado(data.content.challengeList.rewardChallengeList[1])
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
     };
-    fetchData();
-   }, []);
+    HomeData();
+  }, []);
 
    useEffect(() => {
     // 선택한 펫을 active로 설정
