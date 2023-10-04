@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FocusEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import Background from "@/components/Background";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 import arrow_right_small from "@/assets/arrow_right_small.svg";
@@ -13,12 +13,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
-  const [nickname, setNickname] = useState<string>("");
-  const [nicknameError, setNicknameError] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [nameError, setNameError] = useState<string>("");
   const [isNicknameValid, setIsNicknameValid] = useState<boolean>(false);
   const [isDuplicateChecked, setIsDuplicateChecked] = useState<boolean>(false);
-  const [referralCode, setReferralCode] = useState<string>("");
-  const [referralCodeError, setReferralCodeError] = useState<string>("");
 
   const setserviceBottomIsOpen = useSetRecoilState(serviceSheetState);
   const setprivacyBottomIsOpen = useSetRecoilState(privacySheetState);
@@ -34,7 +32,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const isAllAgreed = isServiceAgreed && isPrivacyAgreed;
-  const isButtonEnabled = isNicknameValid && !nicknameError && isDuplicateChecked && isAllAgreed && (referralCode === '' || referralCodeError === '');
+  const isButtonEnabled = isNicknameValid && !nameError && isDuplicateChecked && isAllAgreed;
 
   const handleAgreeButtonClick = () => {
     if (isButtonEnabled) {
@@ -56,14 +54,14 @@ const SignUp = () => {
 
   const handleNicknameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
-    setNickname(inputValue);
+    setName(inputValue);
 
     const regex = /^[a-zA-Z가-힣]{2,10}$/;
     if (!regex.test(inputValue)) {
-      setNicknameError("숫자, 특수문자, 공백 제외 최소 2자 ~ 10자 입력");
+      setNameError("숫자, 특수문자, 공백 제외 최소 2자 ~ 10자 입력");
       setIsNicknameValid(false);
     } else {
-      setNicknameError("");
+      setNameError("");
       setIsNicknameValid(true);
     }
 
@@ -71,64 +69,27 @@ const SignUp = () => {
     setIsDuplicateChecked(false);
   };
 
-  const generateReferralCode = () => {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    let code = '';
-
-    for (let i = 0; i < 5; i++) {
-      const randomLetter = letters[Math.floor(Math.random() * letters.length)];
-      code += randomLetter;
-    }
-
-    for (let i = 0; i < 3; i++) {
-      const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
-      code += randomNumber;
-    }
-
-    return code;
-  };
-
   const handleDuplicateCheck = async () => {
-    // 고유한 추천인 코드 생성
-    const uniqueReferralCode = generateReferralCode();
-
-    // 상태에 고유한 추천인 코드 설정
-    setReferralCode(uniqueReferralCode);
-
-    // 필요한 경우 중복 확인 로직 수행
-    // ...
-
-    // 중복 확인 완료로 상태 설정
-    setIsDuplicateChecked(true);
-  };
-
-  const handleReferralCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setReferralCode(inputValue);
-  };
-
-  const handleReferralCodeBlur = async (event: FocusEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-
-    // 추천인 코드 유효성 검사 로직 (예: 길이가 6이상)
-    if (inputValue.length < 6) {
-      setReferralCodeError("해당 추천인 코드가 올바르지 않습니다.");
-    } else {
-      setReferralCodeError("");
-
-      // 서버로 추천인 코드 중복 확인 요청
-      /* try {
-        const response = await axios.post("/api/checkReferralCode", {
-          referralCode: inputValue,
-        });
-
-        if (response.data.isDuplicate) {
-          setReferralCodeError("해당 추천인 코드는 이미 사용 중입니다.");
-        }
-      } catch (error) {
-        console.error("추천인 코드 중복 확인 오류:", error);
-      } */
+    try {
+      const response = await axios.get("http://3.34.154.62:8080/auth/nickname", {
+        params: { nickname: name },
+      });
+  
+      const { isExists } = response.data;
+  
+      if (isExists) {
+        setIsNicknameValid(false);
+        setNameError("이미 사용 중인 닉네임입니다.");
+        console.log("사용 가능한 닉네임: ", name);
+      } else {
+        setIsNicknameValid(true);
+        setNameError("");
+        console.log("사용 가능한 닉네임: ", name);
+      }
+  
+      setIsDuplicateChecked(true);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -159,9 +120,15 @@ const SignUp = () => {
   useEffect(() => {
     const fetchKakaoEmail = async () => {
       try {
+        const hasKakaoAccessToken = sessionStorage.getItem("kakaoAccessToken") || "";
+        if (!hasKakaoAccessToken) {
+          console.error("Kakao Access Token이 없습니다. 로그인 후에 다시 시도하세요.");
+          return;
+        }
+
         const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("kakaoAccessToken")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("kakaoAccessToken")}`,
           },
         });
 
@@ -193,7 +160,7 @@ const SignUp = () => {
               <h2 className={styles.title}>이메일</h2>
               <input
                 id="email-input"
-                readOnly // 읽기 전용 상태로 변경
+                readOnly
               />
             </div>
           </div>
@@ -203,10 +170,10 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="닉네임을 입력해주세요"
-                value={nickname}
+                value={name}
                 onChange={handleNicknameChange}
                 className={`${isNicknameValid ? styles.valid : ""} ${
-                  nicknameError || (isDuplicateChecked && !isNicknameValid) ? styles.invalid : ""
+                  nameError || (isDuplicateChecked && !isNicknameValid) ? styles.invalid : ""
                 }`}
               />
               <div
@@ -219,10 +186,7 @@ const SignUp = () => {
                 중복체크
               </div>
             </div>
-            {nicknameError && (
-              <p className={styles.nameerror}>{nicknameError}</p>
-            )}
-            {isNicknameValid && !nicknameError && (
+            {isDuplicateChecked && isNicknameValid && !nameError && (
               <p className={styles.validText}>
                 사용 가능합니다
               </p>
@@ -235,16 +199,15 @@ const SignUp = () => {
             <input
               type="text"
               placeholder="추천인의 코드를 입력해주세요"
-              value={referralCode}
-              onChange={handleReferralCodeChange}
-              onBlur={handleReferralCodeBlur}
-              className={referralCodeError ? styles.invalid : ""}
+              // value={referralCode}
+              // onBlur={handleReferralCodeBlur}
+              // className={referralCodeError ? styles.invalid : ""}
             />
-            {referralCodeError && (
+            {/* {referralCodeError && (
               <p className={styles.nameerror} style={{ color: "$red_accent_F42A3B", fontSize: "12px" }}>
                 {referralCodeError}
               </p>
-            )}
+            )} */}
           </div>
         </div>
         <div className={styles.agree}>

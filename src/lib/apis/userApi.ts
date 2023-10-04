@@ -5,17 +5,6 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-// 로그인
-export const login = async (code) => {
-  try {
-    const response = await api.get("/auth/kakao/login", code );
-    console.log(response);
-    return response;    
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 // 회원가입
 export const join = async ({ email, nickname, referralCode, isAgreed }: Join) => {
   try {
@@ -29,9 +18,11 @@ export const join = async ({ email, nickname, referralCode, isAgreed }: Join) =>
 };
 
 // 닉네임 중복 체크
-export const checknickname = async ({ nickname }: CheckNickname) => {
+export const checkNickname = async ({ nickname }: CheckNickname) => {
   try {
-    const response = await api.post("/member/nickname", { nickname });
+    const response = await api.post("/auth/nickname", null, {
+      params: { nickname },
+    });
     console.log("중복체크 응답 데이터:", response.data);
     return response;
   } catch (error) {
