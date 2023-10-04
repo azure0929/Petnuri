@@ -7,7 +7,7 @@ import { REST_API_KEY } from "@/lib/apis/base";
 
 const Login = () => {
   const handleKakaoLogin = () => {
-    const REDIRECT_URL = `http://localhost:5173/KaKaoLogin`;
+    const REDIRECT_URL = `https://petnuri.netlify.app/KaKaoLogin`;
 
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
   };
