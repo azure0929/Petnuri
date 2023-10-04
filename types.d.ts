@@ -189,10 +189,10 @@ interface writer {
 interface DefaultAddress {
   name: string;
   phone: string;
-  add1: string;
-  add2: string;
-  zoneCode: string;
-  default?: boolean;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased?: boolean;
 }
 
 type DefaultAddressArray = DefaultAddress[];
