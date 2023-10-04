@@ -8,14 +8,28 @@ import DeliveryBSAddress from "@/components/challenge/delivery/DeliveryBSAddress
 import { useState, useEffect } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { BSTypeState, deliveryDataState } from "@/store/challengeState";
+import { DeliveryRegApi } from "@/lib/apis/challengeApi";
 
 const DeliveryReg = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const deliveryData = useRecoilValue(deliveryDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
-  const handleReg = () => {
-    setBSType("DeliveryBS");
+  const handleReg = async () => {
+    try {
+      const deliveryInfo = {
+        name: nameState,
+        phone: contactState,
+        roadAddress: roadAddressState,
+        address: detailAddressState,
+        zipcode: deliveryData.zonecode, 
+        isBased: agreedCheck
+      };
+      await DeliveryRegApi(deliveryInfo);
+      setBSType("DeliveryBS");
+    } catch (error) {
+       console.error('Failed to register delivery:', error);
+    }
   };
 
   // 수령인 이름

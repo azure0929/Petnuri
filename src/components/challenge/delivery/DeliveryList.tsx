@@ -6,6 +6,7 @@ import BottomButton from "@/components/challenge/BottomButton";
 import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { BSTypeState } from "@/store/challengeState";
+import { DeliveryListApi } from "@/lib/apis/challengeApi";
 
 const DeliveryList = () => {
   const [privacy, setPrivacy] = useState<Privacy[]>();
@@ -23,8 +24,7 @@ const DeliveryList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/Privacy.json");
-      const data = await response.json();
+      const data = await DeliveryListApi();
       setPrivacy(data.address);
       const defaultItem = data.address.find((item: Privacy) => item.isBased);
       setSelectedItem(defaultItem);

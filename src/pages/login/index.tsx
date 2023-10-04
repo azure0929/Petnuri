@@ -4,7 +4,8 @@ import login_screen from "@/assets/login_screen.svg";
 import kakao from "@/assets/kakao.svg";
 import styles from "@/styles/login.module.scss";
 import { REST_API_KEY } from "@/lib/apis/base";
-import {useEffect} from 'react'
+import { useEffect } from 'react'
+import { setCookie } from "@/utils/Cookie";
 
 const Login = () => {
   const handleKakaoLogin = () => {
@@ -28,6 +29,7 @@ const Login = () => {
       window.location.href = '/signup';
     } else {
       window.location.href = '/';
+      setCookie('jwt',jwtToken)
     }
   }, []);
 

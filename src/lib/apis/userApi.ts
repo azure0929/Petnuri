@@ -8,7 +8,7 @@ const api = axios.create({
 // 로그인
 export const login = async (code) => {
   try {
-    const response = await api.get("/auth/kakao/login", { params: { code } });
+    const response = await api.get("/auth/kakao/login", code );
     console.log(response);
     return response;    
   } catch (error) {
@@ -61,6 +61,16 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
   } catch (error) {
     console.error("펫 정보 등록 실패", error);
     throw error;
+  }
+};
+
+// 홈 페이지 불러오기 
+export const HomeApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/member/main`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in HomeApi:", error);
   }
 };
 
