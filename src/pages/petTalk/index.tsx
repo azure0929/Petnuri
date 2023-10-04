@@ -36,7 +36,7 @@ interface PetTalkItem {
   };
 }
 
-const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
+const PetTalk: React.FC<PetTalkProps> = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
@@ -136,59 +136,62 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
             </div>
 
             <div className={styles.talk_list}>
-              {data.map((item: PetTalkItem) => (
-                <div className={styles.border}>
-                  <Link to={`/petTalk/${petTalkId}`}>
-                    <div className={styles.item}>
-                      <div className={styles.user_info}>
-                        {item.writer.profileImageUrl === null ? (
-                          <img src={default_user} alt="default-img" />
-                        ) : (
-                          <img
-                            src={item.writer.profileImageUrl}
-                            alt="profile-img"
-                          />
-                        )}
+              {data && data.length > 0
+                ? data.map((item: PetTalkItem) => (
+                    <div className={styles.border} key={item.id}>
+                      <Link to={`/petTalk/${item.id}`}>
+                        <div className={styles.item}>
+                          <div className={styles.user_info}>
+                            {item.writer.profileImageUrl === null ? (
+                              <img src={default_user} alt="default-img" />
+                            ) : (
+                              <img
+                                src={item.writer.profileImageUrl}
+                                alt="profile-img"
+                              />
+                            )}
+                            <span className={styles.user_name}>
+                              {item.writer.nickname}
+                            </span>
+                            <span className={styles.date}>
+                              ・ 게시된 날짜 넣기 {item.id}
+                            </span>
+                          </div>
+                          <div className={styles.title}>{item.title}</div>
+                          <div className={styles.text_wrapper}>
+                            <div className={styles.content_text}>
+                              {item.content}
+                            </div>
+                            <button className={styles.plus_button}>
+                              더보기
+                            </button>
+                          </div>
 
-                        <span className={styles.user_name}>
-                          {item.writer.nickname}
-                        </span>
-                        <span className={styles.date}>
-                          ・ 게시된 날짜 넣기 {item.id}
-                        </span>
-                      </div>
-                      <div className={styles.title}>{item.title}</div>
-                      <div className={styles.text_wrapper}>
-                        <div className={styles.content_text}>
-                          {item.content}
-                        </div>
-                        <button className={styles.plus_button}>더보기</button>
-                      </div>
+                          {item.thumbnail === null ? null : (
+                            <div className={styles.content_img}>
+                              <img src="" alt="예시이미지" />
+                            </div>
+                          )}
 
-                      {item.thumbnail === null ? null : (
-                        <div className={styles.content_img}>
-                          <img src="" alt="예시이미지" />
+                          <div className={styles.response_wrapper}>
+                            <div className={styles.icon_area}>
+                              <img src={heart} alt="" />
+                              <span>{item.emojiCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={talk} alt="" />
+                              <span>{item.replyCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={view} alt="" />
+                              <span>{item.viewCount}</span>
+                            </div>
+                          </div>
                         </div>
-                      )}
-
-                      <div className={styles.response_wrapper}>
-                        <div className={styles.icon_area}>
-                          <img src={heart} alt="" />
-                          <span>{item.emojiCount}</span>
-                        </div>
-                        <div className={styles.icon_area}>
-                          <img src={talk} alt="" />
-                          <span>{item.replyCount}</span>
-                        </div>
-                        <div className={styles.icon_area}>
-                          <img src={view} alt="" />
-                          <span>{item.viewCount}</span>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
-                  </Link>
-                </div>
-              ))}
+                  ))
+                : null}
             </div>
 
             <div
