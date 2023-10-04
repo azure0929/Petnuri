@@ -2,7 +2,7 @@ import styles from '@/styles/fulladress.module.scss'
 import EditBtn from './EditBtn'
 import close from '@/assets/close.svg'
 import { useSetRecoilState } from 'recoil';
-import { deliveryDataState, BSTypeState } from '@/store/challengeState';
+import { deliveryUpdateDataState, BSTypeState } from '@/store/challengeState';
 
 interface FullAdressProps {
   item:Privacy
@@ -13,11 +13,12 @@ interface FullAdressProps {
 }
 
 const FullAdress = ({item, isSelected, onSelect, onDelete, onUpdate }: FullAdressProps) => {
-  const setDeliveryData = useSetRecoilState(deliveryDataState);
+  const setDeliveryData = useSetRecoilState(deliveryUpdateDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
-  const handleEdit = () => {
+  const handleUpdate = () => {
     setDeliveryData({
+      id: item.id,
       name: item.name,
       phone: item.phone,
       roadAddress: item.roadAddress,
@@ -25,7 +26,7 @@ const FullAdress = ({item, isSelected, onSelect, onDelete, onUpdate }: FullAdres
       zipCode:item.zipcode,
       isSelected:item.isBased
      });
-    setBSType('DeliveryReg')
+    setBSType('DeliveryUpdate')
   };
 
   return (
@@ -51,7 +52,7 @@ const FullAdress = ({item, isSelected, onSelect, onDelete, onUpdate }: FullAdres
         </div>
 
         <div className={styles.box3}>
-          <EditBtn version='light' text='수정' onClick={handleEdit}/>
+          <EditBtn version='light' text='수정' onClick={handleUpdate}/>
           <button onClick={onSelect}>
               <EditBtn version='dark' text='선택' onClick={onUpdate}/>
           </button>

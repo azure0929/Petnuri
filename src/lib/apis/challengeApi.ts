@@ -101,7 +101,22 @@ export const DeliveryRegApi = async (deliveryInfo:any) => {
   }
 };
 
-export const DeliveryUpdateApi = async (item: Privacy) => {
+export const DeliveryUpdateApi = async (deliveryInfo:any) => {
+  try {
+    const response = await axios.put(`${API_URL}/delivery/address`, deliveryInfo, {
+      headers: {
+        'Authorization': getCookie('jwtToken'), 
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+export const DeliveryTrueUpdateApi = async (item: Privacy) => {
   const response = await axios.put(
     `${API_URL}/delivery/address`,
     {

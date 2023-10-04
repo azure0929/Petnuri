@@ -27,6 +27,19 @@ export const deliveryListState = atom<DeliveryAddress[]>({
   default: [],
 });
 
+export const deliveryUpdateDataState = atom({
+  key: 'deliveryUpdateDataState',
+  default: {
+    id: 0,
+    name: '',
+    phone: '',
+    roadAddress: '',
+    address: '',
+    zipCode: '',
+    isSelected: false,
+  },
+});
+
 export const loginModalState = atom({
   key: 'loginModalState',
   default: false,
