@@ -2,6 +2,7 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
 import Head from "@/components/Head";
@@ -27,6 +28,12 @@ const Concern = () => {
   const handleFloating = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const { data } = useQuery("queryKey", () => allList(selectedPet));
+
+  if (data) {
+    console.log(`${selectedPet}`, data);
+  }
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
