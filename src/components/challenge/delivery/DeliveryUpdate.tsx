@@ -7,21 +7,22 @@ import DeliveryBSContact from "@/components/challenge/delivery/DeliveryBSContact
 import DeliveryBSAddress from "@/components/challenge/delivery/DeliveryBSAddress";
 import { useState, useEffect } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { BSTypeState, deliveryDataState } from "@/store/challengeState";
-import { DeliveryRegApi } from "@/lib/apis/challengeApi";
+import { BSTypeState, deliveryUpdateDataState } from "@/store/challengeState";
+import { DeliveryUpdateApi } from "@/lib/apis/challengeApi";
 
-const DeliveryReg = () => {
+const DeliveryUpdate = () => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
-  const deliveryData = useRecoilValue(deliveryDataState);
+  const deliveryData = useRecoilValue(deliveryUpdateDataState);
   const setBSType = useSetRecoilState(BSTypeState);
 
   const handleReg = () => {
     setBSType("DeliveryBS");
   };
 
-  const regApi = async () => {
+  const updateApi = async () => {
     try {
       const deliveryInfo = {
+        id: deliveryData.id,
         name: nameState,
         phone: contactState,
         roadAddress: addressInfoState.roadAddress,
@@ -29,14 +30,14 @@ const DeliveryReg = () => {
         zipcode: addressInfoState.zipCode, 
         isBased: agreedCheck
       };
-      await DeliveryRegApi(deliveryInfo);
+      await DeliveryUpdateApi(deliveryInfo);
     } catch (error) {
        console.error('Failed to register delivery:', error);
     }
   };
 
   const postReg = () => {
-    regApi()
+    updateApi()
     handleReg()
   }
 
@@ -92,7 +93,7 @@ const DeliveryReg = () => {
   return (
     <>
       <BottomSheet>
-        <DeliveryBSHead text={"배송지 등록"} onClick={handleReg} />
+        <DeliveryBSHead text={"배송지 수정"} onClick={handleReg} />
         <DeliveryBSName
           onNameComplete={handleNameComplete}
           initialName={nameState}
@@ -132,4 +133,4 @@ const DeliveryReg = () => {
   );
 };
 
-export default DeliveryReg;
+export default DeliveryUpdate;

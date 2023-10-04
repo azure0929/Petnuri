@@ -3,10 +3,13 @@ import MainTab from "@/components/MainTab";
 import login_screen from "@/assets/login_screen.svg";
 import kakao from "@/assets/kakao.svg";
 import styles from "@/styles/login.module.scss";
+import { REST_API_KEY } from "@/lib/apis/base";
 
 const Login = () => {
   const handleKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a7286a7a260984d746ba0d10d2a4a07a&redirect_uri=http://localhost:5173/KaKaoLogin`;
+    const REDIRECT_URL = `http://localhost:5173/KaKaoLogin`;
+
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
   };
 
   // 1 : 1 채팅 상담하기 클릭 시 이동
@@ -34,7 +37,9 @@ const Login = () => {
               className={styles.kakao}
             >
               <img src={kakao} alt="kakao-icon" />
-              <div role="button" onClick={handleKakaoLogin}>카카오로 간편 로그인</div>
+              <div role="button" onClick={handleKakaoLogin}>
+                카카오로 간편 로그인
+              </div>
             </div>
             <div className={styles.chat} onClick={handleChatClick}>
               <span>로그인이 안되시나요?</span> |

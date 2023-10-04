@@ -16,7 +16,7 @@ interface ChallengeContents {
 }
 
 interface ChallengeJoin {
-  id: number
+  id: number;
   participantsImg: string;
   participantsName: string;
 }
@@ -85,6 +85,16 @@ interface DailyDetailList {
   challengeReview: string;
   dailyReview: Review[];
   status?: boolean;
+}
+
+interface DeliveryAddress {
+  id: number;
+  name: string;
+  phone: string;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased: boolean;
 }
 
 interface DailyAllList {
@@ -179,10 +189,26 @@ interface writer {
 interface DefaultAddress {
   name: string;
   phone: string;
-  add1: string;
-  add2: string;
-  zoneCode: string;
-  default?: boolean;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased?: boolean;
 }
 
 type DefaultAddressArray = DefaultAddress[];
+
+interface PetTalkItem {
+  id: number;
+  title: string;
+  content: string;
+  thumbnail: string | null;
+  viewCount: number;
+  emojiCount: number | null;
+  replyCount: number | null;
+  reacted: boolean;
+  writer: {
+    id: number;
+    nickname: string;
+    profileImageUrl: string | null;
+  };
+}

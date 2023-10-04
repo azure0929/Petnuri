@@ -2,10 +2,9 @@ import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
-import { allList } from "@/lib/apis/pettalkApi";
+import { useAllList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { SetStateAction, useEffect, useState } from "react";
 import heart from "../../assets/heart_18px.svg";
@@ -15,28 +14,25 @@ import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
 import default_user from "../../assets/user.png";
-
-interface PetTalkProps {
-  petTalkId?: number;
-}
+import banner from "../../assets/키트배너.png";
 
 interface PetTalkItem {
   id: number;
   title: string;
   content: string;
-  thumbnail: string | null;
+  thumbnail?: string;
   viewCount: number;
-  emojiCount: number | null;
-  replyCount: number | null;
+  emojiCount?: number;
+  replyCount?: number;
   reacted: boolean;
   writer: {
     id: number;
     nickname: string;
-    profileImageUrl: string | null;
+    profileImageUrl?: string;
   };
 }
 
-const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
+const PetTalk = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
@@ -54,17 +50,14 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
     setSelectedPet(selectedValue);
 
     if (selectedValue === "DOG") {
-      allList("DOG");
+      setSelectedPet("DOG");
     } else if (selectedValue === "CAT") {
-      allList("CAT");
+      setSelectedPet("CAT");
     }
   };
 
-  const { data } = useQuery("queryKey", () => allList(selectedPet));
-
-  if (data) {
-    console.log(`${selectedPet}`, data);
-  }
+  const { data } = useAllList(selectedPet);
+  console.log("모든리스트", data);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
@@ -125,7 +118,7 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
             </div>
 
             <div className={styles.banner}>
-              <img src="" alt="프로모션 배너" />
+              <img src={banner} alt="프로모션 배너" />
             </div>
 
             <div className={styles.select_wrap}>
@@ -136,59 +129,62 @@ const PetTalk: React.FC<PetTalkProps> = ({ petTalkId }) => {
             </div>
 
             <div className={styles.talk_list}>
-              {data.map((item: PetTalkItem) => (
-                <div className={styles.border}>
-                  <Link to={`/petTalk/${petTalkId}`}>
-                    <div className={styles.item}>
-                      <div className={styles.user_info}>
-                        {item.writer.profileImageUrl === null ? (
-                          <img src={default_user} alt="default-img" />
-                        ) : (
-                          <img
-                            src={item.writer.profileImageUrl}
-                            alt="profile-img"
-                          />
-                        )}
+              {data && data.length > 0
+                ? data.map((item: PetTalkItem) => (
+                    <div className={styles.border} key={item.id}>
+                      <Link to={`/petTalk/${item.id}`}>
+                        <div className={styles.item}>
+                          <div className={styles.user_info}>
+                            {item.writer.profileImageUrl === null ? (
+                              <img src={default_user} alt="default-img" />
+                            ) : (
+                              <img
+                                src={item.writer.profileImageUrl}
+                                alt="profile-img"
+                              />
+                            )}
+                            <span className={styles.user_name}>
+                              {item.writer.nickname}
+                            </span>
+                            <span className={styles.date}>
+                              ・ 게시된 날짜 넣기 {item.id}
+                            </span>
+                          </div>
+                          <div className={styles.title}>{item.title}</div>
+                          <div className={styles.text_wrapper}>
+                            <div className={styles.content_text}>
+                              {item.content}
+                            </div>
+                            <button className={styles.plus_button}>
+                              더보기
+                            </button>
+                          </div>
 
-                        <span className={styles.user_name}>
-                          {item.writer.nickname}
-                        </span>
-                        <span className={styles.date}>
-                          ・ 게시된 날짜 넣기 {item.id}
-                        </span>
-                      </div>
-                      <div className={styles.title}>{item.title}</div>
-                      <div className={styles.text_wrapper}>
-                        <div className={styles.content_text}>
-                          {item.content}
-                        </div>
-                        <button className={styles.plus_button}>더보기</button>
-                      </div>
+                          {item.thumbnail === null ? null : (
+                            <div className={styles.content_img}>
+                              <img src="" alt="예시이미지" />
+                            </div>
+                          )}
 
-                      {item.thumbnail === null ? null : (
-                        <div className={styles.content_img}>
-                          <img src="" alt="예시이미지" />
+                          <div className={styles.response_wrapper}>
+                            <div className={styles.icon_area}>
+                              <img src={heart} alt="" />
+                              <span>{item.emojiCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={talk} alt="" />
+                              <span>{item.replyCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={view} alt="" />
+                              <span>{item.viewCount}</span>
+                            </div>
+                          </div>
                         </div>
-                      )}
-
-                      <div className={styles.response_wrapper}>
-                        <div className={styles.icon_area}>
-                          <img src={heart} alt="" />
-                          <span>{item.emojiCount}</span>
-                        </div>
-                        <div className={styles.icon_area}>
-                          <img src={talk} alt="" />
-                          <span>{item.replyCount}</span>
-                        </div>
-                        <div className={styles.icon_area}>
-                          <img src={view} alt="" />
-                          <span>{item.viewCount}</span>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
-                  </Link>
-                </div>
-              ))}
+                  ))
+                : null}
             </div>
 
             <div

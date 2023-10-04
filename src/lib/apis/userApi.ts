@@ -57,6 +57,16 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
   }
 };
 
+// 홈 페이지 불러오기 
+export const HomeApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/member/main`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in HomeApi:", error);
+  }
+};
+
 // 회원가입
 export interface Join {
   email: string;
