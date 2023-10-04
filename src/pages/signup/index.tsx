@@ -55,6 +55,10 @@ const SignUp = () => {
           isAgreed: isAllAgreed,
         });
 
+        const { jwtToken } = response.data;
+
+        sessionStorage.setItem('jwtToken', jwtToken);
+
         console.log("회원가입 성공:", response.data);
         navigate("/onboarding");
       } catch (error) {
