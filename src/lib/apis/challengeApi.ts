@@ -249,3 +249,13 @@ export const daily3JoinListApi = async() => {
     console.error("Error in daily3JoinListApi: " + error)
   }
 }
+
+//데일리 전체 조회
+export const dailyAllListApi = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/daily`)
+    return response.data
+  } catch (error) {
+    console.error("Error in dailyAllListApi: " + error)
+  }
+}
