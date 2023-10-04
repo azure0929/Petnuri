@@ -1,46 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillLightningChargeFill } from "react-icons/bs";
 import { HiChatBubbleOvalLeft } from "react-icons/hi2";
 import { IoPersonSharp } from "react-icons/io5";
-import { useParams } from "react-router-dom";
 import "@/styles/maintab.scss";
-
-import { login } from "@/lib/apis/userApi";
 
 const MainTab = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { code } = useParams();
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        console.log("로그인 상태 확인 성공");
-        if (code) {
-          const response = await login({ code });
-
-          if (response) {
-            if (response.data && response.data.jwtToken) {
-              setIsLoggedIn(true);
-            } else {
-              setIsLoggedIn(false);
-            }
-          } else {
-            setIsLoggedIn(false);
-          }
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        console.error("로그인 상태 확인 실패", error);
-        setIsLoggedIn(false);
-      }
-    };
-
-    checkLoginStatus();
-  }, [code]);
 
   return (
     <div className="main-tab">
