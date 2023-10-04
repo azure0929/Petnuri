@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import Background from "@/components/Background";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 import arrow_right_small from "@/assets/arrow_right_small.svg";
@@ -11,6 +11,7 @@ import { useSetRecoilState } from "recoil";
 import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { join } from "@/lib/apis/userApi";
 
 const SignUp = () => {
   const [name, setName] = useState<string>("");
@@ -23,26 +24,48 @@ const SignUp = () => {
 
   const [privacyVisible, setPrivacyVisible] = useState(true);
   const [serviceVisible, setServiceVisible] = useState(true);
-  
+
   const [isAgreeAll, setIsAgreeAll] = useState<boolean>(false);
   const [isServiceAgreed, setIsServiceAgreed] = useState<boolean>(false);
   const [isPrivacyAgreed, setIsPrivacyAgreed] = useState<boolean>(false);
   const [isMarketingAgreed, setIsMarketingAgreed] = useState<boolean>(false);
 
+  const [referralCode, setReferralCode] = useState<string>("");
+  const [referralCodeError, setReferralCodeError] = useState<string>("");
+
+  const [kakaoEmail, setKakaoEmail] = useState<string>(""); // 카카오 계정의 이메일 상태
+
   const navigate = useNavigate();
 
   const isAllAgreed = isServiceAgreed && isPrivacyAgreed;
-  const isButtonEnabled = isNicknameValid && !nameError && isDuplicateChecked && isAllAgreed;
+  const isButtonEnabled =
+    isNicknameValid && !nameError && isDuplicateChecked && isAllAgreed || referralCode;
 
-  const handleAgreeButtonClick = () => {
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleAgreeButtonClick = async () => {
     if (isButtonEnabled) {
-      navigate('/onboarding');
+      try {
+        const email = kakaoEmail || (emailInputRef.current?.placeholder ?? "");
+
+        const response = await join({
+          email: email,
+          nickname: name,
+          referral: referralCode,
+          isAgreed: isAllAgreed,
+        });
+
+        console.log("회원가입 성공:", response.data);
+        navigate("/onboarding");
+      } catch (error) {
+        console.error("회원가입 실패", error);
+      }
     }
   };
 
   const onLogin = () => {
     navigate(`/login`);
-  }
+  };
 
   const handlePrivacyConfirm = () => {
     setPrivacyVisible(false);
@@ -74,19 +97,19 @@ const SignUp = () => {
       const response = await axios.get("http://3.34.154.62:8080/auth/nickname", {
         params: { nickname: name },
       });
-  
+
       const { isExists } = response.data;
-  
+
       if (isExists) {
         setIsNicknameValid(false);
         setNameError("이미 사용 중인 닉네임입니다.");
-        console.log("사용 가능한 닉네임: ", name);
+        console.log("사용 불가능한 닉네임: ", name);
       } else {
         setIsNicknameValid(true);
         setNameError("");
         console.log("사용 가능한 닉네임: ", name);
       }
-  
+
       setIsDuplicateChecked(true);
     } catch (error) {
       console.error(error);
@@ -135,6 +158,9 @@ const SignUp = () => {
         const { kakao_account } = response.data;
         const { email } = kakao_account;
 
+        // 이메일 정보를 상태에 저장
+        setKakaoEmail(email);
+
         const emailInput = document.querySelector("#email-input") as HTMLInputElement;
         emailInput.placeholder = email;
       } catch (error) {
@@ -145,12 +171,38 @@ const SignUp = () => {
     fetchKakaoEmail();
   }, []);
 
+  const handleReferralCodeBlur = async () => {
+    try {
+      if (!referralCode) {
+        setReferralCodeError("");
+        console.log("No referral code provided.");
+        return;
+      }
+
+      const response = await axios.get("http://3.34.154.62:8080/auth/referral", {
+        params: { referralCode: referralCode },
+      });
+
+      const { isValid } = response.data;
+
+      if (isValid) {
+        setReferralCodeError("이미 사용 중인 추천인 코드입니다.");
+        console.log("이미 사용 중인 추천인 코드입니다.");
+      } else {
+        setReferralCodeError("");
+        console.log("사용 불가능한 추천인 코드입니다.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Background>
         <div className={styles.head}>
           <div role="button" className={styles.prev}>
-            <img src={arrow_left_mid} alt="prev" onClick={onLogin}/>
+            <img src={arrow_left_mid} alt="prev" onClick={onLogin} />
           </div>
           <p>카카오톡 회원가입</p>
         </div>
@@ -158,10 +210,7 @@ const SignUp = () => {
           <div className={styles.read}>
             <div className={styles.box}>
               <h2 className={styles.title}>이메일</h2>
-              <input
-                id="email-input"
-                readOnly
-              />
+              <input id="email-input" readOnly />
             </div>
           </div>
           <div className={styles.box}>
@@ -187,27 +236,24 @@ const SignUp = () => {
               </div>
             </div>
             {isDuplicateChecked && isNicknameValid && !nameError && (
-              <p className={styles.validText}>
-                사용 가능합니다
-              </p>
+              <p className={styles.validText}>사용 가능합니다</p>
             )}
           </div>
           <div className={styles.box}>
-            <p className={styles.title}>
-              추천인 코드 (선택)
-            </p>
+            <p className={styles.title}>추천인 코드 (선택)</p>
             <input
               type="text"
               placeholder="추천인의 코드를 입력해주세요"
-              // value={referralCode}
-              // onBlur={handleReferralCodeBlur}
-              // className={referralCodeError ? styles.invalid : ""}
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
+              onBlur={handleReferralCodeBlur}
+              className={`${referralCodeError ? styles.invalid : ""}`}
             />
-            {/* {referralCodeError && (
+            {referralCodeError && (
               <p className={styles.nameerror} style={{ color: "$red_accent_F42A3B", fontSize: "12px" }}>
                 {referralCodeError}
               </p>
-            )} */}
+            )}
           </div>
         </div>
         <div className={styles.agree}>
@@ -268,9 +314,7 @@ const SignUp = () => {
                     role="button"
                   />
                   <div>
-                    <p>
-                      (선택) 광고성 정보 수신 전체 동의
-                    </p>
+                    <p>(선택) 광고성 정보 수신 전체 동의</p>
                   </div>
                 </div>
               </li>
@@ -285,16 +329,16 @@ const SignUp = () => {
           <div
             role="button"
             onClick={handleAgreeButtonClick}
-            className={`${styles.agreeactive} ${isButtonEnabled ? '' : styles.disabled}`}
+            className={`${styles.agreeactive} ${isButtonEnabled ? "" : styles.disabled}`}
           >
             동의하고 가입하기
           </div>
         </div>
-        {serviceVisible && <ServiceHBS onConfirm={handleServiceConfirm}/>}
+        {serviceVisible && <ServiceHBS onConfirm={handleServiceConfirm} />}
         {privacyVisible && <PrivacyHBS onConfirm={handlePrivacyConfirm} />}
       </Background>
     </>
-  )
-}
+  );
+};
 
 export default SignUp;
