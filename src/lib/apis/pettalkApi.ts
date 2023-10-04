@@ -1,12 +1,11 @@
 import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://3.34.154.62:8080/",
-});
+import { API_URL } from "./base";
 
 export const allList = async () => {
   try {
-    const response = await api.get("/pet-talk");
+    const response = await axios.get(
+      `${API_URL}/pet-talk/{mainCategory}?pet=DOG&order=LATEST&page=0&size=15`
+    );
     console.log("모든 리스트", response.data);
     return response.data;
   } catch (error) {
@@ -15,13 +14,13 @@ export const allList = async () => {
 };
 
 interface WritingOutParams {
-  // accessToken: string;
+  accessToken: string;
   image?: File;
   request: object;
 }
 
 export const writingOut = async ({
-  // accessToken,
+  accessToken,
   image,
   request,
 }: WritingOutParams) => {
@@ -37,7 +36,7 @@ export const writingOut = async ({
     //여기
     const response = await axios.post("/pet-talk", formData, {
       headers: {
-        // Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "multipart/form-data",
       },
     });
