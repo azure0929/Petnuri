@@ -10,7 +10,6 @@ import ChallengeItem from "@/components/challenge/ChallengeItem";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
 import styles from "@/styles/challenge/challengejoin.module.scss";
-import { useScrollDiv } from "@/utils/Scroll";
 import KitModal from "@/components/modal/KitModal";
 import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
 import DeliveryList from "@/components/challenge/delivery/DeliveryList";
@@ -19,8 +18,7 @@ import { useRecoilValue } from "recoil";
 import { ContestCheckApi, ContestJoinApi } from "@/lib/apis/challengeApi";
 
 const Contest = () => {
-  const scrollRef = useScrollDiv();
-  const [joinList, setJoinList] = useState<JoinList[] | null>(null);
+  const [joinList, setJoinList] = useState<ChallengeJoin[] | null>(null);
   const [contestData, setContestData] = useState<ContestData | null>(null);
   const BSType = useRecoilValue(BSTypeState);
 
@@ -79,24 +77,7 @@ const Contest = () => {
             <ChallengeBanner banner={contestData.poster} />
             <ChallengeContents contents={contents} />
             <ChallengeItem />
-            <span className={styles.title}>다른 집사들도 참여중이에요!</span>
-            <div className={styles.participants} ref={scrollRef}>
-              {joinList ? (
-                joinList.map((joinItem) => (
-                  <ChallengeJoin
-                    key={joinItem.id}
-                    join={{
-                      participantsImg: joinItem.photoUrl,
-                      participantsName: joinItem.photoName,
-                    }}
-                  />
-                ))
-              ) : (
-                <>
-                  <div>아직 아무도 참여를 안했습니다.</div>
-                </>
-              )}
-            </div>
+            <ChallengeJoin joinLists={joinList || []}/>
             {renderButton}
             <KitModal />
             {BSType === "DeliveryBS" && <DeliveryBS />}

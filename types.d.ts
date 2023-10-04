@@ -16,6 +16,7 @@ interface ChallengeContents {
 }
 
 interface ChallengeJoin {
+  id: number
   participantsImg: string;
   participantsName: string;
 }

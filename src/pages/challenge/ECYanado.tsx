@@ -6,15 +6,12 @@ import ChallengeContents from "@/components/challenge/ChallengeContents";
 import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import EventSaveBS from "@/components/challenge/EventSaveBS";
-import styles from "@/styles/challenge/challengejoin.module.scss";
 import { useState, useEffect } from "react";
-import { useScrollDiv } from "@/utils/Scroll";
 import { ECyanadoCheckApi, ECyanadoJoinApi } from "@/lib/apis/challengeApi";
 
 const ECYanado = () => {
-  const scrollRef = useScrollDiv();
   const [yanadoData, setYanadoData] = useState<YanadoData | null>(null);
-  const [joinList, setJoinList] = useState<JoinList[]>([]);
+  const [joinList, setJoinList] = useState<ChallengeJoin[]>([]);
 
   useEffect(() => {
     const ecyanadoApi = async () => {
@@ -65,24 +62,7 @@ const ECYanado = () => {
             <ChallengeHead head={"야 너도? 야 나두!"} />
             <ChallengeBanner banner={yanadoData.poster} />
             <ChallengeContents contents={contents} />
-            <span className={styles.title}>다른 집사들도 참여중이에요!</span>
-            <div className={styles.participants} ref={scrollRef}>
-              {joinList ? (
-                joinList.map((joinItem) => (
-                  <ChallengeJoin
-                    key={joinItem.id}
-                    join={{
-                      participantsImg: joinItem.photoUrl,
-                      participantsName: joinItem.photoName,
-                    }}
-                  />
-                ))
-              ) : (
-                <>
-                  <div>아직 아무도 참여를 안했습니다.</div>
-                </>
-              )}
-            </div>
+            <ChallengeJoin joinLists={joinList || []}/>
             <JoinButton />
             <EventSaveBS />
             <MainTab />

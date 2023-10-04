@@ -3,20 +3,7 @@ import { API_URL } from "./base";
 
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
-
-// 로그인
-export const login = async ({ code }: Login) => {
-  try {
-    const response = await api.post("auth/kakao/login", code);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // 회원가입
 export const join = async ({ email, nickname, referralCode, isAgreed }: Join) => {
@@ -65,17 +52,6 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
     throw error;
   }
 };
-
-// 로그인
-export interface Login {
-  code: string;
-}
-export interface LoginResponse {
-  jwtToken: null | string;
-  refreshToken: null | string;
-  kakaoAccessToken: string;
-  email: string;
-}
 
 // 회원가입
 export interface Join {
