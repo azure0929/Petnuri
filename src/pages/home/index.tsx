@@ -14,6 +14,7 @@ import { kitModalState, loginModalState } from "@/store/challengeState";
 import { useScrollUl } from "@/utils/Scroll";
 import { useState,useEffect } from 'react'
 import { getCookie } from "@/utils/Cookie";
+import { HomeApi } from "@/lib/apis/userApi";
 
 const Home = () => {
   const setKitOpen = useSetRecoilState(kitModalState);
@@ -26,20 +27,23 @@ const Home = () => {
   const [petProfile, setPetProfile] = useState<Pet[]>([])
   const [activePetName, setActivePetName] = useState<string | null>(null);
   const [selectedProfile, setSelectedProfile] = useState<Pet | null>(null);
-  const token = getCookie("token")
+  const token = getCookie("jwtToken")
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/HomePet.json');
-      const data = await response.json();
-      setPetProfile(data.content.petList);
-      setPetTalkList(data.content.petTalkList);
-      setDaily(data.content.challengeList.dailyChallenge)
-      setCheonHa(data.content.challengeList.rewardChallengeList[0])
-      setYanado(data.content.challengeList.rewardChallengeList[1])
+    const HomeData = async () => {
+      try {
+        const data = await HomeApi();
+        setPetProfile(data.content.petList);
+        setPetTalkList(data.content.petTalkList);
+        setDaily(data.content.challengeList.dailyChallenge)
+        setCheonHa(data.content.challengeList.rewardChallengeList[0])
+        setYanado(data.content.challengeList.rewardChallengeList[1])
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
     };
-    fetchData();
-   }, []);
+    HomeData();
+  }, []);
 
    useEffect(() => {
     // 선택한 펫을 active로 설정
@@ -133,7 +137,7 @@ const Home = () => {
                </div>
                {/* 데이터가 있을 때는 "수정하기", 없을 때는 "등록하기"를 표시 */}
                <div className={styles.modify} onClick={() => 
-                petProfile.length > 0 ? onPetProfileModify() : onPetProfileAdd()}>
+                petProfile.length > 0 ? openLoginModal(onPetProfileModify) : openLoginModal(onPetProfileAdd)}>
                  {petProfile.length > 0 ? '수정하기' : '등록하기'}
                </div>
              </div>

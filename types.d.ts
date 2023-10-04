@@ -16,9 +16,11 @@ interface ChallengeContents {
 }
 
 interface ChallengeJoin {
-  id: number
+  id: number;
   participantsImg: string;
   participantsName: string;
+  nickName: string;
+  imageUrl: string;
 }
 
 interface JoinList {
@@ -57,6 +59,17 @@ interface ContestData {
   subTitle: string;
 }
 
+interface DailyData {
+  challengeId: number;
+  banner: string;
+  title: string;
+  subTitle: string;
+  authMethod: string;
+  point: number;
+  pointMethod: string;
+  status: boolean;
+}
+
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
 interface Review {
   reviewUserId: number;
@@ -74,6 +87,16 @@ interface DailyDetailList {
   challengeReview: string;
   dailyReview: Review[];
   status?: boolean;
+}
+
+interface DeliveryAddress {
+  id: number;
+  name: string;
+  phone: string;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased: boolean;
 }
 
 interface DailyAllList {
@@ -168,10 +191,26 @@ interface writer {
 interface DefaultAddress {
   name: string;
   phone: string;
-  add1: string;
-  add2: string;
-  zoneCode: string;
-  default?: boolean;
+  roadAddress: string;
+  address: string;
+  zipcode: string;
+  isBased?: boolean;
 }
 
 type DefaultAddressArray = DefaultAddress[];
+
+interface PetTalkItem {
+  id: number;
+  title: string;
+  content: string;
+  thumbnail: string | null;
+  viewCount: number;
+  emojiCount: number | null;
+  replyCount: number | null;
+  reacted: boolean;
+  writer: {
+    id: number;
+    nickname: string;
+    profileImageUrl: string | null;
+  };
+}

@@ -9,10 +9,10 @@ import DeliveryBS from "./deliverybs/DeliveryBS";
 import ChallengeItem from "@/components/challenge/ChallengeItem";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
-import styles from "@/styles/challenge/challengejoin.module.scss";
 import KitModal from "@/components/modal/KitModal";
 import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
 import DeliveryList from "@/components/challenge/delivery/DeliveryList";
+import DeliveryUpdate from "@/components/challenge/delivery/DeliveryUpdate";
 import { BSTypeState } from "@/store/challengeState";
 import { useRecoilValue } from "recoil";
 import { ContestCheckApi, ContestJoinApi } from "@/lib/apis/challengeApi";
@@ -83,6 +83,7 @@ const Contest = () => {
             {BSType === "DeliveryBS" && <DeliveryBS />}
             {BSType === "DeliveryReg" && <DeliveryReg />}
             {BSType === "DeliveryList" && <DeliveryList />}
+            {BSType === "DeliveryUpdate" && <DeliveryUpdate />}
             <MainTab />
           </>
         ) : null}

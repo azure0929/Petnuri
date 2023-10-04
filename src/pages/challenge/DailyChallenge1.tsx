@@ -7,29 +7,43 @@ import ChallengeJoin from "@/components/challenge/ChallengeJoin";
 import JoinButton from "@/components/challenge/JoinButton";
 import DailySaveBS from "../../components/challenge/DailySaveBS";
 import { useState, useEffect } from "react";
+import { daily1JoinListApi, dailyChallenge1Api } from "@/lib/apis/challengeApi";
 
 const DailyChallenge1 = () => {
-  const [challenges, setChallenges] = useState<ChallengeJoin[]>([]);
+  const [daily1Data, setDaily1Data] = useState<DailyData>();
+  const [joinList, setjoinList] = useState<ChallengeJoin[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const daily1 = async () => {
       try {
-        const response = await fetch("/Daily.json");
-        const data = await response.json();
-        setChallenges(data.data);
+        const response = await dailyChallenge1Api();
+        setDaily1Data(response);
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
-    fetchData();
+    daily1();
+  }, []);
+
+  useEffect(() => {
+    const daily1Join = async () => {
+      try {
+        const response = await daily1JoinListApi();
+        setjoinList(response.content);
+      } catch (error) {
+        console.error("Error in daily1Join: " + error);
+      }
+    };
+
+    daily1Join();
   }, []);
 
   const contents: ChallengeContents = {
-    mainTitle: "간식 주기 챌린지",
-    subTitle: "간식 주기 챌린지",
+    mainTitle: daily1Data?.title || "",
+    subTitle: daily1Data?.subTitle || "",
     howTitle: "인증방법",
-    howInfo: "인증사진 업로드",
+    howInfo: daily1Data?.authMethod || "",
     periodTitle: "진행기간",
     periodInfo: "1일",
     pointTitle: "포인트 지급",
@@ -39,13 +53,17 @@ const DailyChallenge1 = () => {
   return (
     <>
       <Background>
-        <ChallengeHead head={head} />
-        <ChallengeBanner banner={banner} />
-        <ChallengeContents contents={contents} />
-        <ChallengeJoin joinLists={challenges || []}/>
-        <JoinButton />
-        <DailySaveBS />
-        <MainTab />
+        {daily1Data ? (
+          <>
+            <ChallengeHead head={daily1Data.title} />
+            <ChallengeBanner banner={daily1Data.banner} />
+            <ChallengeContents contents={contents} />
+            <ChallengeJoin joinLists={joinList || []} />
+            <JoinButton />
+            <DailySaveBS id={daily1Data.challengeId} />
+            <MainTab />
+          </>
+        ) : null}
       </Background>
     </>
   );

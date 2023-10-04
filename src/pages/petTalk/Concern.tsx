@@ -3,7 +3,8 @@ import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { activeTabState } from "../../store/petTalkState";
+import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
+import { useConcernList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -13,19 +14,44 @@ import view from "../../assets/view_18px.svg";
 import floating from "../../assets/X.png";
 import concern_icon from "../../assets/concerns_icon.svg";
 import freetalk_icon from "../../assets/freetalk_icon.svg";
+import default_user from "../../assets/user.png";
+import banner from "../../assets/키트배너.png";
 
 const Concern = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
+  const [selectedPet, setSelectedPet] = useState("DOG");
+  const [subCategory, setSubCategory] = useState(1);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollRef = useScrollDiv();
 
-  const [activeCategory, setActiveCategory] = useState(0);
-
   const handleFloating = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handlePetSelect = (e: { target: { value: string } }) => {
+    const selectedValue = e.target.value;
+    setSelectedPet(selectedValue);
+
+    if (selectedValue === "DOG") {
+      setSelectedPet("DOG");
+    } else if (selectedValue === "CAT") {
+      setSelectedPet("CAT");
+    }
+  };
+
+  const { data, refetch } = useConcernList(
+    selectedPet,
+    mapTabToNumber(activeTab),
+    subCategory
+  );
+  console.log("고민상담 리스트", data);
+
+  const handleSubCategorySelect = (subCategory: number) => {
+    setSubCategory(subCategory);
+    refetch();
   };
 
   useEffect(() => {
@@ -77,32 +103,32 @@ const Concern = () => {
             <div className={styles.category_container}>
               <div className={styles.category_wrapper} ref={scrollRef}>
                 <button
-                  className={activeCategory === 0 ? styles.active_button : ""}
-                  onClick={() => setActiveCategory(0)}
+                  className={subCategory === 1 ? styles.active_button : ""}
+                  onClick={() => handleSubCategorySelect(1)}
                 >
                   질병/질환
                 </button>
                 <button
-                  className={activeCategory === 1 ? styles.active_button : ""}
-                  onClick={() => setActiveCategory(1)}
+                  className={subCategory === 2 ? styles.active_button : ""}
+                  onClick={() => handleSubCategorySelect(2)}
                 >
                   미용/패션
                 </button>
                 <button
-                  className={activeCategory === 2 ? styles.active_button : ""}
-                  onClick={() => setActiveCategory(2)}
+                  className={subCategory === 3 ? styles.active_button : ""}
+                  onClick={() => handleSubCategorySelect(3)}
                 >
                   교육/훈련
                 </button>
                 <button
-                  className={activeCategory === 3 ? styles.active_button : ""}
-                  onClick={() => setActiveCategory(3)}
+                  className={subCategory === 4 ? styles.active_button : ""}
+                  onClick={() => handleSubCategorySelect(4)}
                 >
                   양육/관리
                 </button>
                 <button
-                  className={activeCategory === 4 ? styles.active_button : ""}
-                  onClick={() => setActiveCategory(4)}
+                  className={subCategory === 5 ? styles.active_button : ""}
+                  onClick={() => handleSubCategorySelect(5)}
                 >
                   반려용품
                 </button>
@@ -110,14 +136,19 @@ const Concern = () => {
             </div>
 
             <div className={styles.select_wrap}>
-              <select className={styles.select_pet} name="강아지">
+              <select
+                className={styles.select_pet}
+                name="강아지"
+                value={selectedPet}
+                onChange={handlePetSelect}
+              >
                 <option value="강아지">강아지</option>
                 <option value="고양이">고양이</option>
               </select>
             </div>
 
             <div className={styles.banner}>
-              <img src="" alt="프로모션 배너" />
+              <img src={banner} alt="프로모션 배너" />
             </div>
 
             <div className={styles.select_wrap}>
@@ -128,117 +159,62 @@ const Concern = () => {
             </div>
 
             <div className={styles.talk_list}>
-              <div className={styles.border}>
-                {/* item 클릭하면 상세페이지 연결 추가하기 */}
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
-                    </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
+              {data && data.length > 0
+                ? data.map((item: PetTalkItem) => (
+                    <div className={styles.border} key={item.id}>
+                      <Link to={`/petTalk/${item.id}`}>
+                        <div className={styles.item}>
+                          <div className={styles.user_info}>
+                            {item.writer.profileImageUrl === null ? (
+                              <img src={default_user} alt="default-img" />
+                            ) : (
+                              <img
+                                src={item.writer.profileImageUrl}
+                                alt="profile-img"
+                              />
+                            )}
+                            <span className={styles.user_name}>
+                              {item.writer.nickname}
+                            </span>
+                            <span className={styles.date}>
+                              ・ 게시된 날짜 넣기 {item.id}
+                            </span>
+                          </div>
+                          <div className={styles.title}>{item.title}</div>
+                          <div className={styles.text_wrapper}>
+                            <div className={styles.content_text}>
+                              {item.content}
+                            </div>
+                            <button className={styles.plus_button}>
+                              더보기
+                            </button>
+                          </div>
 
-                  {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
-                  <div className={styles.content_img}>
-                    <img src="" alt="예시이미지" />
-                  </div>
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.border}>
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
-                    </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
+                          {item.thumbnail === null ? null : (
+                            <div className={styles.content_img}>
+                              <img src="" alt="예시이미지" />
+                            </div>
+                          )}
 
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
+                          <div className={styles.response_wrapper}>
+                            <div className={styles.icon_area}>
+                              <img src={heart} alt="" />
+                              <span>{item.emojiCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={talk} alt="" />
+                              <span>{item.replyCount}</span>
+                            </div>
+                            <div className={styles.icon_area}>
+                              <img src={view} alt="" />
+                              <span>{item.viewCount}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.border}>
-                <div className={styles.item}>
-                  <div className={styles.user_info}>
-                    <img src="" alt="profile-img" />
-                    <span className={styles.user_name}>닉네임</span>
-                    <span className={styles.date}>・ 게시된 날짜 넣기</span>
-                  </div>
-                  <div className={styles.title}>제목 텍스트 입니다.</div>
-                  <div className={styles.text_wrapper}>
-                    <div className={styles.content_text}>
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ
-                      꿍이가 아파요 어뜩하죠ㅠㅠ
-                    </div>
-                    <button className={styles.plus_button}>더보기</button>
-                  </div>
-                  {/* 이미지가 없는 게시글이면 숨겨지도록 작업예정 */}
-                  <div className={styles.content_img}>
-                    <img src="" alt="예시이미지" />
-                  </div>
-                  <div className={styles.response_wrapper}>
-                    <div className={styles.icon_area}>
-                      <img src={heart} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={talk} alt="" />
-                      <span>100</span>
-                    </div>
-                    <div className={styles.icon_area}>
-                      <img src={view} alt="" />
-                      <span>100</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  ))
+                : null}
             </div>
 
             <div
