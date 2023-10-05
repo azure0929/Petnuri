@@ -4,8 +4,36 @@ import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { getMypage, logout } from '@/lib/apis/mypageApi';
+import { useEffect, useState } from 'react';
+import defaultImage from '@/assets/defaultImage.png';
 
 const MyPage = () => {
+  const [nickname, setNickname] = useState();
+  const [email, setEmail] = useState();
+  const [img, setImg] = useState();
+  useEffect(() => {
+    const a = getMypage();
+    a.then((res) => {
+      console.log('res::', res);
+      setNickname(res.nickname);
+      setEmail(res.email);
+      setImg(res.profileImageUrl);
+    });
+    console.log('---', a);
+  }, []);
+
+  const onClickLogout = () => {
+    const res = logout();
+    res
+      .then(() => {
+        alert('로그아웃 성공');
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <>
       <Background>
@@ -14,11 +42,14 @@ const MyPage = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <div className={styles.photo}></div>
+            <img
+              className={styles.photo}
+              src={img ? img : defaultImage}
+            ></img>
           </div>
           <div className={styles.nickarea}>
-            <p className={styles.nickname}>여덟글자까지가능</p>
-            <p className={styles.email}>Yu-jin@kakao.com</p>
+            <p className={styles.nickname}>{nickname}</p>
+            <p className={styles.email}>{email}</p>
           </div>
           <div className={styles.setting}>
             <Link to="/mypage/editinfo">
@@ -28,6 +59,14 @@ const MyPage = () => {
         </div>
         <div className={styles.space}></div>
         <div className={styles.contents}>
+          <div>
+            배송지 등록
+            <span>
+              <Link to="/mypage/delivery">
+                <AiOutlineRight />
+              </Link>
+            </span>
+          </div>
           <div>
             자주하는 질문
             <span>
@@ -72,7 +111,7 @@ const MyPage = () => {
               </Link>
             </span>
           </div>
-          <div>
+          <div onClick={onClickLogout}>
             로그아웃
             <span>
               <AiOutlineRight />

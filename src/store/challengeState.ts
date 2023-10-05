@@ -7,7 +7,7 @@ export const bottomSheetState = atom({
 
 export const BSTypeState = atom({
   key: 'bottomSheetTypeState',
-  default: 'DeliveryBS', 
+  default: 'DeliveryBS',
 });
 
 export const deliveryDataState = atom({
