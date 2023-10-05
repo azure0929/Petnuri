@@ -198,7 +198,6 @@ const PetTalkDetail = () => {
           <div className={styles.reply_wrapper}>
             <span className={styles.count}>댓글 {data?.replyCount}개</span>
             <CommentItem />
-            <CommentItem />
           </div>
           <div className={styles.replyWrite_wrapper}>
             {data?.writer?.profileImageUrl === null ? (

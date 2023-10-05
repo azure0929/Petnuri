@@ -56,7 +56,9 @@ const CommentItem = () => {
           </div>
         ))
       ) : (
-        <div>아직 등록된 댓글이 없습니다.</div>
+        <div className={styles.noList_wrapper}>
+          아직 등록된 댓글이 없습니다.
+        </div>
       )}
     </>
   );
