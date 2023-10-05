@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillLightningChargeFill } from "react-icons/bs";
 import { HiChatBubbleOvalLeft } from "react-icons/hi2";
 import { IoPersonSharp } from "react-icons/io5";
 import "@/styles/maintab.scss";
+import { getCookie } from "@/utils/Cookie";
 
 const MainTab = () => {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = getCookie('jwtToken')
 
   return (
     <div className="main-tab">
@@ -46,9 +46,13 @@ const MainTab = () => {
         <p>펫톡</p>
       </NavLink>
 
-      {isLoggedIn ? (
+      {token ? (
         <NavLink
-          className="main-tab-item active"
+          className={
+            location.pathname === "/mypage"
+              ? "main-tab-item active"
+              : "main-tab-item"
+          }
           to="/mypage"
         >
           <IoPersonSharp size="24px" />
