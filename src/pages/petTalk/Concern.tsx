@@ -48,7 +48,6 @@ const Concern = () => {
     mapTabToNumber(activeTab),
     subCategory
   );
-  console.log("고민상담 리스트", data);
 
   const handleSubCategorySelect = (subCategory: number) => {
     setSubCategory(subCategory);
@@ -202,7 +201,7 @@ const Concern = () => {
                       <div className={styles.response_wrapper}>
                         <div className={styles.icon_area}>
                           <img src={heart} alt="" />
-                          <span>{item.emojiCount}</span>
+                          <span>{item.totalEmojiCount}</span>
                         </div>
                         <div className={styles.icon_area}>
                           <img src={talk} alt="" />

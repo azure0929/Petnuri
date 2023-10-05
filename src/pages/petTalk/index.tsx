@@ -155,7 +155,7 @@ const PetTalk = () => {
                       <div className={styles.response_wrapper}>
                         <div className={styles.icon_area}>
                           <img src={heart} alt="" />
-                          <span>{item.emojiCount}</span>
+                          <span>{item.totalEmojiCount}</span>
                         </div>
                         <div className={styles.icon_area}>
                           <img src={talk} alt="" />
