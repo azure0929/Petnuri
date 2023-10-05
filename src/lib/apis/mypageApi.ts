@@ -30,13 +30,14 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
     // } else {
     //   formData.append('file', 'null');
     // }
-
-    formData.append(
-      'nickname',
-      new Blob([JSON.stringify({ nickname: nickname })], {
-        type: 'application/json',
-      })
-    );
+    if (nickname != '') {
+      formData.append(
+        'nickname',
+        new Blob([JSON.stringify({ nickname: nickname })], {
+          type: 'application/json',
+        })
+      );
+    }
     //formData.append('nickname', nickname);
     console.log(11111111111);
 
@@ -66,8 +67,23 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 
 export const withdraw = async () => {
   try {
+    const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
+
+    await axios.post(
+      KAKAO_UNLINK_URI,
+      {}, // 빈 바디
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
+        },
+      }
+    );
+
     const res = await api.delete('/member/mypage/withdraw');
     console.log('res:', res);
+
     return res;
   } catch (error) {
     console.log(error);

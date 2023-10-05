@@ -7,7 +7,12 @@ import { useEffect, useState } from 'react';
 import Warning from '../../assets/Warning.png';
 import nonCheck from '@/assets/none-checked.png';
 import Checked from '@/assets/checked.png';
-import { editProfile, getMypage, nickCheck } from '@/lib/apis/mypageApi';
+import {
+  editProfile,
+  getMypage,
+  nickCheck,
+  withdraw,
+} from '@/lib/apis/mypageApi';
 import defaultImage from '@/assets/defaultImage.png';
 
 const EditInfo = () => {
@@ -21,6 +26,15 @@ const EditInfo = () => {
   const [email, setEmail] = useState();
   const [file, setFile] = useState<File>();
   const [doubleCheck, setDoubleCheck] = useState(false);
+
+  const convertURLtoFile = async (url: string) => {
+    const response = await fetch(url);
+    const data = await response.blob();
+    const ext = url.split('.').pop(); // url 구조에 맞게 수정할 것
+    const filename = url.split('/').pop(); // url 구조에 맞게 수정할 것
+    const metadata = { type: `image/${ext}` };
+    return new File([data], filename!, metadata);
+  };
 
   const navigate = useNavigate();
   const onClickBack = () => {
@@ -46,8 +60,14 @@ const EditInfo = () => {
   }, []);
 
   const onClickEdit = () => {
-    if (doubleCheck) {
-      editProfile(input, file);
+    if (doubleCheck || input == '') {
+      let temp = input;
+      if (input == '') {
+        temp = nickname;
+      }
+      editProfile(temp, file).then(() => {
+        navigate('/mypage');
+      });
     }
   };
 
@@ -69,7 +89,13 @@ const EditInfo = () => {
       console.log('입력값이 유효하지 않습니다.');
       setValidation(false);
     }
+    setDoubleCheck(false);
   };
+
+  const onClickWithdraw = () => {
+    withdraw();
+  };
+
   return (
     <Background>
       <div className={styles.contain}>
@@ -139,15 +165,19 @@ const EditInfo = () => {
                 중복체크
               </button>
             </div>
-            <span
-              style={
-                validation || input.length == 0
-                  ? { color: '#ffffff' }
-                  : { color: '#f42a3b' }
-              }
-            >
-              숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
-            </span>
+            {doubleCheck ? (
+              <span style={{ color: '#3f54d1' }}>사용 가능합니다</span>
+            ) : (
+              <span
+                style={
+                  validation || input.length == 0
+                    ? { color: '#ffffff' }
+                    : { color: '#f42a3b' }
+                }
+              >
+                숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
+              </span>
+            )}
           </div>
         </div>
         <div
@@ -195,7 +225,12 @@ const EditInfo = () => {
               </div>
             </div>
             <div className={styles.btnarea}>
-              <button disabled={!check}>회원 탈퇴</button>
+              <button
+                disabled={!check}
+                onClick={onClickWithdraw}
+              >
+                회원 탈퇴
+              </button>
             </div>
           </div>
         ) : null}
@@ -220,6 +255,7 @@ const EditInfo = () => {
                 <button
                   onClick={() => {
                     setImg('');
+                    convertURLtoFile(defaultImage).then((res) => setFile(res));
                     setFilemodal(false);
                   }}
                 >

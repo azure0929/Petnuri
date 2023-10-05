@@ -33,6 +33,7 @@ const MyPage = () => {
     //     alert(error);
     //   });
   };
+
   return (
     <>
       <Background>
