@@ -85,7 +85,6 @@ const PetTalkDetail = () => {
   };
 
   const openLoginModal = () => {
-    console.log('Opening login modal...');
     if (!token) {
       setLoginOpen(true);
     }
@@ -208,6 +207,7 @@ const PetTalkDetail = () => {
                   selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleEmojiClick(index, emoji.emojiType)}
+                onFocus={openLoginModal}
               >
                 <div className={styles.img_area}>
                   <img
