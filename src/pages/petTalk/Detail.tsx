@@ -33,17 +33,24 @@ const PetTalkDetail = () => {
   const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const token = getCookie("jwtToken")
-  console.log(getCookie("jwtToken"));
+  const [replyContent, setReplyContent] = useState("");
+  const [selectedReplyUser, setSelectedReplyUser] = useState<null | string>(
+    null
+  );
 
   const { data } = usePettalkDetail(Number(petTalkId));
-  const { data: totalEmojiCount, refetch: totalEmojiRefetch } =
-    usePettalkDetail(Number(petTalkId));
+  const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
   const { data: replyData, refetch: replyRefetch } = usePettalkReply(
     Number(petTalkId)
   );
 
   const onClickBack = () => {
     navigate(-1);
+  };
+
+  const handleReplyClick = (userName: string) => {
+    setSelectedReplyUser(userName);
+    setReplyContent(`@${userName} `);
   };
 
   const handleEmojiClick = async (index: number, emojiType: string) => {
@@ -84,8 +91,6 @@ const PetTalkDetail = () => {
     }
   };
 
-  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
-
   const settings = {
     dots: true,
     infinite: true,
@@ -95,10 +100,6 @@ const PetTalkDetail = () => {
     swipeToSlide: true,
     arrows: false,
   };
-
-  if (images.length === 0) {
-    return null;
-  }
 
   const emojiData = [
     {
@@ -232,7 +233,12 @@ const PetTalkDetail = () => {
           </div>
           <div className={styles.reply_wrapper}>
             <span className={styles.count}>댓글 {replyData?.length}개</span>
-            {replyData && <CommentItem />}
+            {replyData && (
+              <CommentItem
+                replyContent={replyContent} // 대댓글 내용을 props로 전달
+                selectedReplyUser={selectedReplyUser} // 선택된 사용자명을 props로 전달
+              />
+            )}
           </div>
 
           <form onSubmit={handleSubmit(onVaild)}>
@@ -246,7 +252,9 @@ const PetTalkDetail = () => {
                 {...register("reply", { required: true, maxLength: 100 })}
                 type="text"
                 placeholder="댓글을 작성해주세요"
-                onClick={openLoginModal}
+                onFocus={openLoginModal}
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
               />
 
               <button

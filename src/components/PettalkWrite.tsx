@@ -91,7 +91,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
     const request = {
       petType,
       mainCategoryId: 1,
-      subCategoryId: 1,
+      subCategoryId: Number(category),
       title,
       content,
     };
@@ -126,11 +126,11 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
             value={category}
           >
             <option value="">카테고리를 선택하세요</option>
-            <option value="질병/질환">질병/질환</option>
-            <option value="미용/패션">미용/패션</option>
-            <option value="교육/훈련">교육/훈련</option>
-            <option value="양육/관리">양육/관리</option>
-            <option value="반려용품">반려용품</option>
+            <option value="1">질병/질환</option>
+            <option value="2">미용/패션</option>
+            <option value="3">교육/훈련</option>
+            <option value="4">양육/관리</option>
+            <option value="5">반려용품</option>
           </select>
         </div>
       ) : null}
