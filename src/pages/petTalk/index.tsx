@@ -148,7 +148,7 @@ const PetTalk = () => {
 
                       {item.thumbnail === null ? null : (
                         <div className={styles.content_img}>
-                          <img src="" alt="예시이미지" />
+                          <img src={item.thumbnail} alt="thumbnail" />
                         </div>
                       )}
 
