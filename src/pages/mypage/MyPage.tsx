@@ -4,15 +4,26 @@ import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { getMypage } from '@/lib/apis/mypageApi';
+import { getMypage, logout } from '@/lib/apis/mypageApi';
 import { useEffect } from 'react';
 
 const MyPage = () => {
   useEffect(() => {
     const a = getMypage();
-    getMypage();
-    console.log(a);
+    a;
+    console.log('---', a);
   }, []);
+
+  const onClickLogout = () => {
+    // const res = logout();
+    // res
+    //   .then(() => {
+    //     alert('로그아웃 성공');
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
+  };
   return (
     <>
       <Background>
@@ -87,7 +98,7 @@ const MyPage = () => {
               </Link>
             </span>
           </div>
-          <div>
+          <div onClick={onClickLogout}>
             로그아웃
             <span>
               <AiOutlineRight />
