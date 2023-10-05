@@ -56,7 +56,7 @@ export const pettalkDetail = async (petTalkId: number) => {
 export const pettalkReply = async (petTalkId: number) => {
   try {
     const response = await axios.get(`${API_URL}/pet-talk/${petTalkId}/replys`);
-    return response;
+    return response.data.replys;
   } catch (error) {
     console.error("no List:", error);
   }
@@ -151,19 +151,20 @@ export const emojiDelete = async ({
 };
 
 //펫톡 댓글 추가
+//accessToken 임시
 export const replyPost = async ({
+  accessToken,
   petTalkId,
-  emojiType,
 }: {
+  accessToken: string;
   petTalkId: number;
-  emojiType: string;
 }) => {
   try {
     const response = await axios.delete(
-      `${API_URL}/pet-talk/${petTalkId}/emotion?emoji=${emojiType}`,
+      `${API_URL}/pet-talk/${petTalkId}/reply`,
       {
         headers: {
-          Authorization: getCookie("jwtToken"),
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
