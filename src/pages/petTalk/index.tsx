@@ -141,7 +141,9 @@ const PetTalk = () => {
                         <div className={styles.content_text}>
                           {item.content}
                         </div>
-                        <button className={styles.plus_button}>더보기</button>
+                        {item.content.split("\n").length > 2 && (
+                          <button className={styles.plus_button}>더보기</button>
+                        )}
                       </div>
 
                       {item.thumbnail === null ? null : (
