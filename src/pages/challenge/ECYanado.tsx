@@ -11,14 +11,12 @@ import { ECyanadoCheckApi, ECyanadoJoinApi } from "@/lib/apis/challengeApi";
 
 const ECYanado = () => {
   const [yanadoData, setYanadoData] = useState<YanadoData | null>(null);
-  const [joinList, setJoinList] = useState<ChallengeJoin[]>([]);
+  const [joinList, setJoinList] = useState<ChallengeJoin | null>(null);
 
   useEffect(() => {
     const ecyanadoApi = async () => {
       try {
         const response = await ECyanadoCheckApi();
-        console.log("res" + response);
-
         setYanadoData(response);
       } catch (error) {
         console.error("Error:", error);
@@ -38,10 +36,9 @@ const ECYanado = () => {
     };
 
     joinAPi();
-    console.log(joinList);
   }, []);
 
-  console.log(joinList);
+  const filterData = joinList ? joinList.reviews : null;
 
   const contents: ChallengeContents = {
     mainTitle: yanadoData?.title || "",
@@ -62,7 +59,7 @@ const ECYanado = () => {
             <ChallengeHead head={"야 너도? 야 나두!"} />
             <ChallengeBanner banner={yanadoData.poster} />
             <ChallengeContents contents={contents} />
-            <ChallengeJoin joinLists={joinList || []}/>
+            <ChallengeJoin joinLists={filterData || []} />
             <JoinButton />
             <EventSaveBS />
             <MainTab />

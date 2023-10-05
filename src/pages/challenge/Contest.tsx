@@ -39,12 +39,11 @@ const Contest = () => {
     const joinAPi = async () => {
       try {
         const response = await ContestJoinApi();
-        setJoinList(response);
+        setJoinList(response.data);
       } catch (error) {
         console.error("joinAPi Error:", error);
       }
     };
-
     joinAPi();
   }, []);
 
@@ -77,7 +76,7 @@ const Contest = () => {
             <ChallengeBanner banner={contestData.poster} />
             <ChallengeContents contents={contents} />
             <ChallengeItem />
-            <ChallengeJoin joinLists={joinList || []}/>
+            <ChallengeJoin joinLists={joinList || []} />
             {renderButton}
             <KitModal />
             {BSType === "DeliveryBS" && <DeliveryBS />}

@@ -4,7 +4,11 @@ import DaumPostcode from "react-daum-postcode";
 import Modal from "react-modal"; // 추가
 
 interface DeliveryBSAddressProps {
-  onAddressComplete: (addressInfo: {roadAddress:string, detailAddress:string, zipCode:string}) => void;
+  onAddressComplete: (addressInfo: {
+    roadAddress: string;
+    detailAddress: string;
+    zipCode: string;
+  }) => void;
   initialRoadAddress?: string;
   initialDetailAddress?: string;
   initialZipCode?: string;
@@ -30,7 +34,11 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   const completeHandler = (data: DaumPostcodeData) => {
     setRoadAddress(data.roadAddress);
     setZipCode(data.zonecode);
-    onAddressComplete({roadAddress:data.roadAddress,detailAddress:'',zipCode:data.zonecode});
+    onAddressComplete({
+      roadAddress: data.roadAddress,
+      detailAddress: "",
+      zipCode: data.zonecode,
+    });
     setIsOpen(false); //추가
   };
 
@@ -56,7 +64,7 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   // 상세 주소검색 event
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
-    onAddressComplete({roadAddress,zipCode,detailAddress:e.target.value});
+    onAddressComplete({ roadAddress, zipCode, detailAddress: e.target.value });
   };
 
   const closeModal = () => {
@@ -67,8 +75,12 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
     <>
       <div className={styles.addressContainer}>
         <div className={styles.inputTitle}>배송지 입력</div>
-        <input value={zipCode} readOnly placeholder="우편번호" />
-        <div>{zipCode}</div>
+        <input
+          value={zipCode}
+          readOnly
+          placeholder="우편번호"
+          className={styles.addressZipCode}
+        />
 
         <input
           onClick={toggle}

@@ -4,7 +4,7 @@ import { getCookie } from "@/utils/Cookie";
 
 // 토큰 임시 값
 const locakStorageToken =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMTIiLCJleHAiOjE2OTY0NDQzMzMsImlkIjo1Mywicm9sZSI6IlVTRVIifQ.BFSpWK-pqTwtiW-_Ci87aC9Tcl7z_jV2WkEGvaU-l5Q";
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMzMiLCJleHAiOjE2OTY1MDU4OTYsImlkIjo5MCwicm9sZSI6IlVTRVIifQ.k7SlyH4oMEi6WQ6RKnRZae4YgTegy30ml5xu9ksCyYs";
 // const token = localstorage.getItem('jwtToken')
 // const locakStorageToken = `Bearer ${token}`
 
@@ -30,33 +30,43 @@ export const ContestJoinApi = async () => {
 };
 
 // 집사대회 참여신청 api
-// export const ContestReviewApi = async (
-//   accessToken: string,
-//   imageFile: File,
-//   content: string
-// ) => {
-//   try {
-//     const formData = new FormData();
-//     formData.append("file", imageFile);
+export const ContestParticipationApi = async (deliveryData: DeliveryData) => {
+  try {
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+    await axios.post(`${API_URL}/challenge/reward/1/join`, deliveryData, {
+      headers,
+    });
+  } catch (error) {
+    console.error("Error in ContestParticipationApi: " + error);
+  }
+};
 
-//     const headers = {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "multipart/form-data",
-//     };
+// 집사대회 인증신청 api
+export const ContestReviewApi = async (imageFile: File, content: string) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", imageFile);
 
-//     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-//       headers,
-//     });
+    const headers = {
+      Authorization: locakStorageToken,
+      "Content-Type": "multipart/form-data",
+    };
 
-//     const request = { content };
+    await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
+      headers,
+    });
 
-//     await axios.post(`${API_URL}/challenge/point/1/review`, request, {
-//       headers,
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+    const request = { content };
+
+    await axios.post(`${API_URL}/challenge/point/1/review`, request, {
+      headers,
+    });
+  } catch (error) {
+    console.error("Error in ContestReviewApi: " + error);
+  }
+};
 
 // 야너도? 야 너도!
 export const ECyanadoCheckApi = async () => {
@@ -77,16 +87,26 @@ export const YanadoCheckApi = async () => {
   }
 };
 
+export const rewardApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/reward/1/product`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in rewardApi: " + error);
+  }
+};
+
 export const DeliveryListApi = async () => {
   try {
     const response = await axios.get(`${API_URL}/delivery/address`, {
       headers: {
-        Authorization: getCookie("jwtToken"),
+        // Authorization: getCookie("jwtToken"),
+        Authorization: locakStorageToken,
       },
     });
     return response.data;
   } catch (error) {
-    console.error("Error in YanadoCheckApi:", error);
+    console.error("Error in DeliveryListApi:", error);
   }
 };
 
@@ -98,7 +118,8 @@ export const DeliveryRegApi = async (deliveryInfo: any) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: getCookie("jwtToken"),
+          // Authorization: getCookie("jwtToken"),
+          Authorization: locakStorageToken,
         },
       }
     );
@@ -117,7 +138,8 @@ export const DeliveryUpdateApi = async (deliveryInfo: any) => {
       deliveryInfo,
       {
         headers: {
-          Authorization: getCookie("jwtToken"),
+          // Authorization: getCookie("jwtToken"),
+          Authorization: locakStorageToken,
         },
       }
     );
@@ -170,7 +192,13 @@ export const DeliveryDelApi = async (deliveryAddressId: number) => {
 // 야너도?야나도 내 참여 현황
 export const ECyanadoJoinApi = async () => {
   try {
-    const response = await axios.post(`${API_URL}/challenge/point/1/reviews`);
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+
+    const response = await axios.get(`${API_URL}/challenge/point/1/reviews`, {
+      headers,
+    });
     return response.data;
   } catch (error) {
     console.log("Error in ECyanadoJoinApi: " + error);
@@ -209,17 +237,6 @@ export const ECyanadoReviewApi = async (
     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
       headers,
     });
-    // const response = await axios.post(
-    //   `${API_URL}/challenge/point/1/review`,
-    //   formData,
-    //   {
-    //     headers,
-    //   }
-    // );
-
-    // if (response.status === 400) {
-    //   console.log(response);
-    // }
   } catch (error) {
     console.error(error);
   }
@@ -302,17 +319,17 @@ export const dailyReviewApi = async (imageFile: File, id: number) => {
     await axios.post(`${API_URL}/challenge/daily/${id}`, formData, {
       headers,
     });
-    const response = await axios.post(
-      `${API_URL}/challenge/point/1/review`,
-      formData,
-      {
-        headers,
-      }
-    );
+    // const response = await axios.post(
+    //   `${API_URL}/challenge/point/1/review`,
+    //   formData,
+    //   {
+    //     headers,
+    //   }
+    // );
 
-    if (response.status > 300) {
-      console.log(response.status);
-    }
+    // if (response.status > 300) {
+    //   console.log(response.status);
+    // }
   } catch (error) {
     console.error("Error in daily1ReviewApi: " + error);
   }

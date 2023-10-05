@@ -26,19 +26,19 @@ const DeliveryReg = () => {
         phone: contactState,
         roadAddress: addressInfoState.roadAddress,
         address: addressInfoState.detailAddress,
-        zipcode: addressInfoState.zipCode, 
-        isBased: agreedCheck
+        zipcode: addressInfoState.zipCode,
+        isBased: agreedCheck,
       };
       await DeliveryRegApi(deliveryInfo);
     } catch (error) {
-       console.error('Failed to register delivery:', error);
+      console.error("Failed to register delivery:", error);
     }
   };
 
   const postReg = () => {
-    regApi()
-    handleReg()
-  }
+    regApi();
+    handleReg();
+  };
 
   // 수령인 이름
   const [nameState, setNameState] = useState(deliveryData.name);
@@ -52,17 +52,19 @@ const DeliveryReg = () => {
     setContactState(contact);
   };
 
-  const [addressInfoState, setAddressInfoState] = useState(
-    {
-     roadAddress : deliveryData.roadAddress || "",
-     detailAddress : deliveryData.address || "",
-     zipCode : deliveryData.zipCode || ""
-    }
-  );
+  const [addressInfoState, setAddressInfoState] = useState({
+    roadAddress: deliveryData.roadAddress || "",
+    detailAddress: deliveryData.address || "",
+    zipCode: deliveryData.zipCode || "",
+  });
 
-  const handleAddressComplete = (addressInfo:{roadAddress:string,detailAddress:string,zipCode:string})=>{
-    setAddressInfoState(addressInfo)
-};
+  const handleAddressComplete = (addressInfo: {
+    roadAddress: string;
+    detailAddress: string;
+    zipCode: string;
+  }) => {
+    setAddressInfoState(addressInfo);
+  };
 
   // 기본 배송지 설정 여부
   const [agreedCheck, setAgreeCheck] = useState(
@@ -74,20 +76,12 @@ const DeliveryReg = () => {
   };
 
   useEffect(() => {
-    if (
-      nameState &&
-      contactState &&
-      addressInfoState
-    ) {
+    if (nameState && contactState && addressInfoState) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [
-    nameState,
-    contactState,
-    addressInfoState
-  ]);
+  }, [nameState, contactState, addressInfoState]);
 
   return (
     <>

@@ -17,11 +17,31 @@ interface ChallengeContents {
 
 interface ChallengeJoin {
   id: number;
-  participantsImg: string;
-  participantsName: string;
+  memberId: number;
   nickName: string;
   imageUrl: string;
+  photoUrl?: string; // photoUrl는 옵셔널로 지정합니다.
+  reviews?: FilterDataArray;
 }
+
+interface FilterData {
+  id: number;
+  memberId: number;
+  nickName: string;
+  imageUrl: string;
+  photoUrl: string; // photoUrl은 옵셔널로 지정합니다.
+}
+
+type FilterDataArray = FilterData[];
+
+interface FilterData {
+  id: number;
+  nickName: string;
+  imageUrl: string;
+  photoUrl: string;
+}
+
+type FilterDataArray = FilterData[];
 
 interface JoinList {
   id: number;
@@ -34,6 +54,19 @@ interface YanadoData {
   status: string;
   poster: string;
   subTitle: string;
+}
+
+interface DeliveryData {
+  rewardId: number; //rewardId,
+  isConsentedPersonalInfo: boolean;
+  delivery: {
+    name: string;
+    phone: string;
+    roadAddress: string;
+    address: string;
+    zipcode: string;
+    message: string;
+  };
 }
 
 interface Item {
@@ -68,6 +101,13 @@ interface DailyData {
   point: number;
   pointMethod: string;
   status: boolean;
+}
+
+// 리워드 상품
+interface RewardData {
+  id: number;
+  name: string;
+  quantity: number;
 }
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
