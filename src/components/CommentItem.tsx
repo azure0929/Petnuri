@@ -35,17 +35,23 @@ const CommentItem = () => {
             <div className={styles.item_content}>
               <span
                 className={
-                  isExpanded ? styles.expandedText : styles.collapsedText
+                  item?.content.split("\n").length > 2
+                    ? isExpanded
+                      ? styles.expandedText
+                      : styles.collapsedText
+                    : styles.expandedText
                 }
               >
                 {item?.content}
               </span>
-              {isExpanded || (
+              {item?.content.split("\n").length > 2 && !isExpanded && (
                 <button className={styles.expandButton} onClick={toggleExpand}>
                   ...더보기
                 </button>
               )}
-              <button className={styles.reReply}>대댓글 달기</button>
+              <div>
+                <button className={styles.reReply}>대댓글 달기</button>
+              </div>
             </div>
           </div>
         ))
