@@ -18,6 +18,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [inputCount, setInputCount] = useState(0);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -50,6 +51,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
+    let imageFileLists = [...imageFiles];
 
     if (imageUrlLists.length > 4) {
       alert("더 이상 이미지를 추가할 수 없습니다.");
@@ -64,6 +66,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
         if (validImageTypes.includes(currentImage.type)) {
           const currentImageUrl = URL.createObjectURL(currentImage) as never;
           imageUrlLists.push(currentImageUrl);
+          imageFileLists.push(currentImage);
         } else {
           alert("올바른 이미지 형식이 아닙니다.");
         }
@@ -71,9 +74,11 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
       if (imageUrlLists.length > 4) {
         imageUrlLists = imageUrlLists.slice(0, 10);
+        imageFileLists= imageFileLists.slice(0,10);
       }
 
       setShowImages(imageUrlLists);
+      setImageFiles(imageFileLists);
     }
   };
 
@@ -83,26 +88,20 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   //api post
   const handlePostData = async () => {
+    const request={
+      petType,
+      mainCategoryId:1,
+      subCategoryId:1,
+      title,
+      content
+    };
+   
     try {
-      // const accessToken = "YOUR_ACCESS_TOKEN";
-
-      const request = {
-        petType,
-        mainCategory: 1,
-        subCategory: 1,
-        title,
-        content,
-      };
-      console.log(request);
-
-      const imageFile = inputFileRef.current?.files?.[0];
-
       const response = await writingOut({
-        // accessToken,
-        image: imageFile || undefined,
+        images: imageFiles,
         request,
       });
-
+  
       if (response.status === 200) {
         console.log("게시물이 성공적으로 작성되었습니다.", response.data);
         navigate("/petTalk");
@@ -113,6 +112,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
           response.statusText
         );
       }
+
     } catch (error) {
       console.error("게시물 작성 중 오류 발생:", error);
     }

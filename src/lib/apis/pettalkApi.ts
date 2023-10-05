@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "./base";
+import { getCookie } from "@/utils/Cookie";
 
 //펫톡 전체 리스트
 export const allList = async (petType: string) => {
@@ -52,29 +53,32 @@ export const pettalkDetail = async (petTalkId: number) => {
 };
 
 interface WritingOutParams {
-  accessToken: string;
-  image?: File;
+  images?: File[];
   request: object;
 }
 
 export const writingOut = async ({
-  accessToken,
-  image,
+  images,
   request,
 }: WritingOutParams) => {
   try {
     const formData = new FormData();
 
-    if (image) {
-      formData.append("image", image);
-    }
+    if (images) {
+      for(let i=0; i<images.length;i++){
+        formData.append('files', images[i]);
+      }
+   }
 
-    formData.append("request", JSON.stringify(request));
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(request)], { type: "application/json" })
+    );
 
     //여기
-    const response = await axios.post("/pet-talk", formData, {
+    const response = await axios.post(`${API_URL}/pet-talk`, formData, {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: getCookie('jwtToken'),
         "Content-Type": "multipart/form-data",
       },
     });
