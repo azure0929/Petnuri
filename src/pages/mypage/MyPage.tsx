@@ -4,7 +4,7 @@ import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { getMypage, logout, withdraw } from '@/lib/apis/mypageApi';
+import { getMypage, logout } from '@/lib/apis/mypageApi';
 import { useEffect, useState } from 'react';
 import defaultImage from '@/assets/defaultImage.png';
 
@@ -24,14 +24,14 @@ const MyPage = () => {
   }, []);
 
   const onClickLogout = () => {
-    // const res = logout();
-    // res
-    //   .then(() => {
-    //     alert('로그아웃 성공');
-    //   })
-    //   .catch((error) => {
-    //     alert(error);
-    //   });
+    const res = logout();
+    res
+      .then(() => {
+        alert('로그아웃 성공');
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
