@@ -3,10 +3,12 @@ import styles from '@/styles/editinfo.module.scss';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { IoIosAdd } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Warning from '../../assets/Warning.png';
 import nonCheck from '@/assets/none-checked.png';
 import Checked from '@/assets/checked.png';
+import { editProfile, getMypage, nickCheck } from '@/lib/apis/mypageApi';
+import defaultImage from '@/assets/defaultImage.png';
 
 const EditInfo = () => {
   const [modal, setModal] = useState(false);
@@ -15,9 +17,38 @@ const EditInfo = () => {
   const [validation, setValidation] = useState(false);
   const [check, setCheck] = useState(false);
   const [img, setImg] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState();
+  const [file, setFile] = useState<File>();
+  const [doubleCheck, setDoubleCheck] = useState(false);
+
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1);
+  };
+  const onClickCheck = () => {
+    nickCheck(input).then((res) => {
+      if (!res?.data.isExists) {
+        setDoubleCheck(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const a = getMypage();
+    a.then((res) => {
+      console.log('res::', res);
+      setNickname(res.nickname);
+      setEmail(res.email);
+      setImg(res.profileImageUrl);
+    });
+    console.log('---', a);
+  }, []);
+
+  const onClickEdit = () => {
+    if (doubleCheck) {
+      editProfile(input, file);
+    }
   };
 
   const changeHandler = (e: React.ChangeEvent) => {
@@ -54,7 +85,7 @@ const EditInfo = () => {
             <div
               className={styles.photo}
               style={{
-                backgroundImage: `url(${img})`,
+                backgroundImage: `url(${img ? img : defaultImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -65,8 +96,8 @@ const EditInfo = () => {
             </div>
           </div>
           <div className={styles.nickarea}>
-            <p className={styles.nickname}>여덟글자까지가능</p>
-            <p className={styles.email}>Yu-jin@kakao.com</p>
+            <p className={styles.nickname}>{nickname}</p>
+            <p className={styles.email}>{email}</p>
           </div>
         </div>
         <div className={styles.contents}>
@@ -103,6 +134,7 @@ const EditInfo = () => {
                         backgroundColor: 'rgba(63, 84, 209, 0.1)',
                       }
                 }
+                onClick={onClickCheck}
               >
                 중복체크
               </button>
@@ -126,7 +158,7 @@ const EditInfo = () => {
           <AiOutlineRight />
         </div>
         <div className={styles.editbtnarea}>
-          <button>수정 완료</button>
+          <button onClick={onClickEdit}>수정 완료</button>
         </div>
 
         {modal === true ? (
@@ -182,6 +214,7 @@ const EditInfo = () => {
                   onChange={(e) => {
                     setImg(URL.createObjectURL(e.target.files![0]));
                     setFilemodal(false);
+                    setFile(e.target.files![0]);
                   }}
                 />
                 <button

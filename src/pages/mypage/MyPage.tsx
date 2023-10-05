@@ -4,13 +4,22 @@ import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { getMypage, logout } from '@/lib/apis/mypageApi';
-import { useEffect } from 'react';
+import { getMypage, logout, withdraw } from '@/lib/apis/mypageApi';
+import { useEffect, useState } from 'react';
+import defaultImage from '@/assets/defaultImage.png';
 
 const MyPage = () => {
+  const [nickname, setNickname] = useState();
+  const [email, setEmail] = useState();
+  const [img, setImg] = useState();
   useEffect(() => {
     const a = getMypage();
-    a;
+    a.then((res) => {
+      console.log('res::', res);
+      setNickname(res.nickname);
+      setEmail(res.email);
+      setImg(res.profileImageUrl);
+    });
     console.log('---', a);
   }, []);
 
@@ -32,11 +41,14 @@ const MyPage = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <div className={styles.photo}></div>
+            <img
+              className={styles.photo}
+              src={img ? img : defaultImage}
+            ></img>
           </div>
           <div className={styles.nickarea}>
-            <p className={styles.nickname}>여덟글자까지가능</p>
-            <p className={styles.email}>Yu-jin@kakao.com</p>
+            <p className={styles.nickname}>{nickname}</p>
+            <p className={styles.email}>{email}</p>
           </div>
           <div className={styles.setting}>
             <Link to="/mypage/editinfo">
