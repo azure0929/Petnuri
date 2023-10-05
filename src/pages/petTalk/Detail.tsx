@@ -30,6 +30,8 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
+  const { data: totalEmojiCount, refetch: totalEmojiRefetch } =
+    usePettalkDetail(Number(petTalkId));
   const { data: replyData, refetch: replyRefetch } = usePettalkReply(
     Number(petTalkId)
   );
@@ -62,6 +64,8 @@ const PetTalkDetail = () => {
           return [...prevSelectedButtons, index];
         }
       });
+
+      totalEmojiRefetch();
     } catch (error) {
       console.error("이모지 응답 실패:", error);
     }
@@ -109,26 +113,6 @@ const PetTalkDetail = () => {
     reset,
     formState: { isValid, errors },
   } = useForm();
-
-  // const postReply = async (data: any) => {
-  //   const content = data.reply;
-  //   try {
-  //     const response = await axios.post(
-  //       `${API_URL}/pet-talk/${petTalkId}/reply`,
-  //       {
-  //         content,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: getCookie("jwtToken"),
-  //         },
-  //       }
-  //     );
-  //     console.log("response:", response);
-  //   } catch (error) {
-  //     console.error("no List:", error);
-  //   }
-  // };
 
   const onVaild = async (data: any) => {
     const content = data.reply;
