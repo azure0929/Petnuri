@@ -2,10 +2,10 @@ import axios from 'axios';
 import { API_URL } from './base';
 
 const api = axios.create({
-  baseURL: 'http://3.34.154.62:8080',
+  baseURL: 'https://petnuri.shop',
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzQHRlc3QuY29tIiwiZXhwIjoxNjk2NTExNjIyLCJpZCI6OTYsInJvbGUiOiJVU0VSIn0.X_k-x63UdEpOr97wHd2USZEjumir7vng8CHyICRF5XM',
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
   },
 });
 
@@ -45,10 +45,14 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
     });*/
 
     const res = await axios.put(
-      'http://3.34.154.62:8080/member/mypage/profile',
+      'https://petnuri.shop/member/mypage/profile',
       formData,
       {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
+        },
       }
     );
 
