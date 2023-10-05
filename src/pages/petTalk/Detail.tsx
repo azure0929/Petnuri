@@ -2,38 +2,44 @@ import Background from "@/components/Background";
 import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { usePettalkDetail } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
 import LoginModal from "@/components/modal/LoginModal";
-import heart from "../../assets/heart_18px.svg";
-import talk from "../../assets/talk_18px.svg";
-import view from "../../assets/view_18px.svg";
-import cute_off from "../../assets/Cute_off.png";
-import funny_off from "../../assets/Funny_off.png";
-import kiss_off from "../../assets/kiss_off.png";
-import surprise_off from "../../assets/Surprise_off.png";
-import sad_off from "../../assets/Sad_off.png";
-import default_user from "../../assets/user.png";
+import heart from "@/assets/heart_18px.svg";
+import talk from "@/assets/talk_18px.svg";
+import view from "@/assets/view_18px.svg";
+import cute_off from "@/assets/Cute_off.png";
+import funny_off from "@/assets/Funny_off.png";
+import kiss_off from "@/assets/kiss_off.png";
+import surprise_off from "@/assets/Surprise_off.png";
+import sad_off from "@/assets/Sad_off.png";
+import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 
 const PetTalkDetail = () => {
   const navigate = useNavigate();
+  const { petTalkId } = useParams();
+
+  const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data } = usePettalkDetail(Number(petTalkId));
 
   const onClickBack = () => {
     navigate(-1);
   };
 
-  const [selectedButton, setSelectedButton] = useState<number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleButtonClick = (index: number) => {
-    if (selectedButton === index) {
-      setSelectedButton(null);
-    } else {
-      setSelectedButton(index);
-    }
+    setSelectedButtons((prevSelectedButtons) => {
+      if (prevSelectedButtons.includes(index)) {
+        return prevSelectedButtons.filter((item) => item !== index);
+      } else {
+        return [...prevSelectedButtons, index];
+      }
+    });
   };
 
   const handleInputFocus = () => {
@@ -85,42 +91,47 @@ const PetTalkDetail = () => {
           <div className={styles.content_wrapper}>
             <div className={styles.item}>
               <div className={styles.user_info}>
-                <img src="" alt="profile-img" />
-                <span className={styles.user_name}>닉네임</span>
-                <span className={styles.date}>・ 게시된 날짜 넣기</span>
+                {data?.writer?.profileImageUrl === null ? (
+                  <img src={default_user} alt="default-img" />
+                ) : (
+                  <img src={data?.writer?.profileImageUrl} alt="profile-img" />
+                )}
+                <span className={styles.user_name}>
+                  {data?.writer?.nickname}
+                </span>
+                <span className={styles.date}>・ {data?.createdAt}</span>
               </div>
-              <div className={styles.title}>제목 텍스트 입니다.</div>
+              <div className={styles.title}>{data?.title}</div>
               <div className={styles.text_wrapper}>
-                <div className={styles.content_text}>
-                  꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가
-                  아파요 어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요
-                  어뜩하죠ㅠㅠ 꿍이가 아파요 어뜩하죠ㅠㅠ 꿍이가 아파요
-                  어뜩하죠ㅠㅠ
-                </div>
+                <div className={styles.content_text}>{data?.content}</div>
               </div>
 
-              <div className={styles.imgWrapper}>
-                <Slider {...settings}>
-                  {images.map((image, index) => (
-                    <div className={styles.content_img} key={index}>
-                      <img src={image} alt={`Image ${index + 1}`} />
-                    </div>
-                  ))}
-                </Slider>
-              </div>
+              {data?.petTalkPhotos ? (
+                <div className={styles.imgWrapper}>
+                  <Slider {...settings}>
+                    {data?.petTalkPhotos?.map(
+                      (photo: PetTalkPhoto, index: number) => (
+                        <div className={styles.content_img} key={index}>
+                          <img src={photo.url} alt={`Image ${index + 1}`} />
+                        </div>
+                      )
+                    )}
+                  </Slider>
+                </div>
+              ) : null}
 
               <div className={styles.response_wrapper}>
                 <div className={styles.icon_area}>
                   <img src={heart} alt="" />
-                  <span>100</span>
+                  <span>{data?.emoji}</span>
                 </div>
                 <div className={styles.icon_area}>
                   <img src={talk} alt="" />
-                  <span>100</span>
+                  <span>{data?.replyCount}</span>
                 </div>
                 <div className={styles.icon_area}>
                   <img src={view} alt="" />
-                  <span>100</span>
+                  <span>{data?.viewCount}</span>
                 </div>
               </div>
             </div>
@@ -130,14 +141,14 @@ const PetTalkDetail = () => {
               <button
                 key={index}
                 className={`${styles.emoji_item} ${
-                  selectedButton === index ? styles.selected : ""
+                  selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleButtonClick(index)}
               >
                 <div className={styles.img_area}>
                   <img
                     src={
-                      selectedButton === index
+                      selectedButtons.includes(index)
                         ? emoji.imgSrc.replace("_off", "_on")
                         : emoji.imgSrc
                     }
@@ -147,8 +158,8 @@ const PetTalkDetail = () => {
 
                 <span
                   style={{
-                    fontWeight: selectedButton === index ? 600 : 400,
-                    color: selectedButton === index ? "black" : "gray",
+                    fontWeight: selectedButtons.includes(index) ? 600 : 400,
+                    color: selectedButtons.includes(index) ? "black" : "gray",
                   }}
                 >
                   {emoji.text}
@@ -157,18 +168,16 @@ const PetTalkDetail = () => {
             ))}
           </div>
           <div className={styles.reply_wrapper}>
-            {/* 댓글 ${count}개 */}
-            <span className={styles.count}>{`댓글 42`}</span>
+            <span className={styles.count}>댓글 {data?.replyCount}개</span>
             <CommentItem />
             <CommentItem />
           </div>
           <div className={styles.replyWrite_wrapper}>
-            <img src={default_user} alt="profile" />
-            {/* user_profile 이미지 불러오기 */}
-            {/* <img
-              src={isLoggedIn ? "user_profile" : default_user}
-              alt="profile"
-            /> */}
+            {data?.writer?.profileImageUrl === null ? (
+              <img src={default_user} alt="default-img" />
+            ) : (
+              <img src={data?.writer?.profileImageUrl} alt="profile-img" />
+            )}
             <input
               type="text"
               placeholder="댓글을 작성해주세요"

@@ -41,6 +41,16 @@ export const freetalkList = async (petType: string, mainCategory: number) => {
   }
 };
 
+//펫톡 상세조회
+export const pettalkDetail = async (petTalkId: number) => {
+  try {
+    const response = await axios.get(`${API_URL}/pet-talk/${petTalkId}`);
+    return response.data;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
 interface WritingOutParams {
   accessToken: string;
   image?: File;
