@@ -4,6 +4,7 @@ import {
   concernList,
   freetalkList,
   pettalkDetail,
+  pettalkReply,
 } from "../apis/pettalkApi";
 
 export const useAllList = (selectedPet: string) => {
@@ -28,4 +29,8 @@ export const useFreetalkList = (selectedPet: string, mainCategory: number) => {
 
 export const usePettalkDetail = (petTalkId: number) => {
   return useQuery("Detail", () => pettalkDetail(petTalkId));
+};
+
+export const usePettalkReply = (petTalkId: number) => {
+  return useQuery("Replys", () => pettalkReply(petTalkId));
 };

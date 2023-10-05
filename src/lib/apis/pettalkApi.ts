@@ -51,6 +51,16 @@ export const pettalkDetail = async (petTalkId: number) => {
   }
 };
 
+//펫톡 댓글 조회
+export const pettalkReply = async (petTalkId: number) => {
+  try {
+    const response = await axios.get(`${API_URL}/pet-talk/${petTalkId}/replys`);
+    return response;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
 interface WritingOutParams {
   accessToken: string;
   image?: File;
