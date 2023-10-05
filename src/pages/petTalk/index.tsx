@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "@/store/petTalkState";
 import { useAllList } from "@/lib/hooks/pettalkList";
+import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import { SetStateAction, useState } from "react";
 import heart from "@/assets/heart_18px.svg";
@@ -15,22 +16,6 @@ import concern_icon from "@/assets/concerns_icon.svg";
 import freetalk_icon from "@/assets/freetalk_icon.svg";
 import default_user from "@/assets/user.png";
 import banner from "@/assets/키트배너.png";
-
-interface PetTalkItem {
-  id: number;
-  title: string;
-  content: string;
-  thumbnail?: string;
-  viewCount: number;
-  emojiCount?: number;
-  replyCount?: number;
-  reacted: boolean;
-  writer: {
-    id: number;
-    nickname: string;
-    profileImageUrl?: string;
-  };
-}
 
 const PetTalk = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -148,7 +133,7 @@ const PetTalk = () => {
                           {item.writer.nickname}
                         </span>
                         <span className={styles.date}>
-                          ・ 게시된 날짜 넣기 {item.id}
+                          ・ {formatDate(item.createdAt)}
                         </span>
                       </div>
                       <div className={styles.title}>{item.title}</div>

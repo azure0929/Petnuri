@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState, mapTabToNumber } from "@/store/petTalkState";
 import { useConcernList } from "@/lib/hooks/pettalkList";
+import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
@@ -179,7 +180,7 @@ const Concern = () => {
                           {item.writer.nickname}
                         </span>
                         <span className={styles.date}>
-                          ・ 게시된 날짜 넣기 {item.id}
+                          ・ {formatDate(item.createdAt)}
                         </span>
                       </div>
                       <div className={styles.title}>{item.title}</div>

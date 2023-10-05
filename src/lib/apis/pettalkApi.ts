@@ -51,12 +51,23 @@ export const pettalkDetail = async (petTalkId: number) => {
   }
 };
 
+//펫톡 댓글 조회
+export const pettalkReply = async (petTalkId: number) => {
+  try {
+    const response = await axios.get(`${API_URL}/pet-talk/${petTalkId}/replys`);
+    return response;
+  } catch (error) {
+    console.error("no List:", error);
+  }
+};
+
 interface WritingOutParams {
   accessToken: string;
   image?: File;
   request: object;
 }
 
+//펫톡 게시글 작성
 export const writingOut = async ({
   accessToken,
   image,
@@ -69,16 +80,48 @@ export const writingOut = async ({
       formData.append("image", image);
     }
 
-    formData.append("request", JSON.stringify(request));
+    // formData.append("request", JSON.stringify(request));
 
-    //여기
-    const response = await axios.post("/pet-talk", formData, {
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(request)], { type: "application/json" })
+    );
+
+    const response = await axios.post(`${API_URL}/pet-talk`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "multipart/form-data",
       },
     });
 
+    console.log("성공", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("실패", error);
+    throw error;
+  }
+};
+
+//펫톡 게시글 이모지반응
+export const emojiResponse = async ({
+  accessToken,
+  petTalkId,
+  emojiType,
+}: {
+  accessToken: string;
+  petTalkId: number;
+  emojiType: string;
+}) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/pet-talk/${petTalkId}/emotion`,
+      { emoji: emojiType },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     console.log("성공", response.data);
     return response.data;
   } catch (error) {
