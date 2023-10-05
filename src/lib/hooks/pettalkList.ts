@@ -1,5 +1,10 @@
 import { useQuery } from "react-query";
-import { allList, concernList, freetalkList } from "../apis/pettalkApi";
+import {
+  allList,
+  concernList,
+  freetalkList,
+  pettalkDetail,
+} from "../apis/pettalkApi";
 
 export const useAllList = (selectedPet: string) => {
   return useQuery("allList", () => allList(selectedPet));
@@ -19,4 +24,8 @@ export const useFreetalkList = (selectedPet: string, mainCategory: number) => {
   return useQuery("allLisfreetalkListt", () =>
     freetalkList(selectedPet, mainCategory)
   );
+};
+
+export const usePettalkDetail = (petTalkId: number) => {
+  return useQuery("Detail", () => pettalkDetail(petTalkId));
 };

@@ -214,3 +214,9 @@ interface PetTalkItem {
     profileImageUrl: string | null;
   };
 }
+
+interface PetTalkPhoto {
+  id: number;
+  name: string;
+  url: string;
+}
