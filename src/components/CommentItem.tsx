@@ -5,11 +5,21 @@ import { usePettalkReply } from "@/lib/hooks/pettalkList";
 import default_user from "@/assets/user.png";
 import { formatDate } from "@/utils/DateFormat";
 
-const CommentItem = () => {
+interface CommentItemProps {
+  replyContent: string;
+  selectedReplyUser: string | null;
+}
+const CommentItem: React.FC<CommentItemProps> = ({
+  replyContent,
+  selectedReplyUser,
+}) => {
   const { petTalkId } = useParams();
 
   const [isExpanded, setIsExpanded] = useState(false);
+
   const { data } = usePettalkReply(Number(petTalkId));
+
+  const handleReplyClick = (userName: string) => {};
 
   const toggleExpand = () => {
     setIsExpanded((prev) => !prev);
