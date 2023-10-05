@@ -51,8 +51,11 @@ const Concern = () => {
 
   const handleSubCategorySelect = (subCategory: number) => {
     setSubCategory(subCategory);
-    refetch();
   };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, subCategory]);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {

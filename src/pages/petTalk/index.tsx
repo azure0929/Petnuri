@@ -1,12 +1,12 @@
 import MainTab from "@/components/MainTab";
 import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "../../store/petTalkState";
 import { useAllList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useState } from "react";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
@@ -33,7 +33,6 @@ interface PetTalkItem {
 }
 
 const PetTalk = () => {
-  const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
 
@@ -59,15 +58,9 @@ const PetTalk = () => {
   const { data } = useAllList(selectedPet);
   console.log("모든리스트", data);
 
-  useEffect(() => {
-    if (location.pathname === "/petTalk") {
-      setActiveTab("전체");
-    } else if (location.pathname === "/petTalk/concern") {
-      setActiveTab("고민상담");
-    } else if (location.pathname === "/petTalk/freetalk") {
-      setActiveTab("자유수다");
-    }
-  }, [location.pathname, setActiveTab]);
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -81,6 +74,7 @@ const PetTalk = () => {
                   className={`${styles.head_item} ${
                     activeTab === "전체" ? styles.tab_active : ""
                   }`}
+                  onClick={() => handleTabChange("전체")}
                 >
                   전체
                 </Link>
@@ -89,6 +83,10 @@ const PetTalk = () => {
                   className={`${styles.head_item} ${
                     activeTab === "고민상담" ? styles.tab_active : ""
                   }`}
+                  onClick={() => {
+                    handleTabChange("고민상담");
+                    setActiveTab("고민상담");
+                  }}
                 >
                   고민상담
                 </Link>
@@ -97,6 +95,10 @@ const PetTalk = () => {
                   className={`${styles.head_item} ${
                     activeTab === "자유수다" ? styles.tab_active : ""
                   }`}
+                  onClick={() => {
+                    handleTabChange("자유수다");
+                    setActiveTab("자유수다");
+                  }}
                 >
                   자유수다
                 </Link>
