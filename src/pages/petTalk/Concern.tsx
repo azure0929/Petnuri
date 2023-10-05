@@ -3,19 +3,19 @@ import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
+import { activeTabState, mapTabToNumber } from "@/store/petTalkState";
 import { useConcernList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
 import { useScrollDiv } from "@/utils/Scroll";
-import heart from "../../assets/heart_18px.svg";
-import talk from "../../assets/talk_18px.svg";
-import view from "../../assets/view_18px.svg";
-import floating from "../../assets/X.png";
-import concern_icon from "../../assets/concerns_icon.svg";
-import freetalk_icon from "../../assets/freetalk_icon.svg";
-import default_user from "../../assets/user.png";
-import banner from "../../assets/키트배너.png";
+import heart from "@/assets/heart_18px.svg";
+import talk from "@/assets/talk_18px.svg";
+import view from "@/assets/view_18px.svg";
+import floating from "@/assets/X.png";
+import concern_icon from "@/assets/concerns_icon.svg";
+import freetalk_icon from "@/assets/freetalk_icon.svg";
+import default_user from "@/assets/user.png";
+import banner from "@/assets/키트배너.png";
 
 const Concern = () => {
   const location = useLocation();

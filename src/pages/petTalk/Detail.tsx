@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
 import LoginModal from "@/components/modal/LoginModal";
-import heart from "../../assets/heart_18px.svg";
-import talk from "../../assets/talk_18px.svg";
-import view from "../../assets/view_18px.svg";
-import cute_off from "../../assets/Cute_off.png";
-import funny_off from "../../assets/Funny_off.png";
-import kiss_off from "../../assets/kiss_off.png";
-import surprise_off from "../../assets/Surprise_off.png";
-import sad_off from "../../assets/Sad_off.png";
-import default_user from "../../assets/user.png";
+import heart from "@/assets/heart_18px.svg";
+import talk from "@/assets/talk_18px.svg";
+import view from "@/assets/view_18px.svg";
+import cute_off from "@/assets/Cute_off.png";
+import funny_off from "@/assets/Funny_off.png";
+import kiss_off from "@/assets/kiss_off.png";
+import surprise_off from "@/assets/Surprise_off.png";
+import sad_off from "@/assets/Sad_off.png";
+import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 
