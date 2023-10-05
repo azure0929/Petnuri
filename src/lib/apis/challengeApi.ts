@@ -327,3 +327,17 @@ export const dailyAllListApi = async () => {
     console.error("Error in dailyAllListApi: " + error);
   }
 };
+
+//포인트 샵
+export const pointApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/point`,{
+      headers: {
+        Authorization: getCookie('jwtToken')
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in dailyAllListApi: " + error);
+  }
+};

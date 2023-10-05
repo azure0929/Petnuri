@@ -1,8 +1,19 @@
 import styles from '@/styles/challengeprofile.module.scss'
 import credit from "@/assets/credit.svg";
 import defaultImage from '@/assets/defaultImage.png'
+import { useState, useEffect } from 'react';
+import { pointApi } from '@/lib/apis/challengeApi';
 
 const ChallengeProfile = () => {
+  const [point, setPoint] = useState()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await pointApi()
+      setPoint(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>

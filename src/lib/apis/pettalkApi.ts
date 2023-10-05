@@ -86,7 +86,6 @@ export const writingOut = async ({
       new Blob([JSON.stringify(request)], { type: "application/json" })
     );
 
-    //여기
     const response = await axios.post(`${API_URL}/pet-talk`, formData, {
       headers: {
         Authorization: getCookie('jwtToken'),
@@ -94,8 +93,8 @@ export const writingOut = async ({
       },
     });
 
-    console.log("성공", response.data);
-    return response.data;
+    console.log("성공", response);
+    return response;
   } catch (error) {
     console.error("실패", error);
     throw error;
