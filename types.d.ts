@@ -221,3 +221,15 @@ interface PetTalkPhoto {
   name: string;
   url: string;
 }
+
+interface ReplyItem {
+  writer: {
+    writerId: number;
+    profileImageUrl: string | null;
+    nickname: string;
+  };
+  replyId: number;
+  content: string;
+  createdAt: string;
+  tag: string | null;
+}
