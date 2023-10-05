@@ -56,7 +56,7 @@ export const pettalkDetail = async (petTalkId: number) => {
 export const pettalkReply = async (petTalkId: number) => {
   try {
     const response = await axios.get(`${API_URL}/pet-talk/${petTalkId}/replys`);
-    return response;
+    return response.data.replys;
   } catch (error) {
     console.error("no List:", error);
   }
@@ -68,34 +68,30 @@ interface WritingOutParams {
 }
 
 //펫톡 게시글 작성
-export const writingOut = async ({
-  images,
-  request,
-}: WritingOutParams) => {
+export const writingOut = async ({ images, request }: WritingOutParams) => {
   try {
     const formData = new FormData();
 
     if (images) {
-      for(let i=0; i<images.length;i++){
-        formData.append('files', images[i]);
+      for (let i = 0; i < images.length; i++) {
+        formData.append("files", images[i]);
       }
-   }
+    }
 
     formData.append(
       "request",
       new Blob([JSON.stringify(request)], { type: "application/json" })
     );
 
-    //여기
     const response = await axios.post(`${API_URL}/pet-talk`, formData, {
       headers: {
-        Authorization: getCookie('jwtToken'),
+        Authorization: getCookie("jwtToken"),
         "Content-Type": "multipart/form-data",
       },
     });
 
-    console.log("성공", response.data);
-    return response.data;
+    console.log("성공", response);
+    return response;
   } catch (error) {
     console.error("실패", error);
     throw error;
@@ -104,11 +100,9 @@ export const writingOut = async ({
 
 //펫톡 게시글 이모지 추가
 export const emojiPost = async ({
-  accessToken,
   petTalkId,
   emojiType,
 }: {
-  accessToken: string;
   petTalkId: number;
   emojiType: string;
 }) => {
@@ -118,7 +112,7 @@ export const emojiPost = async ({
       { emoji: emojiType },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: getCookie("jwtToken"),
         },
       }
     );
@@ -132,17 +126,41 @@ export const emojiPost = async ({
 
 //펫톡 게시글 이모지 삭제
 export const emojiDelete = async ({
-  accessToken,
   petTalkId,
   emojiType,
 }: {
-  accessToken: string;
   petTalkId: number;
   emojiType: string;
 }) => {
   try {
     const response = await axios.delete(
       `${API_URL}/pet-talk/${petTalkId}/emotion?emoji=${emojiType}`,
+      {
+        headers: {
+          Authorization: getCookie("jwtToken"),
+        },
+      }
+    );
+    console.log("성공", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("실패", error);
+    throw error;
+  }
+};
+
+//펫톡 댓글 추가
+//accessToken 임시
+export const replyPost = async ({
+  accessToken,
+  petTalkId,
+}: {
+  accessToken: string;
+  petTalkId: number;
+}) => {
+  try {
+    const response = await axios.delete(
+      `${API_URL}/pet-talk/${petTalkId}/reply`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
