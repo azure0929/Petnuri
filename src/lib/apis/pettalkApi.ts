@@ -67,6 +67,7 @@ interface WritingOutParams {
   request: object;
 }
 
+//펫톡 게시글 작성
 export const writingOut = async ({
   accessToken,
   image,
@@ -79,7 +80,12 @@ export const writingOut = async ({
       formData.append("image", image);
     }
 
-    formData.append("request", JSON.stringify(request));
+    // formData.append("request", JSON.stringify(request));
+
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(request)], { type: "application/json" })
+    );
 
     //여기
     const response = await axios.post("/pet-talk", formData, {

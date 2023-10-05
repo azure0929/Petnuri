@@ -3,7 +3,9 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
+import { usePettalkDetail } from "@/lib/hooks/pettalkList";
+// import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
+import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
 import LoginModal from "@/components/modal/LoginModal";
@@ -27,8 +29,8 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
-  const { data: replydata } = usePettalkReply(Number(petTalkId));
-  console.log("댓글", replydata);
+  // const { data: replydata } = usePettalkReply(Number(petTalkId));
+  // console.log("댓글", replydata);
 
   const onClickBack = () => {
     navigate(-1);
@@ -101,7 +103,9 @@ const PetTalkDetail = () => {
                 <span className={styles.user_name}>
                   {data?.writer?.nickname}
                 </span>
-                <span className={styles.date}>・ {data?.createdAt}</span>
+                <span className={styles.date}>
+                  ・ {formatDate(data?.createdAt)}
+                </span>
               </div>
               <div className={styles.title}>{data?.title}</div>
               <div className={styles.text_wrapper}>
@@ -125,7 +129,7 @@ const PetTalkDetail = () => {
               <div className={styles.response_wrapper}>
                 <div className={styles.icon_area}>
                   <img src={heart} alt="" />
-                  <span>{data?.emoji}</span>
+                  <span>{data?.emoji.totalEmojiCount}</span>
                 </div>
                 <div className={styles.icon_area}>
                   <img src={talk} alt="" />

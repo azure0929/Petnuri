@@ -208,6 +208,7 @@ interface PetTalkItem {
   emojiCount: number | null;
   replyCount: number | null;
   reacted: boolean;
+  createdAt: string;
   writer: {
     id: number;
     nickname: string;
