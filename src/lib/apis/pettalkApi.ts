@@ -87,14 +87,41 @@ export const writingOut = async ({
       new Blob([JSON.stringify(request)], { type: "application/json" })
     );
 
-    //여기
-    const response = await axios.post("/pet-talk", formData, {
+    const response = await axios.post(`${API_URL}/pet-talk`, formData, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "multipart/form-data",
       },
     });
 
+    console.log("성공", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("실패", error);
+    throw error;
+  }
+};
+
+//펫톡 게시글 이모지반응
+export const emojiResponse = async ({
+  accessToken,
+  petTalkId,
+  emojiType,
+}: {
+  accessToken: string;
+  petTalkId: number;
+  emojiType: string;
+}) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/pet-talk/${petTalkId}/emotion`,
+      { emoji: emojiType },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     console.log("성공", response.data);
     return response.data;
   } catch (error) {

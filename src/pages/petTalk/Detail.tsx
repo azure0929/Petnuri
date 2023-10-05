@@ -4,6 +4,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePettalkDetail } from "@/lib/hooks/pettalkList";
+import { emojiResponse } from "@/lib/apis/pettalkApi";
 // import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
@@ -36,7 +37,20 @@ const PetTalkDetail = () => {
     navigate(-1);
   };
 
-  const handleButtonClick = (index: number) => {
+  const handleEmojiClick = async (index: number, emojiType: string) => {
+    try {
+      const response = await emojiResponse({
+        accessToken:
+          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
+        petTalkId: Number(petTalkId),
+        emojiType,
+      });
+
+      console.log("이모지 응답:", response);
+    } catch (error) {
+      console.error("이모지 응답 실패:", error);
+    }
+
     setSelectedButtons((prevSelectedButtons) => {
       if (prevSelectedButtons.includes(index)) {
         return prevSelectedButtons.filter((item) => item !== index);
@@ -70,11 +84,16 @@ const PetTalkDetail = () => {
   }
 
   const emojiData = [
-    { imgSrc: cute_off, altText: "귀여워요", text: "귀여워요" },
-    { imgSrc: funny_off, altText: "웃겨요", text: "웃겨요" },
-    { imgSrc: kiss_off, altText: "뽀뽀", text: "뽀뽀" },
-    { imgSrc: surprise_off, altText: "헉", text: "헉" },
-    { imgSrc: sad_off, altText: "슬퍼요", text: "슬퍼요" },
+    {
+      emojiType: "CUTE",
+      imgSrc: cute_off,
+      altText: "귀여워요",
+      text: "귀여워요",
+    },
+    { emojiType: "FUN", imgSrc: funny_off, altText: "웃겨요", text: "웃겨요" },
+    { emojiType: "KISS", imgSrc: kiss_off, altText: "뽀뽀", text: "뽀뽀" },
+    { emojiType: "OMG", imgSrc: surprise_off, altText: "헉", text: "헉" },
+    { emojiType: "SAD", imgSrc: sad_off, altText: "슬퍼요", text: "슬퍼요" },
   ];
 
   return (
@@ -149,7 +168,7 @@ const PetTalkDetail = () => {
                 className={`${styles.emoji_item} ${
                   selectedButtons.includes(index) ? styles.selected : ""
                 }`}
-                onClick={() => handleButtonClick(index)}
+                onClick={() => handleEmojiClick(index, emoji.emojiType)}
               >
                 <div className={styles.img_area}>
                   <img
