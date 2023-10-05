@@ -74,7 +74,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
       if (imageUrlLists.length > 4) {
         imageUrlLists = imageUrlLists.slice(0, 10);
-        imageFileLists= imageFileLists.slice(0,10);
+        imageFileLists = imageFileLists.slice(0, 10);
       }
 
       setShowImages(imageUrlLists);
@@ -88,28 +88,27 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   //api post
   const handlePostData = async () => {
-    const request={
+    const request = {
       petType,
-      mainCategoryId:1,
-      subCategoryId:1,
+      mainCategoryId: 1,
+      subCategoryId: 1,
       title,
-      content
+      content,
     };
-   
+
     try {
       const response = await writingOut({
         images: imageFiles,
         request,
       });
-      console.log(response)
-  
+      console.log(response);
+
       if (response.status === 201 || response.status === 200) {
         console.log("게시물이 성공적으로 작성되었습니다.", response.data);
         navigate("/petTalk");
       } else {
-        console.error("게시물 작성 중 오류 발생:",response);
+        console.error("게시물 작성 중 오류 발생:", response);
       }
-
     } catch (error) {
       console.error("게시물 작성 중 오류 발생:", error);
     }

@@ -3,7 +3,7 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
+import { emojiPost, emojiDelete, replyPost } from "@/lib/apis/pettalkApi";
 import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
@@ -21,9 +21,6 @@ import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { API_URL } from "@/lib/apis/base";
-import { getCookie } from "@/utils/Cookie";
 
 const PetTalkDetail = () => {
   const navigate = useNavigate();
@@ -33,11 +30,11 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
+  const { data: totalEmojiCount, refetch: totalEmojiRefetch } =
+    usePettalkDetail(Number(petTalkId));
   const { data: replyData, refetch: replyRefetch } = usePettalkReply(
     Number(petTalkId)
   );
-
-  console.log(replyData);
 
   const onClickBack = () => {
     navigate(-1);
@@ -67,6 +64,8 @@ const PetTalkDetail = () => {
           return [...prevSelectedButtons, index];
         }
       });
+
+      totalEmojiRefetch();
     } catch (error) {
       console.error("이모지 응답 실패:", error);
     }
@@ -115,30 +114,18 @@ const PetTalkDetail = () => {
     formState: { isValid, errors },
   } = useForm();
 
-  const postReply = async (data: any) => {
+  const onVaild = async (data: any) => {
     const content = data.reply;
     try {
-      const response = await axios.post(
-        `${API_URL}/pet-talk/${petTalkId}/reply`,
-        {
-          content,
-        },
-        {
-          headers: {
-            Authorization: getCookie("jwtToken"),
-          },
-        }
-      );
-      console.log("response:", response);
+      await replyPost({
+        petTalkId: Number(petTalkId),
+        content,
+      });
+      replyRefetch();
+      reset();
     } catch (error) {
-      console.error("no List:", error);
+      console.error("댓글 작성 실패:", error);
     }
-  };
-
-  const onVaild = async (data: any) => {
-    await postReply(data);
-    replyRefetch();
-    reset();
   };
 
   return (
