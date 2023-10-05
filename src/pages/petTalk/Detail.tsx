@@ -4,7 +4,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePettalkDetail } from "@/lib/hooks/pettalkList";
-import { emojiResponse } from "@/lib/apis/pettalkApi";
+import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
 // import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
@@ -39,25 +39,35 @@ const PetTalkDetail = () => {
 
   const handleEmojiClick = async (index: number, emojiType: string) => {
     try {
-      const response = await emojiResponse({
-        accessToken:
-          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
-        petTalkId: Number(petTalkId),
-        emojiType,
-      });
+      // 이미 선택된 이모지인 경우에는 삭제 API를 호출
+      if (selectedButtons.includes(index)) {
+        await emojiDelete({
+          accessToken:
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
+          petTalkId: Number(petTalkId),
+          emojiType,
+        });
+      } else {
+        // 선택되지 않은 경우에는 추가 API를 호출
+        await emojiPost({
+          accessToken:
+            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
+          petTalkId: Number(petTalkId),
+          emojiType,
+        });
+      }
 
-      console.log("이모지 응답:", response);
+      //이모지 개수 카운트
+      setSelectedButtons((prevSelectedButtons) => {
+        if (prevSelectedButtons.includes(index)) {
+          return prevSelectedButtons.filter((item) => item !== index);
+        } else {
+          return [...prevSelectedButtons, index];
+        }
+      });
     } catch (error) {
       console.error("이모지 응답 실패:", error);
     }
-
-    setSelectedButtons((prevSelectedButtons) => {
-      if (prevSelectedButtons.includes(index)) {
-        return prevSelectedButtons.filter((item) => item !== index);
-      } else {
-        return [...prevSelectedButtons, index];
-      }
-    });
   };
 
   const handleInputFocus = () => {

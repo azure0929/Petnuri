@@ -102,8 +102,8 @@ export const writingOut = async ({
   }
 };
 
-//펫톡 게시글 이모지반응
-export const emojiResponse = async ({
+//펫톡 게시글 이모지 추가
+export const emojiPost = async ({
   accessToken,
   petTalkId,
   emojiType,
@@ -116,6 +116,33 @@ export const emojiResponse = async ({
     const response = await axios.post(
       `${API_URL}/pet-talk/${petTalkId}/emotion`,
       { emoji: emojiType },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log("성공", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("실패", error);
+    throw error;
+  }
+};
+
+//펫톡 게시글 이모지 삭제
+export const emojiDelete = async ({
+  accessToken,
+  petTalkId,
+  emojiType,
+}: {
+  accessToken: string;
+  petTalkId: number;
+  emojiType: string;
+}) => {
+  try {
+    const response = await axios.delete(
+      `${API_URL}/pet-talk/${petTalkId}/emotion?emoji=${emojiType}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
