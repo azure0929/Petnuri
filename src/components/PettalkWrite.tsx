@@ -101,16 +101,13 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
         images: imageFiles,
         request,
       });
+      console.log(response)
   
-      if (response.status === 200) {
+      if (response.status === 201 || response.status === 200) {
         console.log("게시물이 성공적으로 작성되었습니다.", response.data);
         navigate("/petTalk");
       } else {
-        console.error(
-          "게시물 작성 중 오류 발생:",
-          response.status,
-          response.statusText
-        );
+        console.error("게시물 작성 중 오류 발생:",response);
       }
 
     } catch (error) {
