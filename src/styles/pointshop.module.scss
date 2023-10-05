@@ -24,6 +24,7 @@
   border-radius: 12px;
   margin-left: 24px;
   position: relative;
+  cursor: pointer;
 
   .banner {
     @include title_bold_18px;

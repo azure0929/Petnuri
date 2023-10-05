@@ -4,7 +4,7 @@ import styles from "@/styles/concernwrite.module.scss";
 import { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useNavigate, useLocation } from "react-router-dom";
-import Head from "../../components/Head";
+import Head from "@/components/Head";
 
 const ConcernWrite = () => {
   const navigate = useNavigate();

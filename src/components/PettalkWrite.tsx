@@ -84,7 +84,8 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   //api post
   const handlePostData = async () => {
     try {
-      // const accessToken = "YOUR_ACCESS_TOKEN";
+      const accessToken =
+        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34"; //임시
 
       const request = {
         petType,
@@ -98,7 +99,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
       const imageFile = inputFileRef.current?.files?.[0];
 
       const response = await writingOut({
-        // accessToken,
+        accessToken,
         image: imageFile || undefined,
         request,
       });
