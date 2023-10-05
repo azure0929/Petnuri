@@ -3,9 +3,8 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePettalkDetail } from "@/lib/hooks/pettalkList";
 import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
-// import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
+import { usePettalkDetail } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
@@ -30,8 +29,6 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
-  // const { data: replydata } = usePettalkReply(Number(petTalkId));
-  // console.log("댓글", replydata);
 
   const onClickBack = () => {
     navigate(-1);
@@ -42,16 +39,12 @@ const PetTalkDetail = () => {
       // 이미 선택된 이모지인 경우에는 삭제 API를 호출
       if (selectedButtons.includes(index)) {
         await emojiDelete({
-          accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
           petTalkId: Number(petTalkId),
           emojiType,
         });
       } else {
         // 선택되지 않은 경우에는 추가 API를 호출
         await emojiPost({
-          accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
           petTalkId: Number(petTalkId),
           emojiType,
         });
@@ -204,7 +197,6 @@ const PetTalkDetail = () => {
           </div>
           <div className={styles.reply_wrapper}>
             <span className={styles.count}>댓글 {data?.replyCount}개</span>
-            <CommentItem />
             <CommentItem />
           </div>
           <div className={styles.replyWrite_wrapper}>
