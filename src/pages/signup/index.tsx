@@ -98,7 +98,7 @@ const SignUp = () => {
 
   const handleDuplicateCheck = async () => {
     try {
-      const response = await axios.get("http://3.34.154.62:8080/auth/nickname", {
+      const response = await axios.get("https://petnuri.shop/auth/nickname", {
         params: { nickname: name },
       });
 
@@ -183,7 +183,7 @@ const SignUp = () => {
         return;
       }
 
-      const response = await axios.get("http://3.34.154.62:8080/auth/referral", {
+      const response = await axios.get("https://petnuri.shop/auth/referral", {
         params: { referralCode: referralCode },
       });
 

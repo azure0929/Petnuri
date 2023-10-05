@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "@/store/petTalkState";
 import { useFreetalkList } from "@/lib/hooks/pettalkList";
+import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import { useState, useEffect } from "react";
 import heart from "@/assets/heart_18px.svg";
@@ -128,7 +129,7 @@ const FreeTalk = () => {
                           {item.writer.nickname}
                         </span>
                         <span className={styles.date}>
-                          ・ 게시된 날짜 넣기 {item.id}
+                          ・ {formatDate(item.createdAt)}
                         </span>
                       </div>
                       <div className={styles.title}>{item.title}</div>
