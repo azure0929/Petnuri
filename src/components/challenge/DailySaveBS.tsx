@@ -6,28 +6,47 @@ import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
 import { createToast } from "@/utils/ToastUtils";
+import { dailyReviewApi } from "@/lib/apis/challengeApi";
 
-const DailySaveBS = () => {
+interface DailySaveBSProps {
+  id: number;
+}
+
+const DailySaveBS: React.FC<DailySaveBSProps> = ({ id }) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
   const sucess = () => createToast("success", "포인트 지급이 완료되었습니다.");
 
-  // 이미지 업로드
-  const [newUserImg, setNewUserImg] = useState<string>();
-
-  const closeBS = () => {
-    sucess();
-    setBottomIsOpen(false);
+  const review = async () => {
+    try {
+      if (!newUserImg) {
+        throw new Error("이미지 파일을 선택해주세요.");
+      }
+      await dailyReviewApi(newUserImg, id);
+    } catch (error) {
+      console.error("Error in reivew: " + error);
+    }
   };
 
+  // 이미지 업로드
+  const [newUserImg, setNewUserImg] = useState<File | null>(null);
+
+  const isFileSizeValid = (file: File, maxSizeInBytes: number) => {
+    return file.size <= maxSizeInBytes;
+  };
+
+  const MAX_FILE_SIZE = 1024 * 1024; // 1MB, 바이트 단위로 설정
+
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files as FileList;
-    for (const file of Array.from(files)) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.addEventListener("load", (e) => {
-        setNewUserImg(e.target?.result as string);
-      });
+    if (!e.target.files?.length) return;
+
+    const selectedFile = e.target.files[0];
+
+    if (!isFileSizeValid(selectedFile, MAX_FILE_SIZE)) {
+      alert("이미지 파일 크기가 너무 큽니다. mb 이하의 이미지를 선택해주세요.");
+      return;
     }
+
+    setNewUserImg(selectedFile);
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +55,12 @@ const DailySaveBS = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click(); // 숨겨진 input 요소를 클릭함
     }
+  };
+
+  const closeBS = () => {
+    review();
+    sucess();
+    setBottomIsOpen(false);
   };
 
   return (
@@ -55,7 +80,11 @@ const DailySaveBS = () => {
               ref={fileInputRef}
             />
             {newUserImg ? (
-              <img src={newUserImg} className={styles.saveImg} />
+              <img
+                src={`${URL.createObjectURL(newUserImg)}`}
+                alt="uploaded-img"
+                className={styles.saveImg}
+              />
             ) : (
               <img src={addIcon} className={styles.addIcon} />
             )}

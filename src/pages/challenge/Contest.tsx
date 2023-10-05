@@ -9,7 +9,6 @@ import DeliveryBS from "./deliverybs/DeliveryBS";
 import ChallengeItem from "@/components/challenge/ChallengeItem";
 import { useEffect, useState } from "react";
 import JoinComplete from "@/components/challenge/JoinComplete";
-import styles from "@/styles/challenge/challengejoin.module.scss";
 import KitModal from "@/components/modal/KitModal";
 import DeliveryReg from "@/components/challenge/delivery/DeliveryReg";
 import DeliveryList from "@/components/challenge/delivery/DeliveryList";

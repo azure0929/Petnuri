@@ -36,8 +36,6 @@ const DeliveryBS = () => {
 
   const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
 
-  
-
   const defaultAddress = addressData.filter((item) => item.isBased === true);
   // 배송 메세지
   const [messageState, setMessageState] = useState("부재시 문앞에 놓아주세요");

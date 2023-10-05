@@ -19,6 +19,8 @@ interface ChallengeJoin {
   id: number;
   participantsImg: string;
   participantsName: string;
+  nickName: string;
+  imageUrl: string;
 }
 
 interface JoinList {
@@ -58,14 +60,14 @@ interface ContestData {
 }
 
 interface DailyData {
-  challengeId: number,
-  banner: string,
-  title: string,
-  subTitle: string,
-  authMethod: string,
-  point: number,
-  pointMethod: string,
-  status: boolean
+  challengeId: number;
+  banner: string;
+  title: string;
+  subTitle: string;
+  authMethod: string;
+  point: number;
+  pointMethod: string;
+  status: boolean;
 }
 
 //데일리 이벤트 조회, 챌린지 홈, 어드민에서 사용
@@ -206,9 +208,16 @@ interface PetTalkItem {
   emojiCount: number | null;
   replyCount: number | null;
   reacted: boolean;
+  createdAt: string;
   writer: {
     id: number;
     nickname: string;
     profileImageUrl: string | null;
   };
+}
+
+interface PetTalkPhoto {
+  id: number;
+  name: string;
+  url: string;
 }
