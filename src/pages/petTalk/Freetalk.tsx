@@ -3,10 +3,10 @@ import Background from "@/components/Background";
 import styles from "@/styles/pettalk.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { activeTabState, mapTabToNumber } from "../../store/petTalkState";
+import { activeTabState } from "../../store/petTalkState";
 import { useFreetalkList } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import heart from "../../assets/heart_18px.svg";
 import talk from "../../assets/talk_18px.svg";
 import view from "../../assets/view_18px.svg";
@@ -27,7 +27,7 @@ const FreeTalk = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const { data } = useFreetalkList(selectedPet, mapTabToNumber(activeTab));
+  const { data } = useFreetalkList(selectedPet, 2);
   console.log("자유수다 리스트", data);
 
   const handlePetSelect = (e: { target: { value: string } }) => {
