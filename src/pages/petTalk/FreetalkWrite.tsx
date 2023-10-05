@@ -56,7 +56,10 @@ const FreetalkWrite = () => {
             )}
           </div>
         </Head>
-        <PettalkWrite isFreeTalkWrite={isFreeTalkWrite} />
+        <PettalkWrite
+          isFreeTalkWrite={isFreeTalkWrite}
+          petType={active ? "DOG" : "CAT"}
+        />
       </div>
     </Background>
   );

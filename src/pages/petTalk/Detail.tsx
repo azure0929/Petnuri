@@ -4,7 +4,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
 import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
-import { usePettalkDetail } from "@/lib/hooks/pettalkList";
+import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
@@ -20,6 +20,10 @@ import sad_off from "@/assets/Sad_off.png";
 import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { API_URL } from "@/lib/apis/base";
+import { getCookie } from "@/utils/Cookie";
 
 const PetTalkDetail = () => {
   const navigate = useNavigate();
@@ -29,6 +33,11 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
+  const { data: replyData, refetch: replyRefetch } = usePettalkReply(
+    Number(petTalkId)
+  );
+
+  console.log(replyData);
 
   const onClickBack = () => {
     navigate(-1);
@@ -98,6 +107,39 @@ const PetTalkDetail = () => {
     { emojiType: "OMG", imgSrc: surprise_off, altText: "헉", text: "헉" },
     { emojiType: "SAD", imgSrc: sad_off, altText: "슬퍼요", text: "슬퍼요" },
   ];
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid, errors },
+  } = useForm();
+
+  const postReply = async (data: any) => {
+    const content = data.reply;
+    try {
+      const response = await axios.post(
+        `${API_URL}/pet-talk/${petTalkId}/reply`,
+        {
+          content,
+        },
+        {
+          headers: {
+            Authorization: getCookie("jwtToken"),
+          },
+        }
+      );
+      console.log("response:", response);
+    } catch (error) {
+      console.error("no List:", error);
+    }
+  };
+
+  const onVaild = async (data: any) => {
+    await postReply(data);
+    replyRefetch();
+    reset();
+  };
 
   return (
     <>
@@ -196,21 +238,38 @@ const PetTalkDetail = () => {
             ))}
           </div>
           <div className={styles.reply_wrapper}>
-            <span className={styles.count}>댓글 {data?.replyCount}개</span>
-            <CommentItem />
+            <span className={styles.count}>댓글 {replyData?.length}개</span>
+            {replyData && <CommentItem />}
           </div>
-          <div className={styles.replyWrite_wrapper}>
-            {data?.writer?.profileImageUrl === null ? (
-              <img src={default_user} alt="default-img" />
-            ) : (
-              <img src={data?.writer?.profileImageUrl} alt="profile-img" />
-            )}
-            <input
-              type="text"
-              placeholder="댓글을 작성해주세요"
-              onFocus={handleInputFocus}
-            />
-          </div>
+
+          <form onSubmit={handleSubmit(onVaild)}>
+            <div className={styles.replyWrite_wrapper}>
+              {data?.writer?.profileImageUrl === null ? (
+                <img src={default_user} alt="default-img" />
+              ) : (
+                <img src={data?.writer?.profileImageUrl} alt="profile-img" />
+              )}
+              <input
+                {...register("reply", { required: true, maxLength: 100 })}
+                type="text"
+                placeholder="댓글을 작성해주세요"
+                onFocus={handleInputFocus}
+              />
+
+              <button
+                style={{
+                  cursor: isValid ? "pointer" : "not-allowed",
+                  backgroundColor: isValid ? "#FFD262" : "#EAEAEA",
+                }}
+                disabled={!isValid}
+              >
+                {">"}
+              </button>
+              {errors?.reply?.type === "maxLength" ? (
+                <span>100자 이내로 입력하세요.</span>
+              ) : null}
+            </div>
+          </form>
           {isModalOpen && <LoginModal />}
         </div>
       </Background>
