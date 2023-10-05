@@ -46,12 +46,13 @@ const SignUp = () => {
 
   useEffect(() => {
     const jwtToken = getCookie("jwtToken");
-
+  
     if (jwtToken) {
       navigate("/");
-    } else () => {
+    } else {
       navigate("/signup");
     }
+  
   }, [navigate]);
 
   const handleAgreeButtonClick = async () => {
@@ -59,7 +60,7 @@ const SignUp = () => {
       try {
         const email = kakaoEmail || (emailInputRef.current?.placeholder ?? "");
         const response = await join({
-          email,
+          email: email,
           nickname: name,
           referral: referralCode,
           isAgreed: isAllAgreed,
@@ -158,7 +159,7 @@ const SignUp = () => {
   useEffect(() => {
     const fetchKakaoEmail = async () => {
       try {
-        const hasKakaoAccessToken = sessionStorage.getItem("kakaoAccessToken") || "";
+        const hasKakaoAccessToken = localStorage.getItem("kakaoAccessToken") || "";
         if (!hasKakaoAccessToken) {
           console.error("Kakao Access Token이 없습니다. 로그인 후에 다시 시도하세요.");
           return;
@@ -166,18 +167,17 @@ const SignUp = () => {
 
         const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("kakaoAccessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("kakaoAccessToken")}`,
           },
         });
 
         const { kakao_account } = response.data;
         const { email } = kakao_account;
 
-        // 이메일 정보를 상태에 저장
         setKakaoEmail(email);
 
         const emailInput = document.querySelector("#email-input") as HTMLInputElement;
-        emailInput.placeholder = email;
+        emailInput.placeholder = email || 'petnuri@kakao.talk';
       } catch (error) {
         console.error("Kakao 이메일 조회 오류:", error);
       }
@@ -185,6 +185,7 @@ const SignUp = () => {
 
     fetchKakaoEmail();
   }, []);
+
 
   const handleReferralCodeBlur = async () => {
     try {
@@ -225,7 +226,10 @@ const SignUp = () => {
           <div className={styles.read}>
             <div className={styles.box}>
               <h2 className={styles.title}>이메일</h2>
-              <input id="email-input" readOnly />
+              <input 
+                id="email-input" 
+                readOnly 
+              />
             </div>
           </div>
           <div className={styles.box}>
