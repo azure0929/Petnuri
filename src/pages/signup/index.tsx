@@ -12,6 +12,7 @@ import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { join } from "@/lib/apis/userApi";
+import { setCookie, getCookie } from "@/utils/Cookie";
 
 const SignUp = () => {
   const [name, setName] = useState<string>("");
@@ -33,7 +34,7 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState<string>("");
   const [referralCodeError, setReferralCodeError] = useState<string>("");
 
-  const [kakaoEmail, setKakaoEmail] = useState<string>(""); // 카카오 계정의 이메일 상태
+  const [kakaoEmail, setKakaoEmail] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -43,21 +44,31 @@ const SignUp = () => {
 
   const emailInputRef = useRef<HTMLInputElement | null>(null);
 
+  useEffect(() => {
+    const jwtToken = getCookie("jwtToken");
+
+    if (jwtToken) {
+      navigate("/");
+    } else () => {
+      navigate("/signup");
+    }
+  }, [navigate]);
+
   const handleAgreeButtonClick = async () => {
     if (isButtonEnabled) {
       try {
         const email = kakaoEmail || (emailInputRef.current?.placeholder ?? "");
-
         const response = await join({
-          email: email,
+          email,
           nickname: name,
           referral: referralCode,
           isAgreed: isAllAgreed,
         });
 
-        const { jwtToken } = response.data;
+        const { jwtToken, refreshToken } = response.data;
 
-        sessionStorage.setItem('jwtToken', jwtToken);
+        setCookie("jwtToken", jwtToken);
+        localStorage.setItem("refreshToken", refreshToken);
 
         console.log("회원가입 성공:", response.data);
         navigate("/onboarding");
