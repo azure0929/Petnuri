@@ -30,8 +30,7 @@ const PetTalkDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
-  const { data: totalEmojiCount, refetch: totalEmojiRefetch } =
-    usePettalkDetail(Number(petTalkId));
+  const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
   const { data: replyData, refetch: replyRefetch } = usePettalkReply(
     Number(petTalkId)
   );
