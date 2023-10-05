@@ -3,7 +3,6 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-// import { pettalkDetail } from "@/lib/apis/pettalkApi";
 import { usePettalkDetail } from "@/lib/hooks/pettalkList";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
@@ -24,7 +23,7 @@ const PetTalkDetail = () => {
   const navigate = useNavigate();
   const { petTalkId } = useParams();
 
-  const [selectedButton, setSelectedButton] = useState<number | null>(null);
+  const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data } = usePettalkDetail(Number(petTalkId));
@@ -34,11 +33,13 @@ const PetTalkDetail = () => {
   };
 
   const handleButtonClick = (index: number) => {
-    if (selectedButton === index) {
-      setSelectedButton(null);
-    } else {
-      setSelectedButton(index);
-    }
+    setSelectedButtons((prevSelectedButtons) => {
+      if (prevSelectedButtons.includes(index)) {
+        return prevSelectedButtons.filter((item) => item !== index);
+      } else {
+        return [...prevSelectedButtons, index];
+      }
+    });
   };
 
   const handleInputFocus = () => {
@@ -105,8 +106,8 @@ const PetTalkDetail = () => {
                 <div className={styles.content_text}>{data?.content}</div>
               </div>
 
-              <div className={styles.imgWrapper}>
-                {data?.petTalkPhotos ? (
+              {data?.petTalkPhotos ? (
+                <div className={styles.imgWrapper}>
                   <Slider {...settings}>
                     {data?.petTalkPhotos?.map(
                       (photo: PetTalkPhoto, index: number) => (
@@ -116,8 +117,8 @@ const PetTalkDetail = () => {
                       )
                     )}
                   </Slider>
-                ) : null}
-              </div>
+                </div>
+              ) : null}
 
               <div className={styles.response_wrapper}>
                 <div className={styles.icon_area}>
@@ -140,14 +141,14 @@ const PetTalkDetail = () => {
               <button
                 key={index}
                 className={`${styles.emoji_item} ${
-                  selectedButton === index ? styles.selected : ""
+                  selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleButtonClick(index)}
               >
                 <div className={styles.img_area}>
                   <img
                     src={
-                      selectedButton === index
+                      selectedButtons.includes(index)
                         ? emoji.imgSrc.replace("_off", "_on")
                         : emoji.imgSrc
                     }
@@ -157,8 +158,8 @@ const PetTalkDetail = () => {
 
                 <span
                   style={{
-                    fontWeight: selectedButton === index ? 600 : 400,
-                    color: selectedButton === index ? "black" : "gray",
+                    fontWeight: selectedButtons.includes(index) ? 600 : 400,
+                    color: selectedButtons.includes(index) ? "black" : "gray",
                   }}
                 >
                   {emoji.text}
