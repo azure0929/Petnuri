@@ -43,10 +43,10 @@ const DailyChallenge2 = () => {
     subTitle: daily2Data?.subTitle || "",
     howTitle: "인증방법",
     howInfo: daily2Data?.authMethod || "",
-    periodTitle: "진행기간",
-    periodInfo: "1일",
+    periodTitle: "리워드",
+    periodInfo: "100P (1일 1회 참여 횟수 제한)",
     pointTitle: "포인트 지급",
-    pointInfo: "참여완료시 바로 지급",
+    pointInfo: "참여완료 즉시 지급",
   };
 
   const handleJoinButtonClick = async () => {

@@ -22,6 +22,7 @@ interface ChallengeJoin {
   imageUrl: string;
   photoUrl?: string; // photoUrl는 옵셔널로 지정합니다.
   reviews?: FilterDataArray;
+  createdAt: string;
 }
 
 // 집사대회 내 참여현황

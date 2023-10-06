@@ -44,11 +44,11 @@ const ECYanado = () => {
     mainTitle: yanadoData?.title || "",
     subTitle: yanadoData?.subTitle || "",
     howTitle: "인증방법",
-    howInfo: "인증사진 업로드",
+    howInfo: "반려일기 작성",
     periodTitle: "진행기간",
-    periodInfo: "1일",
+    periodInfo: "15일",
     pointTitle: "포인트 지급",
-    pointInfo: "참여완료시 바로 지급",
+    pointInfo: "10회차 반려일기 작성완료시 즉시 지급",
   };
 
   const handleJoinButtonClick = async () => {

@@ -80,11 +80,11 @@ const Contest = () => {
     mainTitle: contestData?.title || "",
     subTitle: contestData?.subTitle || "",
     howTitle: "인증방법",
-    howInfo: "인증사진 업로드",
+    howInfo: "참여신청 - 제품 수령 후 리뷰글 작성",
     periodTitle: "진행기간",
-    periodInfo: "1일",
+    periodInfo: "각 단계별 기간 상이(총23일)",
     pointTitle: "포인트 지급",
-    pointInfo: "참여완료시 바로 지급",
+    pointInfo: "인증기간 종료 후 순차 발송",
   };
 
   const handleJoinButtonClick = async () => {

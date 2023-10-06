@@ -24,7 +24,7 @@ const ChallengeJoin: React.FC<JoinListsProps> = ({ joinLists }) => {
                   className={styles.img}
                 />
                 <div className={styles.name}>
-                  <span>{joinItem.id || joinItem.memberId}</span>
+                  <span>{joinItem.createdAt || joinItem.nickName}</span>
                 </div>
               </div>
             ))
