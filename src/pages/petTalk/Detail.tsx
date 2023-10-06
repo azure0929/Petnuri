@@ -3,11 +3,10 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
+import { emojiPost, emojiDelete, replyPost } from "@/lib/apis/pettalkApi";
 import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
-import CommentItem from "@/components/CommentItem";
 import LoginModal from "@/components/modal/LoginModal";
 import heart from "@/assets/heart_18px.svg";
 import talk from "@/assets/talk_18px.svg";
@@ -21,8 +20,9 @@ import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { API_URL } from "@/lib/apis/base";
+
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
 import { getCookie } from "@/utils/Cookie";
 
 const PetTalkDetail = () => {
@@ -31,13 +31,20 @@ const PetTalkDetail = () => {
 
   const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
+  const [replyContent, setReplyContent] = useState("");
 
   const { data } = usePettalkDetail(Number(petTalkId));
+  const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
   const { data: replyData, refetch: replyRefetch } = usePettalkReply(
     Number(petTalkId)
   );
 
-  console.log(replyData);
+  const toggleExpand = () => {
+    setIsExpanded((prev) => !prev);
+  };
 
   const onClickBack = () => {
     navigate(-1);
@@ -67,19 +74,18 @@ const PetTalkDetail = () => {
           return [...prevSelectedButtons, index];
         }
       });
+
+      totalEmojiRefetch();
     } catch (error) {
       console.error("이모지 응답 실패:", error);
     }
   };
 
-  const handleInputFocus = () => {
-    const isLoggedIn = false;
-    if (!isLoggedIn) {
-      setIsModalOpen(true);
+  const openLoginModal = () => {
+    if (!token) {
+      setLoginOpen(true);
     }
   };
-
-  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
 
   const settings = {
     dots: true,
@@ -90,10 +96,6 @@ const PetTalkDetail = () => {
     swipeToSlide: true,
     arrows: false,
   };
-
-  if (images.length === 0) {
-    return null;
-  }
 
   const emojiData = [
     {
@@ -113,32 +115,25 @@ const PetTalkDetail = () => {
     handleSubmit,
     reset,
     formState: { isValid, errors },
+    setValue,
   } = useForm();
 
-  const postReply = async (data: any) => {
-    const content = data.reply;
-    try {
-      const response = await axios.post(
-        `${API_URL}/pet-talk/${petTalkId}/reply`,
-        {
-          content,
-        },
-        {
-          headers: {
-            Authorization: getCookie("jwtToken"),
-          },
-        }
-      );
-      console.log("response:", response);
-    } catch (error) {
-      console.error("no List:", error);
-    }
+  const ReplyOnClick = (item: ReplyItem) => {
+    setValue("reply", `@${item.writer.nickname} `);
   };
 
   const onVaild = async (data: any) => {
-    await postReply(data);
-    replyRefetch();
-    reset();
+    const content = data.reply;
+    try {
+      await replyPost({
+        petTalkId: Number(petTalkId),
+        content,
+      });
+      replyRefetch();
+      reset();
+    } catch (error) {
+      console.error("댓글 작성 실패:", error);
+    }
   };
 
   return (
@@ -214,6 +209,7 @@ const PetTalkDetail = () => {
                   selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleEmojiClick(index, emoji.emojiType)}
+                onFocus={openLoginModal}
               >
                 <div className={styles.img_area}>
                   <img
@@ -239,7 +235,73 @@ const PetTalkDetail = () => {
           </div>
           <div className={styles.reply_wrapper}>
             <span className={styles.count}>댓글 {replyData?.length}개</span>
-            {replyData && <CommentItem />}
+            {replyData && (
+              <>
+                {replyData && replyData?.length > 0 ? (
+                  replyData?.map((item: ReplyItem) => (
+                    <div key={item.replyId} className={styles.item}>
+                      <div className={styles.user_info}>
+                        {item?.writer?.profileImageUrl === null ? (
+                          <img src={default_user} alt="default-img" />
+                        ) : (
+                          <img
+                            src={item?.writer?.profileImageUrl}
+                            alt="profile-img"
+                          />
+                        )}
+                        <span className={styles.name}>
+                          {item?.writer?.nickname}
+                        </span>
+                        <span className={styles.date}>
+                          ・ {formatDate(item?.createdAt)}
+                        </span>
+                      </div>
+
+                      <div className={styles.item_content}>
+                        <span
+                          className={
+                            item?.content.split("\n").length > 2
+                              ? isExpanded
+                                ? styles.expandedText
+                                : styles.collapsedText
+                              : styles.expandedText
+                          }
+                        >
+                          {item?.content}
+                        </span>
+                        {item?.content.split("\n").length > 2 &&
+                          !isExpanded && (
+                            <button
+                              className={styles.expandButton}
+                              onClick={toggleExpand}
+                            >
+                              ...더보기
+                            </button>
+                          )}
+                        <div>
+                          {item?.tag ? (
+                            <div>
+                              <span>{item?.tag?.taggedMemberId}</span>
+                              <span>{item?.tag?.nickname}</span>
+                            </div>
+                          ) : null}
+                          <button
+                            onClick={() => ReplyOnClick(item)}
+                            className={styles.reReply}
+                          >
+                            대댓글 달기
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.noList_wrapper}>
+                    아직 등록된 댓글이 없습니다.
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           <form onSubmit={handleSubmit(onVaild)}>
@@ -253,7 +315,9 @@ const PetTalkDetail = () => {
                 {...register("reply", { required: true, maxLength: 100 })}
                 type="text"
                 placeholder="댓글을 작성해주세요"
-                onFocus={handleInputFocus}
+                onFocus={openLoginModal}
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
               />
 
               <button
@@ -270,8 +334,8 @@ const PetTalkDetail = () => {
               ) : null}
             </div>
           </form>
-          {isModalOpen && <LoginModal />}
         </div>
+        <LoginModal />
       </Background>
     </>
   );

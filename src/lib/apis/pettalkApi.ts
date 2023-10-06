@@ -150,27 +150,29 @@ export const emojiDelete = async ({
 };
 
 //펫톡 댓글 추가
-//accessToken 임시
 export const replyPost = async ({
-  accessToken,
   petTalkId,
+  content,
 }: {
-  accessToken: string;
   petTalkId: number;
+  content: string;
 }) => {
   try {
-    const response = await axios.delete(
+    const response = await axios.post(
       `${API_URL}/pet-talk/${petTalkId}/reply`,
       {
+        content,
+      },
+      {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: getCookie("jwtToken"),
         },
       }
     );
-    console.log("성공", response.data);
+    console.log("댓글", content);
     return response.data;
   } catch (error) {
-    console.error("실패", error);
+    console.error("댓글 작성 실패:", error);
     throw error;
   }
 };

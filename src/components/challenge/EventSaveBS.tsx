@@ -1,15 +1,25 @@
 import BottomSheet from "@/components/challenge/EventBSLayout";
 import styles from "@/styles/challenge/eventbs.module.scss";
 import addIcon from "@/assets/icon-plus-circle-mono.svg";
-import { bottomSheetState } from "@/store/challengeState";
+import { EventBottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
 import { createToast } from "@/utils/ToastUtils";
-import { ECyanadoReviewApi } from "@/lib/apis/challengeApi";
+import { ReviewApi } from "@/lib/apis/challengeApi";
 
-const EventSaveBS = () => {
-  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+interface EventSaveBSProps {
+  eventName: string;
+  id: number;
+  onHandle: () => void;
+}
+
+const EventSaveBS: React.FC<EventSaveBSProps> = ({
+  eventName,
+  id,
+  onHandle,
+}) => {
+  const setEventBottomIsOpen = useSetRecoilState(EventBottomSheetState);
   const sucess = () => createToast("success", "포인트 지급이 완료되었습니다.");
   const error = () => createToast("error", "취소되었습니다.");
   const [content, setContent] = useState<string>("");
@@ -19,9 +29,9 @@ const EventSaveBS = () => {
       if (!newUserImg) {
         throw new Error("이미지 파일을 선택해주세요.");
       }
-      await ECyanadoReviewApi(newUserImg, content, petType);
+      await ReviewApi(newUserImg, content, petType, eventName, id);
+      onHandle();
     } catch (error) {
-      alert(error);
       console.log(error);
     }
   };
@@ -58,13 +68,13 @@ const EventSaveBS = () => {
     if (newUserImg && content && petType) {
       review();
       sucess();
-      setBottomIsOpen(false);
+      setEventBottomIsOpen(false);
     } else {
-      error();
       setContent("");
       setNewUserImg(null);
       setPetType("");
-      setBottomIsOpen(false);
+      setEventBottomIsOpen(false);
+      error();
     }
   };
 

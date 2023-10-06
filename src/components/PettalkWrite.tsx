@@ -74,7 +74,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
       if (imageUrlLists.length > 4) {
         imageUrlLists = imageUrlLists.slice(0, 10);
-        imageFileLists= imageFileLists.slice(0,10);
+        imageFileLists = imageFileLists.slice(0, 10);
       }
 
       setShowImages(imageUrlLists);
@@ -88,28 +88,27 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   //api post
   const handlePostData = async () => {
-    const request={
+    const request = {
       petType,
-      mainCategoryId:1,
-      subCategoryId:1,
+      mainCategoryId: 1,
+      subCategoryId: Number(category),
       title,
-      content
+      content,
     };
-   
+
     try {
       const response = await writingOut({
         images: imageFiles,
         request,
       });
-      console.log(response)
-  
+      console.log(response);
+
       if (response.status === 201 || response.status === 200) {
         console.log("게시물이 성공적으로 작성되었습니다.", response.data);
         navigate("/petTalk");
       } else {
-        console.error("게시물 작성 중 오류 발생:",response);
+        console.error("게시물 작성 중 오류 발생:", response);
       }
-
     } catch (error) {
       console.error("게시물 작성 중 오류 발생:", error);
     }
@@ -127,11 +126,11 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
             value={category}
           >
             <option value="">카테고리를 선택하세요</option>
-            <option value="질병/질환">질병/질환</option>
-            <option value="미용/패션">미용/패션</option>
-            <option value="교육/훈련">교육/훈련</option>
-            <option value="양육/관리">양육/관리</option>
-            <option value="반려용품">반려용품</option>
+            <option value="1">질병/질환</option>
+            <option value="2">미용/패션</option>
+            <option value="3">교육/훈련</option>
+            <option value="4">양육/관리</option>
+            <option value="5">반려용품</option>
           </select>
         </div>
       ) : null}

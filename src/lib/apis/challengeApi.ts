@@ -3,10 +3,8 @@ import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
 
 // 토큰 임시 값
-const locakStorageToken =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMTIiLCJleHAiOjE2OTY0NDQzMzMsImlkIjo1Mywicm9sZSI6IlVTRVIifQ.BFSpWK-pqTwtiW-_Ci87aC9Tcl7z_jV2WkEGvaU-l5Q";
-// const token = localstorage.getItem('jwtToken')
-// const locakStorageToken = `Bearer ${token}`
+// const locakStorageToken =
+const locakStorageToken = getCookie("jwtToken");
 
 // 집사대회 api
 export const ContestCheckApi = async () => {
@@ -17,7 +15,7 @@ export const ContestCheckApi = async () => {
     console.error("Error in ContestCheckApi: " + error);
   }
 };
-// 집사대회 참여현황 api
+// 집사대회 다른 사람 참여현황 api
 export const ContestJoinApi = async () => {
   try {
     const response = await axios.get(
@@ -29,39 +27,46 @@ export const ContestJoinApi = async () => {
   }
 };
 
+//집사대회 내 참여현황
+export const joinCheckApi = async () => {
+  try {
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+
+    const response = await axios.get(`${API_URL}/challenge/reward/1/join/my`, {
+      headers,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error in joinCheckApi: " + error);
+    return "join";
+  }
+};
+
 // 집사대회 참여신청 api
-// export const ContestReviewApi = async (
-//   accessToken: string,
-//   imageFile: File,
-//   content: string
-// ) => {
-//   try {
-//     const formData = new FormData();
-//     formData.append("file", imageFile);
-
-//     const headers = {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "multipart/form-data",
-//     };
-
-//     await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-//       headers,
-//     });
-
-//     const request = { content };
-
-//     await axios.post(`${API_URL}/challenge/point/1/review`, request, {
-//       headers,
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const ContestParticipationApi = async (deliveryData: DeliveryData) => {
+  try {
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+    await axios.post(`${API_URL}/challenge/reward/1/join`, deliveryData, {
+      headers,
+    });
+  } catch (error) {
+    console.error("Error in ContestParticipationApi: " + error);
+  }
+};
 
 // 야너도? 야 너도!
 export const ECyanadoCheckApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/point/1`);
+    const response = await axios.get(`${API_URL}/challenge/point/1`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in ContestCheckApi:", error);
@@ -77,16 +82,26 @@ export const YanadoCheckApi = async () => {
   }
 };
 
+export const rewardApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/challenge/reward/1/product`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in rewardApi: " + error);
+  }
+};
+
 export const DeliveryListApi = async () => {
   try {
     const response = await axios.get(`${API_URL}/delivery/address`, {
       headers: {
-        Authorization: getCookie("jwtToken"),
+        // Authorization: getCookie("jwtToken"),
+        Authorization: locakStorageToken,
       },
     });
     return response.data;
   } catch (error) {
-    console.error("Error in YanadoCheckApi:", error);
+    console.error("Error in DeliveryListApi:", error);
   }
 };
 
@@ -98,7 +113,8 @@ export const DeliveryRegApi = async (deliveryInfo: any) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: getCookie("jwtToken"),
+          // Authorization: getCookie("jwtToken"),
+          Authorization: locakStorageToken,
         },
       }
     );
@@ -117,7 +133,8 @@ export const DeliveryUpdateApi = async (deliveryInfo: any) => {
       deliveryInfo,
       {
         headers: {
-          Authorization: getCookie("jwtToken"),
+          // Authorization: getCookie("jwtToken"),
+          Authorization: locakStorageToken,
         },
       }
     );
@@ -170,7 +187,13 @@ export const DeliveryDelApi = async (deliveryAddressId: number) => {
 // 야너도?야나도 내 참여 현황
 export const ECyanadoJoinApi = async () => {
   try {
-    const response = await axios.post(`${API_URL}/challenge/point/1/reviews`);
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+
+    const response = await axios.get(`${API_URL}/challenge/point/1/reviews`, {
+      headers,
+    });
     return response.data;
   } catch (error) {
     console.log("Error in ECyanadoJoinApi: " + error);
@@ -178,10 +201,12 @@ export const ECyanadoJoinApi = async () => {
 };
 
 // 야너도?야나두 참여신청
-export const ECyanadoReviewApi = async (
+export const ReviewApi = async (
   imageFile: File,
   content: string,
-  petType: string
+  petType: string,
+  eventName: string,
+  id: number
 ) => {
   try {
     // 파일 Blob 생성
@@ -206,20 +231,13 @@ export const ECyanadoReviewApi = async (
       "Content-Type": "application/octet-stream",
     };
 
-    await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-      headers,
-    });
-    // const response = await axios.post(
-    //   `${API_URL}/challenge/point/1/review`,
-    //   formData,
-    //   {
-    //     headers,
-    //   }
-    // );
-
-    // if (response.status === 400) {
-    //   console.log(response);
-    // }
+    await axios.post(
+      `${API_URL}/challenge/${eventName}/${id}/review`,
+      formData,
+      {
+        headers,
+      }
+    );
   } catch (error) {
     console.error(error);
   }
@@ -228,7 +246,11 @@ export const ECyanadoReviewApi = async (
 // 데일리 이벤트 - 간식주기 조회
 export const dailyChallenge1Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/1`);
+    const response = await axios.get(`${API_URL}/challenge/daily/1`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallange1Api: " + error);
@@ -248,7 +270,11 @@ export const daily1JoinListApi = async () => {
 // 데일리 이벤트 - 놀아주기 조회
 export const dailyChallenge2Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/2`);
+    const response = await axios.get(`${API_URL}/challenge/daily/2`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallenge2Api: " + error);
@@ -268,7 +294,11 @@ export const daily2JoinListApi = async () => {
 // 데일리 이벤트 - 위생관리 조회
 export const dailyChallenge3Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/3`);
+    const response = await axios.get(`${API_URL}/challenge/daily/3`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallenge3Api: " + error);
@@ -302,17 +332,17 @@ export const dailyReviewApi = async (imageFile: File, id: number) => {
     await axios.post(`${API_URL}/challenge/daily/${id}`, formData, {
       headers,
     });
-    const response = await axios.post(
-      `${API_URL}/challenge/point/1/review`,
-      formData,
-      {
-        headers,
-      }
-    );
+    // const response = await axios.post(
+    //   `${API_URL}/challenge/point/1/review`,
+    //   formData,
+    //   {
+    //     headers,
+    //   }
+    // );
 
-    if (response.status > 300) {
-      console.log(response.status);
-    }
+    // if (response.status > 300) {
+    //   console.log(response.status);
+    // }
   } catch (error) {
     console.error("Error in daily1ReviewApi: " + error);
   }
@@ -331,10 +361,11 @@ export const dailyAllListApi = async () => {
 //포인트 샵
 export const pointApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/point`,{
+
+    const response = await axios.get(`${API_URL}/point/get`,{
       headers: {
-        Authorization: getCookie('jwtToken')
-      }
+        Authorization: getCookie("jwtToken"),
+      },
     });
     return response.data;
   } catch (error) {

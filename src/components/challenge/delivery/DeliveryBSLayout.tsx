@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useState } from "react";
-import styles from "@/styles/challenge/deliverybs/deliverybslayout.module.scss";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { bottomSheetState, BSTypeState } from "@/store/challengeState";
+import { ReactNode, useEffect, useState } from 'react';
+import styles from '@/styles/challenge/deliverybs/deliverybslayout.module.scss';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { bottomSheetState, BSTypeState } from '@/store/challengeState';
 
 interface BottomSheetProps {
   children: ReactNode;
@@ -10,7 +10,7 @@ interface BottomSheetProps {
 
 const BottomSheet: React.FC<BottomSheetProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useRecoilState(bottomSheetState);
-  const setBSType = useSetRecoilState(BSTypeState)
+  const setBSType = useSetRecoilState(BSTypeState);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -23,8 +23,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ children }) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    setBSType('DeliveryBS')
-  }
+    setBSType('DeliveryBS');
+  };
 
   return (
     <>
@@ -32,12 +32,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ children }) => {
         <>
           <div
             className={`${styles.background} ${
-              isVisible ? styles.visible : ""
+              isVisible ? styles.visible : ''
             }`}
             onClick={handleClose}
           ></div>
           <div
-            className={`${styles.container} ${isVisible ? styles.visible : ""}`}
+            className={`${styles.container} ${isVisible ? styles.visible : ''}`}
           >
             {children}
           </div>

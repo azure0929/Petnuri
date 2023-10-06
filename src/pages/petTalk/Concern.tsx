@@ -18,6 +18,11 @@ import freetalk_icon from "@/assets/freetalk_icon.svg";
 import default_user from "@/assets/user.png";
 import banner from "@/assets/키트배너.png";
 
+import LoginModal from "@/components/modal/LoginModal";
+import { getCookie } from "@/utils/Cookie";
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
+
 const Concern = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -25,11 +30,17 @@ const Concern = () => {
   const [subCategory, setSubCategory] = useState(1);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
 
   const scrollRef = useScrollDiv();
 
   const handleFloating = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (!token) {
+      setLoginOpen(true);
+    } else if (!isMenuOpen) { 
+      setIsMenuOpen(true);
+    }
   };
 
   const handlePetSelect = (e: { target: { value: string } }) => {
@@ -250,6 +261,7 @@ const Concern = () => {
           </div>
           <MainTab />
         </div>
+        <LoginModal />
       </Background>
     </>
   );

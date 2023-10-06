@@ -17,15 +17,26 @@ import freetalk_icon from "@/assets/freetalk_icon.svg";
 import default_user from "@/assets/user.png";
 import banner from "@/assets/키트배너.png";
 
+import LoginModal from "@/components/modal/LoginModal";
+import { getCookie } from "@/utils/Cookie";
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
+
 const FreeTalk = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
 
   const handleFloating = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (!token) {
+      setLoginOpen(true);
+    } else if (!isMenuOpen) { 
+      setIsMenuOpen(true);
+    }
   };
 
   const { data } = useFreetalkList(selectedPet, 2);
@@ -100,7 +111,7 @@ const FreeTalk = () => {
               </select>
             </div>
 
-            <div className={styles.banner}>
+            <div className={styles.banner} onClick={handleFloating}>
               <img src={banner} alt="프로모션 배너" />
             </div>
 
@@ -199,6 +210,7 @@ const FreeTalk = () => {
           </div>
           <MainTab />
         </div>
+        <LoginModal />
       </Background>
     </>
   );

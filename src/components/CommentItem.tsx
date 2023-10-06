@@ -1,14 +1,14 @@
 import styles from "@/styles/pettalkdetail.module.scss";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 import { usePettalkReply } from "@/lib/hooks/pettalkList";
 import default_user from "@/assets/user.png";
 import { formatDate } from "@/utils/DateFormat";
 
 const CommentItem = () => {
   const { petTalkId } = useParams();
-
   const [isExpanded, setIsExpanded] = useState(false);
+
   const { data } = usePettalkReply(Number(petTalkId));
 
   const toggleExpand = () => {
@@ -50,6 +50,12 @@ const CommentItem = () => {
                 </button>
               )}
               <div>
+                {item?.tag ? (
+                  <div>
+                    <span>{item?.tag?.taggedMemberId}</span>
+                    <span>{item?.tag?.nickname}</span>
+                  </div>
+                ) : null}
                 <button className={styles.reReply}>대댓글 달기</button>
               </div>
             </div>
