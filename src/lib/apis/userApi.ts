@@ -7,9 +7,9 @@ const api = axios.create({
 });
 
 // 회원가입
-export const join = async ({ email, nickname, isAgreed, referral }: Join) => {
+export const join = async ({ email, nickname, isAgreed, referralCode }: Join) => {
   try {
-    const response = await api.post("/auth/join", { email, nickname, isAgreed, referral });
+    const response = await api.post("/auth/join", { email, nickname, isAgreed, referralCode });
     console.log("회원가입 응답 데이터:", response.data);
     return response;
   } catch (error) {
@@ -33,10 +33,10 @@ export const checkNickname = async ({ nickname }: CheckNickname) => {
 };
 
 // 추천인 코드 체크
-export const checkReferral = async ({ referral }: Checkreferral) => {
+export const checkReferral = async ({ referralCode }: Checkreferral) => {
   try {
     const response = await axios.get("/auth/referral", {
-      params: { referral },
+      params: { referralCode },
     });
     console.log("추천인코드 응답 데이터:", response.data);
     return response;
@@ -76,7 +76,7 @@ export const HomeApi = async () => {
 export interface Join {
   email: string;
   nickname: string;
-  referral?: string;
+  referralCode: string;
   isAgreed: boolean;
 }
 
@@ -100,7 +100,7 @@ export interface CheckNicknameResponse {
 
 // 추천인 코드 확인
 export interface Checkreferral {
-  referral: string;
+  referralCode: string;
 }
 export interface CheckreferralResponse {
   referral: string;

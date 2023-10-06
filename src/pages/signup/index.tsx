@@ -12,7 +12,7 @@ import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { join } from "@/lib/apis/userApi";
-import { setCookie, getCookie } from "@/utils/Cookie";
+import { setCookie/* , getCookie */ } from "@/utils/Cookie";
 
 const SignUp = () => {
   const [name, setName] = useState<string>("");
@@ -44,17 +44,6 @@ const SignUp = () => {
 
   const emailInputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    const jwtToken = getCookie("jwtToken");
-  
-    if (jwtToken) {
-      navigate("/");
-    } else {
-      navigate("/signup");
-    }
-  
-  }, [navigate]);
-
   const handleAgreeButtonClick = async () => {
     if (isButtonEnabled) {
       try {
@@ -62,7 +51,7 @@ const SignUp = () => {
         const response = await join({
           email: email,
           nickname: name,
-          referral: referralCode,
+          referralCode: referralCode,
           isAgreed: isAllAgreed,
         });
 
@@ -89,8 +78,8 @@ const SignUp = () => {
     }
   };
 
-  const onLogin = () => {
-    navigate(`/login`);
+  const onHome = () => {
+    navigate(`/`);
   };
 
   const handlePrivacyConfirm = () => {
@@ -194,6 +183,11 @@ const SignUp = () => {
     fetchKakaoEmail();
   }, []);
 
+  const handleReferralCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setReferralCode(inputValue);
+    setReferralCodeError("");
+  };
 
   const handleReferralCodeBlur = async () => {
     try {
@@ -207,7 +201,6 @@ const SignUp = () => {
       const regex = /^[A-Z0-9]{8}$/;
       if (!regex.test(referralCode)) {
         setReferralCodeError("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.");
-        console.log("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.: ", referralCode);
         return;
       }
 
@@ -215,13 +208,13 @@ const SignUp = () => {
         params: { referralCode: referralCode },
       });
 
-      const { isValid } = response.data;
+      const { isExists } = response.data;
 
-      if (isValid) {
-        setReferralCodeError("사용 가능한 추천인 코드입니다.");
+      if (isExists) {
+        setReferralCode(referralCode);
         console.log("사용 가능한 추천인 코드: ", referralCode);
       } else {
-        setReferralCodeError("해당 추천인 코드가 올바르지 않습니다.");
+        setReferralCodeError(referralCode);
         console.log("해당 추천인 코드가 올바르지 않습니다.: ", referralCode);
       }
     } catch (error) {
@@ -234,7 +227,7 @@ const SignUp = () => {
       <Background>
         <div className={styles.head}>
           <div role="button" className={styles.prev}>
-            <img src={arrow_left_mid} alt="prev" onClick={onLogin} />
+            <img src={arrow_left_mid} alt="prev" onClick={onHome} />
           </div>
           <p>카카오톡 회원가입</p>
         </div>
@@ -280,7 +273,7 @@ const SignUp = () => {
               type="text"
               placeholder="추천인의 코드를 입력해주세요"
               value={referralCode}
-              onChange={(e) => setReferralCode(e.target.value)}
+              onChange={handleReferralCodeChange}
               onBlur={handleReferralCodeBlur}
               className={`${referralCodeError ? styles.invalid : ""}`}
             />
