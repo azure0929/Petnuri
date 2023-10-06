@@ -5,6 +5,7 @@ import {
 } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import JoinComplete from "@/components/challenge/JoinComplete";
+import { getCookie } from "@/utils/Cookie";
 
 interface JoinButtonProps {
   joinCheck: boolean | string;
@@ -20,7 +21,10 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
       <button
         className={styles.joinButton}
         onClick={() => {
-          setBottomIsOpen(true);
+          if (getCookie("jwtToken")) {
+            setBottomIsOpen(true);
+          }
+          handleCookie();
         }}
       >
         <span className={styles.buttonText}>참여하기</span>
@@ -40,6 +44,13 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
   } else if (joinCheck === "KIT_REVIEW_COMPLETE") {
     renderButton = <JoinComplete />;
   }
+
+  const handleCookie = () => {
+    const token = getCookie("jwtToken");
+    if (!token) {
+      alert("로그인 후 참여가 가능합니다.");
+    }
+  };
 
   return <>{renderButton}</>;
 };
