@@ -12,17 +12,18 @@ export const useAllList = (selectedPet: string) => {
 };
 
 export const useConcernList = (
-  selectedPet: string,
+  petType: string,
+  order: string,
   mainCategory: number,
   subCategory: number
 ) => {
   return useQuery("concernList", () =>
-    concernList(selectedPet, mainCategory, subCategory)
+    concernList(petType, order, mainCategory, subCategory)
   );
 };
 
 export const useFreetalkList = (selectedPet: string, mainCategory: number) => {
-  return useQuery("allLisfreetalkListt", () =>
+  return useQuery("freetalkList", () =>
     freetalkList(selectedPet, mainCategory)
   );
 };

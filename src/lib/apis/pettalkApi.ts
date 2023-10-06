@@ -17,12 +17,13 @@ export const allList = async (petType: string) => {
 //펫톡 고민상담 리스트
 export const concernList = async (
   petType: string,
+  order: string,
   mainCategory: number,
   subCategory: number
 ) => {
   try {
     const response = await axios.get(
-      `${API_URL}/pet-talk?pet=${petType}&order=BEST&mainCategory=${mainCategory}&subCategory=${subCategory}`
+      `${API_URL}/pet-talk?pet=${petType}&order=${order}&mainCategory=${mainCategory}&subCategory=${subCategory}`
     );
     return response.data.petTalkPosts;
   } catch (error) {
