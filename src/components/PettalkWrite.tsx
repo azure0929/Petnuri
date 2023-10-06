@@ -45,7 +45,11 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   };
 
   const isSubmitButtonEnabled = () => {
-    return category !== "" && title !== "" && inputCount !== 0;
+    if (isFreeTalkWrite) {
+      return title !== "" && inputCount !== 0;
+    } else {
+      return category !== "" && title !== "" && inputCount !== 0;
+    }
   };
 
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,9 +92,17 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   //api post
   const handlePostData = async () => {
+    let mainCategoryId;
+
+    if (window.location.pathname.includes("concernwrite")) {
+      mainCategoryId = 1;
+    } else if (window.location.pathname.includes("freetalkwrite")) {
+      mainCategoryId = 2;
+    }
+
     const request = {
       petType,
-      mainCategoryId: 1,
+      mainCategoryId,
       subCategoryId: Number(category),
       title,
       content,
@@ -116,7 +128,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   return (
     <div className={styles.all}>
-      {!isFreeTalkWrite ? (
+      {!isFreeTalkWrite && isSubmitButtonEnabled() ? (
         <div className={styles.selectarea}>
           <select
             name="category"

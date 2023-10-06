@@ -3,15 +3,17 @@ import Background from '../../components/Background';
 import styles from '@/styles/mypage.module.scss';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { AiOutlineRight } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getMypage, logout } from '@/lib/apis/mypageApi';
 import { useEffect, useState } from 'react';
 import defaultImage from '@/assets/defaultImage.png';
 
 const MyPage = () => {
+  const navigate = useNavigate();
   const [nickname, setNickname] = useState();
   const [email, setEmail] = useState();
   const [img, setImg] = useState();
+
   useEffect(() => {
     const a = getMypage();
     a.then((res) => {
@@ -28,6 +30,7 @@ const MyPage = () => {
     res
       .then(() => {
         alert('로그아웃 성공');
+        navigate('/');
       })
       .catch((error) => {
         alert(error);

@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState } from "@/store/petTalkState";
 import { useFreetalkList } from "@/lib/hooks/pettalkList";
+import { freetalkList } from "@/lib/apis/pettalkApi";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import { useState, useEffect } from "react";
@@ -19,37 +20,46 @@ import banner from "@/assets/키트배너.png";
 
 import LoginModal from "@/components/modal/LoginModal";
 import { getCookie } from "@/utils/Cookie";
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from "recoil";
 import { loginModalState } from "@/store/challengeState";
 
 const FreeTalk = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
+  const [selectedValue, setSelectedValue] = useState("BEST");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const setLoginOpen = useSetRecoilState(loginModalState); 
-  const token = getCookie("jwtToken")
+  const setLoginOpen = useSetRecoilState(loginModalState);
+  const token = getCookie("jwtToken");
 
   const handleFloating = () => {
     if (!token) {
       setLoginOpen(true);
-    } else if (!isMenuOpen) { 
+    } else if (!isMenuOpen) {
       setIsMenuOpen(true);
     }
   };
 
-  const { data } = useFreetalkList(selectedPet, 2);
-  console.log("자유수다 리스트", data);
+  const { data, refetch } = useFreetalkList(selectedPet, selectedValue, 2);
 
-  const handlePetSelect = (e: { target: { value: string } }) => {
-    const selectedValue = e.target.value;
-    setSelectedPet(selectedValue);
+  const handleChange = async (event: { target: { value: string } }) => {
+    setSelectedValue(event.target.value);
+    try {
+      await freetalkList(selectedPet, selectedValue, 2);
+      refetch();
+    } catch (error) {
+      console.error("데이터를 불러오는 중 에러 발생:", error);
+    }
+  };
 
-    if (selectedValue === "DOG") {
-      setSelectedPet("DOG");
-    } else if (selectedValue === "CAT") {
-      setSelectedPet("CAT");
+  const handlePetSelect = async (e: { target: { value: string } }) => {
+    setSelectedPet(e.target.value);
+    try {
+      await freetalkList(selectedPet, selectedValue, 2);
+      refetch();
+    } catch (error) {
+      console.error("데이터를 불러오는 중 에러 발생:", error);
     }
   };
 
@@ -116,9 +126,13 @@ const FreeTalk = () => {
             </div>
 
             <div className={styles.select_wrap}>
-              <select className={styles.select_sort} name="인기순">
-                <option value="인기순">인기순</option>
-                <option value="최신순">최신순</option>
+              <select
+                className={styles.select_sort}
+                name="인기순"
+                onChange={handleChange}
+              >
+                <option value="BEST">인기순</option>
+                <option value="LATEST">최신순</option>
               </select>
             </div>
 
