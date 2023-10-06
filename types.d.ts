@@ -251,16 +251,16 @@ interface PetTalkItem {
   id: number;
   title: string;
   content: string;
-  thumbnail: string | null;
+  thumbnail?: string;
   viewCount: number;
-  emojiCount: number | null;
-  replyCount: number | null;
+  totalEmojiCount: number;
+  replyCount: number;
   reacted: boolean;
   createdAt: string;
   writer: {
     id: number;
     nickname: string;
-    profileImageUrl: string | null;
+    profileImageUrl?: string;
   };
 }
 
@@ -268,4 +268,19 @@ interface PetTalkPhoto {
   id: number;
   name: string;
   url: string;
+}
+
+interface ReplyItem {
+  writer: {
+    writerId: number;
+    profileImageUrl?: string;
+    nickname: string;
+  };
+  replyId: number;
+  content: string;
+  createdAt: string;
+  tag?: {
+    taggedMemberId: number;
+    nickname: string;
+  };
 }

@@ -12,6 +12,7 @@ import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { join } from "@/lib/apis/userApi";
+import { setCookie, getCookie } from "@/utils/Cookie";
 
 const SignUp = () => {
   const [name, setName] = useState<string>("");
@@ -33,7 +34,7 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState<string>("");
   const [referralCodeError, setReferralCodeError] = useState<string>("");
 
-  const [kakaoEmail, setKakaoEmail] = useState<string>(""); // 카카오 계정의 이메일 상태
+  const [kakaoEmail, setKakaoEmail] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -43,11 +44,21 @@ const SignUp = () => {
 
   const emailInputRef = useRef<HTMLInputElement | null>(null);
 
+  useEffect(() => {
+    const jwtToken = getCookie("jwtToken");
+  
+    if (jwtToken) {
+      navigate("/");
+    } else {
+      navigate("/signup");
+    }
+  
+  }, [navigate]);
+
   const handleAgreeButtonClick = async () => {
     if (isButtonEnabled) {
       try {
         const email = kakaoEmail || (emailInputRef.current?.placeholder ?? "");
-
         const response = await join({
           email: email,
           nickname: name,
@@ -55,14 +66,25 @@ const SignUp = () => {
           isAgreed: isAllAgreed,
         });
 
-        const { jwtToken } = response.data;
+        const { jwtToken, refreshToken } = response.data;
 
-        sessionStorage.setItem('jwtToken', jwtToken);
+        setCookie("jwtToken", jwtToken);
+        localStorage.setItem("refreshToken", refreshToken);
 
         console.log("회원가입 성공:", response.data);
         navigate("/onboarding");
       } catch (error) {
-        console.error("회원가입 실패", error);
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.status === 400) {
+            alert("이미 가입된 이메일입니다.");
+            console.log("이미 가입된 이메일입니다.", error.response);
+            navigate("/");
+          } else {
+            console.error(error);
+          }
+        } else {
+          console.error(error);
+        }
       }
     }
   };
@@ -106,11 +128,9 @@ const SignUp = () => {
 
       if (isExists) {
         setIsNicknameValid(false);
-        setNameError("이미 사용 중인 닉네임입니다.");
-        console.log("사용 불가능한 닉네임: ", name);
+        console.log("다른 닉네임을 사용해주세요: ", name);
       } else {
         setIsNicknameValid(true);
-        setNameError("");
         console.log("사용 가능한 닉네임: ", name);
       }
 
@@ -147,7 +167,7 @@ const SignUp = () => {
   useEffect(() => {
     const fetchKakaoEmail = async () => {
       try {
-        const hasKakaoAccessToken = sessionStorage.getItem("kakaoAccessToken") || "";
+        const hasKakaoAccessToken = localStorage.getItem("kakaoAccessToken") || "";
         if (!hasKakaoAccessToken) {
           console.error("Kakao Access Token이 없습니다. 로그인 후에 다시 시도하세요.");
           return;
@@ -155,18 +175,17 @@ const SignUp = () => {
 
         const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("kakaoAccessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("kakaoAccessToken")}`,
           },
         });
 
         const { kakao_account } = response.data;
         const { email } = kakao_account;
 
-        // 이메일 정보를 상태에 저장
         setKakaoEmail(email);
 
         const emailInput = document.querySelector("#email-input") as HTMLInputElement;
-        emailInput.placeholder = email;
+        emailInput.placeholder = email || 'petnuri@kakao.talk';
       } catch (error) {
         console.error("Kakao 이메일 조회 오류:", error);
       }
@@ -175,11 +194,20 @@ const SignUp = () => {
     fetchKakaoEmail();
   }, []);
 
+
   const handleReferralCodeBlur = async () => {
     try {
       if (!referralCode) {
         setReferralCodeError("");
         console.log("No referral code provided.");
+        return;
+      }
+
+      // 영문 대문자와 숫자 3글자를 포함한 8글자의 추천인 코드 검사
+      const regex = /^[A-Z0-9]{8}$/;
+      if (!regex.test(referralCode)) {
+        setReferralCodeError("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.");
+        console.log("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.: ", referralCode);
         return;
       }
 
@@ -190,11 +218,11 @@ const SignUp = () => {
       const { isValid } = response.data;
 
       if (isValid) {
-        setReferralCodeError("이미 사용 중인 추천인 코드입니다.");
-        console.log("이미 사용 중인 추천인 코드입니다.");
+        setReferralCodeError("사용 가능한 추천인 코드입니다.");
+        console.log("사용 가능한 추천인 코드: ", referralCode);
       } else {
-        setReferralCodeError("");
-        console.log("사용 불가능한 추천인 코드입니다.");
+        setReferralCodeError("해당 추천인 코드가 올바르지 않습니다.");
+        console.log("해당 추천인 코드가 올바르지 않습니다.: ", referralCode);
       }
     } catch (error) {
       console.error(error);
@@ -214,7 +242,10 @@ const SignUp = () => {
           <div className={styles.read}>
             <div className={styles.box}>
               <h2 className={styles.title}>이메일</h2>
-              <input id="email-input" readOnly />
+              <input 
+                id="email-input" 
+                readOnly 
+              />
             </div>
           </div>
           <div className={styles.box}>

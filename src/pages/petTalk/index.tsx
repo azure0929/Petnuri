@@ -17,14 +17,25 @@ import freetalk_icon from "@/assets/freetalk_icon.svg";
 import default_user from "@/assets/user.png";
 import banner from "@/assets/키트배너.png";
 
+import LoginModal from "@/components/modal/LoginModal";
+import { getCookie } from "@/utils/Cookie";
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
+
 const PetTalk = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
 
   const handleFloating = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (!token) {
+      setLoginOpen(true);
+    } else if (!isMenuOpen) { 
+      setIsMenuOpen(true);
+    }
   };
 
   const handlePetSelect = (e: {
@@ -141,19 +152,21 @@ const PetTalk = () => {
                         <div className={styles.content_text}>
                           {item.content}
                         </div>
-                        <button className={styles.plus_button}>더보기</button>
+                        {item.content.split("\n").length > 2 && (
+                          <button className={styles.plus_button}>더보기</button>
+                        )}
                       </div>
 
                       {item.thumbnail === null ? null : (
                         <div className={styles.content_img}>
-                          <img src="" alt="예시이미지" />
+                          <img src={item.thumbnail} alt="thumbnail" />
                         </div>
                       )}
 
                       <div className={styles.response_wrapper}>
                         <div className={styles.icon_area}>
                           <img src={heart} alt="" />
-                          <span>{item.emojiCount}</span>
+                          <span>{item.totalEmojiCount}</span>
                         </div>
                         <div className={styles.icon_area}>
                           <img src={talk} alt="" />
@@ -202,6 +215,7 @@ const PetTalk = () => {
           </div>
           <MainTab />
         </div>
+        <LoginModal />
       </Background>
     </>
   );

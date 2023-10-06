@@ -34,7 +34,6 @@
         width: 26px;
         height: 26px;
         margin-right: 8px;
-        background-color: pink; //수정예정
         border: none;
         border-radius: 100%;
       }
@@ -254,17 +253,31 @@
   img {
     width: 38px;
     height: 38px;
-    background-color: pink; //수정예정
     border-radius: 100%;
     margin-right: 8px;
   }
   input {
-    width: 281px;
+    width: 250px;
     height: 38px;
     background-color: #f2f4f6;
     border: none;
     border-radius: 19px;
     padding: 9px 0 9px 16px;
     margin-top: 0;
+    margin-right: 8px;
   }
+  button {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100%;
+    color: white;
+  }
+}
+.noList_wrapper {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
 }

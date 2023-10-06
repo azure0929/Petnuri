@@ -3,9 +3,8 @@ import styles from "@/styles/pettalkdetail.module.scss";
 import { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePettalkDetail } from "@/lib/hooks/pettalkList";
-import { emojiPost, emojiDelete } from "@/lib/apis/pettalkApi";
-// import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
+import { emojiPost, emojiDelete, replyPost } from "@/lib/apis/pettalkApi";
+import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import CommentItem from "@/components/CommentItem";
@@ -21,18 +20,28 @@ import sad_off from "@/assets/Sad_off.png";
 import default_user from "@/assets/user.png";
 
 import { AiOutlineLeft } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
+import { getCookie } from "@/utils/Cookie";
 
 const PetTalkDetail = () => {
   const navigate = useNavigate();
   const { petTalkId } = useParams();
 
   const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
+  const [replyContent, setReplyContent] = useState("");
 
   const { data } = usePettalkDetail(Number(petTalkId));
-  // const { data: replydata } = usePettalkReply(Number(petTalkId));
-  // console.log("댓글", replydata);
+  const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
+  const { data: replyData, refetch: replyRefetch } = usePettalkReply(
+    Number(petTalkId)
+  );
 
+  console.log(replyData);
   const onClickBack = () => {
     navigate(-1);
   };
@@ -42,16 +51,12 @@ const PetTalkDetail = () => {
       // 이미 선택된 이모지인 경우에는 삭제 API를 호출
       if (selectedButtons.includes(index)) {
         await emojiDelete({
-          accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
           petTalkId: Number(petTalkId),
           emojiType,
         });
       } else {
         // 선택되지 않은 경우에는 추가 API를 호출
         await emojiPost({
-          accessToken:
-            "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvZ3UyQG5hdmVyLmNvbSIsImV4cCI6MTY5NjQ4OTg3MCwiaWQiOjcwLCJyb2xlIjoiVVNFUiJ9.mQE4IW-JS0mFgrH_lgCBQWGSw3XovezvC1ndqm4KG34",
           petTalkId: Number(petTalkId),
           emojiType,
         });
@@ -65,19 +70,18 @@ const PetTalkDetail = () => {
           return [...prevSelectedButtons, index];
         }
       });
+
+      totalEmojiRefetch();
     } catch (error) {
       console.error("이모지 응답 실패:", error);
     }
   };
 
-  const handleInputFocus = () => {
-    const isLoggedIn = false;
-    if (!isLoggedIn) {
-      setIsModalOpen(true);
+  const openLoginModal = () => {
+    if (!token) {
+      setLoginOpen(true);
     }
   };
-
-  const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
 
   const settings = {
     dots: true,
@@ -88,10 +92,6 @@ const PetTalkDetail = () => {
     swipeToSlide: true,
     arrows: false,
   };
-
-  if (images.length === 0) {
-    return null;
-  }
 
   const emojiData = [
     {
@@ -105,6 +105,27 @@ const PetTalkDetail = () => {
     { emojiType: "OMG", imgSrc: surprise_off, altText: "헉", text: "헉" },
     { emojiType: "SAD", imgSrc: sad_off, altText: "슬퍼요", text: "슬퍼요" },
   ];
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid, errors },
+  } = useForm();
+
+  const onVaild = async (data: any) => {
+    const content = data.reply;
+    try {
+      await replyPost({
+        petTalkId: Number(petTalkId),
+        content,
+      });
+      replyRefetch();
+      reset();
+    } catch (error) {
+      console.error("댓글 작성 실패:", error);
+    }
+  };
 
   return (
     <>
@@ -179,6 +200,7 @@ const PetTalkDetail = () => {
                   selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleEmojiClick(index, emoji.emojiType)}
+                onFocus={openLoginModal}
               >
                 <div className={styles.img_area}>
                   <img
@@ -203,24 +225,49 @@ const PetTalkDetail = () => {
             ))}
           </div>
           <div className={styles.reply_wrapper}>
-            <span className={styles.count}>댓글 {data?.replyCount}개</span>
-            <CommentItem />
-            <CommentItem />
-          </div>
-          <div className={styles.replyWrite_wrapper}>
-            {data?.writer?.profileImageUrl === null ? (
-              <img src={default_user} alt="default-img" />
-            ) : (
-              <img src={data?.writer?.profileImageUrl} alt="profile-img" />
+            <span className={styles.count}>댓글 {replyData?.length}개</span>
+            {replyData && (
+              <>
+                <CommentItem
+                  parentId={replyData?.replyId}
+                  userName={replyData?.writer?.nickname}
+                />
+              </>
             )}
-            <input
-              type="text"
-              placeholder="댓글을 작성해주세요"
-              onFocus={handleInputFocus}
-            />
           </div>
-          {isModalOpen && <LoginModal />}
+
+          <form onSubmit={handleSubmit(onVaild)}>
+            <div className={styles.replyWrite_wrapper}>
+              {data?.writer?.profileImageUrl === null ? (
+                <img src={default_user} alt="default-img" />
+              ) : (
+                <img src={data?.writer?.profileImageUrl} alt="profile-img" />
+              )}
+              <input
+                {...register("reply", { required: true, maxLength: 100 })}
+                type="text"
+                placeholder="댓글을 작성해주세요"
+                onFocus={openLoginModal}
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
+              />
+
+              <button
+                style={{
+                  cursor: isValid ? "pointer" : "not-allowed",
+                  backgroundColor: isValid ? "#FFD262" : "#EAEAEA",
+                }}
+                disabled={!isValid}
+              >
+                {">"}
+              </button>
+              {errors?.reply?.type === "maxLength" ? (
+                <span>100자 이내로 입력하세요.</span>
+              ) : null}
+            </div>
+          </form>
         </div>
+        <LoginModal />
       </Background>
     </>
   );
