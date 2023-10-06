@@ -8,10 +8,12 @@ import LoginModal from "@/components/modal/LoginModal";
 import { getCookie } from "@/utils/Cookie";
 import { useSetRecoilState } from 'recoil';
 import { loginModalState } from "@/store/challengeState";
+import { checkApi } from "@/lib/apis/challengeApi";
 
 const ChallengeHBS = () => {
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const [selected, setSelected] = useState<number | null>(null);
+  const [isClicked, setIsClicked] = useState(false);
   const token = getCookie("jwtToken")
 
   const openLoginModal = (callback: () => void) => {
@@ -19,6 +21,7 @@ const ChallengeHBS = () => {
       setLoginOpen(true);
     } else {
       callback();
+      setIsClicked(true);
     }
   };
 
@@ -30,7 +33,14 @@ const ChallengeHBS = () => {
     }
   };
 
-  const complete = () => createToast('success', '포인트 지급이 완료되었습니다');
+  const complete = async () => {
+    try {
+      await checkApi();
+      createToast('success', '포인트 지급이 완료되었습니다');
+    } catch (error) {
+      console.error("Error in complete function:", error);
+    }
+  };
   const wrong = () => createToast('error', '내일 다시 참여가 가능합니다');
   const copy = () => simpleToast('클립보드에 복사되었습니다');
 
@@ -44,7 +54,13 @@ const ChallengeHBS = () => {
             <span className={styles.title}>출석체크</span>
             <div className={styles.sub}>출석석체크하고 10 포인트 받아가세요!</div>
           </div>
-          <button className={styles.btn_1} onClick={() => openLoginModal(complete)}>포인트 받기</button>
+          <button 
+            className={`${styles.btn_1} ${isClicked ? styles.disabled : ''}`} 
+            onClick={() => openLoginModal(complete)} 
+            disabled={isClicked}
+          >
+            포인트 받기
+          </button>
         </div>
 
         <div className={styles.quiz}>

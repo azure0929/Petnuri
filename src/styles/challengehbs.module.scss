@@ -91,6 +91,12 @@
   @include body_regular_12px;
 }
 
+.disabled {
+  background-color: $gray_0100_F5F5F5; 
+  color: $gray_0600_707070;
+  cursor: default;
+}
+
 .code {
   height: 44px;
   background-color: $gray_0100_F5F5F5;

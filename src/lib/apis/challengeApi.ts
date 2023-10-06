@@ -372,3 +372,17 @@ export const pointApi = async () => {
     console.error("Error in dailyAllListApi: " + error);
   }
 };
+
+//출석체크
+export const checkApi = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/point/attendance`,{
+      headers: {
+        Authorization: getCookie("jwtToken"),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in checkApi: " + error);
+  }
+};
