@@ -50,9 +50,11 @@ const ChallengeHBS = () => {
       await checkApi();
       createToast('success', '포인트 지급이 완료되었습니다');
     } catch (error) {
-      console.error("Error in complete function:", error);
+      console.error("Error in checkApi: " + error);
+      createToast('error', '오늘 이미 출석체크를 하셨습니다 ');
     }
-  };
+  };  
+
   const yes = () => createToast('success', '포인트 지급이 완료되었습니다')
   const wrong = () => createToast('error', '내일 다시 참여가 가능합니다');
   const copy = () => simpleToast('클립보드에 복사되었습니다');
