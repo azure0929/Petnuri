@@ -21,6 +21,10 @@ import default_user from "@/assets/user.png";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 
+import { useSetRecoilState } from 'recoil';
+import { loginModalState } from "@/store/challengeState";
+import { getCookie } from "@/utils/Cookie";
+
 const PetTalkDetail = () => {
   const navigate = useNavigate();
   const { petTalkId } = useParams();
@@ -28,6 +32,9 @@ const PetTalkDetail = () => {
   const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const setLoginOpen = useSetRecoilState(loginModalState); 
+  const token = getCookie("jwtToken")
+  const [replyContent, setReplyContent] = useState("");
 
   const { data } = usePettalkDetail(Number(petTalkId));
   const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
@@ -74,10 +81,9 @@ const PetTalkDetail = () => {
     }
   };
 
-  const handleInputFocus = () => {
-    const isLoggedIn = false;
-    if (!isLoggedIn) {
-      setIsModalOpen(true);
+  const openLoginModal = () => {
+    if (!token) {
+      setLoginOpen(true);
     }
   };
 
@@ -203,6 +209,7 @@ const PetTalkDetail = () => {
                   selectedButtons.includes(index) ? styles.selected : ""
                 }`}
                 onClick={() => handleEmojiClick(index, emoji.emojiType)}
+                onFocus={openLoginModal}
               >
                 <div className={styles.img_area}>
                   <img
@@ -308,7 +315,9 @@ const PetTalkDetail = () => {
                 {...register("reply", { required: true, maxLength: 100 })}
                 type="text"
                 placeholder="댓글을 작성해주세요"
-                onFocus={handleInputFocus}
+                onFocus={openLoginModal}
+                value={replyContent}
+                onChange={(e) => setReplyContent(e.target.value)}
               />
 
               <button
@@ -325,8 +334,8 @@ const PetTalkDetail = () => {
               ) : null}
             </div>
           </form>
-          {isModalOpen && <LoginModal />}
         </div>
+        <LoginModal />
       </Background>
     </>
   );

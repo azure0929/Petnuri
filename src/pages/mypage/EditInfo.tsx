@@ -3,10 +3,17 @@ import styles from '@/styles/editinfo.module.scss';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { IoIosAdd } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Warning from '../../assets/Warning.png';
 import nonCheck from '@/assets/none-checked.png';
 import Checked from '@/assets/checked.png';
+import {
+  editProfile,
+  getMypage,
+  nickCheck,
+  withdraw,
+} from '@/lib/apis/mypageApi';
+import defaultImage from '@/assets/defaultImage.png';
 
 const EditInfo = () => {
   const [modal, setModal] = useState(false);
@@ -15,9 +22,53 @@ const EditInfo = () => {
   const [validation, setValidation] = useState(false);
   const [check, setCheck] = useState(false);
   const [img, setImg] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState();
+  const [file, setFile] = useState<File>();
+  const [doubleCheck, setDoubleCheck] = useState(false);
+
+  const convertURLtoFile = async (url: string) => {
+    const response = await fetch(url);
+    const data = await response.blob();
+    const ext = url.split('.').pop(); // url 구조에 맞게 수정할 것
+    const filename = url.split('/').pop(); // url 구조에 맞게 수정할 것
+    const metadata = { type: `image/${ext}` };
+    return new File([data], filename!, metadata);
+  };
+
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1);
+  };
+  const onClickCheck = () => {
+    nickCheck(input).then((res) => {
+      if (!res?.data.isExists) {
+        setDoubleCheck(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const a = getMypage();
+    a.then((res) => {
+      console.log('res::', res);
+      setNickname(res.nickname);
+      setEmail(res.email);
+      setImg(res.profileImageUrl);
+    });
+    console.log('---', a);
+  }, []);
+
+  const onClickEdit = () => {
+    if (doubleCheck || input == '') {
+      let temp = input;
+      if (input == '') {
+        temp = nickname;
+      }
+      editProfile(temp, file).then(() => {
+        navigate('/mypage');
+      });
+    }
   };
 
   const changeHandler = (e: React.ChangeEvent) => {
@@ -38,7 +89,13 @@ const EditInfo = () => {
       console.log('입력값이 유효하지 않습니다.');
       setValidation(false);
     }
+    setDoubleCheck(false);
   };
+
+  const onClickWithdraw = () => {
+    withdraw();
+  };
+
   return (
     <Background>
       <div className={styles.contain}>
@@ -54,7 +111,7 @@ const EditInfo = () => {
             <div
               className={styles.photo}
               style={{
-                backgroundImage: `url(${img})`,
+                backgroundImage: `url(${img ? img : defaultImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -65,8 +122,8 @@ const EditInfo = () => {
             </div>
           </div>
           <div className={styles.nickarea}>
-            <p className={styles.nickname}>여덟글자까지가능</p>
-            <p className={styles.email}>Yu-jin@kakao.com</p>
+            <p className={styles.nickname}>{nickname}</p>
+            <p className={styles.email}>{email}</p>
           </div>
         </div>
         <div className={styles.contents}>
@@ -103,25 +160,24 @@ const EditInfo = () => {
                         backgroundColor: 'rgba(63, 84, 209, 0.1)',
                       }
                 }
+                onClick={onClickCheck}
               >
                 중복체크
               </button>
             </div>
-            <span
-              style={
-                validation || input.length == 0
-                  ? { color: '#ffffff' }
-                  : { color: '#f42a3b' }
-              }
-            >
-              숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
-            </span>
-          </div>
-          <div className={styles.numinputarea}>
-            휴대폰번호
-            <div className={styles.numinput}>
-              <input placeholder="010-0000-0000" />
-            </div>
+            {doubleCheck ? (
+              <span style={{ color: '#3f54d1' }}>사용 가능합니다</span>
+            ) : (
+              <span
+                style={
+                  validation || input.length == 0
+                    ? { color: '#ffffff' }
+                    : { color: '#f42a3b' }
+                }
+              >
+                숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
+              </span>
+            )}
           </div>
         </div>
         <div
@@ -132,7 +188,7 @@ const EditInfo = () => {
           <AiOutlineRight />
         </div>
         <div className={styles.editbtnarea}>
-          <button>수정 완료</button>
+          <button onClick={onClickEdit}>수정 완료</button>
         </div>
 
         {modal === true ? (
@@ -169,7 +225,12 @@ const EditInfo = () => {
               </div>
             </div>
             <div className={styles.btnarea}>
-              <button disabled={!check}>회원 탈퇴</button>
+              <button
+                disabled={!check}
+                onClick={onClickWithdraw}
+              >
+                회원 탈퇴
+              </button>
             </div>
           </div>
         ) : null}
@@ -188,11 +249,13 @@ const EditInfo = () => {
                   onChange={(e) => {
                     setImg(URL.createObjectURL(e.target.files![0]));
                     setFilemodal(false);
+                    setFile(e.target.files![0]);
                   }}
                 />
                 <button
                   onClick={() => {
                     setImg('');
+                    convertURLtoFile(defaultImage).then((res) => setFile(res));
                     setFilemodal(false);
                   }}
                 >
