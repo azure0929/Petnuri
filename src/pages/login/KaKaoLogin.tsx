@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { REST_API_KEY } from "@/lib/apis/base";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+//import { setCookie } from "@/utils/Cookie";
 
 const KaKaoLogin = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const KaKaoLogin = () => {
       codeProcessed.current = true;
 
       const grantType = "authorization_code";
-      const REDIRECT_URL = "https://petnuri.netlify.app/KaKaoLogin";
+      const REDIRECT_URL = "http://localhost:5173/KaKaoLogin";
 
       axios
         .post(
@@ -30,6 +31,7 @@ const KaKaoLogin = () => {
         .then((res) => {
           console.log("로그인 성공", res);
           const { access_token } = res.data;
+          // setCookie("jwtToken", jwtToken);
 
           axios
             .post(
@@ -46,12 +48,17 @@ const KaKaoLogin = () => {
               console.log("유저 정보", userRes);
               const { kakao_account } = userRes.data;
               const { email } = kakao_account;
-              const { access_token } = res.data;
+              const { jwtToken } = res.data;
 
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoAccessToken", access_token);
-
-              navigate("/signup");
+              if (jwtToken) {
+                // jwtToken이 존재하는 경우, 메인 페이지로 이동
+                navigate("/");
+              } else {
+                // jwtToken이 null 또는 undefined인 경우, 회원가입 페이지로 이동
+                localStorage.setItem("email", email);
+                localStorage.setItem("kakaoAccessToken", access_token);
+                navigate("/signup");
+              }
             })
             .catch((userError) => {
               console.log("유저 정보 조회 실패", userError);
