@@ -7,7 +7,6 @@ import { emojiPost, emojiDelete, replyPost } from "@/lib/apis/pettalkApi";
 import { usePettalkDetail, usePettalkReply } from "@/lib/hooks/pettalkList";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
-import CommentItem from "@/components/CommentItem";
 import LoginModal from "@/components/modal/LoginModal";
 import heart from "@/assets/heart_18px.svg";
 import talk from "@/assets/talk_18px.svg";
@@ -31,6 +30,8 @@ const PetTalkDetail = () => {
   const { petTalkId } = useParams();
 
   const [selectedButtons, setSelectedButtons] = useState<number[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const token = getCookie("jwtToken")
   const [replyContent, setReplyContent] = useState("");
@@ -41,7 +42,10 @@ const PetTalkDetail = () => {
     Number(petTalkId)
   );
 
-  console.log(replyData);
+  const toggleExpand = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
   const onClickBack = () => {
     navigate(-1);
   };
@@ -111,7 +115,12 @@ const PetTalkDetail = () => {
     handleSubmit,
     reset,
     formState: { isValid, errors },
+    setValue,
   } = useForm();
+
+  const ReplyOnClick = (item: ReplyItem) => {
+    setValue("reply", `@${item.writer.nickname} `);
+  };
 
   const onVaild = async (data: any) => {
     const content = data.reply;
@@ -228,10 +237,69 @@ const PetTalkDetail = () => {
             <span className={styles.count}>댓글 {replyData?.length}개</span>
             {replyData && (
               <>
-                <CommentItem
-                  parentId={replyData?.replyId}
-                  userName={replyData?.writer?.nickname}
-                />
+                {replyData && replyData?.length > 0 ? (
+                  replyData?.map((item: ReplyItem) => (
+                    <div key={item.replyId} className={styles.item}>
+                      <div className={styles.user_info}>
+                        {item?.writer?.profileImageUrl === null ? (
+                          <img src={default_user} alt="default-img" />
+                        ) : (
+                          <img
+                            src={item?.writer?.profileImageUrl}
+                            alt="profile-img"
+                          />
+                        )}
+                        <span className={styles.name}>
+                          {item?.writer?.nickname}
+                        </span>
+                        <span className={styles.date}>
+                          ・ {formatDate(item?.createdAt)}
+                        </span>
+                      </div>
+
+                      <div className={styles.item_content}>
+                        <span
+                          className={
+                            item?.content.split("\n").length > 2
+                              ? isExpanded
+                                ? styles.expandedText
+                                : styles.collapsedText
+                              : styles.expandedText
+                          }
+                        >
+                          {item?.content}
+                        </span>
+                        {item?.content.split("\n").length > 2 &&
+                          !isExpanded && (
+                            <button
+                              className={styles.expandButton}
+                              onClick={toggleExpand}
+                            >
+                              ...더보기
+                            </button>
+                          )}
+                        <div>
+                          {item?.tag ? (
+                            <div>
+                              <span>{item?.tag?.taggedMemberId}</span>
+                              <span>{item?.tag?.nickname}</span>
+                            </div>
+                          ) : null}
+                          <button
+                            onClick={() => ReplyOnClick(item)}
+                            className={styles.reReply}
+                          >
+                            대댓글 달기
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className={styles.noList_wrapper}>
+                    아직 등록된 댓글이 없습니다.
+                  </div>
+                )}
               </>
             )}
           </div>

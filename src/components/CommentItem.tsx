@@ -5,20 +5,11 @@ import { usePettalkReply } from "@/lib/hooks/pettalkList";
 import default_user from "@/assets/user.png";
 import { formatDate } from "@/utils/DateFormat";
 
-interface CommentItemProps {
-  parentId: number | null;
-  parentUserName: string | null;
-}
-const CommentItem: React.FC<CommentItemProps> = ({
-  parentId,
-  parentUserName,
-}) => {
+const CommentItem = () => {
   const { petTalkId } = useParams();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const { data } = usePettalkReply(Number(petTalkId));
-
-  console.log(parentId, parentUserName);
 
   const toggleExpand = () => {
     setIsExpanded((prev) => !prev);
