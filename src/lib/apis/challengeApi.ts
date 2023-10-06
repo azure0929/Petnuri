@@ -361,7 +361,7 @@ export const dailyAllListApi = async () => {
 //포인트 샵
 export const pointApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/point`, {
+    const response = await axios.get(`${API_URL}/point/get`, {
       headers: {
         Authorization: getCookie("jwtToken"),
       },

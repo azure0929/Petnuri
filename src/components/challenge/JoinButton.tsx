@@ -21,9 +21,6 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
       <button
         className={styles.joinButton}
         onClick={() => {
-          if (getCookie("jwtToken")) {
-            setBottomIsOpen(true);
-          }
           handleCookie();
         }}
       >
@@ -49,6 +46,8 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
     const token = getCookie("jwtToken");
     if (!token) {
       alert("로그인 후 참여가 가능합니다.");
+    } else if (token) {
+      setBottomIsOpen(true);
     }
   };
 
