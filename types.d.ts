@@ -209,11 +209,20 @@ interface PetTalkItem {
   replyCount: number;
   reacted: boolean;
   createdAt: string;
+  emoji: {
+    cuteCount: number;
+    funCount: number;
+    kissCount: number;
+    omgCount: number;
+    sadCount: number;
+    totalEmojiCount: number;
+  };
   writer: {
     id: number;
     nickname: string;
     profileImageUrl?: string;
   };
+  petTalkPhotos?: PetTalkPhoto[];
 }
 
 interface PetTalkPhoto {

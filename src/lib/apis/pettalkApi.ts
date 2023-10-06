@@ -169,6 +169,7 @@ export const replyPost = async ({
         },
       }
     );
+    console.log("댓글", content);
     return response.data;
   } catch (error) {
     console.error("댓글 작성 실패:", error);
