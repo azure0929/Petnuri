@@ -1,18 +1,21 @@
 import axios from 'axios';
 import { API_URL } from './base';
+import { getCookie } from '@/utils/Cookie';
 
 const api = axios.create({
   baseURL: 'https://petnuri.shop',
   headers: {
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
+    //   Authorization:
+    //     'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjJAdGVzdC5jb20iLCJleHAiOjE2OTY0OTI0ODUsImlkIjo3Mywicm9sZSI6IlVTRVIifQ.Dxmmw1xCeqLq8HWEIWiirPGfEQbyUEuHv209vwL4E7o',
+    // },
+    Authorization: getCookie('jwtToken'),
   },
 });
 
 export const getMypage = async () => {
   try {
     const res = await api.get('/member/mypage');
-    console.log('res:', res.data);
+    console.log('res:', res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -38,8 +41,6 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
         })
       );
     }
-    //formData.append('nickname', nickname);
-    console.log(11111111111);
 
     /*const res = await api.put('/member/mypage/profile', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -51,14 +52,14 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
+          // Authorization:
+          //   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjJAdGVzdC5jb20iLCJleHAiOjE2OTY0OTI0ODUsImlkIjo3Mywicm9sZSI6IlVTRVIifQ.Dxmmw1xCeqLq8HWEIWiirPGfEQbyUEuHv209vwL4E7o',
+          Authorization: getCookie('jwtToken'),
         },
       }
     );
 
     //const res = await api.put('/member/mypage/profile', { nickname: nickname });
-    console.log('res:', res);
     return res;
   } catch (error) {
     console.log(error);
@@ -68,6 +69,7 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 export const withdraw = async () => {
   try {
     const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
+    const kakaoToken = localStorage.getItem('kakaoAccessToken');
 
     await axios.post(
       KAKAO_UNLINK_URI,
@@ -75,8 +77,7 @@ export const withdraw = async () => {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIxMTEzNTVAdGVzdC5jb20iLCJleHAiOjE2OTY1MjAzMzIsImlkIjoxMDYsInJvbGUiOiJVU0VSIn0.DbKLmpTz3Qilu7UwsHFJJ6VPxklTGmCixJQm_PmHqpI',
+          Authorization: `Bearer ${kakaoToken}`,
         },
       }
     );

@@ -11,14 +11,12 @@ import { ECyanadoCheckApi, ECyanadoJoinApi } from "@/lib/apis/challengeApi";
 
 const ECYanado = () => {
   const [yanadoData, setYanadoData] = useState<YanadoData | null>(null);
-  const [joinList, setJoinList] = useState<ChallengeJoin[]>([]);
+  const [joinList, setJoinList] = useState<ChallengeJoin | null>(null);
 
   useEffect(() => {
     const ecyanadoApi = async () => {
       try {
         const response = await ECyanadoCheckApi();
-        console.log("res" + response);
-
         setYanadoData(response);
       } catch (error) {
         console.error("Error:", error);
@@ -38,10 +36,9 @@ const ECYanado = () => {
     };
 
     joinAPi();
-    console.log(joinList);
   }, []);
 
-  console.log(joinList);
+  const filterData = joinList ? joinList.reviews : null;
 
   const contents: ChallengeContents = {
     mainTitle: yanadoData?.title || "",
@@ -54,6 +51,18 @@ const ECYanado = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
+  const handleJoinButtonClick = async () => {
+    // You can call the daily1 and daily1Join functions here if needed
+    try {
+      const daily1Response = await ECyanadoCheckApi();
+      const joinListResponse = await ECyanadoJoinApi();
+      setYanadoData(daily1Response);
+      setJoinList(joinListResponse.content);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <Background>
@@ -62,9 +71,13 @@ const ECYanado = () => {
             <ChallengeHead head={"야 너도? 야 나두!"} />
             <ChallengeBanner banner={yanadoData.poster} />
             <ChallengeContents contents={contents} />
-            <ChallengeJoin joinLists={joinList || []}/>
-            <JoinButton />
-            <EventSaveBS />
+            <ChallengeJoin joinLists={filterData || []} />
+            <JoinButton joinCheck={yanadoData.writtenReviewToday} />
+            <EventSaveBS
+              eventName="point"
+              id={yanadoData.id}
+              onHandle={handleJoinButtonClick}
+            />
             <MainTab />
           </>
         ) : null}
