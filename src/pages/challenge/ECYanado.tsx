@@ -13,6 +13,8 @@ const ECYanado = () => {
   const [yanadoData, setYanadoData] = useState<YanadoData | null>(null);
   const [joinList, setJoinList] = useState<ChallengeJoin | null>(null);
 
+  const filterData = joinList ? joinList.reviews : null;
+
   useEffect(() => {
     const ecyanadoApi = async () => {
       try {
@@ -36,9 +38,7 @@ const ECYanado = () => {
     };
 
     joinAPi();
-  }, []);
-
-  const filterData = joinList ? joinList.reviews : null;
+  }, [yanadoData]);
 
   const contents: ChallengeContents = {
     mainTitle: yanadoData?.title || "",
@@ -54,10 +54,10 @@ const ECYanado = () => {
   const handleJoinButtonClick = async () => {
     // You can call the daily1 and daily1Join functions here if needed
     try {
-      const daily1Response = await ECyanadoCheckApi();
-      const joinListResponse = await ECyanadoJoinApi();
-      setYanadoData(daily1Response);
-      setJoinList(joinListResponse.content);
+      const ECyanadoCheckResponse = await ECyanadoCheckApi();
+      const ECyanadoJoinResponse = await ECyanadoJoinApi();
+      setYanadoData(ECyanadoCheckResponse);
+      setJoinList(ECyanadoJoinResponse.content);
     } catch (error) {
       console.error("Error:", error);
     }

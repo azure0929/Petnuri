@@ -9,6 +9,14 @@ interface PettalkWriteProps {
   petType: string;
 }
 
+interface RequestType {
+  petType: string;
+  mainCategoryId: number | undefined;
+  subCategoryId?: number;
+  title: string;
+  content: string;
+}
+
 const PettalkWrite: React.FC<PettalkWriteProps> = ({
   isFreeTalkWrite,
   petType,
@@ -45,7 +53,13 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   };
 
   const isSubmitButtonEnabled = () => {
-    return category !== "" && title !== "" && inputCount !== 0;
+    if (window.location.pathname.includes("freetalkwrite")) {
+      return title !== "" && inputCount !== 0;
+    } else {
+      return (
+        !isFreeTalkWrite && category !== "" && title !== "" && inputCount !== 0
+      );
+    }
   };
 
   const handleAddImages = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,13 +102,24 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   //api post
   const handlePostData = async () => {
-    const request = {
+    let mainCategoryId;
+
+    if (window.location.pathname.includes("concernwrite")) {
+      mainCategoryId = 1;
+    } else if (window.location.pathname.includes("freetalkwrite")) {
+      mainCategoryId = 2;
+    }
+
+    const request: RequestType = {
       petType,
-      mainCategoryId: 1,
-      subCategoryId: Number(category),
+      mainCategoryId,
       title,
       content,
     };
+
+    if (category !== "") {
+      request.subCategoryId = Number(category);
+    }
 
     try {
       const response = await writingOut({
