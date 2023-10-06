@@ -141,10 +141,11 @@ const DeliveryBS: React.FC<DeliveryBSProps> = ({ onHandle }) => {
       <DeliveryBSContact onContactComplete={handleContactComplete} />
       <DeliveryBSAddress onAddressComplete={handleAddressComplete} /> */}
       {/* <DeliveryBSmessage onMessageComplete={handleMessageComplete} /> */}
-      <DeliveryBSReward rewardId={rewardId} setRewardId={setRewardId} />
       {defaultAddress ? (
         <>
           <Address addressData={defaultAddress} />
+          <DeliveryBSReward rewardId={rewardId} setRewardId={setRewardId} />
+
           <DeliveryBSmessage
             onMessageComplete={handleMessageComplete}
             defaultAddress={defaultAddress}
