@@ -109,14 +109,14 @@ const PetRegist = () => {
                 role="button"
                 onClick={() => handlePetSelection("남")}
               >
-                강아지
+                남
               </div>
               <div
                 className={`${styles.maleButton} ${selectedMale === "여" ? styles.active : ""}`}
                 role="button"
                 onClick={() => handlePetSelection("여")}
               >
-                고양이
+                여
               </div>
             </div>
           </div>
