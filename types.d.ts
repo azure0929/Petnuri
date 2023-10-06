@@ -231,5 +231,8 @@ interface ReplyItem {
   replyId: number;
   content: string;
   createdAt: string;
-  tag?: string;
+  tag?: {
+    taggedMemberId: number;
+    nickname: string;
+  };
 }

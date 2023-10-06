@@ -34,9 +34,6 @@ const PetTalkDetail = () => {
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const token = getCookie("jwtToken")
   const [replyContent, setReplyContent] = useState("");
-  const [selectedReplyUser, setSelectedReplyUser] = useState<null | string>(
-    null
-  );
 
   const { data } = usePettalkDetail(Number(petTalkId));
   const { refetch: totalEmojiRefetch } = usePettalkDetail(Number(petTalkId));
@@ -44,13 +41,9 @@ const PetTalkDetail = () => {
     Number(petTalkId)
   );
 
+  console.log(replyData);
   const onClickBack = () => {
     navigate(-1);
-  };
-
-  const handleReplyClick = (userName: string) => {
-    setSelectedReplyUser(userName);
-    setReplyContent(`@${userName} `);
   };
 
   const handleEmojiClick = async (index: number, emojiType: string) => {
@@ -234,10 +227,12 @@ const PetTalkDetail = () => {
           <div className={styles.reply_wrapper}>
             <span className={styles.count}>댓글 {replyData?.length}개</span>
             {replyData && (
-              <CommentItem
-                replyContent={replyContent} // 대댓글 내용을 props로 전달
-                selectedReplyUser={selectedReplyUser} // 선택된 사용자명을 props로 전달
-              />
+              <>
+                <CommentItem
+                  parentId={replyData?.replyId}
+                  userName={replyData?.writer?.nickname}
+                />
+              </>
             )}
           </div>
 
