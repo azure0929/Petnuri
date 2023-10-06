@@ -3,10 +3,10 @@ import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
 
 //펫톡 전체 리스트
-export const allList = async (petType: string) => {
+export const allList = async (petType: string, order: string) => {
   try {
     const response = await axios.get(
-      `${API_URL}/pet-talk?pet=${petType}&order=BEST`
+      `${API_URL}/pet-talk?pet=${petType}&order=${order}`
     );
     return response.data.petTalkPosts;
   } catch (error) {
@@ -32,10 +32,14 @@ export const concernList = async (
 };
 
 //펫톡 자유수다 리스트
-export const freetalkList = async (petType: string, mainCategory: number) => {
+export const freetalkList = async (
+  petType: string,
+  order: string,
+  mainCategory: number
+) => {
   try {
     const response = await axios.get(
-      `${API_URL}/pet-talk?pet=${petType}&order=BEST&mainCategory=${mainCategory}&subCategory`
+      `${API_URL}/pet-talk?pet=${petType}&order=${order}&mainCategory=${mainCategory}&subCategory`
     );
     return response.data.petTalkPosts;
   } catch (error) {
