@@ -6,7 +6,7 @@ import styles from "@/styles/home.module.scss";
 import KitModal from "@/components/modal/KitModal";
 import LoginModal from "@/components/modal/LoginModal";
 import HomeEventList from "@/components/HomeEventList";
-import dog from '@/assets/위생관리.png'
+import dog from '@/assets/defaultImage.png'
 import defaultImage from '@/assets/defaultImage.png'
 import 키트배너 from '@/assets/키트배너.png'
 import { useSetRecoilState } from "recoil";
@@ -167,7 +167,7 @@ const Home = () => {
                 const hours = ("0" + date.getHours()).slice(-2);
                 const minutes = ("0" + date.getMinutes()).slice(-2);
                 let thumbnailSrc = item.thumbnail;
-                if (!thumbnailSrc) {
+                if (thumbnailSrc === null) {
                   thumbnailSrc = defaultImage;
                 }
 
