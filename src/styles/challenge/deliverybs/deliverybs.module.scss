@@ -1,3 +1,21 @@
+.checkBtn {
+  width: 327px;
+  height: 54px;
+  border-radius: 12px;
+  background-color: #3f54d1;
+  margin-top: 40px;
+  span {
+    display: inline-block;
+    width: 100px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.1px;
+    color: #f5f5f5;
+  }
+}
+
 .noCheckBtn {
   width: 327px;
   height: 54px;

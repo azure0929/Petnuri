@@ -6,37 +6,44 @@ import DeliveryBSHead from "@/components/challenge/delivery/DeliveryBSHead";
 // import DeliveryBSAddress from "./DeliveryBSAddress";
 import DeliveryBSmessage from "@/components/challenge/delivery/DeliveryBSmessage";
 import DeliveryBSAgree from "@/components/challenge/delivery/DeliveryBSAgree";
-import DeliveryBSBtn from "@/components/challenge/delivery/DeliveryBSBtn";
 import DeliveryBSReward from "@/components/challenge/delivery/DeliveryBSReward";
 import Address from "@/components/challenge/delivery/Address";
 import styles from "@/styles/challenge/deliverybs/deliverybs.module.scss";
-import { DeliveryListApi } from "@/lib/apis/challengeApi";
+import {
+  ContestParticipationApi,
+  DeliveryListApi,
+} from "@/lib/apis/challengeApi";
+import { bottomSheetState } from "@/store/challengeState";
+import { useSetRecoilState } from "recoil";
+import { createToast } from "@/utils/ToastUtils";
 
-const DeliveryBS = () => {
-  // 수령인 이름
-  // const [nameState, setNameState] = useState("");
+interface DeliveryBSProps {
+  onHandle: () => void;
+}
 
-  // const handleNameComplete = (name: string) => {
-  //   setNameState(name);
-  // };
+const DeliveryBS: React.FC<DeliveryBSProps> = ({ onHandle }) => {
+  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
-  // // 수령인 연착서
-  // const [contactState, setContactState] = useState("");
+  const [addressData, setAddressData] = useState<DefaultAddressArray | null>(
+    null
+  );
 
-  // const handleContactComplete = (contact: string) => {
-  //   setContactState(contact);
-  // };
+  useEffect(() => {
+    const addressCheck = async () => {
+      try {
+        const response = await DeliveryListApi();
+        setAddressData(response);
+      } catch (error) {
+        console.error("Error in addressCheck: " + error);
+      }
+    };
+    addressCheck();
+  }, []);
 
-  // 배송지 주소
-  // const [addressState, setAddressState] = useState("");
+  const defaultAddress = addressData
+    ? addressData.filter((item) => item.isBased === true)
+    : [];
 
-  // const handleAddressComplete = (address: string) => {
-  //   setAddressState(address);
-  // };
-
-  const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
-
-  const defaultAddress = addressData.filter((item) => item.isBased === true);
   // 배송 메세지
   const [messageState, setMessageState] = useState("부재시 문앞에 놓아주세요");
 
@@ -48,33 +55,23 @@ const DeliveryBS = () => {
 
   const [agreedCheck, setAgreedCheck] = useState(false);
   const handleAgreedCheckChange = (value: boolean) => {
-    console.log("agreecheck value : " + value);
     setAgreedCheck(value);
   };
 
   const [ruleCheck, setRuleCheck] = useState(false);
   const handleRuleCheckChange = (value: boolean) => {
-    console.log("rulecheck value : " + value);
     setRuleCheck(value);
   };
 
   const [exchangeCheck, setExchangeCheck] = useState(false);
   const handleExchangeCheckChange = (value: boolean) => {
-    console.log("exchangecheck value : " + value);
     setExchangeCheck(value);
   };
 
   const [marketingCheck, setMarketingCheck] = useState(false);
   const handleMarketingCheck = (value: boolean) => {
     // marketingCheck 값(value)을 사용
-    console.log("marketcheck value : " + value);
     setMarketingCheck(value);
-  };
-
-  const data = {
-    address: defaultAddress,
-    messageState: messageState,
-    marketingCheck: marketingCheck,
   };
 
   useEffect(() => {
@@ -85,6 +82,56 @@ const DeliveryBS = () => {
     fetchData();
   }, []);
 
+  const [deliveryData, setDeliveryData] = useState<DeliveryData | null>(null);
+
+  useEffect(() => {
+    const participationApi = async () => {
+      if (deliveryData) {
+        await ContestParticipationApi(deliveryData);
+        onHandle();
+      }
+    };
+    participationApi();
+  }, [deliveryData]);
+
+  const correct = () => createToast("success", "참여 신청이 완료되었습니다.");
+
+  // 리워드 조회
+  const [rewardId, setRewardId] = useState<number>(0);
+
+  const clickHandler = () => {
+    if (
+      rewardId &&
+      defaultAddress &&
+      agreedCheck &&
+      ruleCheck &&
+      exchangeCheck
+    ) {
+      const newDeliveryData: DeliveryData = {
+        rewardId: rewardId, // rewardId 값을 설정해야 함
+        isConsentedPersonalInfo: marketingCheck,
+        delivery: {
+          name: defaultAddress[0].name,
+          phone: defaultAddress[0].phone,
+          roadAddress: defaultAddress[0].roadAddress,
+          address: defaultAddress[0].address,
+          zipcode: defaultAddress[0].zipcode,
+          message: messageState,
+        },
+      };
+      setDeliveryData(newDeliveryData);
+      correct();
+      setBottomIsOpen(false);
+    } else if (
+      (agreedCheck && ruleCheck && exchangeCheck) ||
+      rewardId ||
+      defaultAddress ||
+      messageState
+    ) {
+      alert("필수 입력값을 넣어주세요.");
+    }
+  };
+
   return (
     <BottomSheet>
       <DeliveryBSHead text={"참여 신청"} />
@@ -94,7 +141,7 @@ const DeliveryBS = () => {
       <DeliveryBSContact onContactComplete={handleContactComplete} />
       <DeliveryBSAddress onAddressComplete={handleAddressComplete} /> */}
       {/* <DeliveryBSmessage onMessageComplete={handleMessageComplete} /> */}
-      <DeliveryBSReward />
+      <DeliveryBSReward rewardId={rewardId} setRewardId={setRewardId} />
       {defaultAddress ? (
         <>
           <Address addressData={defaultAddress} />
@@ -116,10 +163,14 @@ const DeliveryBS = () => {
       agreedCheck &&
       ruleCheck &&
       exchangeCheck ? (
-        <DeliveryBSBtn data={data} />
+        <>
+          <button className={styles.checkBtn} onClick={clickHandler}>
+            <span>참여 신청</span>
+          </button>
+        </>
       ) : (
         <>
-          <button className={styles.noCheckBtn}>
+          <button className={styles.noCheckBtn} onClick={clickHandler}>
             <span>참여 신청</span>
           </button>
         </>

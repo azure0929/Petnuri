@@ -49,6 +49,18 @@ const DailyChallenge2 = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
+  const handleJoinButtonClick = async () => {
+    // You can call the daily1 and daily1Join functions here if needed
+    try {
+      const daily1Response = await dailyChallenge2Api();
+      const joinListResponse = await daily2JoinListApi();
+      setDaily2Data(daily1Response);
+      setjoinList(joinListResponse.content);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <Background>
@@ -58,8 +70,11 @@ const DailyChallenge2 = () => {
             <ChallengeBanner banner={daily2Data.banner} />
             <ChallengeContents contents={contents} />
             <ChallengeJoin joinLists={joinList || []} />
-            <JoinButton />
-            <DailySaveBS id={daily2Data.challengeId} />
+            <JoinButton joinCheck={daily2Data.status} />
+            <DailySaveBS
+              id={daily2Data.challengeId}
+              onHandle={handleJoinButtonClick}
+            />
             <MainTab />
           </>
         ) : null}

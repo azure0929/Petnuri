@@ -10,6 +10,17 @@
     text-align: start;
     margin: 10px 0;
   }
+  .addressZipCode {
+    width: 327px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px;
+    padding: 16px;
+    gap: 10px;
+    color: #171717;
+    background-color: #ebebeb;
+    font-size: 14px;
+  }
   .addressInput {
     width: 327px;
     height: 52px;
@@ -32,6 +43,5 @@
     color: #171717;
     background-color: #ebebeb;
     font-size: 14px;
-    margin-top: 10px;
   }
 }
