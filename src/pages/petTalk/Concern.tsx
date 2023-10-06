@@ -61,6 +61,7 @@ const Concern = () => {
         mapTabToNumber(activeTab),
         subCategory
       );
+      refetch();
     } catch (error) {
       console.error("데이터를 불러오는 중 에러 발생:", error);
     }
@@ -75,6 +76,7 @@ const Concern = () => {
         mapTabToNumber(activeTab),
         subCategory
       );
+      refetch();
     } catch (error) {
       console.error("데이터를 불러오는 중 에러 발생:", error);
     }
@@ -82,12 +84,11 @@ const Concern = () => {
 
   const handleSubCategorySelect = (subCategory: number) => {
     setSubCategory(subCategory);
-    refetch();
   };
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [refetch, selectedPet, selectedValue, subCategory]);
+  useEffect(() => {
+    refetch();
+  }, [refetch, activeTab, selectedPet, selectedValue, subCategory]);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
