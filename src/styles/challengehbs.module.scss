@@ -60,6 +60,7 @@
 }
 
 .check {
+  width: 100%;
   height: 50px;
   background-color: $brand_blue_100_3F54D11A;
   border-radius: 12px;
@@ -89,6 +90,12 @@
   align-items: center;
   justify-content: center;
   @include body_regular_12px;
+}
+
+.disabled {
+  background-color: $gray_0100_F5F5F5; 
+  color: $gray_0600_707070;
+  cursor: default;
 }
 
 .code {

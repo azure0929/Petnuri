@@ -9,6 +9,14 @@ interface PettalkWriteProps {
   petType: string;
 }
 
+interface RequestType {
+  petType: string;
+  mainCategoryId: number | undefined;
+  subCategoryId?: number;
+  title: string;
+  content: string;
+}
+
 const PettalkWrite: React.FC<PettalkWriteProps> = ({
   isFreeTalkWrite,
   petType,
@@ -45,10 +53,12 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
   };
 
   const isSubmitButtonEnabled = () => {
-    if (isFreeTalkWrite) {
+    if (window.location.pathname.includes("freetalkwrite")) {
       return title !== "" && inputCount !== 0;
     } else {
-      return category !== "" && title !== "" && inputCount !== 0;
+      return (
+        !isFreeTalkWrite && category !== "" && title !== "" && inputCount !== 0
+      );
     }
   };
 
@@ -100,13 +110,16 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
       mainCategoryId = 2;
     }
 
-    const request = {
+    const request: RequestType = {
       petType,
       mainCategoryId,
-      subCategoryId: Number(category),
       title,
       content,
     };
+
+    if (category !== "") {
+      request.subCategoryId = Number(category);
+    }
 
     try {
       const response = await writingOut({
@@ -128,7 +141,7 @@ const PettalkWrite: React.FC<PettalkWriteProps> = ({
 
   return (
     <div className={styles.all}>
-      {!isFreeTalkWrite && isSubmitButtonEnabled() ? (
+      {!isFreeTalkWrite ? (
         <div className={styles.selectarea}>
           <select
             name="category"

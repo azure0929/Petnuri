@@ -19,7 +19,7 @@ const DeliveryList = () => {
   const setBSType = useSetRecoilState(BSTypeState);
 
   const handleReg = () => {
-    setBSType("DeliveryBS");
+    setBSType("DeliveryReg");
   };
 
   const handleSelect = (item: Privacy) => {
@@ -28,10 +28,9 @@ const DeliveryList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/Privacy.json");
-      const data = await response.json();
-      setPrivacy(data.address);
-      const defaultItem = data.address.find((item: Privacy) => item.isBased);
+      const data = await DeliveryListApi();
+      setPrivacy(data);
+      const defaultItem = data.find((item: Privacy) => item.isBased);
       setSelectedItem(defaultItem);
     };
     fetchData();

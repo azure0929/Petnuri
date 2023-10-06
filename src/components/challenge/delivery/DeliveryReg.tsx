@@ -16,7 +16,7 @@ const DeliveryReg = () => {
   const setBSType = useSetRecoilState(BSTypeState);
 
   const handleReg = () => {
-    setBSType("DeliveryBS");
+    setBSType("DeliveryList");
   };
 
   const regApi = async () => {
@@ -35,10 +35,10 @@ const DeliveryReg = () => {
     }
   };
 
-  const postReg = () => {
-    regApi();
+  const postReg = async () => {
+    await regApi();
     handleReg();
-  };
+  };  
 
   // 수령인 이름
   const [nameState, setNameState] = useState(deliveryData.name);

@@ -16,7 +16,7 @@ const DeliveryUpdate = () => {
   const setBSType = useSetRecoilState(BSTypeState);
 
   const handleReg = () => {
-    setBSType("DeliveryBS");
+    setBSType("DeliveryList");
   };
 
   const updateApi = async () => {
