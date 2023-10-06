@@ -5,12 +5,21 @@ import { useState, useEffect } from 'react';
 import { pointApi } from '@/lib/apis/challengeApi';
 
 const ChallengeProfile = () => {
-  const [point, setPoint] = useState()
+  const [point, setPoint] = useState({nickname: '비회원', havePoint: 0, profileImageUrl: defaultImage})
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await pointApi()
-      setPoint(data);
+      try {
+        const data = await pointApi()
+        setPoint(prevState => ({
+          ...prevState,
+          nickname: data.nickname || prevState.nickname,
+          havePoint: data.havePoint || prevState.havePoint,
+          profileImageUrl: data.profileImageUrl || prevState.profileImageUrl
+        }));
+      } catch (error) {
+        console.error("Error ChallengeProfile:", error);
+      }
     };
     fetchData();
   }, []);
@@ -18,11 +27,11 @@ const ChallengeProfile = () => {
   return (
     <>
       <div className={styles.name}>
-        <img src={defaultImage} alt="" className={styles.img}/>
-        <div className={styles.nickname}>꿍이집사</div>
+        <img src={point.profileImageUrl} alt="" className={styles.img}/>
+        <div className={styles.nickname}>{point.nickname}</div>
       </div>
       <div className={styles.credit}>
-        1220 크레딧
+        {point.havePoint} 크레딧
         <img src={credit} alt="credit" />
       </div>
     </>

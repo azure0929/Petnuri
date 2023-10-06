@@ -74,7 +74,17 @@ const SignUp = () => {
         console.log("회원가입 성공:", response.data);
         navigate("/onboarding");
       } catch (error) {
-        console.error("회원가입 실패", error);
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.status === 400) {
+            alert("이미 가입된 이메일입니다.");
+            console.log("이미 가입된 이메일입니다.", error.response);
+            navigate("/");
+          } else {
+            console.error(error);
+          }
+        } else {
+          console.error(error);
+        }
       }
     }
   };
@@ -118,11 +128,9 @@ const SignUp = () => {
 
       if (isExists) {
         setIsNicknameValid(false);
-        setNameError("이미 사용 중인 닉네임입니다.");
-        console.log("사용 불가능한 닉네임: ", name);
+        console.log("다른 닉네임을 사용해주세요: ", name);
       } else {
         setIsNicknameValid(true);
-        setNameError("");
         console.log("사용 가능한 닉네임: ", name);
       }
 
@@ -195,6 +203,14 @@ const SignUp = () => {
         return;
       }
 
+      // 영문 대문자와 숫자 3글자를 포함한 8글자의 추천인 코드 검사
+      const regex = /^[A-Z0-9]{8}$/;
+      if (!regex.test(referralCode)) {
+        setReferralCodeError("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.");
+        console.log("영문 대문자와 숫자 3글자를 포함한 8글자의 코드를 입력해주세요.: ", referralCode);
+        return;
+      }
+
       const response = await axios.get("https://petnuri.shop/auth/referral", {
         params: { referralCode: referralCode },
       });
@@ -202,11 +218,11 @@ const SignUp = () => {
       const { isValid } = response.data;
 
       if (isValid) {
-        setReferralCodeError("이미 사용 중인 추천인 코드입니다.");
-        console.log("이미 사용 중인 추천인 코드입니다.");
+        setReferralCodeError("사용 가능한 추천인 코드입니다.");
+        console.log("사용 가능한 추천인 코드: ", referralCode);
       } else {
-        setReferralCodeError("");
-        console.log("사용 불가능한 추천인 코드입니다.");
+        setReferralCodeError("해당 추천인 코드가 올바르지 않습니다.");
+        console.log("해당 추천인 코드가 올바르지 않습니다.: ", referralCode);
       }
     } catch (error) {
       console.error(error);

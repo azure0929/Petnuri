@@ -1,51 +1,56 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const bottomSheetState = atom({
-  key: 'bottomSheetState',
+  key: "bottomSheetState",
   default: false,
 });
 
 export const BSTypeState = atom({
-  key: 'bottomSheetTypeState',
-  default: 'DeliveryBS',
+  key: "bottomSheetTypeState",
+  default: "DeliveryBS",
 });
 
 export const deliveryDataState = atom({
-  key: 'deliveryDataState',
+  key: "deliveryDataState",
   default: {
-    name: '',
-    phone: '',
-    roadAddress: '',
-    address: '',
-    zipCode: '',
+    name: "",
+    phone: "",
+    roadAddress: "",
+    address: "",
+    zipCode: "",
     isSelected: false,
   },
 });
 
 export const deliveryListState = atom<DeliveryAddress[]>({
-  key: 'deliveryListState',
+  key: "deliveryListState",
   default: [],
 });
 
 export const deliveryUpdateDataState = atom({
-  key: 'deliveryUpdateDataState',
+  key: "deliveryUpdateDataState",
   default: {
     id: 0,
-    name: '',
-    phone: '',
-    roadAddress: '',
-    address: '',
-    zipCode: '',
+    name: "",
+    phone: "",
+    roadAddress: "",
+    address: "",
+    zipCode: "",
     isSelected: false,
   },
 });
 
 export const loginModalState = atom({
-  key: 'loginModalState',
+  key: "loginModalState",
   default: false,
 });
 
 export const kitModalState = atom({
-  key: 'kitModalState',
+  key: "kitModalState",
+  default: false,
+});
+
+export const EventBottomSheetState = atom({
+  key: "EventBottomSheetState",
   default: false,
 });

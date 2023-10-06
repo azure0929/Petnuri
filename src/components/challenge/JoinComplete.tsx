@@ -1,8 +1,11 @@
 import styles from "@/styles/challenge/joincomplete.module.scss";
+import { createToast } from "@/utils/ToastUtils";
 
 const JoinButton = () => {
+  const error = () => createToast("error", "참여가 완료된 상태입니다.");
+
   const handleComplete = () => {
-    alert("이미 신청완료 된 상태입니다");
+    error();
   };
 
   return (

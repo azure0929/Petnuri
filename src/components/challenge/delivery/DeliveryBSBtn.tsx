@@ -1,5 +1,5 @@
 import styles from "@/styles/challenge/deliverybs/deliverybsbtn.module.scss";
-import { bottomSheetState } from "@/store/challengeState";
+import { EventBottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import { createToast } from "@/utils/ToastUtils";
 
@@ -12,7 +12,7 @@ interface DeliveryBSBtn {
 }
 
 const DeliveryBSBtn: React.FC<DeliveryBSBtn> = ({ data }) => {
-  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+  const setBottomIsOpen = useSetRecoilState(EventBottomSheetState);
   const correct = () => createToast("success", "참여 신청이 완료되었습니다.");
   // 추가
   const clickHandler = () => {

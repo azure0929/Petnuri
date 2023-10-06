@@ -1,7 +1,7 @@
 import BottomSheet from "@/components/challenge/SaveBSLayout";
 import styles from "@/styles/challenge/dailysavebs.module.scss";
 import addIcon from "@/assets/icon-plus-circle-mono.svg";
-import { bottomSheetState } from "@/store/challengeState";
+import { EventBottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import closeIcon from "@/assets/close.svg";
 import { useState, useRef } from "react";
@@ -10,11 +10,13 @@ import { dailyReviewApi } from "@/lib/apis/challengeApi";
 
 interface DailySaveBSProps {
   id: number;
+  onHandle: () => void;
 }
 
-const DailySaveBS: React.FC<DailySaveBSProps> = ({ id }) => {
-  const setBottomIsOpen = useSetRecoilState(bottomSheetState);
+const DailySaveBS: React.FC<DailySaveBSProps> = ({ id, onHandle }) => {
+  const setBottomIsOpen = useSetRecoilState(EventBottomSheetState);
   const sucess = () => createToast("success", "포인트 지급이 완료되었습니다.");
+  const error = () => createToast("error", "취소되었습니다.");
 
   const review = async () => {
     try {
@@ -22,6 +24,7 @@ const DailySaveBS: React.FC<DailySaveBSProps> = ({ id }) => {
         throw new Error("이미지 파일을 선택해주세요.");
       }
       await dailyReviewApi(newUserImg, id);
+      onHandle();
     } catch (error) {
       console.error("Error in reivew: " + error);
     }
@@ -58,9 +61,15 @@ const DailySaveBS: React.FC<DailySaveBSProps> = ({ id }) => {
   };
 
   const closeBS = () => {
-    review();
-    sucess();
-    setBottomIsOpen(false);
+    if (newUserImg) {
+      review();
+      sucess();
+      setBottomIsOpen(false);
+    } else {
+      setNewUserImg(null);
+      setBottomIsOpen(false);
+      error();
+    }
   };
 
   return (
