@@ -1,9 +1,9 @@
-import Background from "@/components/Background";
-import MainTab from "@/components/MainTab";
-import login_screen from "@/assets/login_screen.svg";
-import kakao from "@/assets/kakao.svg";
-import styles from "@/styles/login.module.scss";
-import { REST_API_KEY } from "@/lib/apis/base";
+import Background from '@/components/Background';
+import MainTab from '@/components/MainTab';
+import login_screen from '@/assets/login_screen.svg';
+import kakao from '@/assets/kakao.svg';
+import styles from '@/styles/login.module.scss';
+import { REST_API_KEY } from '@/lib/apis/base';
 
 const Login = () => {
   const handleKakaoLogin = () => {
@@ -13,7 +13,7 @@ const Login = () => {
   };
 
   // 1 : 1 채팅 상담하기 클릭 시 이동
-  const chatLink = "http://pf.kakao.com/_RfxnuG/chat";
+  const chatLink = 'http://pf.kakao.com/_RfxnuG/chat';
 
   const handleChatClick = () => {
     window.location.href = chatLink;
@@ -36,17 +36,30 @@ const Login = () => {
               role="button"
               className={styles.kakao}
             >
-              <img src={kakao} alt="kakao-icon" />
-              <div role="button" onClick={handleKakaoLogin}>
+              <img
+                src={kakao}
+                alt="kakao-icon"
+              />
+              <div
+                role="button"
+                onClick={handleKakaoLogin}
+              >
                 카카오로 간편 로그인
               </div>
             </div>
-            <div className={styles.chat} onClick={handleChatClick}>
+            <div
+              className={styles.chat}
+              onClick={handleChatClick}
+            >
               <span>로그인이 안되시나요?</span> |
               <span>1 : 1 채팅 상담하기</span>
             </div>
           </div>
-          <img className={styles.back} src={login_screen} alt="login_screen" />
+          <img
+            className={styles.back}
+            src={login_screen}
+            alt="login_screen"
+          />
         </div>
       </Background>
       <MainTab />
