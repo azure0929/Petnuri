@@ -4,10 +4,7 @@ import { getCookie } from "@/utils/Cookie";
 
 // 토큰 임시 값
 // const locakStorageToken =
-//   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwNjAiLCJleHAiOjE2OTY1NzQ1MDcsImlkIjoxNTQsInJvbGUiOiJVU0VSIn0.AcuJCMinjw9PfZgfpuk0kUB6oWfS2WGlfiyNBf-Thek";
-// "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwNDIiLCJleHAiOjE2OTY1NDEzMjUsImlkIjoxMjMsInJvbGUiOiJVU0VSIn0.nXU-EXZCMAz9HwUXS0gSz3XgR5nI0wltsAznT-uV_qg";
-const token = localStorage.getItem("jwtToken");
-const locakStorageToken = `Bearer ${token}`;
+const locakStorageToken = getCookie("jwtToken");
 
 // 집사대회 api
 export const ContestCheckApi = async () => {
