@@ -10,13 +10,15 @@ import Header from "@/components/Head";
 import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
-import { bottomSheetState } from "@/store/challengeState";
+import { bottomSheetState,loginModalState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
 import {
   ContestCheckApi,
   YanadoCheckApi,
   dailyAllListApi,
 } from "@/lib/apis/challengeApi";
+import LoginModal from "@/components/modal/LoginModal";
+import { getCookie } from "@/utils/Cookie";
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -26,6 +28,8 @@ const Challenge = () => {
   const [cheonHa, setCheonHa] = useState<EventChallenge>();
   const [yanado, setYanado] = useState<EventChallenge>();
   const navigate = useNavigate();
+  const setLoginOpen = useSetRecoilState(loginModalState);
+  const token = getCookie('jwtToken')
 
   useEffect(() => {
     const calculateTime = () => {
@@ -80,6 +84,14 @@ const Challenge = () => {
   }, []);
 
   const wrong = () => createToast("error", "추후 오픈 예정입니다");
+
+  const handleParticipateClick = (challengeId: number) => {
+    if (!token) {
+      setLoginOpen(true);
+    } else {
+      navigate(`/dailychallenge${challengeId}`);
+    }
+  };
 
   return (
     <>
@@ -177,9 +189,7 @@ const Challenge = () => {
                 ) : (
                   <button
                     className={styles.participate_on}
-                    onClick={() =>
-                      navigate(`/dailychallenge${challengeData.challengeId}`)
-                    }
+                    onClick={() => handleParticipateClick(challengeData.challengeId)}
                   >
                     참여하기
                   </button>
@@ -200,6 +210,7 @@ const Challenge = () => {
         </div>
         <MainTab />
         <ChallengeHBS />
+        <LoginModal />
       </Background>
     </>
   );
