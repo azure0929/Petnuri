@@ -14,6 +14,7 @@ const ChallengeHBS = () => {
   const setLoginOpen = useSetRecoilState(loginModalState); 
   const [selected, setSelected] = useState<number | null>(null);
   const [isClicked, setIsClicked] = useState(false);
+  const [isClicked2, setIsClicked2] = useState(false);
   const token = getCookie("jwtToken")
 
   const openLoginModal = (callback: () => void) => {
@@ -24,6 +25,17 @@ const ChallengeHBS = () => {
       setIsClicked(true);
     }
   };
+
+  const handleYesClick = () => {
+    if (isClicked2) {
+      wrong();
+    } else if (!token) {
+      setLoginOpen(true);
+    } else {
+      yes();
+      setIsClicked2(true);
+    }
+  };  
 
   const handleClick = (index:number) => {
     if (selected === index) {
@@ -41,6 +53,7 @@ const ChallengeHBS = () => {
       console.error("Error in complete function:", error);
     }
   };
+  const yes = () => createToast('success', '포인트 지급이 완료되었습니다')
   const wrong = () => createToast('error', '내일 다시 참여가 가능합니다');
   const copy = () => simpleToast('클립보드에 복사되었습니다');
 
@@ -94,7 +107,12 @@ const ChallengeHBS = () => {
           </div>
         </div>
 
-        <div className={styles.check} onClick={() => openLoginModal(wrong)}> 정답 확인 </div>
+        <button 
+        className={`${styles.check} ${isClicked2 ? styles.disabled : ''}`}
+        onClick={handleYesClick}
+        > 
+          정답 확인 
+        </button>
 
         <div className={styles.invite}>
           <div className={styles.text_box}>
