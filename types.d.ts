@@ -24,6 +24,11 @@ interface ChallengeJoin {
   reviews?: FilterDataArray;
 }
 
+// 집사대회 내 참여현황
+interface JoinCheckData {
+  process: string;
+}
+
 interface FilterData {
   id: number;
   memberId: number;
@@ -50,10 +55,12 @@ interface JoinList {
 }
 
 interface YanadoData {
+  id: number;
   title: string;
   status: string;
   poster: string;
   subTitle: string;
+  writtenReviewToday: boolean;
 }
 
 interface DeliveryData {
@@ -86,6 +93,7 @@ interface ChallengeEventListProps {
 }
 
 interface ContestData {
+  id: number;
   title: string;
   status: string;
   poster: string;

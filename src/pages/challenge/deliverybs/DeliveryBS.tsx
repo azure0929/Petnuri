@@ -17,35 +17,33 @@ import { bottomSheetState } from "@/store/challengeState";
 import { useSetRecoilState } from "recoil";
 import { createToast } from "@/utils/ToastUtils";
 
-const DeliveryBS = () => {
+interface DeliveryBSProps {
+  onHandle: () => void;
+}
+
+const DeliveryBS: React.FC<DeliveryBSProps> = ({ onHandle }) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
-  // 수령인 이름
-  // const [nameState, setNameState] = useState("");
+  const [addressData, setAddressData] = useState<DefaultAddressArray | null>(
+    null
+  );
 
-  // const handleNameComplete = (name: string) => {
-  //   setNameState(name);
-  // };
-
-  // // 수령인 연착서
-  // const [contactState, setContactState] = useState("");
-
-  // const handleContactComplete = (contact: string) => {
-  //   setContactState(contact);
-  // };
-
-  // 배송지 주소
-  // const [addressState, setAddressState] = useState("");
-
-  // const handleAddressComplete = (address: string) => {
-  //   setAddressState(address);
-  // };
-
-  const [addressData, setAddressData] = useState<DefaultAddressArray>([]);
+  useEffect(() => {
+    const addressCheck = async () => {
+      try {
+        const response = await DeliveryListApi();
+        setAddressData(response);
+      } catch (error) {
+        console.error("Error in addressCheck: " + error);
+      }
+    };
+    addressCheck();
+  }, []);
 
   const defaultAddress = addressData
     ? addressData.filter((item) => item.isBased === true)
     : [];
+
   // 배송 메세지
   const [messageState, setMessageState] = useState("부재시 문앞에 놓아주세요");
 
@@ -90,6 +88,7 @@ const DeliveryBS = () => {
     const participationApi = async () => {
       if (deliveryData) {
         await ContestParticipationApi(deliveryData);
+        onHandle();
       }
     };
     participationApi();

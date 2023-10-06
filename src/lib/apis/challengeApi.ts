@@ -4,7 +4,8 @@ import { getCookie } from "@/utils/Cookie";
 
 // 토큰 임시 값
 const locakStorageToken =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwMzMiLCJleHAiOjE2OTY1MDU4OTYsImlkIjo5MCwicm9sZSI6IlVTRVIifQ.k7SlyH4oMEi6WQ6RKnRZae4YgTegy30ml5xu9ksCyYs";
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwNjAiLCJleHAiOjE2OTY1NzQ1MDcsImlkIjoxNTQsInJvbGUiOiJVU0VSIn0.AcuJCMinjw9PfZgfpuk0kUB6oWfS2WGlfiyNBf-Thek";
+// "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTAwNDIiLCJleHAiOjE2OTY1NDEzMjUsImlkIjoxMjMsInJvbGUiOiJVU0VSIn0.nXU-EXZCMAz9HwUXS0gSz3XgR5nI0wltsAznT-uV_qg";
 // const token = localstorage.getItem('jwtToken')
 // const locakStorageToken = `Bearer ${token}`
 
@@ -17,7 +18,7 @@ export const ContestCheckApi = async () => {
     console.error("Error in ContestCheckApi: " + error);
   }
 };
-// 집사대회 참여현황 api
+// 집사대회 다른 사람 참여현황 api
 export const ContestJoinApi = async () => {
   try {
     const response = await axios.get(
@@ -26,6 +27,24 @@ export const ContestJoinApi = async () => {
     return response.data;
   } catch (error) {
     console.error("Error in ContestJoinApi: " + error);
+  }
+};
+
+//집사대회 내 참여현황
+export const joinCheckApi = async () => {
+  try {
+    const headers = {
+      Authorization: locakStorageToken,
+    };
+
+    const response = await axios.get(`${API_URL}/challenge/reward/1/join/my`, {
+      headers,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error in joinCheckApi: " + error);
+    return "join";
   }
 };
 
@@ -43,35 +62,14 @@ export const ContestParticipationApi = async (deliveryData: DeliveryData) => {
   }
 };
 
-// 집사대회 인증신청 api
-export const ContestReviewApi = async (imageFile: File, content: string) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", imageFile);
-
-    const headers = {
-      Authorization: locakStorageToken,
-      "Content-Type": "multipart/form-data",
-    };
-
-    await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-      headers,
-    });
-
-    const request = { content };
-
-    await axios.post(`${API_URL}/challenge/point/1/review`, request, {
-      headers,
-    });
-  } catch (error) {
-    console.error("Error in ContestReviewApi: " + error);
-  }
-};
-
 // 야너도? 야 너도!
 export const ECyanadoCheckApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/point/1`);
+    const response = await axios.get(`${API_URL}/challenge/point/1`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in ContestCheckApi:", error);
@@ -206,10 +204,12 @@ export const ECyanadoJoinApi = async () => {
 };
 
 // 야너도?야나두 참여신청
-export const ECyanadoReviewApi = async (
+export const ReviewApi = async (
   imageFile: File,
   content: string,
-  petType: string
+  petType: string,
+  eventName: string,
+  id: number
 ) => {
   try {
     // 파일 Blob 생성
@@ -234,9 +234,13 @@ export const ECyanadoReviewApi = async (
       "Content-Type": "application/octet-stream",
     };
 
-    await axios.post(`${API_URL}/challenge/point/1/review`, formData, {
-      headers,
-    });
+    await axios.post(
+      `${API_URL}/challenge/${eventName}/${id}/review`,
+      formData,
+      {
+        headers,
+      }
+    );
   } catch (error) {
     console.error(error);
   }
@@ -245,7 +249,11 @@ export const ECyanadoReviewApi = async (
 // 데일리 이벤트 - 간식주기 조회
 export const dailyChallenge1Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/1`);
+    const response = await axios.get(`${API_URL}/challenge/daily/1`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallange1Api: " + error);
@@ -265,7 +273,11 @@ export const daily1JoinListApi = async () => {
 // 데일리 이벤트 - 놀아주기 조회
 export const dailyChallenge2Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/2`);
+    const response = await axios.get(`${API_URL}/challenge/daily/2`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallenge2Api: " + error);
@@ -285,7 +297,11 @@ export const daily2JoinListApi = async () => {
 // 데일리 이벤트 - 위생관리 조회
 export const dailyChallenge3Api = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily/3`);
+    const response = await axios.get(`${API_URL}/challenge/daily/3`, {
+      headers: {
+        Authorization: locakStorageToken,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyChallenge3Api: " + error);

@@ -51,6 +51,18 @@ const ECYanado = () => {
     pointInfo: "참여완료시 바로 지급",
   };
 
+  const handleJoinButtonClick = async () => {
+    // You can call the daily1 and daily1Join functions here if needed
+    try {
+      const daily1Response = await ECyanadoCheckApi();
+      const joinListResponse = await ECyanadoJoinApi();
+      setYanadoData(daily1Response);
+      setJoinList(joinListResponse.content);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <Background>
@@ -60,8 +72,12 @@ const ECYanado = () => {
             <ChallengeBanner banner={yanadoData.poster} />
             <ChallengeContents contents={contents} />
             <ChallengeJoin joinLists={filterData || []} />
-            <JoinButton />
-            <EventSaveBS />
+            <JoinButton joinCheck={yanadoData.writtenReviewToday} />
+            <EventSaveBS
+              eventName="point"
+              id={yanadoData.id}
+              onHandle={handleJoinButtonClick}
+            />
             <MainTab />
           </>
         ) : null}
