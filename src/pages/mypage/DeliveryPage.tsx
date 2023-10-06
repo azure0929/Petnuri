@@ -1,7 +1,7 @@
 import { BSTypeState, bottomSheetState } from '@/store/challengeState';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import DeliveryList from '@/components/challenge/delivery/DeliveryList';
+import DeliveryReg from '@/components/challenge/delivery/DeliveryReg';
 import Background from '@/components/Background';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const DeliveryPage = () => {
   const [valueBSType, setValueBSType] = useRecoilState(BSTypeState);
 
   useEffect(() => {
-    setValueBSType('DeliveryList');
+    setValueBSType('DeliveryReg');
     setIsOpen(true);
     // console.log('11', valueBSType);
   }, []);
@@ -25,7 +25,7 @@ const DeliveryPage = () => {
   return (
     <div>
       <Background>
-        <DeliveryList />
+        <DeliveryReg />
       </Background>
     </div>
   );
