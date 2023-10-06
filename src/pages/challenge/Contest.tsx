@@ -92,11 +92,11 @@ const Contest = () => {
     try {
       const contestResponse = await ContestCheckApi();
       const joinCheckResponse = await joinCheckApi();
-      // const joinResponse = await ContestJoinApi();
+      const joinResponse = await ContestJoinApi();
       setContestData(contestResponse);
       setJoinCheckData(joinCheckResponse);
       console.log("joinCheckResponse asd : " + joinCheckResponse);
-      // setJoinList(joinResponse);
+      setJoinList(joinResponse);
     } catch (error) {
       console.error("Error:", error);
     }
