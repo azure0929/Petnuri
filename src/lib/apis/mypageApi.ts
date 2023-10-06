@@ -69,7 +69,7 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 export const withdraw = async () => {
   try {
     const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
-    const jwtToken = localStorage.getItem('kakaoAccessToken');
+    const kakaoToken = localStorage.getItem('kakaoAccessToken');
 
     await axios.post(
       KAKAO_UNLINK_URI,
@@ -77,7 +77,7 @@ export const withdraw = async () => {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Bearer ${jwtToken}`,
+          Authorization: `Bearer ${kakaoToken}`,
         },
       }
     );
