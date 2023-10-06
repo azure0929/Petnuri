@@ -32,17 +32,6 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
         <span className={styles.buttonText}>참여하기</span>
       </button>
     );
-  } else if (joinCheck === "APPLY") {
-    renderButton = (
-      <button
-        className={styles.joinButton}
-        onClick={() => {
-          setEventBottomIsOpen(true);
-        }}
-      >
-        <span className={styles.buttonText}>인증하기</span>
-      </button>
-    );
   } else if (joinCheck === "join") {
     renderButton = (
       <button
@@ -58,7 +47,11 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
         <span className={styles.buttonText}>참여하기</span>
       </button>
     );
-  } else if (joinCheck === "KIT_REVIEW_COMPLETE" || joinCheck) {
+  } else if (
+    joinCheck === "KIT_REVIEW_COMPLETE" ||
+    joinCheck === "APPLY" ||
+    joinCheck
+  ) {
     renderButton = <JoinComplete />;
   }
 
