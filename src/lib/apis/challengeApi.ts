@@ -383,5 +383,6 @@ export const checkApi = async () => {
     return response.data;
   } catch (error) {
     console.error("Error in checkApi: " + error);
+    throw error;
   }
 };

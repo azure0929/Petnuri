@@ -51,6 +51,7 @@ const DeliveryList = () => {
       setPrivacy(data);
       const defaultItem = data.find((item: Privacy) => item.isBased);
       setSelectedItem(defaultItem);
+      setBSType('DeliveryBS');
     } catch (error) {
       console.error("Failed to update delivery address:", error);
     }
