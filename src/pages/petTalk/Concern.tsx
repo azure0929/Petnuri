@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { activeTabState, mapTabToNumber } from "@/store/petTalkState";
 import { useConcernList } from "@/lib/hooks/pettalkList";
+import { concernList } from "@/lib/apis/pettalkApi";
 import { formatDate } from "@/utils/DateFormat";
 import Head from "@/components/Head";
 import { useEffect, useState } from "react";
@@ -20,45 +21,66 @@ import banner from "@/assets/키트배너.png";
 
 import LoginModal from "@/components/modal/LoginModal";
 import { getCookie } from "@/utils/Cookie";
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from "recoil";
 import { loginModalState } from "@/store/challengeState";
 
 const Concern = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
   const [selectedPet, setSelectedPet] = useState("DOG");
+  const [selectedValue, setSelectedValue] = useState("BEST");
   const [subCategory, setSubCategory] = useState(1);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const setLoginOpen = useSetRecoilState(loginModalState); 
-  const token = getCookie("jwtToken")
+  const setLoginOpen = useSetRecoilState(loginModalState);
+  const token = getCookie("jwtToken");
 
   const scrollRef = useScrollDiv();
 
   const handleFloating = () => {
     if (!token) {
       setLoginOpen(true);
-    } else if (!isMenuOpen) { 
+    } else if (!isMenuOpen) {
       setIsMenuOpen(true);
-    }
-  };
-
-  const handlePetSelect = (e: { target: { value: string } }) => {
-    const selectedValue = e.target.value;
-    setSelectedPet(selectedValue);
-
-    if (selectedValue === "DOG") {
-      setSelectedPet("DOG");
-    } else if (selectedValue === "CAT") {
-      setSelectedPet("CAT");
     }
   };
 
   const { data, refetch } = useConcernList(
     selectedPet,
+    selectedValue,
     mapTabToNumber(activeTab),
     subCategory
   );
+
+  const handleChange = async (event: { target: { value: string } }) => {
+    setSelectedValue(event.target.value);
+    try {
+      await concernList(
+        selectedPet,
+        selectedValue,
+        mapTabToNumber(activeTab),
+        subCategory
+      );
+      refetch();
+    } catch (error) {
+      console.error("데이터를 불러오는 중 에러 발생:", error);
+    }
+  };
+
+  const handlePetSelect = async (e: { target: { value: string } }) => {
+    setSelectedPet(e.target.value);
+    try {
+      await concernList(
+        selectedPet,
+        selectedValue,
+        mapTabToNumber(activeTab),
+        subCategory
+      );
+      refetch();
+    } catch (error) {
+      console.error("데이터를 불러오는 중 에러 발생:", error);
+    }
+  };
 
   const handleSubCategorySelect = (subCategory: number) => {
     setSubCategory(subCategory);
@@ -66,7 +88,7 @@ const Concern = () => {
 
   useEffect(() => {
     refetch();
-  }, [refetch, subCategory]);
+  }, [refetch, activeTab, selectedPet, selectedValue, subCategory]);
 
   useEffect(() => {
     if (location.pathname === "/petTalk") {
@@ -156,8 +178,8 @@ const Concern = () => {
                 value={selectedPet}
                 onChange={handlePetSelect}
               >
-                <option value="강아지">강아지</option>
-                <option value="고양이">고양이</option>
+                <option value="DOG">강아지</option>
+                <option value="CAT">고양이</option>
               </select>
             </div>
 
@@ -166,9 +188,13 @@ const Concern = () => {
             </div>
 
             <div className={styles.select_wrap}>
-              <select className={styles.select_sort} name="인기순">
-                <option value="인기순">인기순</option>
-                <option value="최신순">최신순</option>
+              <select
+                className={styles.select_sort}
+                onChange={handleChange}
+                name="인기순"
+              >
+                <option value="BEST">인기순</option>
+                <option value="LATEST">최신순</option>
               </select>
             </div>
 

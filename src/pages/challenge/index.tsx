@@ -12,7 +12,11 @@ import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
 import { bottomSheetState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
-import { ContestCheckApi, YanadoCheckApi, dailyAllListApi } from "@/lib/apis/challengeApi";
+import {
+  ContestCheckApi,
+  YanadoCheckApi,
+  dailyAllListApi,
+} from "@/lib/apis/challengeApi";
 
 const Challenge = () => {
   const intervalId = useRef(0);
@@ -45,7 +49,7 @@ const Challenge = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await dailyAllListApi()
+      const data = await dailyAllListApi();
       setChallenges(data);
     };
     fetchData();
@@ -100,6 +104,25 @@ const Challenge = () => {
           </div>
         </div>
 
+        {/* {getCookie("jwtToken") ? (
+          <>
+            <div className={styles.shop}>
+              <div className={styles.container}>
+                <div
+                  className={styles.button}
+                  onClick={() => navigate("/pointshop")}
+                >
+                  포인트샵 가기
+                </div>
+                <span>|</span>
+                <button className={styles.button_right} onClick={wrong}>
+                  포인트 사용 내역
+                </button>
+              </div>
+            </div>
+          </>
+        ) : null} */}
+
         <div className={styles.event}>
           <div className={styles.head}>
             <span>이벤트 챌린지</span>
@@ -147,13 +170,19 @@ const Challenge = () => {
                 </div>
 
                 {challengeData.status ? (
-                  <button className={styles.participate_off} disabled> 지급완료 </button>
+                  <button className={styles.participate_off} disabled>
+                    {" "}
+                    지급완료{" "}
+                  </button>
                 ) : (
-                  <button 
+                  <button
                     className={styles.participate_on}
                     onClick={() =>
                       navigate(`/dailychallenge${challengeData.challengeId}`)
-                    }>참여하기</button>
+                    }
+                  >
+                    참여하기
+                  </button>
                 )}
               </div>
             ))}

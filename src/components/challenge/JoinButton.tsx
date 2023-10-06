@@ -16,15 +16,17 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
   const setBottomIsOpen = useSetRecoilState(bottomSheetState);
 
   let renderButton;
-  if (joinCheck === false || joinCheck === "join") {
+  if (joinCheck === false) {
     renderButton = (
       <button
         className={styles.joinButton}
         onClick={() => {
-          if (getCookie("jwtToken")) {
-            setBottomIsOpen(true);
+          if (!getCookie("jwtToken")) {
+            alert("로그인 후 참여가 가능합니다.");
+            setEventBottomIsOpen(false);
+          } else if (getCookie("jwtToken")) {
+            setEventBottomIsOpen(true);
           }
-          handleCookie();
         }}
       >
         <span className={styles.buttonText}>참여하기</span>
@@ -41,16 +43,24 @@ const JoinButton: React.FC<JoinButtonProps> = ({ joinCheck }) => {
         <span className={styles.buttonText}>인증하기</span>
       </button>
     );
-  } else if (joinCheck === "KIT_REVIEW_COMPLETE") {
+  } else if (joinCheck === "join") {
+    renderButton = (
+      <button
+        className={styles.joinButton}
+        onClick={() => {
+          if (!getCookie("jwtToken")) {
+            alert("로그인 후 참여가 가능합니다.");
+          } else if (getCookie("jwtToken")) {
+            setBottomIsOpen(true);
+          }
+        }}
+      >
+        <span className={styles.buttonText}>참여하기</span>
+      </button>
+    );
+  } else if (joinCheck === "KIT_REVIEW_COMPLETE" || joinCheck) {
     renderButton = <JoinComplete />;
   }
-
-  const handleCookie = () => {
-    const token = getCookie("jwtToken");
-    if (!token) {
-      alert("로그인 후 참여가 가능합니다.");
-    }
-  };
 
   return <>{renderButton}</>;
 };

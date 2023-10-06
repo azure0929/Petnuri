@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { API_URL } from './base';
-import { getCookie } from '@/utils/Cookie';
+import { getCookie, removeCookie } from '@/utils/Cookie';
 
 const api = axios.create({
   baseURL: 'https://petnuri.shop',
   headers: {
-    //   Authorization:
-    //     'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjJAdGVzdC5jb20iLCJleHAiOjE2OTY0OTI0ODUsImlkIjo3Mywicm9sZSI6IlVTRVIifQ.Dxmmw1xCeqLq8HWEIWiirPGfEQbyUEuHv209vwL4E7o',
-    // },
     Authorization: getCookie('jwtToken'),
   },
 });
@@ -30,9 +27,6 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
       const fileBlob = new Blob([img], { type: img.type });
       formData.append('file', fileBlob);
     }
-    // } else {
-    //   formData.append('file', 'null');
-    // }
     if (nickname != '') {
       formData.append(
         'nickname',
@@ -42,24 +36,16 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
       );
     }
 
-    /*const res = await api.put('/member/mypage/profile', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });*/
-
     const res = await axios.put(
       'https://petnuri.shop/member/mypage/profile',
       formData,
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          // Authorization:
-          //   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjJAdGVzdC5jb20iLCJleHAiOjE2OTY0OTI0ODUsImlkIjo3Mywicm9sZSI6IlVTRVIifQ.Dxmmw1xCeqLq8HWEIWiirPGfEQbyUEuHv209vwL4E7o',
           Authorization: getCookie('jwtToken'),
         },
       }
     );
-
-    //const res = await api.put('/member/mypage/profile', { nickname: nickname });
     return res;
   } catch (error) {
     console.log(error);
@@ -70,6 +56,7 @@ export const withdraw = async () => {
   try {
     const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
     const kakaoToken = localStorage.getItem('kakaoAccessToken');
+    console.log('33', kakaoToken);
 
     await axios.post(
       KAKAO_UNLINK_URI,
@@ -95,6 +82,7 @@ export const logout = async () => {
   try {
     const res = await api.post('/member/logout');
     console.log('res:', res);
+    removeCookie('jwtToken');
     return res;
   } catch (error) {
     console.log(error);
