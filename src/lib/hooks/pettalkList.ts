@@ -7,8 +7,8 @@ import {
   pettalkReply,
 } from "../apis/pettalkApi";
 
-export const useAllList = (selectedPet: string) => {
-  return useQuery("allList", () => allList(selectedPet));
+export const useAllList = (selectedPet: string, order: string) => {
+  return useQuery("allList", () => allList(selectedPet, order));
 };
 
 export const useConcernList = (
@@ -22,9 +22,13 @@ export const useConcernList = (
   );
 };
 
-export const useFreetalkList = (selectedPet: string, mainCategory: number) => {
+export const useFreetalkList = (
+  selectedPet: string,
+  order: string,
+  mainCategory: number
+) => {
   return useQuery("freetalkList", () =>
-    freetalkList(selectedPet, mainCategory)
+    freetalkList(selectedPet, order, mainCategory)
   );
 };
 

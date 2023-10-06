@@ -194,7 +194,7 @@ const Concern = () => {
                 name="인기순"
               >
                 <option value="BEST">인기순</option>
-                <option value="LAITEST">최신순</option>
+                <option value="LATEST">최신순</option>
               </select>
             </div>
 
