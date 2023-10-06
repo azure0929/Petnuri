@@ -116,25 +116,6 @@ const Challenge = () => {
           </div>
         </div>
 
-        {/* {getCookie("jwtToken") ? (
-          <>
-            <div className={styles.shop}>
-              <div className={styles.container}>
-                <div
-                  className={styles.button}
-                  onClick={() => navigate("/pointshop")}
-                >
-                  포인트샵 가기
-                </div>
-                <span>|</span>
-                <button className={styles.button_right} onClick={wrong}>
-                  포인트 사용 내역
-                </button>
-              </div>
-            </div>
-          </>
-        ) : null} */}
-
         <div className={styles.event}>
           <div className={styles.head}>
             <span>이벤트 챌린지</span>
