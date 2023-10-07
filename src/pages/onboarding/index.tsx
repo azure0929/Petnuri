@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { nicknameState, selectedPetState } from '@/store/signupState';
 
 const OnBoarding = () => {
-  const [selectedPet, setSelectedPet] = useRecoilState<"강아지" | "고양이" | ''>(selectedPetState);
+  const [selectedPet, setSelectedPet] = useRecoilState<PetType>(selectedPetState);
   const [showName, setShowName] = useState(false);
   const [nickname, setNickname] = useRecoilState(nicknameState);
   const [nicknameError, setNicknameError] = useState('');
@@ -22,15 +22,24 @@ const OnBoarding = () => {
     navigate(`/petregist`)
   }
 
-  const handlePetSelection = (pet: "강아지" | "고양이") => {
-    if (selectedPet === pet) {
+  const handlePetSelection = (pet: PetType) => {
+    let petInEnglish:PetType = '';
+    
+    if (pet === "강아지") {
+      petInEnglish = "DOG";
+    } else if (pet === "고양이") {
+      petInEnglish = "CAT";
+    }
+  
+    if (selectedPet === petInEnglish) {
       setSelectedPet(''); 
       setShowName(false);
     } else {
-      setSelectedPet(pet);
+      setSelectedPet(petInEnglish);
       setShowName(true);
     }
   };
+  
 
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newNickname = event.target.value;

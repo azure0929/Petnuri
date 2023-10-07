@@ -82,7 +82,7 @@ const PetRegist = () => {
         "petAge": age
       });
       
-      if(response?.status == 200){
+      if(response?.status == 201){
         navigate(`/registsuccess`);
       }
       else{

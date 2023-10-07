@@ -15,7 +15,7 @@ export const nicknameState = atom({
   default: '',
 });
 
-export const selectedPetState = atom<"강아지" | "고양이" | ''>({
+export const selectedPetState = atom<PetType>({
   key: 'selectedPetState',
   default: '',
 });
