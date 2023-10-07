@@ -70,6 +70,20 @@ export const petInfo = async ({ species, petName, breed, petGender, petAge }: Pe
   }
 };
 
+export const registerPet = async ({ species, petName, breed, petGender, petAge }: PetInfo) => {
+  try {
+    const response = await axios.post(`${API_URL}/member/pet`, 
+    { species, petName, breed, petGender, petAge }, {
+      headers:{
+        'Authorization': getCookie('jwtToken')
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // 홈 페이지 불러오기 
 export const HomeApi = async () => {
   try {
@@ -125,7 +139,7 @@ export interface PetInfo {
   petName: string;
   breed: string;
   petGender: string;
-  petAge: number;
+  petAge: number | null;
 }
 export interface PetInfoResponse {
   message: string;
