@@ -8,33 +8,32 @@ const KaKaoLogin = () => {
   const codeProcessed = useRef(false);
 
   useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get("code");
-
     if (!codeProcessed.current) {
       codeProcessed.current = true;
 
       const processLogin = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        
         try {
           const res = await login(code);
-  
-          if (res) {
-            const { jwtToken, refreshToken, kakaoAccessToken, email } = res?.data;
-
+            const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
+            console.log(jwtToken);
+            
             if (jwtToken) {
-              localStorage.setItem("refreshToken", refreshToken);
+              localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
               localStorage.setItem("email", email);
-              localStorage.setItem("kakaoAccessToken", kakaoAccessToken);
+              localStorage.setItem("kakaoToken", kakaoToken);
               setCookie("jwtToken", jwtToken);
               navigate("/");
             } else {
               localStorage.setItem("email", email);
-              localStorage.setItem("kakaoAccessToken", kakaoAccessToken);
+              localStorage.setItem("kakaoToken", kakaoToken);
               navigate("/signup");
             }
-          }
         } catch (error) {
           console.log("로그인 실패", error);
+          navigate('/login')
         }
       };
       processLogin();
