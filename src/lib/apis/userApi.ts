@@ -100,7 +100,7 @@ export const HomeApi = async () => {
 
 // 회원가입
 export interface Join {
-  email: string;
+  email: string | null;
   nickname: string;
   referralCode: string;
   isAgreed: boolean;

@@ -4,13 +4,11 @@ import login_screen from '@/assets/login_screen.svg';
 import kakao from '@/assets/kakao.svg';
 import styles from '@/styles/login.module.scss';
 import { REST_API_KEY } from '@/lib/apis/base';
-import { login } from '@/lib/apis/userApi';
 
 const Login = () => {
-  const REDIRECT_URL = `localhost:5173`;
+  const REDIRECT_URL = `http://localhost:5173/auth/kakao/login`;
   const handleKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
-    login(`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}`)
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}`;
   };
 
   const chatLink = 'http://pf.kakao.com/_RfxnuG/chat';
