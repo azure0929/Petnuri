@@ -6,6 +6,18 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+//로그인
+export const login = async (code:string | null) => {
+  try {
+    const response = await axios.get(`${API_URL}/auth/kakao/login`,
+      {params: { code }}
+    )
+    return response
+  } catch (error) {
+    console.log('로그인 api 에러',error);
+  }
+}
+
 // 회원가입
 export const join = async ({ email, nickname, isAgreed, referralCode }: Join) => {
   try {
