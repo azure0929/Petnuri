@@ -13,10 +13,8 @@ const DeliveryPage = () => {
   useEffect(() => {
     setValueBSType('DeliveryReg');
     setIsOpen(true);
-    // console.log('11', valueBSType);
   }, []);
   useEffect(() => {
-    // console.log('22', valueBSType);
     if (isOpen && valueBSType == 'DeliveryBS') {
       setIsOpen(false);
       navigate('/mypage');

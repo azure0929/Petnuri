@@ -12,7 +12,6 @@ const Login = () => {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
   };
 
-  // 1 : 1 채팅 상담하기 클릭 시 이동
   const chatLink = 'http://pf.kakao.com/_RfxnuG/chat';
 
   const handleChatClick = () => {
