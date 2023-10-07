@@ -106,7 +106,7 @@ const Home = () => {
                   onClick={() => handleItemClick(profile.petName)}
                   className={activePetName === profile.petName ? styles.active : styles.add}
                 >
-                  <img src={profile.image} alt="" className={styles.icon}/>
+                  <img src={profile?.image || defaultImage} alt="" className={styles.icon}/>
                   <span>{profile.petName}</span>
                 </div>
               )}
@@ -120,7 +120,7 @@ const Home = () => {
             <div className={styles.detail}>
               {selectedProfile && (
               <div className={styles.info}>
-                <img src={selectedProfile?.image} alt="" className={styles.photo}/>
+                <img src={selectedProfile?.image || defaultImage} alt="" className={styles.photo}/>
                 <div className={styles.nga}>
                   {/* 데이터가 없을 때는 이름 전체를 출력 */}
                   <span className={styles.name}> 
