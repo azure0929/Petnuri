@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, useRef } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import Background from "@/components/Background";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
 import arrow_right_small from "@/assets/arrow_right_small.svg";
@@ -34,7 +34,7 @@ const SignUp = () => {
   const [referralCode, setReferralCode] = useState<string>("");
   const [referralCodeError, setReferralCodeError] = useState<string>("");
 
-  const [kakaoEmail, setKakaoEmail] = useState<string>("");
+  const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,14 +42,18 @@ const SignUp = () => {
   const isButtonEnabled =
     isNicknameValid && !nameError && isDuplicateChecked && isAllAgreed || referralCode;
 
-  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  }, []);
 
   const handleAgreeButtonClick = async () => {
     if (isButtonEnabled) {
       try {
-        const email = kakaoEmail || (emailInputRef.current?.placeholder ?? "");
         const response = await join({
-          email: email,
+          email: localStorage.getItem('email'),
           nickname: name,
           referralCode: referralCode,
           isAgreed: isAllAgreed,
@@ -77,7 +81,7 @@ const SignUp = () => {
       }
     }
   };
-
+  
   const onHome = () => {
     navigate(`/`);
   };
@@ -153,36 +157,6 @@ const SignUp = () => {
     setIsMarketingAgreed(newAgreeAll);
   };
 
-  useEffect(() => {
-    const fetchKakaoEmail = async () => {
-      try {
-        const hasKakaoAccessToken = localStorage.getItem("kakaoAccessToken") || "";
-        if (!hasKakaoAccessToken) {
-          console.error("Kakao Access Token이 없습니다. 로그인 후에 다시 시도하세요.");
-          return;
-        }
-
-        const response = await axios.get("https://kapi.kakao.com/v2/user/me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("kakaoAccessToken")}`,
-          },
-        });
-
-        const { kakao_account } = response.data;
-        const { email } = kakao_account;
-
-        setKakaoEmail(email);
-
-        const emailInput = document.querySelector("#email-input") as HTMLInputElement;
-        emailInput.placeholder = email || 'petnuri@kakao.talk';
-      } catch (error) {
-        console.error("Kakao 이메일 조회 오류:", error);
-      }
-    };
-
-    fetchKakaoEmail();
-  }, []);
-
   const handleReferralCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     setReferralCode(inputValue);
@@ -236,7 +210,7 @@ const SignUp = () => {
             <div className={styles.box}>
               <h2 className={styles.title}>이메일</h2>
               <input 
-                id="email-input" 
+                value={email}
                 readOnly 
               />
             </div>
