@@ -7,12 +7,11 @@ import { REST_API_KEY } from '@/lib/apis/base';
 
 const Login = () => {
   const handleKakaoLogin = () => {
-    const REDIRECT_URL = `https://petnuri.netlify.app/KaKaoLogin`;
+    const REDIRECT_URL = `https://petnuri.netlify.app/auth/kakao/login`;
 
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
   };
 
-  // 1 : 1 채팅 상담하기 클릭 시 이동
   const chatLink = 'http://pf.kakao.com/_RfxnuG/chat';
 
   const handleChatClick = () => {

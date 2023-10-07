@@ -12,7 +12,7 @@ import { serviceSheetState, privacySheetState } from "@/store/signupState";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { join } from "@/lib/apis/userApi";
-import { setCookie/* , getCookie */ } from "@/utils/Cookie";
+import { setCookie } from "@/utils/Cookie";
 
 const SignUp = () => {
   const [name, setName] = useState<string>("");
