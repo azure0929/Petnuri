@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Background from "@/components/Background";
 import styles from '@/styles/onboarding.module.scss';
-
-type PetType = "강아지" | "고양이";
+import { useRecoilState } from 'recoil';
+import { nicknameState, selectedPetState } from '@/store/signupState';
 
 const OnBoarding = () => {
-  const [selectedPet, setSelectedPet] = useState<PetType | null>(null);
+  const [selectedPet, setSelectedPet] = useRecoilState<"강아지" | "고양이" | ''>(selectedPetState);
   const [showName, setShowName] = useState(false);
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useRecoilState(nicknameState);
   const [nicknameError, setNicknameError] = useState('');
   const [isNicknameValid, setIsNicknameValid] = useState(true);
   
@@ -22,9 +22,9 @@ const OnBoarding = () => {
     navigate(`/petregist`)
   }
 
-  const handlePetSelection = (pet: PetType) => {
+  const handlePetSelection = (pet: "강아지" | "고양이") => {
     if (selectedPet === pet) {
-      setSelectedPet(null); 
+      setSelectedPet(''); 
       setShowName(false);
     } else {
       setSelectedPet(pet);

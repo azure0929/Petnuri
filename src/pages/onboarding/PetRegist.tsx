@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import Background from "@/components/Background";
 import styles from "@/styles/petregist.module.scss";
 import arrow_left_mid from "@/assets/arrow_left_mid.svg";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { nicknameState, selectedPetState, selectedMaleState, ageState, petTypeState } from "@/store/signupState";
+import { registerPet } from "@/lib/apis/userApi";
 
-type MaleType = "남" | "여";
 
 const PetRegist = () => {
-  const [selectedMale, setSelectedMale] = useState<MaleType | null>(null);
-  const [pettype, setPettype] = useState("");
-  const [age, setAge] = useState("");
+  const nickname = useRecoilValue(nicknameState);
+  const selectedPet = useRecoilValue(selectedPetState);
+  const [selectedMale, setSelectedMale]= useRecoilState(selectedMaleState);
+  const [age, setAge]= useRecoilState(ageState);
+  const [pettype, setPettype]= useRecoilState(petTypeState);
   const [pettypeError, setPettypeError] = useState("");
   const [ageError, setAgeError] = useState("");
   const [showGender, setShowGender] = useState(false);
@@ -35,9 +39,9 @@ const PetRegist = () => {
     }
   };
 
-  const handlePetSelection = (male: MaleType) => {
+  const handlePetSelection = (male:string) => {
     if (selectedMale === male) {
-      setSelectedMale(null);
+      setSelectedMale('');
       setShowAge(false);
     } else {
       setSelectedMale(male);
@@ -48,7 +52,7 @@ const PetRegist = () => {
   const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newAge = event.target.value;
     if (!isNaN(Number(newAge))) {
-      setAge(newAge);
+      setAge(Number(newAge));
 
       const ageValue = Number(newAge);
       const ageRegex = /^[1-9][0-9]?$|^25$/;
@@ -68,15 +72,32 @@ const PetRegist = () => {
 
   const navigate = useNavigate();
 
-  const onRegistSuccess = () => {
-    navigate(`/registsuccess`);
+  const onRegistSuccess = async () => {
+    try{
+      let response = await registerPet({
+        "species": selectedPet,
+        "petName": nickname,
+        "breed": pettype,
+        "petGender": selectedMale,
+        "petAge": age
+      });
+      
+      if(response?.status == 200){
+        navigate(`/registsuccess`);
+      }
+      else{
+        return response?.status
+      }
+    }catch(error){
+      console.log(error)
+    }
   }
 
   const onOnBoarding = () => {
     navigate(`/onboarding`);
   }
 
-  const isNextButtonEnabled = selectedMale !== null && !ageError && age !== '';
+  const isNextButtonEnabled = selectedMale !== null && !ageError && age !== 0;
 
   return (
     <>
@@ -125,7 +146,7 @@ const PetRegist = () => {
             <input
               type="text"
               placeholder="숫자만 입력해 주세요"
-              value={age}
+              value={age !== null ? age.toString() : ''}
               onChange={handleAgeChange}
               className={inAgeValid ? '' : styles.invalid}
             />

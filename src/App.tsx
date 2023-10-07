@@ -71,7 +71,7 @@ const App = () => {
         element={<RegistSuccess />}
       />
       <Route
-        path="/KaKaoLogin"
+        path="/auth/kakao/login"
         element={<KaKaoLogin />}
       />
       {/* 챌린지 */}
