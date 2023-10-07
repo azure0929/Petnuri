@@ -24,7 +24,10 @@ const KaKaoLogin = () => {
               localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
               localStorage.setItem("email", email);
               localStorage.setItem("kakaoToken", kakaoToken);
-              setCookie("jwtToken", jwtToken);
+              localStorage.setItem("jwtToken", jwtToken);
+              setCookie('jwtToken',jwtToken)
+              console.log(document.cookie);
+              
               navigate("/");
             } else {
               localStorage.setItem("email", email);
