@@ -63,14 +63,11 @@ const SignUp = () => {
 
         setCookie("jwtToken", jwtToken);
         localStorage.setItem("refreshToken", refreshToken);
-
-        console.log("회원가입 성공:", response.data);
         navigate("/onboarding");
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response && error.response.status === 400) {
             alert("이미 가입된 이메일입니다.");
-            console.log("이미 가입된 이메일입니다.", error.response);
             navigate("/");
           } else {
             console.error(error);

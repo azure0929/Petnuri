@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getMypage, logout } from '@/lib/apis/mypageApi';
 import { useEffect, useState } from 'react';
 import defaultImage from '@/assets/defaultImage.png';
+import { createToast } from '@/utils/ToastUtils';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -17,25 +18,26 @@ const MyPage = () => {
   useEffect(() => {
     const a = getMypage();
     a.then((res) => {
-      console.log('res::', res);
       setNickname(res.nickname);
       setEmail(res.email);
       setImg(res.profileImageUrl);
     });
-    console.log('---', a);
   }, []);
 
-  const onClickLogout = () => {
-    const res = logout();
-    res
-      .then(() => {
-        alert('로그아웃 성공');
-        navigate('/');
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+  const onClickLogout = async () => {
+    try {
+      const response = await logout();
+      if (response?.status === 200) { 
+        createToast('success','로그아웃에 성공했습니다')
+        navigate('/'); 
+        window.location.reload();
+      } else {
+        throw new Error('로그아웃 실패');
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };  
 
   return (
     <>
@@ -121,8 +123,8 @@ const MyPage = () => {
             </span>
           </div>
         </div>
+        <MainTab />
       </Background>
-      <MainTab />
     </>
   );
 };

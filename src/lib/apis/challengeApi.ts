@@ -46,7 +46,7 @@ export const joinCheckApi = async () => {
 };
 
 // 집사대회 참여신청 api
-export const ContestParticipationApi = async (deliveryData: DeliveryData) => {
+export const ContestParticipationApi = async (deliveryData: any) => {
   try {
     const headers = {
       Authorization: locakStorageToken,
@@ -145,7 +145,7 @@ export const DeliveryUpdateApi = async (deliveryInfo: any) => {
   }
 };
 
-export const DeliveryTrueUpdateApi = async (item: Privacy) => {
+export const DeliveryTrueUpdateApi = async (item: any) => {
   const response = await axios.put(
     `${API_URL}/delivery/address`,
     {

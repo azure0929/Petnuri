@@ -51,6 +51,11 @@ const PetRegist = () => {
 
   const handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newAge = event.target.value;
+    if (!newAge) {
+      setAge(null);
+      setInAgeValid(false);
+      return;
+    }
     if (!isNaN(Number(newAge))) {
       setAge(Number(newAge));
 
@@ -66,7 +71,7 @@ const PetRegist = () => {
       }
     } else {
       setAgeError('숫자만 입력해주세요.');
-      setInAgeValid(false); // Set age as invalid
+      setInAgeValid(false);
     }
   };
 
@@ -97,7 +102,7 @@ const PetRegist = () => {
     navigate(`/onboarding`);
   }
 
-  const isNextButtonEnabled = selectedMale !== null && !ageError && age !== 0;
+  const isNextButtonEnabled = selectedMale && pettype && age !== null && !ageError;
 
   return (
     <>
@@ -163,7 +168,7 @@ const PetRegist = () => {
               color: isNextButtonEnabled ? '#F5F5F5' : '#999999',
               borderColor: ageError ? '#F42A3B' : undefined
             }}
-            onClick={onRegistSuccess}
+            onClick={isNextButtonEnabled ? onRegistSuccess : undefined}
           >
             다음
           </div>

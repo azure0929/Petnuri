@@ -16,9 +16,9 @@ const ChallengeProfile = () => {
           const data = await pointApi()
           setPoint(prevState => ({
             ...prevState,
-            nickname: data.nickname || prevState.nickname,
-            havePoint: data.havePoint || prevState.havePoint,
-            profileImageUrl: data.profileImageUrl || prevState.profileImageUrl
+            nickname: data?.nickname || prevState.nickname,
+            havePoint: data?.havePoint || prevState.havePoint,
+            profileImageUrl: data?.profileImageUrl || prevState.profileImageUrl
           }));
         } catch (error) {
           console.error("Error ChallengeProfile:", error);

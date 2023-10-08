@@ -85,7 +85,7 @@ const Home = () => {
   const onChallenge = () => navigate(`challenge`)
   const onYanado = () => navigate(`ecyanado`)
   const onCheonHa = () => navigate(`contest`)
-  const onDailyChallenge1 = () => navigate(`dailychallenge1`)
+  const onDailyChallenge = () => navigate(`dailychallenge${daily?.id}`)
   const onPettalk = () => navigate(`PetTalk`)
   const onPettalkList = (id:number) => navigate(`petTalk/${id}`)
   const onPetProfileAdd = () => navigate(`petprofileadd`)
@@ -150,7 +150,7 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <HomeEventList item={daily} onClick={onDailyChallenge1} />
+              <HomeEventList item={daily} onClick={onDailyChallenge} />
               <HomeEventList item={cheonHa} onClick={onCheonHa} />
               <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
@@ -199,10 +199,10 @@ const Home = () => {
             <img src={키트배너} alt="" className={styles.image} onClick={() => setKitOpen(true)}/>
           </div>   
         </div>
+        <MainTab />
         <LoginModal />
         <KitModal/> 
       </Background>
-      <MainTab />
     </>
   );
 };
