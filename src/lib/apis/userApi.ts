@@ -1,6 +1,7 @@
 import axios  from "axios";
 import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
+import { Join, CheckNickname, Checkreferral, PetInfo } from "types";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -97,50 +98,3 @@ export const HomeApi = async () => {
     console.error("Error in HomeApi:", error);
   }
 };
-
-// 회원가입
-export interface Join {
-  email: string | null;
-  nickname: string;
-  referralCode: string;
-  isAgreed: boolean;
-}
-
-// 로그아웃
-export interface LogoutResponse {
-  id: number;
-  email: string;
-  nickname: string;
-  jwtToken: string;
-  refreshToken: string;
-}
-
-// 닉네임 중복 체크
-export interface CheckNickname {
-  nickname: string;
-}
-export interface CheckNicknameResponse {
-  nickname: string;
-  isExists: boolean;
-}
-
-// 추천인 코드 확인
-export interface Checkreferral {
-  referralCode: string;
-}
-export interface CheckreferralResponse {
-  referral: string;
-  isExists: boolean;
-}
-
-// 펫 정보 등록
-export interface PetInfo {
-  species: string;
-  petName: string;
-  breed: string;
-  petGender: string;
-  petAge: number | null;
-}
-export interface PetInfoResponse {
-  message: string;
-}

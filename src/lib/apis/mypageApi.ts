@@ -3,10 +3,7 @@ import { API_URL } from './base';
 import { getCookie, removeCookie } from '@/utils/Cookie';
 
 const api = axios.create({
-  baseURL: 'https://petnuri.shop',
-  headers: {
-    Authorization: getCookie('jwtToken'),
-  },
+  baseURL: API_URL
 });
 
 export const getMypage = async () => {
@@ -56,7 +53,6 @@ export const withdraw = async () => {
   try {
     const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
     const kakaoToken = localStorage.getItem('kakaoAccessToken');
-    console.log('33', kakaoToken);
 
     await axios.post(
       KAKAO_UNLINK_URI,
@@ -81,7 +77,6 @@ export const withdraw = async () => {
 export const logout = async () => {
   try {
     const res = await api.post('/member/logout');
-    console.log('res:', res);
     removeCookie('jwtToken');
     return res;
   } catch (error) {
@@ -89,12 +84,15 @@ export const logout = async () => {
   }
 };
 
-export const nickCheck = async (nickname: string) => {
+// 닉네임 중복 체크
+export const nickCheck = async ( nickname: string ) => {
   try {
-    const res = await api.get(`/auth/nickname?nickname=${nickname}`);
-    console.log(res);
-    return res;
+    const response = await api.get("/auth/nickname", {
+      params: { nickname },
+    });
+    return response;
   } catch (error) {
-    console.log(error);
+    console.error("중복체크 실패", error);
+    throw error;
   }
 };

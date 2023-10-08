@@ -26,12 +26,13 @@ const EditInfo = () => {
   const [email, setEmail] = useState();
   const [file, setFile] = useState<File>();
   const [doubleCheck, setDoubleCheck] = useState(false);
+  const [message, setMessage] = useState('')
 
   const convertURLtoFile = async (url: string) => {
     const response = await fetch(url);
     const data = await response.blob();
-    const ext = url.split('.').pop(); // url 구조에 맞게 수정할 것
-    const filename = url.split('/').pop(); // url 구조에 맞게 수정할 것
+    const ext = url.split('.').pop();
+    const filename = url.split('/').pop(); 
     const metadata = { type: `image/${ext}` };
     return new File([data], filename!, metadata);
   };
@@ -40,14 +41,24 @@ const EditInfo = () => {
   const onClickBack = () => {
     navigate(-1);
   };
-  const onClickCheck = () => {
-    nickCheck(input).then((res) => {
-      if (!res?.data.isExists) {
-        setDoubleCheck(true);
-      }
-    });
-  };
 
+  const onClickCheck = async () => {
+    if (!validation) return;
+    
+    try {
+      let res = await nickCheck(input)
+      if (!res?.data.isExists) {
+        setMessage('사용 가능합니다.');
+        setDoubleCheck(true);
+      } else if (res?.data.isExists) {
+        setMessage('다른 닉네임을 사용해주세요.');
+        setDoubleCheck(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   useEffect(() => {
     const a = getMypage();
     a.then((res) => {
@@ -71,26 +82,28 @@ const EditInfo = () => {
     }
   };
 
-  const changeHandler = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    setInput(target.value);
-    // 정규 표현식 패턴
-    var pattern = /^[a-zA-Z가-힣]+$/;
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => { // input event type
+    setInput(e.target.value);
 
-    // 입력값을 패턴과 비교하여 유효성을 검사
+    const pattern = /^[a-zA-Z가-힣]+$/;
+
     if (
-      pattern.test(target.value) &&
-      target.value.length >= 2 &&
-      target.value.length <= 10
+      pattern.test(e.target.value) &&
+      e.target.value.length >= 2 &&
+      e.target.value.length <= 10
     ) {
-      console.log('입력값이 유효합니다.');
       setValidation(true);
+      setMessage('');
     } else {
-      console.log('입력값이 유효하지 않습니다.');
       setValidation(false);
+      setMessage('숫자,특수문자,공백 제외 최소 2자~10자까지 입력');
     }
-    setDoubleCheck(false);
-  };
+    
+    if(doubleCheck){
+       setDoubleCheck(false); 
+       setMessage('');
+     }
+   };
 
   const onClickWithdraw = () => {
     withdraw();
@@ -127,57 +140,29 @@ const EditInfo = () => {
           </div>
         </div>
         <div className={styles.contents}>
-          <div className={styles.nickinputarea}>
+         <div className={styles.nickinputarea}>
             닉네임
-            <div
-              className={styles.nickinput}
-              style={
-                validation || input.length == 0
-                  ? { border: 'none' }
-                  : { border: '1px solid #f42a3b' }
-              }
-            >
+            <div className={`${styles.nickinput} ${validation || input.length ==0 ? styles.validationBorder : styles.errorBorder}`}>
               <input
                 placeholder="수정을 원하실 경우 입력해주세요"
                 value={input}
                 onChange={changeHandler}
-                style={
-                  validation || input.length == 0
-                    ? { color: '#000000' }
-                    : { color: '#f42a3b' }
-                }
+                className={validation || input.length ==0 ? styles.validationColor : styles.errorColor}
               />
-              <button
-                style={
-                  validation
-                    ? {
-                        color: '#ffffff',
-                        backgroundColor: '#3f54d1',
-                        cursor: 'pointer',
-                      }
-                    : {
-                        color: '#3f54d1',
-                        backgroundColor: 'rgba(63, 84, 209, 0.1)',
-                      }
-                }
-                onClick={onClickCheck}
+              <button 
+                onClick={onClickCheck} 
+                className={validation ? styles.validButtonStyle : styles.invalidButtonStyle}
               >
                 중복체크
               </button>
             </div>
-            {doubleCheck ? (
-              <span style={{ color: '#3f54d1' }}>사용 가능합니다</span>
-            ) : (
-              <span
-                style={
-                  validation || input.length == 0
-                    ? { color: '#ffffff' }
-                    : { color: '#f42a3b' }
-                }
-              >
-                숫자, 특수문자, 공백 제외 최소 2자~10자까지 입력
-              </span>
-            )}
+            <div className={styles.messageContainer }>
+              {doubleCheck ? (
+                <span className={styles.okColor}>{message || '\u00A0'}</span>
+              ) : (
+                <span className={styles.errorColor}>{input.length !== 0 ? (message || '\u00A0') : '\u00A0'}</span>
+              )}
+            </div>
           </div>
         </div>
         <div

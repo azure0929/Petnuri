@@ -68,7 +68,6 @@
     .nickarea {
       height: 100%;
       width: 55%;
-      // background-color: rgb(147, 210, 210);
       display: flex;
       justify-content: center;
       align-items: start;
@@ -373,3 +372,45 @@
     }
   }
 }
+.messageContainer {
+  height: 30px;
+  .errorColor {
+    color: #f42a3b;
+  }
+  .okColor {
+    color: #3f54d1;
+  }
+}
+.hidden {
+  visibility: hidden;
+}
+.validationBorder {
+  border: none;
+}
+
+.errorBorder {
+  border: 1px solid #f42a3b;
+}
+
+.validationColor {
+  color: #000000;
+}
+
+.errorColor {
+  color: #f42a3b;
+}
+
+.validButtonStyle {
+  color: #ffffff;
+  background-color: #3f54d1;
+  cursor: pointer;
+}
+
+.invalidButtonStyle {
+  color: '#3f54d1';
+  background-color: 'rgba(63,84,209,0.1)';
+}
+.messageValidation {
+  color: #ffffff;
+}
+
