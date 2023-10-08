@@ -294,3 +294,5 @@ interface ReplyItem {
     nickname: string;
   };
 }
+
+type PetType = '강아지' | '고양이' | 'DOG' | 'CAT' | ''

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Background from "@/components/Background";
 import styles from '@/styles/onboarding.module.scss';
-
-type PetType = "강아지" | "고양이";
+import { useRecoilState } from 'recoil';
+import { nicknameState, selectedPetState } from '@/store/signupState';
 
 const OnBoarding = () => {
-  const [selectedPet, setSelectedPet] = useState<PetType | null>(null);
+  const [selectedPet, setSelectedPet] = useRecoilState<PetType>(selectedPetState);
   const [showName, setShowName] = useState(false);
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useRecoilState(nicknameState);
   const [nicknameError, setNicknameError] = useState('');
   const [isNicknameValid, setIsNicknameValid] = useState(true);
   
@@ -23,14 +23,23 @@ const OnBoarding = () => {
   }
 
   const handlePetSelection = (pet: PetType) => {
-    if (selectedPet === pet) {
-      setSelectedPet(null); 
+    let petInEnglish:PetType = '';
+    
+    if (pet === "강아지") {
+      petInEnglish = "DOG";
+    } else if (pet === "고양이") {
+      petInEnglish = "CAT";
+    }
+  
+    if (selectedPet === petInEnglish) {
+      setSelectedPet(''); 
       setShowName(false);
     } else {
-      setSelectedPet(pet);
+      setSelectedPet(petInEnglish);
       setShowName(true);
     }
   };
+  
 
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newNickname = event.target.value;
