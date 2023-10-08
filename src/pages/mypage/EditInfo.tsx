@@ -114,6 +114,7 @@ const EditInfo = () => {
     removeCookie('jwtToken')
     createToast('success','회원탈퇴에 성공했습니다')
     navigate('/')
+    window.location.reload()
   };
 
   return (

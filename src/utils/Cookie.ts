@@ -11,6 +11,6 @@ export const getCookie = (key: string) => {
 }
 
 export const removeCookie = (key: string) => {
-  return cookies.remove(key, { sameSite: 'none', secure: true });
+  return cookies.remove(key, { domain: 'localhost', path: '/' });
 }
 
