@@ -8,6 +8,7 @@ import { getMypage, logout } from '@/lib/apis/mypageApi';
 import { useEffect, useState } from 'react';
 import defaultImage from '@/assets/defaultImage.png';
 import { removeCookie } from '@/utils/Cookie';
+import { createToast } from '@/utils/ToastUtils';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const MyPage = () => {
       const response = await logout();
       if (response?.status === 200) { 
         removeCookie('jwtToken'); 
-        alert('로그아웃 성공');
+        createToast('success','로그아웃에 성공했습니다')
         navigate('/'); 
       } else {
         throw new Error('로그아웃 실패');

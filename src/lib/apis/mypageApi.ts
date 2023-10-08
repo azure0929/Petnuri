@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from './base';
-import { getCookie } from '@/utils/Cookie';
+import { getCookie, removeCookie } from '@/utils/Cookie';
 
 const api = axios.create({
   baseURL: API_URL
@@ -55,11 +55,10 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 export const withdraw = async () => {
   try {
     const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
-    const kakaoToken = localStorage.getItem('kakaoAccessToken');
-
-    await axios.post(
+    const kakaoToken = localStorage.getItem('kakaoToken');
+    const unlink_res = await axios.post(
       KAKAO_UNLINK_URI,
-      {}, // 빈 바디
+      {}, 
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,13 +66,22 @@ export const withdraw = async () => {
         },
       }
     );
-
-    const res = await api.delete('/member/mypage/withdraw');
-    console.log('res:', res);
-
-    return res;
+    if (unlink_res.status !== 200) {
+      throw new Error('카카오계정 탈퇴 실패');
+    }
+    const res = await api.delete('/member/mypage/withdraw',{
+      headers:{
+        Authorization: getCookie('jwtToken')
+      }
+    });
+    if (res.status !== 200) {
+      throw new Error('펫누리 탈퇴 실패');
+    }
+    removeCookie('jwtToken')
+   return res;
   } catch (error) {
-    console.log(error);
+     console.log(error);
+     throw error; 
   }
 };
 
@@ -84,6 +92,7 @@ export const logout = async () => {
         Authorization: getCookie('jwtToken')
       }
     })
+    removeCookie('jwtToken')
     return res;
   } catch (error) {
     console.log(error);

@@ -13,6 +13,8 @@ import {
 import defaultImage from '@/assets/defaultImage.png';
 import WithdrawModal from '@/components/editinfo/WithdrawModal';
 import FileSelectModal from '@/components/editinfo/FileSelectModal';
+import { removeCookie } from '@/utils/Cookie';
+import { createToast } from '@/utils/ToastUtils';
 
 const EditInfo = () => {
   const [modal, setModal] = useState(false);
@@ -106,8 +108,12 @@ const EditInfo = () => {
      }
    };
 
-  const onClickWithdraw = () => {
-    withdraw();
+  const onClickWithdraw = async() => {
+    await withdraw();
+    localStorage.removeItem('kakaoToken');
+    removeCookie('jwtToken')
+    createToast('success','회원탈퇴에 성공했습니다')
+    navigate('/')
   };
 
   return (
