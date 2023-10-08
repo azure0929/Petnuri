@@ -1,7 +1,7 @@
 import axios  from "axios";
 import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
-import { Join, CheckNickname, Checkreferral, PetInfo } from "types";
+import { Join, Checkreferral, PetInfo } from "types";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -32,7 +32,7 @@ export const join = async ({ email, nickname, isAgreed, referralCode }: Join) =>
 };
 
 // 닉네임 중복 체크
-export const checkNickname = async ({ nickname }: CheckNickname) => {
+export const checkNickname = async ( nickname: string) => {
   try {
     const response = await axios.get("/auth/nickname", {
       params: { nickname },

@@ -4,9 +4,6 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { IoIosAdd } from 'react-icons/io';
 import { useEffect, useState } from 'react';
-import Warning from '../../assets/Warning.png';
-import nonCheck from '@/assets/none-checked.png';
-import Checked from '@/assets/checked.png';
 import {
   editProfile,
   getMypage,
@@ -14,6 +11,8 @@ import {
   withdraw,
 } from '@/lib/apis/mypageApi';
 import defaultImage from '@/assets/defaultImage.png';
+import WithdrawModal from '@/components/editinfo/WithdrawModal';
+import FileSelectModal from '@/components/editinfo/FileSelectModal';
 
 const EditInfo = () => {
   const [modal, setModal] = useState(false);
@@ -27,6 +26,8 @@ const EditInfo = () => {
   const [file, setFile] = useState<File>();
   const [doubleCheck, setDoubleCheck] = useState(false);
   const [message, setMessage] = useState('')
+  const [isImageChanged, setImageChanged] = useState(false);
+  const [isNicknameChecked, setNicknameChecked] = useState(false);
 
   const convertURLtoFile = async (url: string) => {
     const response = await fetch(url);
@@ -50,6 +51,7 @@ const EditInfo = () => {
       if (!res?.data.isExists) {
         setMessage('사용 가능합니다.');
         setDoubleCheck(true);
+        setNicknameChecked(true);
       } else if (res?.data.isExists) {
         setMessage('다른 닉네임을 사용해주세요.');
         setDoubleCheck(false);
@@ -62,12 +64,11 @@ const EditInfo = () => {
   useEffect(() => {
     const a = getMypage();
     a.then((res) => {
-      console.log('res::', res);
       setNickname(res.nickname);
       setEmail(res.email);
       setImg(res.profileImageUrl);
+      setImageChanged(false);
     });
-    console.log('---', a);
   }, []);
 
   const onClickEdit = () => {
@@ -82,7 +83,7 @@ const EditInfo = () => {
     }
   };
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => { // input event type
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
 
     const pattern = /^[a-zA-Z가-힣]+$/;
@@ -173,85 +174,30 @@ const EditInfo = () => {
           <AiOutlineRight />
         </div>
         <div className={styles.editbtnarea}>
-          <button onClick={onClickEdit}>수정 완료</button>
+          <button 
+            onClick={onClickEdit} 
+            disabled={!isImageChanged && !isNicknameChecked}
+            className={`${(!isImageChanged && !isNicknameChecked) ? styles.disabled : ''}`}>
+            수정 완료
+          </button>
         </div>
-
         {modal === true ? (
-          <div className={styles.modalcontain}>
-            <div className={styles.header}>
-              <AiOutlineLeft
-                className={styles.modalicon}
-                onClick={() => setModal(false)}
-              />
-              회원 탈퇴
-            </div>
-            <div className={styles.warningarea}>
-              <div className={styles.warning}>
-                <img
-                  src={Warning}
-                  alt="warning icon"
-                />
-                <div className={styles.warningtitle}>
-                  정말 탈퇴하시겠습니까?
-                </div>
-                <div className={styles.warningsubtitle}>
-                  회원 탈퇴 시 고객님의 모든 정보가 소멸되며 <br />
-                  이전으로 복구가 불가능합니다
-                </div>
-              </div>
-              <div
-                className={styles.check}
-                onClick={() => setCheck((old) => !old)}
-              >
-                <img src={check ? Checked : nonCheck} />
-                <label htmlFor="btn1">
-                  안내사항을 모두 확인하였으며 동의합니다
-                </label>
-              </div>
-            </div>
-            <div className={styles.btnarea}>
-              <button
-                disabled={!check}
-                onClick={onClickWithdraw}
-              >
-                회원 탈퇴
-              </button>
-            </div>
-          </div>
+          <WithdrawModal 
+            check={check} 
+            setCheck={setCheck} 
+            setModal={setModal} 
+            onClickWithdraw={onClickWithdraw}
+          />
         ) : null}
+
         {filemodal ? (
-          <div className={styles.filemodalcontain}>
-            <div className={styles.filebtns}>
-              <div className={styles.choosefilebtns}>
-                <label htmlFor="file">
-                  <div className={styles.upload}>사진 선택하기</div>
-                </label>
-                <input
-                  type="file"
-                  name="file"
-                  id="file"
-                  style={{ display: 'none' }}
-                  onChange={(e) => {
-                    setImg(URL.createObjectURL(e.target.files![0]));
-                    setFilemodal(false);
-                    setFile(e.target.files![0]);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    setImg('');
-                    convertURLtoFile(defaultImage).then((res) => setFile(res));
-                    setFilemodal(false);
-                  }}
-                >
-                  기본 이미지로 변경
-                </button>
-              </div>
-              <div className={styles.exitbtn}>
-                <button onClick={() => setFilemodal(false)}>취소</button>
-              </div>
-            </div>
-          </div>
+          <FileSelectModal 
+            setImg={setImg} 
+            setFilemodal={setFilemodal} 
+            setFile={setFile}
+            setImageChanged={setImageChanged}
+            convertURLtoFile={convertURLtoFile}
+            defaultImage={defaultImage} />
         ) : null}
       </div>
     </Background>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from './base';
-import { getCookie, removeCookie } from '@/utils/Cookie';
+import { getCookie } from '@/utils/Cookie';
 
 const api = axios.create({
   baseURL: API_URL
@@ -8,8 +8,11 @@ const api = axios.create({
 
 export const getMypage = async () => {
   try {
-    const res = await api.get('/member/mypage');
-    console.log('res:', res);
+    const res = await api.get('/member/mypage', {
+      headers: {
+        Authorization: getCookie("jwtToken"),
+      }
+    });
     return res.data;
   } catch (error) {
     console.log(error);
@@ -76,8 +79,11 @@ export const withdraw = async () => {
 
 export const logout = async () => {
   try {
-    const res = await api.post('/member/logout');
-    removeCookie('jwtToken');
+    const res = await api.post('/member/logout',{},{
+      headers:{
+        Authorization: getCookie('jwtToken')
+      }
+    })
     return res;
   } catch (error) {
     console.log(error);

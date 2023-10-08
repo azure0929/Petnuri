@@ -201,8 +201,8 @@ const Home = () => {
         </div>
         <LoginModal />
         <KitModal/> 
+        <MainTab />
       </Background>
-      <MainTab />
     </>
   );
 };
