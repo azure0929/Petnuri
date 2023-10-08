@@ -199,9 +199,9 @@ const Home = () => {
             <img src={키트배너} alt="" className={styles.image} onClick={() => setKitOpen(true)}/>
           </div>   
         </div>
+        <MainTab />
         <LoginModal />
         <KitModal/> 
-        <MainTab />
       </Background>
     </>
   );
