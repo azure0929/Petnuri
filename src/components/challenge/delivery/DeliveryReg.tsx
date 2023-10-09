@@ -67,13 +67,11 @@ const DeliveryReg = () => {
   };
 
   // 기본 배송지 설정 여부
-  const [agreedCheck, setAgreeCheck] = useState(
-    deliveryData.isSelected || false
-  );
+  const [agreedCheck, setAgreeCheck] = useState(false);
 
   const agreedBtnEvent = () => {
     setAgreeCheck(!agreedCheck);
-  };
+  };  
 
   useEffect(() => {
     if (nameState && contactState && addressInfoState) {

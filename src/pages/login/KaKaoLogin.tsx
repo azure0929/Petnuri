@@ -18,7 +18,6 @@ const KaKaoLogin = () => {
         try {
           const res = await login(code);
             const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
-            console.log(jwtToken);
             
             if (jwtToken) {
               localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
@@ -30,7 +29,6 @@ const KaKaoLogin = () => {
               navigate("/signup");
             }
         } catch (error) {
-          console.log("로그인 실패", error);
           navigate('/login')
         }
       };
