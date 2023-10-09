@@ -46,17 +46,15 @@ const Home = () => {
   }, []);
 
    useEffect(() => {
-    // 선택한 펫을 active로 설정
     let selectedProfileFromList = petProfile.find(profile => profile.isSelected);
-    // 선택된 펫이 없다면 첫 번째 펫을 선택
+
     if (!selectedProfileFromList && petProfile.length > 0) 
     selectedProfileFromList = petProfile[0];
      
     if (selectedProfileFromList) {
       setActivePetName(selectedProfileFromList.petName);
-      setSelectedProfile(selectedProfileFromList); // 첫 렌더링 시 선택된 프로필 설정
+      setSelectedProfile(selectedProfileFromList); 
     } else {
-      // 데이터가 없는 경우 기본 값을 설정합니다.
       setSelectedProfile({
         id: null,
         image: dog,
@@ -67,7 +65,6 @@ const Home = () => {
     }
   }, [petProfile]);
 
-  // 클릭한 펫 이름으로 active 상태 변경
   const handleItemClick = (petName: string) => {
     setActivePetName(petName);
     setSelectedProfile(petProfile.find(profile => profile.petName === petName) || null);

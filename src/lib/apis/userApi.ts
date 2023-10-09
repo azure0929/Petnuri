@@ -1,7 +1,6 @@
 import axios  from "axios";
 import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
-import { Join, Checkreferral, PetInfo } from "types";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -23,10 +22,8 @@ export const login = async (code:string | null) => {
 export const join = async ({ email, nickname, isAgreed, referralCode }: Join) => {
   try {
     const response = await api.post("/auth/join", { email, nickname, isAgreed, referralCode });
-    console.log("회원가입 응답 데이터:", response.data);
     return response;
   } catch (error) {
-    console.error("회원가입 실패", error);
     throw error;
   }
 };
@@ -37,10 +34,8 @@ export const checkNickname = async ( nickname: string) => {
     const response = await axios.get("/auth/nickname", {
       params: { nickname },
     });
-    console.log("중복체크 응답 데이터:", response.data);
     return response;
   } catch (error) {
-    console.error("중복체크 실패", error);
     throw error;
   }
 };
@@ -51,10 +46,8 @@ export const checkReferral = async ({ referralCode }: Checkreferral) => {
     const response = await axios.get("/auth/referral", {
       params: { referralCode },
     });
-    console.log("추천인코드 응답 데이터:", response.data);
     return response;
   } catch (error) {
-    console.error("추천인코드 확인 실패", error);
     throw error;
   }
 };
@@ -63,7 +56,6 @@ export const checkReferral = async ({ referralCode }: Checkreferral) => {
 export const petInfo = async ({ species, petName, breed, petGender, petAge }: PetInfo) => {
   try {
     const response = await api.post("/member/nickname", { species, petName, breed, petGender, petAge });
-    console.log("펫 정보 등록 데이터:", response.data);
     return response;
   } catch (error) {
     console.error("펫 정보 등록 실패", error);
@@ -93,6 +85,10 @@ export const HomeApi = async () => {
         Authorization: getCookie('jwtToken')
       }
     });
+    if (response.status !== 200) {
+      const secondResponse = await axios.get(`${API_URL}/member/main`);
+      return secondResponse.data;
+    }
     return response.data;
   } catch (error) {
     console.error("Error in HomeApi:", error);
