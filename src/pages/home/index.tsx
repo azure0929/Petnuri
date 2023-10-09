@@ -46,17 +46,15 @@ const Home = () => {
   }, []);
 
    useEffect(() => {
-    // 선택한 펫을 active로 설정
     let selectedProfileFromList = petProfile.find(profile => profile.isSelected);
-    // 선택된 펫이 없다면 첫 번째 펫을 선택
+
     if (!selectedProfileFromList && petProfile.length > 0) 
     selectedProfileFromList = petProfile[0];
      
     if (selectedProfileFromList) {
       setActivePetName(selectedProfileFromList.petName);
-      setSelectedProfile(selectedProfileFromList); // 첫 렌더링 시 선택된 프로필 설정
+      setSelectedProfile(selectedProfileFromList); 
     } else {
-      // 데이터가 없는 경우 기본 값을 설정합니다.
       setSelectedProfile({
         id: null,
         image: dog,
@@ -67,7 +65,6 @@ const Home = () => {
     }
   }, [petProfile]);
 
-  // 클릭한 펫 이름으로 active 상태 변경
   const handleItemClick = (petName: string) => {
     setActivePetName(petName);
     setSelectedProfile(petProfile.find(profile => profile.petName === petName) || null);
@@ -85,7 +82,7 @@ const Home = () => {
   const onChallenge = () => navigate(`challenge`)
   const onYanado = () => navigate(`ecyanado`)
   const onCheonHa = () => navigate(`contest`)
-  const onDailyChallenge1 = () => navigate(`dailychallenge1`)
+  const onDailyChallenge = () => navigate(`dailychallenge${daily?.id}`)
   const onPettalk = () => navigate(`PetTalk`)
   const onPettalkList = (id:number) => navigate(`petTalk/${id}`)
   const onPetProfileAdd = () => navigate(`petprofileadd`)
@@ -106,7 +103,7 @@ const Home = () => {
                   onClick={() => handleItemClick(profile.petName)}
                   className={activePetName === profile.petName ? styles.active : styles.add}
                 >
-                  <img src={profile.image} alt="" className={styles.icon}/>
+                  <img src={profile?.image || defaultImage} alt="" className={styles.icon}/>
                   <span>{profile.petName}</span>
                 </div>
               )}
@@ -120,7 +117,7 @@ const Home = () => {
             <div className={styles.detail}>
               {selectedProfile && (
               <div className={styles.info}>
-                <img src={selectedProfile?.image} alt="" className={styles.photo}/>
+                <img src={selectedProfile?.image || defaultImage} alt="" className={styles.photo}/>
                 <div className={styles.nga}>
                   {/* 데이터가 없을 때는 이름 전체를 출력 */}
                   <span className={styles.name}> 
@@ -150,7 +147,7 @@ const Home = () => {
               <div role="button" onClick={onChallenge}>더보기</div>
             </div>
             <ul className={styles.list} ref={scrollRef} >
-              <HomeEventList item={daily} onClick={onDailyChallenge1} />
+              <HomeEventList item={daily} onClick={onDailyChallenge} />
               <HomeEventList item={cheonHa} onClick={onCheonHa} />
               <HomeEventList item={yanado} onClick={onYanado} />
             </ul>
@@ -199,10 +196,10 @@ const Home = () => {
             <img src={키트배너} alt="" className={styles.image} onClick={() => setKitOpen(true)}/>
           </div>   
         </div>
+        <MainTab />
         <LoginModal />
         <KitModal/> 
       </Background>
-      <MainTab />
     </>
   );
 };

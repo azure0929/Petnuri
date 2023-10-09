@@ -6,10 +6,9 @@ import styles from '@/styles/login.module.scss';
 import { REST_API_KEY } from '@/lib/apis/base';
 
 const Login = () => {
+  const REDIRECT_URL = `http://localhost:5173/auth/kakao/login`;
   const handleKakaoLogin = () => {
-    const REDIRECT_URL = `https://petnuri.netlify.app/KaKaoLogin`;
-
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}`;
   };
 
   const chatLink = 'http://pf.kakao.com/_RfxnuG/chat';
