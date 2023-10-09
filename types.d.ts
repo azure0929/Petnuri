@@ -296,3 +296,48 @@ interface ReplyItem {
 }
 
 type PetType = '강아지' | '고양이' | 'DOG' | 'CAT' | ''
+
+// 회원가입
+interface Join {
+  email: string | null;
+  nickname: string;
+  referralCode: string;
+  isAgreed: boolean;
+}
+
+// 로그아웃
+interface LogoutResponse {
+  id: number;
+  email: string;
+  nickname: string;
+  jwtToken: string;
+  refreshToken: string;
+}
+
+// 닉네임 중복 체크
+
+interface CheckNicknameResponse {
+  nickname: string;
+  isExists: boolean;
+}
+
+// 추천인 코드 확인
+interface Checkreferral {
+  referralCode: string;
+}
+interface CheckreferralResponse {
+  referral: string;
+  isExists: boolean;
+}
+
+// 펫 정보 등록
+interface PetInfo {
+  species: string;
+  petName: string;
+  breed: string;
+  petGender: string;
+  petAge: number | null;
+}
+interface PetInfoResponse {
+  message: string;
+}

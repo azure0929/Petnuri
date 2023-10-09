@@ -163,7 +163,9 @@ const DeliveryBS: React.FC<DeliveryBSProps> = ({ onHandle }) => {
       {defaultAddress.length > 0 &&
       agreedCheck &&
       ruleCheck &&
-      exchangeCheck ? (
+      exchangeCheck &&
+      rewardId &&
+      messageState ? (
         <>
           <button className={styles.checkBtn} onClick={clickHandler}>
             <span>참여 신청</span>

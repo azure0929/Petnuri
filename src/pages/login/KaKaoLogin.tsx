@@ -18,23 +18,18 @@ const KaKaoLogin = () => {
         try {
           const res = await login(code);
 
-          if (res && res.data.jwtToken) {
-            localStorage.setItem("jwtRefreshToken", res.data.jwtRefreshToken);
-            localStorage.setItem("email", res.data.email);
-            localStorage.setItem("kakaoToken", res.data.kakaoToken);
-            localStorage.setItem("jwtToken", res.data.jwtToken);
-            setCookie("jwtToken", res.data.jwtToken);
-            console.log("ID: " + document.cookie);
-            console.log("ID: " + typeof getCookie("jwtToken"));
+          const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
 
+          if (jwtToken) {
+            localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
+            localStorage.setItem("email", email);
+            localStorage.setItem("kakaoToken", kakaoToken);
+            setCookie("jwtToken", jwtToken);
             navigate("/");
-          } else if (res && !res.data.jwtToken) {
-            localStorage.setItem("email", res.data.email);
-            localStorage.setItem("kakaoToken", res.data.kakaoToken);
+          } else {
             navigate("/signup");
           }
         } catch (error) {
-          console.log("로그인 실패", error);
           navigate("/login");
         }
       };

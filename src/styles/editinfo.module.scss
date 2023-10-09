@@ -68,7 +68,6 @@
     .nickarea {
       height: 100%;
       width: 55%;
-      // background-color: rgb(147, 210, 210);
       display: flex;
       justify-content: center;
       align-items: start;
@@ -141,6 +140,16 @@
           line-height: 18px;
           letter-spacing: -0.1px;
         }
+        .validButtonStyle {
+          color: #ffffff;
+          background-color: #3f54d1;
+          cursor: pointer;
+        }
+        
+        .invalidButtonStyle {
+          color: '#3f54d1';
+          background-color: 'rgba(63,84,209,0.1)';
+        }
       }
       span {
         font-size: 12px;
@@ -178,19 +187,23 @@
     align-items: center;
     border-top: 1px solid #ebebeb;
     button {
-      width: 327px;
+      width: 327px; 
       height: 54px;
       border-radius: 12px;
       border: none;
-      background-color: rgba(63, 84, 209, 0.1);
+      background-color: #3f54d1;
       font-size: 16px;
       line-height: 22px;
       letter-spacing: -0.1px;
-      color: #3f54d1;
+      color: #fff;
       font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .disabled {
+      color: $brand_blue_200_3F54D1;
+      background-color: $brand_blue_100_3F54D11A;
     }
   }
   .modalcontain {
@@ -373,3 +386,35 @@
     }
   }
 }
+.messageContainer {
+  height: 30px;
+  .errorColor {
+    color: #f42a3b;
+  }
+  .okColor {
+    color: #3f54d1;
+  }
+}
+.hidden {
+  visibility: hidden;
+}
+.validationBorder {
+  border: none;
+}
+
+.errorBorder {
+  border: 1px solid #f42a3b;
+}
+
+.validationColor {
+  color: #000000;
+}
+
+.errorColor {
+  color: #f42a3b;
+}
+
+.messageValidation {
+  color: #ffffff;
+}
+
