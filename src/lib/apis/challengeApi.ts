@@ -351,7 +351,11 @@ export const dailyReviewApi = async (imageFile: File, id: number) => {
 //데일리 전체 조회
 export const dailyAllListApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/challenge/daily`);
+    const response = await axios.get(`${API_URL}/challenge/daily`, {
+      headers: {
+        Authorization : getCookie('jwtToken')
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error in dailyAllListApi: " + error);
