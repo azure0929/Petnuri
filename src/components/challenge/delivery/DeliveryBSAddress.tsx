@@ -46,14 +46,20 @@ const DeliveryBSAddress: React.FC<DeliveryBSAddressProps> = ({
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0,0,0,0.5)",
+      zIndex : 1999,
     },
     content: {
-      left: "0",
-      margin: "auto",
-      width: "500px",
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: "375px",
       height: "400px",
       padding: "0",
       overflow: "hidden",
+      zIndex : 2000,
     },
   };
 
