@@ -1,7 +1,6 @@
 import axios  from "axios";
 import { API_URL } from "./base";
 import { getCookie } from "@/utils/Cookie";
-import { Join, Checkreferral, PetInfo } from "types";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -93,6 +92,10 @@ export const HomeApi = async () => {
         Authorization: getCookie('jwtToken')
       }
     });
+    if (response.status !== 200) {
+      const secondResponse = await axios.get(`${API_URL}/member/main`);
+      return secondResponse.data;
+    }
     return response.data;
   } catch (error) {
     console.error("Error in HomeApi:", error);

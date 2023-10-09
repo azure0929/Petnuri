@@ -92,7 +92,6 @@ export const logout = async () => {
         Authorization: getCookie('jwtToken')
       }
     })
-    removeCookie('jwtToken')
     return res;
   } catch (error) {
     console.log(error);

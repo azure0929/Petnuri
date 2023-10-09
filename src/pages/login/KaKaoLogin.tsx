@@ -24,13 +24,9 @@ const KaKaoLogin = () => {
               localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
               localStorage.setItem("email", email);
               localStorage.setItem("kakaoToken", kakaoToken);
-              localStorage.setItem("jwtToken", jwtToken);
               setCookie('jwtToken', jwtToken)
               navigate("/");
-              window.location.reload()
             } else {
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoToken", kakaoToken);
               navigate("/signup");
             }
         } catch (error) {
