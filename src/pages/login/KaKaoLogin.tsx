@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "@/lib/apis/userApi";
-import { setCookie } from "@/utils/Cookie";
+import { getCookie, setCookie } from "@/utils/Cookie";
 
 const KaKaoLogin = () => {
   const navigate = useNavigate();
@@ -13,30 +13,29 @@ const KaKaoLogin = () => {
 
       const processLogin = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        
+        const code = urlParams.get("code");
+
         try {
           const res = await login(code);
-            const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
-            console.log(jwtToken);
-            
-            if (jwtToken) {
-              localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoToken", kakaoToken);
-              localStorage.setItem("jwtToken", jwtToken);
-              setCookie('jwtToken',jwtToken)
-              console.log(document.cookie);
-              
-              navigate("/");
-            } else {
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoToken", kakaoToken);
-              navigate("/signup");
-            }
+
+          if (res && res.data.jwtToken) {
+            localStorage.setItem("jwtRefreshToken", res.data.jwtRefreshToken);
+            localStorage.setItem("email", res.data.email);
+            localStorage.setItem("kakaoToken", res.data.kakaoToken);
+            localStorage.setItem("jwtToken", res.data.jwtToken);
+            setCookie("jwtToken", res.data.jwtToken);
+            console.log("ID: " + document.cookie);
+            console.log("ID: " + typeof getCookie("jwtToken"));
+
+            navigate("/");
+          } else if (res && !res.data.jwtToken) {
+            localStorage.setItem("email", res.data.email);
+            localStorage.setItem("kakaoToken", res.data.kakaoToken);
+            navigate("/signup");
+          }
         } catch (error) {
           console.log("로그인 실패", error);
-          navigate('/login')
+          navigate("/login");
         }
       };
       processLogin();

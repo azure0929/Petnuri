@@ -1,40 +1,44 @@
-import MainTab from '../../components/MainTab';
-import Background from '../../components/Background';
-import styles from '@/styles/mypage.module.scss';
-import { IoSettingsSharp } from 'react-icons/io5';
-import { AiOutlineRight } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
-import { getMypage, logout } from '@/lib/apis/mypageApi';
-import { useEffect, useState } from 'react';
-import defaultImage from '@/assets/defaultImage.png';
+import MainTab from "../../components/MainTab";
+import Background from "../../components/Background";
+import styles from "@/styles/mypage.module.scss";
+import { IoSettingsSharp } from "react-icons/io5";
+import { AiOutlineRight } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { getMypage, logout } from "@/lib/apis/mypageApi";
+import { useEffect, useState } from "react";
+import defaultImage from "@/assets/defaultImage.png";
+import { getCookie, removeCookie } from "@/utils/Cookie";
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState();
+  const [nickname, setNickname] = useState<string>("");
   const [email, setEmail] = useState();
   const [img, setImg] = useState();
 
   useEffect(() => {
+    const token = getCookie("jwtToken");
+    if (!token) {
+      alert("로그인 해주세요");
+      navigate("/login");
+    }
+  });
+
+  useEffect(() => {
     const a = getMypage();
     a.then((res) => {
-      console.log('res::', res);
+      console.log("res::", res);
       setNickname(res.nickname);
       setEmail(res.email);
       setImg(res.profileImageUrl);
     });
-    console.log('---', a);
+    console.log("---", a);
   }, []);
 
-  const onClickLogout = () => {
-    const res = logout();
-    res
-      .then(() => {
-        alert('로그아웃 성공');
-        navigate('/');
-      })
-      .catch((error) => {
-        alert(error);
-      });
+  const onClickLogout = async () => {
+    await logout();
+    alert("로그아웃 성공");
+    removeCookie("jwtToken");
+    navigate("/");
   };
 
   return (
@@ -45,10 +49,7 @@ const MyPage = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <img
-              className={styles.photo}
-              src={img ? img : defaultImage}
-            ></img>
+            <img className={styles.photo} src={img ? img : defaultImage}></img>
           </div>
           <div className={styles.nickarea}>
             <p className={styles.nickname}>{nickname}</p>
@@ -106,10 +107,7 @@ const MyPage = () => {
           <div>
             1:1 채팅상담
             <span>
-              <Link
-                to="http://pf.kakao.com/_RfxnuG/chat"
-                target="_blank"
-              >
+              <Link to="http://pf.kakao.com/_RfxnuG/chat" target="_blank">
                 <AiOutlineRight />
               </Link>
             </span>
