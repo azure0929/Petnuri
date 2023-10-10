@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
 
-  const REDIRECT_URL = `http://localhost:5173/auth/kakao/login`;
+  const REDIRECT_URL = `https://petnuri.netlify.app/auth/kakao/login`;
   const handleKakaoLogin = () => {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}`;
   };
