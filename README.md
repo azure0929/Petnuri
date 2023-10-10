@@ -71,7 +71,7 @@
 
   <details>
     <summary>프리뷰</summary>
-    <img src="./src/assets/readme/home.gif" width="500px">
+    <img src="./src/assets/readme/home.gif" width="350px">
     
   </details>
 
@@ -81,7 +81,7 @@
 
   <details>
     <summary>프리뷰</summary>
-    <img src="./src/assets/readme/challenge.gif" width="500px">
+    <img src="./src/assets/readme/challenge.gif" width="350px">
   </details>
 
 **3️⃣ 펫톡 페이지**
@@ -90,7 +90,7 @@
 
   <details>
     <summary>프리뷰</summary>
-    <img src="./src/assets/readme/pettalk.gif" width="500px">
+    <img src="./src/assets/readme/pettalk.gif" width="350px">
   </details>
 
 **4️⃣ 인증**
@@ -111,7 +111,7 @@
     <img src="./src/assets/readme/mypage.gif" width="500px">
   </details>
 
-## 📌 구현 화면
+## 📌 구현 화면 (추가중입니다)
 
 | <div align="center">메인 페이지<br/>(로그인 전)</div> | <div align="center">메인 페이지<br/>(로그인 후)</div> |
 | ----------------------------------------------------- | ----------------------------------------------------- |
