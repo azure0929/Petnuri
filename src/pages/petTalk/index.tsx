@@ -34,8 +34,8 @@ const PetTalk = () => {
   const handleFloating = () => {
     if (!token) {
       setLoginOpen(true);
-    } else if (!isMenuOpen) {
-      setIsMenuOpen(true);
+    } else {
+      setIsMenuOpen(!isMenuOpen);
     }
   };
 
