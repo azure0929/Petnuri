@@ -100,6 +100,7 @@
   <details>
     <summary>프리뷰</summary>
     <img src="./src/assets/readme/user.gif" width="500px">
+    <img src="./src/assets/readme/login.gif" width="500px">
   </details>
 
 **5️⃣ 마이페이지**

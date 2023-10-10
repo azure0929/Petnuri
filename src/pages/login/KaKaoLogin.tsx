@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "@/lib/apis/userApi";
-import { setCookie } from "@/utils/Cookie";
+import { getCookie, setCookie } from "@/utils/Cookie";
 
 const KaKaoLogin = () => {
   const navigate = useNavigate();
@@ -13,25 +13,25 @@ const KaKaoLogin = () => {
 
       const processLogin = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        
+        const code = urlParams.get("code");
+
         try {
           const res = await login(code);
-            const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
-            
-            if (jwtToken) {
-              localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoToken", kakaoToken);
-              setCookie('jwtToken', jwtToken)
-              navigate("/");
-            } else {
-              localStorage.setItem("email", email);
-              localStorage.setItem("kakaoToken", kakaoToken);
-              navigate("/signup");
-            }
+          const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
+
+          if (jwtToken) {
+            localStorage.setItem("jwtRefreshToken", jwtRefreshToken);
+            localStorage.setItem("email", email);
+            localStorage.setItem("kakaoToken", kakaoToken);
+            setCookie("jwtToken", jwtToken);
+            navigate("/");
+          } else {
+            localStorage.setItem("email", email);
+            localStorage.setItem("kakaoToken", kakaoToken);
+            navigate("/signup");
+          }
         } catch (error) {
-          navigate('/login')
+          navigate("/login");
         }
       };
       processLogin();

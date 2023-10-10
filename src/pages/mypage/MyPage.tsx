@@ -1,20 +1,28 @@
-import MainTab from '../../components/MainTab';
-import Background from '../../components/Background';
-import styles from '@/styles/mypage.module.scss';
-import { IoSettingsSharp } from 'react-icons/io5';
-import { AiOutlineRight } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
-import { getMypage, logout } from '@/lib/apis/mypageApi';
-import { useEffect, useState } from 'react';
-import defaultImage from '@/assets/defaultImage.png';
-import { createToast } from '@/utils/ToastUtils';
-import { removeCookie } from '@/utils/Cookie';
+import MainTab from "../../components/MainTab";
+import Background from "../../components/Background";
+import styles from "@/styles/mypage.module.scss";
+import { IoSettingsSharp } from "react-icons/io5";
+import { AiOutlineRight } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { getMypage, logout } from "@/lib/apis/mypageApi";
+import { useEffect, useState } from "react";
+import defaultImage from "@/assets/defaultImage.png";
+import { createToast } from "@/utils/ToastUtils";
+import { removeCookie, getCookie } from "@/utils/Cookie";
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState();
+  const [nickname, setNickname] = useState<string>("");
   const [email, setEmail] = useState();
   const [img, setImg] = useState();
+
+  useEffect(() => {
+    const token = getCookie("jwtToken");
+    if (!token) {
+      alert("로그인 해주세요");
+      navigate("/login");
+    }
+  });
 
   useEffect(() => {
     const a = getMypage();
@@ -28,20 +36,20 @@ const MyPage = () => {
   const onClickLogout = async () => {
     try {
       const response = await logout();
-      if (response?.status === 200) { 
-        localStorage.removeItem('kakaoToken');
+      if (response?.status === 200) {
+        localStorage.removeItem("kakaoToken");
         localStorage.removeItem("jwtRefreshToken");
         localStorage.removeItem("email");
-        removeCookie('jwtToken')
-        createToast('success','로그아웃에 성공했습니다')
-        navigate('/'); 
+        removeCookie("jwtToken");
+        createToast("success", "로그아웃에 성공했습니다");
+        navigate("/");
       } else {
-        throw new Error('로그아웃 실패');
+        throw new Error("로그아웃 실패");
       }
     } catch (error) {
       alert(error);
     }
-  };  
+  };
 
   return (
     <>
@@ -51,10 +59,7 @@ const MyPage = () => {
         </div>
         <div className={styles.info}>
           <div className={styles.photoarea}>
-            <img
-              className={styles.photo}
-              src={img ? img : defaultImage}
-            ></img>
+            <img className={styles.photo} src={img ? img : defaultImage}></img>
           </div>
           <div className={styles.nickarea}>
             <p className={styles.nickname}>{nickname}</p>
@@ -112,10 +117,7 @@ const MyPage = () => {
           <div>
             1:1 채팅상담
             <span>
-              <Link
-                to="http://pf.kakao.com/_RfxnuG/chat"
-                target="_blank"
-              >
+              <Link to="http://pf.kakao.com/_RfxnuG/chat" target="_blank">
                 <AiOutlineRight />
               </Link>
             </span>
