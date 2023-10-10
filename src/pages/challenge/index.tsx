@@ -10,7 +10,7 @@ import Header from "@/components/Head";
 import ChallengeProfile from "@/components/challenge/ChallengeProfile";
 import ChallengeEventList from "@/components/ChallengeEventList";
 import { useSetRecoilState } from "recoil";
-import { bottomSheetState,loginModalState } from "@/store/challengeState";
+import { bottomSheetState, loginModalState } from "@/store/challengeState";
 import { createToast } from "@/utils/ToastUtils";
 import {
   ContestCheckApi,
@@ -29,7 +29,7 @@ const Challenge = () => {
   const [yanado, setYanado] = useState<EventChallenge>();
   const navigate = useNavigate();
   const setLoginOpen = useSetRecoilState(loginModalState);
-  const token = getCookie('jwtToken')
+  const token = getCookie("jwtToken");
 
   useEffect(() => {
     const calculateTime = () => {
@@ -170,7 +170,9 @@ const Challenge = () => {
                 ) : (
                   <button
                     className={styles.participate_on}
-                    onClick={() => handleParticipateClick(challengeData.challengeId)}
+                    onClick={() =>
+                      handleParticipateClick(challengeData.challengeId)
+                    }
                   >
                     참여하기
                   </button>

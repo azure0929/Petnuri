@@ -1,17 +1,20 @@
-import axios from 'axios';
-import { API_URL } from './base';
-import { getCookie, removeCookie } from '@/utils/Cookie';
+import axios from "axios";
+import { API_URL } from "./base";
+import { getCookie, removeCookie } from "@/utils/Cookie";
 
 const api = axios.create({
-  baseURL: API_URL
+  baseURL: API_URL,
+  headers: {
+    Authorization: getCookie("jwtToken"),
+  },
 });
 
 export const getMypage = async () => {
   try {
-    const res = await api.get('/member/mypage', {
+    const res = await api.get("/member/mypage", {
       headers: {
         Authorization: getCookie("jwtToken"),
-      }
+      },
     });
     return res.data;
   } catch (error) {
@@ -25,24 +28,24 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 
     if (img) {
       const fileBlob = new Blob([img], { type: img.type });
-      formData.append('file', fileBlob);
+      formData.append("file", fileBlob);
     }
-    if (nickname != '') {
+    if (nickname != "") {
       formData.append(
-        'nickname',
+        "nickname",
         new Blob([JSON.stringify({ nickname: nickname })], {
-          type: 'application/json',
+          type: "application/json",
         })
       );
     }
 
     const res = await axios.put(
-      'https://petnuri.shop/member/mypage/profile',
+      "https://petnuri.shop/member/mypage/profile",
       formData,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: getCookie('jwtToken'),
+          "Content-Type": "multipart/form-data",
+          Authorization: getCookie("jwtToken"),
         },
       }
     );
@@ -54,44 +57,48 @@ export const editProfile = async (nickname: string, img: File | undefined) => {
 
 export const withdraw = async () => {
   try {
-    const KAKAO_UNLINK_URI = 'https://kapi.kakao.com/v1/user/unlink';
-    const kakaoToken = localStorage.getItem('kakaoToken');
+    const KAKAO_UNLINK_URI = "https://kapi.kakao.com/v1/user/unlink";
+    const kakaoToken = localStorage.getItem("kakaoToken");
     const unlink_res = await axios.post(
       KAKAO_UNLINK_URI,
-      {}, 
+      {},
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${kakaoToken}`,
         },
       }
     );
     if (unlink_res.status !== 200) {
-      throw new Error('카카오계정 탈퇴 실패');
+      throw new Error("카카오계정 탈퇴 실패");
     }
-    const res = await api.delete('/member/mypage/withdraw',{
-      headers:{
-        Authorization: getCookie('jwtToken')
-      }
+    const res = await api.delete("/member/mypage/withdraw", {
+      headers: {
+        Authorization: getCookie("jwtToken"),
+      },
     });
     if (res.status !== 200) {
-      throw new Error('펫누리 탈퇴 실패');
+      throw new Error("펫누리 탈퇴 실패");
     }
-    removeCookie('jwtToken')
+    removeCookie("jwtToken");
     return res;
   } catch (error) {
-     console.log(error);
-     throw error; 
+    console.log(error);
+    throw error;
   }
 };
 
 export const logout = async () => {
   try {
-    const res = await api.post('/member/logout',{},{
-      headers:{
-        Authorization: getCookie('jwtToken')
+    const res = await api.post(
+      "/member/logout",
+      {},
+      {
+        headers: {
+          Authorization: getCookie("jwtToken"),
+        },
       }
-    })
+    );
     return res;
   } catch (error) {
     console.log(error);
@@ -99,7 +106,7 @@ export const logout = async () => {
 };
 
 // 닉네임 중복 체크
-export const nickCheck = async ( nickname: string ) => {
+export const nickCheck = async (nickname: string) => {
   try {
     const response = await api.get("/auth/nickname", {
       params: { nickname },

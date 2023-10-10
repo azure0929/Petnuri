@@ -353,8 +353,8 @@ export const dailyAllListApi = async () => {
   try {
     const response = await axios.get(`${API_URL}/challenge/daily`, {
       headers: {
-        Authorization : getCookie('jwtToken')
-      }
+        Authorization: getCookie("jwtToken"),
+      },
     });
     return response.data;
   } catch (error) {
@@ -379,7 +379,7 @@ export const pointApi = async () => {
 //출석체크
 export const checkApi = async () => {
   try {
-    const response = await axios.get(`${API_URL}/point/attendance`,{
+    const response = await axios.get(`${API_URL}/point/attendance`, {
       headers: {
         Authorization: getCookie("jwtToken"),
       },
