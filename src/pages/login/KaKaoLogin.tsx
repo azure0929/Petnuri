@@ -17,7 +17,6 @@ const KaKaoLogin = () => {
 
         try {
           const res = await login(code);
-
           const { jwtToken, jwtRefreshToken, kakaoToken, email } = res?.data;
 
           if (jwtToken) {
@@ -27,6 +26,8 @@ const KaKaoLogin = () => {
             setCookie("jwtToken", jwtToken);
             navigate("/");
           } else {
+            localStorage.setItem("email", email);
+            localStorage.setItem("kakaoToken", kakaoToken);
             navigate("/signup");
           }
         } catch (error) {
