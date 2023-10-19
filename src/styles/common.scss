@@ -120,6 +120,13 @@
   }
 }
 
+@media (max-width:500px) {
+   .back_container{
+    .back_content {
+      width: 100%;
+    }
+   }
+  }
 
 
 @media (max-height:768px) {
