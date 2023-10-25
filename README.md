@@ -110,25 +110,3 @@
     <summary>프리뷰</summary>
     <img src="./src/assets/readme/mypage.gif" width="500px">
   </details>
-
-## 📌 구현 화면 (추가중입니다)
-
-| <div align="center">메인 페이지<br/>(로그인 전)</div> | <div align="center">메인 페이지<br/>(로그인 후)</div> |
-| ----------------------------------------------------- | ----------------------------------------------------- |
-| ![user-main-nomember](./src/assets/readme/_.png)      | ![user-main-member](./src/assets/readme/_.png)        |
-
-| <div align="center">카카오 로그인</div>   | <div align="center">회원가입</div>        |
-| ----------------------------------------- | ----------------------------------------- |
-| ![user-signin](./src/assets/readme/_.png) | ![user-signup](./src/assets/readme/_.png) |
-
-| <div align="center">온보딩</div>             | <div align="center">마이페이지</div>      |
-| -------------------------------------------- | ----------------------------------------- |
-| ![user-onbording](./src/assets/readme/_.png) | ![user-mypage](./src/assets/readme/_.png) |
-
-| <div align="center">배송지 등록</div>        | <div align="center">배송지 목록</div>     |
-| -------------------------------------------- | ----------------------------------------- |
-| ![user-onbording](./src/assets/readme/_.png) | ![user-mypage](./src/assets/readme/_.png) |
-
-| <div align="center">챌린지 홈</div>               | <div align="center">데일리 챌린지</div>   |
-| ------------------------------------------------- | ----------------------------------------- |
-| ![user-main-quickmenu](./src/assets/readme/_.png) | ![user-search](./src/assets/readme/_.png) |
